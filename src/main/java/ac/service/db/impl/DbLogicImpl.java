@@ -35,10 +35,6 @@ public class DbLogicImpl implements DbLogic {
     @Autowired
     private Validation validation;
 
-    private ResultSet rs;
-    private Connection con;
-    private PreparedStatement ps;
-
     @Override
     public boolean loginCheck(Login login) {
         boolean loginSuccess = false;
@@ -170,67 +166,8 @@ public class DbLogicImpl implements DbLogic {
                 query.append(" WHERE mobile = ? ");
                 args.add(detail.getMobile());
             }
-
         }
         List<UserDetail> userDetailList = jdbcTemplate.query(query.toString(), new UserExtractor(), args.toArray());
-//        if (con == null) {
-//            con = connection();
-//        }
-//        UserDetail userDetail = null;
-//
-//        try {
-//            if (detail != null && (!detail.getUsername().equals("") || !detail.getEmail().equals("") || !detail.getMobile().equals(""))) {
-//                String sql = "SELECT * FROM userdetail WHERE username = ? OR email = ? OR mobile = ? ";
-//                ps = con.prepareStatement(sql);
-//                ps.setString(1, detail.getUsername());
-//                ps.setString(2, detail.getEmail());
-//                ps.setString(3, detail.getMobile());
-//                rs = ps.executeQuery();
-//                if (rs.next()) {
-//                    userDetail = new UserDetail();
-//                    userDetail.setUserId(rs.getInt("userId"));
-//                    userDetail.setName(rs.getString("name"));
-//                    userDetail.setEmail(rs.getString("email"));
-//                    userDetail.setUsername(rs.getString("username"));
-//                    userDetail.setMobile(rs.getString("mobile"));
-//                    userDetails.add(userDetail);
-//                }
-//
-//            } else {
-//                String sql = "SELECT * FROM userdetail";
-//                ps = con.prepareStatement(sql);
-//                rs = ps.executeQuery();
-//                while (rs.next()) {
-//                    userDetail = new UserDetail();
-//                    userDetail.setUserId(rs.getInt("userId"));
-//                    userDetail.setName(rs.getString("name"));
-//                    userDetail.setEmail(rs.getString("email"));
-//                    userDetail.setUsername(rs.getString("username"));
-//                    userDetail.setMobile(rs.getString("mobile"));
-//                    userDetails.add(userDetail);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//                ps.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
         return userDetailList;
-    }
-
-    private Connection connection() {
-
-        try {
-            con = DriverManager.getConnection(
-                    "jdbc:mysql://10.1.249.41:3306/ac_service", "root", "root");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return con;
     }
 }
