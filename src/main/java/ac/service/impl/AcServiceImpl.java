@@ -5,8 +5,9 @@
  */
 package ac.service.impl;
 
-import ac.service.db.DbLogic;
+import ac.service.db.impl.DbLogicImpl;
 import ac.service.pojo.Login;
+import ac.service.pojo.UserDetail;
 import ac.service.ui.LoginForm;
 import ac.service.ui.admin.WelcomeForm;
 import ac.service.validator.Validation;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class AcServiceImpl {
 
     @Autowired
-    private DbLogic dbLogic;
+    private DbLogicImpl dbLogic;
     @Autowired
     private Validation validation;
     @Autowired
@@ -59,5 +60,12 @@ public class AcServiceImpl {
             data = "Success";
         }
         return data;
+    }
+
+    public String addUser(Login login, UserDetail userDetail) {
+
+        String addUsr = null;
+        addUsr = dbLogic.addUser(userDetail, login);
+        return addUsr;
     }
 }

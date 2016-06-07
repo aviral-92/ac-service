@@ -5,6 +5,7 @@
  */
 package ac.service.ui.admin;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WelcomeForm extends javax.swing.JFrame {
+
+    @Autowired
+    private AddUser user;
+    @Autowired
+    private GetUser getUserValue;
 
     /**
      * Creates new form WelcomeForm
@@ -143,18 +149,16 @@ public class WelcomeForm extends javax.swing.JFrame {
     private void Clicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Clicked
         // TODO add your handling code here:
         dispose();
-        AddUser addUser = new AddUser();
-        addUser.setTitle("Add User");
-        addUser.setVisible(true);
+        user.setTitle("Add User");
+        user.setVisible(true);
         System.out.println("Hello");
     }//GEN-LAST:event_Clicked
 
     private void getUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getUserMousePressed
         // TODO add your handling code here:
         dispose();
-        GetUser getUser = new GetUser();
-        getUser.setTitle("Get User Details");
-        getUser.setVisible(true);
+        getUserValue.setTitle("Get User Details");
+        getUserValue.setVisible(true);
     }//GEN-LAST:event_getUserMousePressed
 
     /**

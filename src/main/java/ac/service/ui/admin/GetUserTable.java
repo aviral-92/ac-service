@@ -5,28 +5,36 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.DbLogic;
+import ac.service.db.impl.DbLogicImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Aviral
  */
+
+@Component
 public class GetUserTable extends javax.swing.JFrame {
 
     /**
      * Creates new form GetUserTable
      */
+    
+    @Autowired
+    private WelcomeForm welcomeForm;
+    
     public GetUserTable() {
         initComponents();
     }
 
-    public GetUserTable(List<UserDetail> userDetailList) {
-        initComponents();
-        displayRecords(userDetailList);
-    }
+//    public GetUserTable(List<UserDetail> userDetailList) {
+//        initComponents();
+//        displayRecords(userDetailList);
+//    }
 
     public void displayRecords(List<UserDetail> userDetails) {
 
@@ -103,7 +111,7 @@ public class GetUserTable extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         dispose();
-        WelcomeForm welcomeForm = new WelcomeForm();
+//        WelcomeForm welcomeForm = new WelcomeForm();
         welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);
 

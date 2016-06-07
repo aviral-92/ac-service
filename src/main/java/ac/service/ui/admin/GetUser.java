@@ -5,19 +5,28 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.DbLogic;
+import ac.service.db.impl.DbLogicImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Aviral
  */
+@Component
 public class GetUser extends javax.swing.JFrame {
 
     /**
      * Creates new form GetUser
      */
+    
+    @Autowired
+    private DbLogicImpl dbLogic;
+    @Autowired
+    private GetUserTable getUserTable;
+    
     public GetUser() {
         initComponents();
     }
@@ -185,7 +194,7 @@ public class GetUser extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (getRB.isSelected()) {
-            DbLogic dbLogic = new DbLogic();
+//            DbLogicImpl dbLogic = new DbLogicImpl();
             UserDetail userDetail = new UserDetail();
             userDetail.setEmail(email.getText());
             userDetail.setMobile(mobile.getText());
@@ -195,8 +204,11 @@ public class GetUser extends javax.swing.JFrame {
                 System.out.println(details.getEmail());
             }
             dispose();
-            GetUserTable getUserTable = new GetUserTable(listDetails);
-            getUserTable.setTitle("User Data");
+//            getUserTable.setUserDetailList(listDetails);
+//            GetUserTable getUserTable = new GetUserTable(listDetails);
+getUserTable.setTitle("User Data");                
+getUserTable.displayRecords(listDetails);
+                
             getUserTable.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

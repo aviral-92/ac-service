@@ -5,17 +5,25 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.DbLogic;
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.Login;
+import ac.service.pojo.UserDetail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Aviral
  */
+@Component
 public class AddUser extends javax.swing.JFrame {
 
     /**
      * Creates new form AddUser
      */
+    @Autowired
+    private AcServiceImpl acServiceImpl;
+
     public AddUser() {
         initComponents();
     }
@@ -44,7 +52,7 @@ public class AddUser extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
         cnfPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         choice = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
@@ -73,11 +81,11 @@ public class AddUser extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("Confirm Password");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitActionPerformed(evt);
             }
         });
 
@@ -122,7 +130,7 @@ public class AddUser extends javax.swing.JFrame {
                                 .addComponent(jButton2)))
                         .addGap(43, 43, 43)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(submit)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(password, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(mobile, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -164,7 +172,7 @@ public class AddUser extends javax.swing.JFrame {
                     .addComponent(choice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(submit)
                     .addComponent(jButton2))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -212,21 +220,24 @@ public class AddUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        String response = null;
-        if (!choice.getSelectedItem().equals("Select")) {
-            if (name.getText() != null && username.getText() != null && mobile.getText() != null
-                    && email.getText() != null && password.getText() != null && cnfPassword.getText() != null) {
-
-                if (password.getText().equals(cnfPassword.getText())) {
-                    DbLogic dbLogic = new DbLogic();
-                    response = dbLogic.addUser(name.getText(), username.getText(), email.getText(), mobile.getText(), password.getText(), choice.getSelectedItem().toString());
-                }
-            }
+        if (password.getText().equals(cnfPassword.getText())) {
+            Login login = new Login();
+            login.setUsername(username.getText());
+            login.setPassword(password.getText());
+            login.setRole(choice.getSelectedItem().toString());
+            UserDetail userDetail = new UserDetail();
+            userDetail.setEmail(email.getText());
+            userDetail.setMobile(mobile.getText());
+            userDetail.setName(name.getText());
+            userDetail.setUsername(username.getText());
+            String response = acServiceImpl.addUser(login, userDetail);
+            System.out.println("Showing Response " + response);
+        } else {
+            System.out.println("Password and Confirm Password do no match");
         }
-        System.out.println(response);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_submitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -274,7 +285,6 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JComboBox choice;
     private javax.swing.JPasswordField cnfPassword;
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -289,6 +299,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JTextField mobile;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton submit;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

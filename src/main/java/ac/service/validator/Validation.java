@@ -6,6 +6,7 @@
 package ac.service.validator;
 
 import ac.service.pojo.Login;
+import ac.service.pojo.UserDetail;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +25,25 @@ public class Validation {
         }
         if (login.getRole().equals("select")) {
             response = "Please select role";
+        }
+        return response;
+    }
+
+    public String validateUser(UserDetail userDetail) {
+
+        String response = null;
+        if (userDetail != null) {
+            if (StringUtils.isEmpty(userDetail.getEmail())) {
+                response = "Emial field is empty";
+            } else if (StringUtils.isEmpty(userDetail.getMobile())) {
+                response = "Mobile field is empty";
+            } else if (StringUtils.isEmpty(userDetail.getName())) {
+                response = "Name field is empty";
+            } else if (StringUtils.isEmpty(userDetail.getUsername())) {
+                response = "Username field is empty";
+            }
+        } else {
+            response = "Fields are Empty";
         }
         return response;
     }
