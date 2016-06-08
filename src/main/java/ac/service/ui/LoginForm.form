@@ -64,8 +64,8 @@
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="username" max="32767" attributes="0"/>
-                      <Component id="passwrd" max="32767" attributes="0"/>
                       <Component id="role" max="32767" attributes="0"/>
+                      <Component id="passwrd" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -133,11 +133,6 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="usernameFocusLost"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="passwrd">
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwrdFocusLost"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -167,6 +162,8 @@
               </StringArray>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="passwrd">
         </Component>
       </SubComponents>
     </Container>

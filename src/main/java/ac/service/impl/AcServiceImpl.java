@@ -81,7 +81,13 @@ public class AcServiceImpl {
 
     public String updateUserData(UserDetail detail) throws Exception {
 
-        validation.validateUpdateUser(detail);
+        validation.validateUpdate_DeleteUser(detail);
         return dbLogic.updateUser(detail);
+    }
+
+    public String deleteUserData(UserDetail detail) throws Exception {
+
+        validation.validateUpdate_DeleteUser(detail);
+        return dbLogic.deleteUser(detail);
     }
 }

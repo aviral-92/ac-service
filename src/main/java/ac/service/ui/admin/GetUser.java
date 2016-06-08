@@ -220,6 +220,14 @@ public class GetUser extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        } else if (deleteRB.isSelected()) {
+            try {
+                
+                String response = acServiceImpl.deleteUserData(userDetail);
+                System.out.println(response);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }//GEN-LAST:event_submitActionPerformed
 

@@ -41,10 +41,10 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        passwrd = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         role = new javax.swing.JComboBox();
+        passwrd = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
@@ -61,12 +61,6 @@ public class LoginForm extends javax.swing.JFrame {
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 usernameFocusLost(evt);
-            }
-        });
-
-        passwrd.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                passwrdFocusLost(evt);
             }
         });
 
@@ -100,8 +94,8 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(username)
-                    .addComponent(passwrd)
-                    .addComponent(role, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(role, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwrd))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(101, 101, 101)
@@ -169,15 +163,6 @@ public class LoginForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_usernameFocusLost
 
-    private void passwrdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwrdFocusLost
-
-        String response = acServiceImpl.validateField(passwrd.getText());
-        if (response != null) {
-            passwrd.setText("");
-            passwrd.requestFocus(true);
-        }
-    }//GEN-LAST:event_passwrdFocusLost
-
     /**
      * @param args the command line arguments
      */
@@ -220,7 +205,7 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField passwrd;
+    private javax.swing.JPasswordField passwrd;
     private javax.swing.JComboBox role;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables

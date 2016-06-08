@@ -65,10 +65,11 @@ public class Validation {
         }
     }
 
-    public void validateUpdateUser(UserDetail userDetail) throws Exception {
+    public void validateUpdate_DeleteUser(UserDetail userDetail) throws Exception {
 
-        if (!StringUtils.isEmpty(userDetail) && !StringUtils.isEmpty(userDetail.getEmail())
-                && !StringUtils.isEmpty(userDetail.getMobile()) && !StringUtils.isEmpty(userDetail.getName())) {
+        if (!StringUtils.isEmpty(userDetail) && (!StringUtils.isEmpty(userDetail.getEmail())
+                || !StringUtils.isEmpty(userDetail.getMobile()) || !StringUtils.isEmpty(userDetail.getName()))
+                || !StringUtils.isEmpty(userDetail.getUsername())) {
         } else {
             throw new Exception("please enter values");
         }

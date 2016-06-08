@@ -186,4 +186,32 @@ public class DbLogicImpl implements DbLogic {
         return updated;
     }
 
+    public String deleteUser(UserDetail detail) {
+
+        String delete = null;
+        StringBuilder query = new StringBuilder("DELETE FROM userdetail ");
+        List<String> args = new ArrayList<>();
+        if (!StringUtils.isEmpty(detail)) {
+            if (!StringUtils.isEmpty(detail.getUsername())) {
+                query.append(" WHERE username = ? ");
+                args.add(detail.getUsername());
+            } else if (!StringUtils.isEmpty(detail.getEmail())) {
+                query.append(" WHERE email = ? ");
+                args.add(detail.getEmail());
+            } else if (!StringUtils.isEmpty(detail.getMobile())) {
+                query.append(" WHERE mobile = ? ");
+                args.add(detail.getMobile());
+            } else {
+                delete = "Please provide atleast one field.";
+            }
+        }
+        if (StringUtils.isEmpty(delete)) {
+            int response = jdbcTemplate.update(query.toString(), args.toArray());
+            if (response > 0) {
+                delete = "Successfully Deleted";
+            }
+        }
+        return delete;
+    }
+
 }
