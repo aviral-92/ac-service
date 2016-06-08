@@ -56,4 +56,21 @@ public class Validation {
         }
         return validate;
     }
+
+    public void validateGeteUser(UserDetail detail) throws Exception {
+
+        if (!StringUtils.isEmpty(detail) && (StringUtils.isEmpty(detail.getUsername()) || detail.getUsername().equals(""))
+                && (StringUtils.isEmpty(detail.getEmail()))) {
+            throw new Exception("Please provide atleast one detail");
+        }
+    }
+
+    public void validateUpdateUser(UserDetail userDetail) throws Exception {
+
+        if (!StringUtils.isEmpty(userDetail) && !StringUtils.isEmpty(userDetail.getEmail())
+                && !StringUtils.isEmpty(userDetail.getMobile()) && !StringUtils.isEmpty(userDetail.getName())) {
+        } else {
+            throw new Exception("please enter values");
+        }
+    }
 }

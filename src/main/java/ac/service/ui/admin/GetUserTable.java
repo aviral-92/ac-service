@@ -5,7 +5,6 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.impl.DbLogicImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;

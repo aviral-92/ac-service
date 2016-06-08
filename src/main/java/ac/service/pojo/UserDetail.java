@@ -17,6 +17,17 @@ public class UserDetail {
     private String email;
     private String mobile;
 
+    public UserDetail() {
+    }
+
+    public UserDetail(int userId, String username, String name, String email, String mobile) {
+        this.userId = userId;
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.mobile = mobile;
+    }
+
     /**
      * @return the userId
      */
@@ -87,4 +98,8 @@ public class UserDetail {
         this.mobile = mobile;
     }
 
+    @Override
+    public String toString() {
+        return "UserDetail [userId=" + userId + ", username= [" + username + "], name = [" + name + "] , email [" + email + "] , mobile [" + mobile + "]";
+    }
 }

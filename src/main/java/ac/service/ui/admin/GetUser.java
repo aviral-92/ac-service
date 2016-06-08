@@ -6,6 +6,7 @@
 package ac.service.ui.admin;
 
 import ac.service.db.impl.DbLogicImpl;
+import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,15 @@ public class GetUser extends javax.swing.JFrame {
     /**
      * Creates new form GetUser
      */
-    
     @Autowired
     private DbLogicImpl dbLogic;
     @Autowired
     private GetUserTable getUserTable;
-    
+    @Autowired
+    private AcServiceImpl acServiceImpl;
+    @Autowired
+    private UserModifyForm modifyForm;
+
     public GetUser() {
         initComponents();
     }
@@ -49,7 +53,7 @@ public class GetUser extends javax.swing.JFrame {
         username = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
         mobile = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
         getRB = new javax.swing.JRadioButton();
         updateRB = new javax.swing.JRadioButton();
         deleteRB = new javax.swing.JRadioButton();
@@ -70,11 +74,11 @@ public class GetUser extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Mobile");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitActionPerformed(evt);
             }
         });
 
@@ -122,7 +126,7 @@ public class GetUser extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(submit)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(email)
                             .addComponent(username)
@@ -151,7 +155,7 @@ public class GetUser extends javax.swing.JFrame {
                     .addComponent(mobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(submit)
                     .addComponent(jButton2))
                 .addGap(32, 32, 32))
         );
@@ -191,27 +195,33 @@ public class GetUser extends javax.swing.JFrame {
         welcomeForm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+
+        UserDetail userDetail = new UserDetail();
+        userDetail.setEmail(email.getText());
+        userDetail.setMobile(mobile.getText());
+        userDetail.setUsername(username.getText());
         if (getRB.isSelected()) {
-//            DbLogicImpl dbLogic = new DbLogicImpl();
-            UserDetail userDetail = new UserDetail();
-            userDetail.setEmail(email.getText());
-            userDetail.setMobile(mobile.getText());
-            userDetail.setUsername(username.getText());
             List<UserDetail> listDetails = dbLogic.userDetailList(userDetail);
-            for (UserDetail details : listDetails) {
-                System.out.println(details.getEmail());
-            }
             dispose();
-//            getUserTable.setUserDetailList(listDetails);
-//            GetUserTable getUserTable = new GetUserTable(listDetails);
-getUserTable.setTitle("User Data");                
-getUserTable.displayRecords(listDetails);
-                
+            getUserTable.setTitle("User Data");
+            getUserTable.displayRecords(listDetails);
             getUserTable.setVisible(true);
+        } else if (updateRB.isSelected()) {
+            try {
+                UserDetail userDetailResponse = acServiceImpl.getUserData(userDetail);
+                if (userDetailResponse == null) {
+                    throw new Exception("Please give correct data to get details");
+                }
+                dispose();
+                modifyForm.setValues(userDetailResponse);
+                modifyForm.setTitle("Update");
+                modifyForm.setVisible(true);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,7 +263,6 @@ getUserTable.displayRecords(listDetails);
     private javax.swing.JRadioButton deleteRB;
     private javax.swing.JTextField email;
     private javax.swing.JRadioButton getRB;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -261,6 +270,7 @@ getUserTable.displayRecords(listDetails);
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField mobile;
+    private javax.swing.JButton submit;
     private javax.swing.JRadioButton updateRB;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables

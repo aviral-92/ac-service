@@ -11,11 +11,6 @@ import ac.service.extractor.UserExtractor;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import ac.service.validator.Validation;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,7 +132,6 @@ public class DbLogicImpl implements DbLogic {
     @Override
     public List<UserDetail> userDetailList(UserDetail detail) {
 
-//        List<UserDetail> userDetails = new ArrayList<>();
         boolean isUsername = false, isEmail = false;
         StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
         List<String> args = new ArrayList<>();
@@ -157,7 +151,7 @@ public class DbLogicImpl implements DbLogic {
                 args.add(detail.getEmail());
                 isEmail = true;
             }
-            if (isEmail) {
+            if (isUsername || isEmail) {
                 if (!StringUtils.isEmpty(detail.getMobile())) {
                     query.append(" AND mobile = ? ");
                     args.add(detail.getMobile());
@@ -170,4 +164,26 @@ public class DbLogicImpl implements DbLogic {
         List<UserDetail> userDetailList = jdbcTemplate.query(query.toString(), new UserExtractor(), args.toArray());
         return userDetailList;
     }
+
+    @Override
+    public String updateUser(UserDetail detail) {
+
+        String updated = null;
+        if (!isExist(detail)) {
+            String query = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
+            List<String> args = new ArrayList<>();
+            args.add(detail.getName());
+            args.add(detail.getEmail());
+            args.add(detail.getMobile());
+            args.add(String.valueOf(detail.getUserId()));
+            int update = jdbcTemplate.update(query, args.toArray());
+            if (update > 0) {
+                updated = "Updated Successfully";
+            }
+        } else {
+            updated = "Email or Mobile already Exist, please provide other.";
+        }
+        return updated;
+    }
+
 }

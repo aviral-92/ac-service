@@ -23,4 +23,6 @@ public interface DbLogic {
 
     public List<UserDetail> userDetailList(UserDetail detail);
 
+    public String updateUser(UserDetail detail);
+
 }

@@ -11,10 +11,12 @@ import ac.service.pojo.UserDetail;
 import ac.service.ui.LoginForm;
 import ac.service.ui.admin.WelcomeForm;
 import ac.service.validator.Validation;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -64,8 +66,22 @@ public class AcServiceImpl {
 
     public String addUser(Login login, UserDetail userDetail) {
 
-        String addUsr = null;
-        addUsr = dbLogic.addUser(userDetail, login);
-        return addUsr;
+        return dbLogic.addUser(userDetail, login);
+    }
+
+    public UserDetail getUserData(UserDetail detail) throws Exception {
+
+        validation.validateGeteUser(detail);
+        if (!dbLogic.userDetailList(detail).isEmpty()) {
+            return dbLogic.userDetailList(detail).get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public String updateUserData(UserDetail detail) throws Exception {
+
+        validation.validateUpdateUser(detail);
+        return dbLogic.updateUser(detail);
     }
 }
