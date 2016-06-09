@@ -15,6 +15,14 @@ public class Login {
     private String password;
     private String role;
 
+     
+    public Login(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+   
     /**
      * @return the username
      */

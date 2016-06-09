@@ -5,7 +5,7 @@
  */
 package ac.service.db.impl;
 
-import ac.service.db.DbLogic;
+import ac.service.db.UserDao;
 import ac.service.extractor.LoginExtractor;
 import ac.service.extractor.UserExtractor;
 import ac.service.pojo.Login;
@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
  * @author Aviral
  */
 @Component
-public class DbLogicImpl implements DbLogic {
+public class UserDaoImpl implements UserDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,7 +31,7 @@ public class DbLogicImpl implements DbLogic {
     private Validation validation;
 
     @Override
-    public boolean loginCheck(Login login) {
+    public boolean authenticateUser(Login login) {
         boolean loginSuccess = false;
         String sql = "SELECT * FROM LOGIN WHERE username = ? AND password = ? AND role = ?";
 
@@ -47,17 +47,17 @@ public class DbLogicImpl implements DbLogic {
     }
 
     @Override
-    public String addUser(UserDetail userDetail, Login login) {
+    public String addUser(UserDetail userDetail, Login login) throws Exception {
 
-        String loginValidate = validation.validateLogin(login);
+        validation.validateLogin(login);
         String response = null;
-        if (loginValidate == null) {
+        
             String userValidate = null;
-            userValidate = validation.validateUser(userDetail);
+            validation.validateUser(userDetail);
             if (userValidate == null) {
                 String insertLogin = " INSERT INTO login VALUES (?,?,?)";
                 String sql = "INSERT INTO userdetail (userId,name,email,mobile,username) values (0,?,?,?,?)";
-                if (!isExist(userDetail)) {
+                if (!isUserExist(userDetail)) {
                     List<String> args = null;
                     args = new ArrayList<>();
                     args.add(login.getUsername());
@@ -85,14 +85,12 @@ public class DbLogicImpl implements DbLogic {
             } else {
                 response = userValidate;
             }
-        } else {
-            response = loginValidate;
-        }
+        
         return response;
     }
 
     @Override
-    public boolean isExist(UserDetail detail) {
+    public boolean isUserExist(UserDetail detail) {
 
         boolean isExist = false, isUsername = false, isEmail = false;
         List<String> args = new ArrayList<>();
@@ -130,7 +128,7 @@ public class DbLogicImpl implements DbLogic {
     }
 
     @Override
-    public List<UserDetail> userDetailList(UserDetail detail) {
+    public List<UserDetail> getUserList(UserDetail detail) {
 
         boolean isUsername = false, isEmail = false;
         StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
@@ -169,7 +167,7 @@ public class DbLogicImpl implements DbLogic {
     public String updateUser(UserDetail detail) {
 
         String updated = null;
-        if (!isExist(detail)) {
+        if (!isUserExist(detail)) {
             String query = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
             List<String> args = new ArrayList<>();
             args.add(detail.getName());
@@ -186,6 +184,7 @@ public class DbLogicImpl implements DbLogic {
         return updated;
     }
 
+    @Override
     public String deleteUser(UserDetail detail) {
 
         String delete = null;

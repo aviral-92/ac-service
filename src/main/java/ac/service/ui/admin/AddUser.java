@@ -8,6 +8,8 @@ package ac.service.ui.admin;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -225,25 +227,21 @@ public class AddUser extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
         if (password.getText().equals(cnfPassword.getText())) {
-            Login login = new Login();
-            login.setUsername(username.getText());
-            login.setPassword(password.getText());
-            login.setRole(choice.getSelectedItem().toString());
+            Login login = new Login(username.getText(), password.getText(), choice.getSelectedItem().toString());
             UserDetail userDetail = new UserDetail();
             userDetail.setEmail(email.getText());
             userDetail.setMobile(mobile.getText());
             userDetail.setName(name.getText());
             userDetail.setUsername(username.getText());
             String response = acServiceImpl.addUser(login, userDetail);
-            System.out.println("Showing Response " + response);
+            JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
         } else {
-            System.out.println("Password and Confirm Password do no match");
+            JOptionPane.showMessageDialog(new JFrame(), "Password and Confirm Password do no match", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-//        WelcomeForm welcomeForm = new WelcomeForm();
+
         dispose();
         welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);

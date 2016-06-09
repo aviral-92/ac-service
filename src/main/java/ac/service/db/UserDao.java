@@ -13,16 +13,18 @@ import java.util.List;
  *
  * @author amittal
  */
-public interface DbLogic {
+public interface UserDao {
 
-    public boolean loginCheck(Login login);
+    public boolean authenticateUser(Login login);
 
-    public String addUser(UserDetail userDetail, Login login);
+    public String addUser(UserDetail userDetail, Login login) throws Exception;
 
-    public boolean isExist(UserDetail detail);
+    public boolean isUserExist(UserDetail detail);
 
-    public List<UserDetail> userDetailList(UserDetail detail);
+    public List<UserDetail> getUserList(UserDetail detail);
 
     public String updateUser(UserDetail detail);
+    
+     public String deleteUser(UserDetail detail);
 
 }

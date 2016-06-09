@@ -25,6 +25,7 @@ public class WelcomeForm extends javax.swing.JFrame {
      */
     public WelcomeForm() {
         initComponents();
+        super.setTitle("Welcome");
     }
 
     /**

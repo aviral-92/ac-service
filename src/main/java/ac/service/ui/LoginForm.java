@@ -25,6 +25,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        super.setTitle("Login");
     }
 
     /**
@@ -146,14 +147,10 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Login login = new Login();
-        login.setUsername(username.getText());
-        login.setPassword(passwrd.getText());
-        login.setRole(role.getSelectedItem().toString());
-        acServiceImpl.login(login);
+        acServiceImpl.login(new Login(username.getText(),passwrd.getText(),role.getSelectedItem().toString()));
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //TODO NEED TO CHECK
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
 
         String response = acServiceImpl.validateField(username.getText());

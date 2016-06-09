@@ -19,12 +19,10 @@ public class LoginExtractor implements ResultSetExtractor<Login> {
 
     @Override
     public Login extractData(ResultSet rs) throws SQLException, DataAccessException {
-        Login loginDetails = new Login();
+        Login login =null ;
         if (rs.next()) {
-            loginDetails.setUsername(rs.getString("username"));
-            loginDetails.setPassword(rs.getString("password"));
-            loginDetails.setRole(rs.getString("role"));
+            login = new Login(rs.getString("username"),rs.getString("password"),rs.getString("role"));
         }
-        return loginDetails;
+        return login;
     }
 }

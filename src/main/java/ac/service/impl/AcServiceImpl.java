@@ -5,13 +5,12 @@
  */
 package ac.service.impl;
 
-import ac.service.db.impl.DbLogicImpl;
+import ac.service.db.impl.UserDaoImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import ac.service.ui.LoginForm;
 import ac.service.ui.admin.WelcomeForm;
 import ac.service.validator.Validation;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ import org.springframework.util.StringUtils;
 public class AcServiceImpl {
 
     @Autowired
-    private DbLogicImpl dbLogic;
+    private UserDaoImpl userDaoImpl;
     @Autowired
     private Validation validation;
     @Autowired
@@ -34,23 +33,21 @@ public class AcServiceImpl {
     @Autowired
     private LoginForm loginForm;
 
-    public String login(Login login) {
+    public String login(Login login) throws Exception {
 
-        String check = null;
-        String response = validation.validateLogin(login);
-        if (response == null) {
-            if (dbLogic.loginCheck(login)) {
-                check = "Successfully Logged in";
-                JOptionPane.showMessageDialog(new JFrame(), check, check, JOptionPane.INFORMATION_MESSAGE);
+        String response = null;
+        validation.validateLogin(login);
+        if (StringUtils.isEmpty(response)) {
+            if (userDaoImpl.authenticateUser(login)) {
+                response = "Successfully Logged in";
+                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
                 loginForm.dispose();
-                welcomeForm.setTitle("Welcome");
                 welcomeForm.setVisible(true);
             }
         } else {
-            check = response;
             JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
         }
-        return check;
+        return response;
     }
 
     public String validateField(String field) {
@@ -64,16 +61,16 @@ public class AcServiceImpl {
         return data;
     }
 
-    public String addUser(Login login, UserDetail userDetail) {
+    public String addUser(Login login, UserDetail userDetail) throws Exception {
 
-        return dbLogic.addUser(userDetail, login);
+        return userDaoImpl.addUser(userDetail, login);
     }
 
     public UserDetail getUserData(UserDetail detail) throws Exception {
 
         validation.validateGeteUser(detail);
-        if (!dbLogic.userDetailList(detail).isEmpty()) {
-            return dbLogic.userDetailList(detail).get(0);
+        if (!userDaoImpl.getUserList(detail).isEmpty()) {
+            return userDaoImpl.getUserList(detail).get(0);
         } else {
             return null;
         }
@@ -82,12 +79,12 @@ public class AcServiceImpl {
     public String updateUserData(UserDetail detail) throws Exception {
 
         validation.validateUpdate_DeleteUser(detail);
-        return dbLogic.updateUser(detail);
+        return userDaoImpl.updateUser(detail);
     }
 
     public String deleteUserData(UserDetail detail) throws Exception {
 
         validation.validateUpdate_DeleteUser(detail);
-        return dbLogic.deleteUser(detail);
+        return userDaoImpl.deleteUser(detail);
     }
 }

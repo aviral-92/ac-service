@@ -5,7 +5,8 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.impl.DbLogicImpl;
+
+import ac.service.db.impl.UserDaoImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
@@ -23,7 +24,7 @@ public class GetUser extends javax.swing.JFrame {
      * Creates new form GetUser
      */
     @Autowired
-    private DbLogicImpl dbLogic;
+    private UserDaoImpl userDaoImpl;
     @Autowired
     private GetUserTable getUserTable;
     @Autowired
@@ -202,7 +203,7 @@ public class GetUser extends javax.swing.JFrame {
         userDetail.setMobile(mobile.getText());
         userDetail.setUsername(username.getText());
         if (getRB.isSelected()) {
-            List<UserDetail> listDetails = dbLogic.userDetailList(userDetail);
+            List<UserDetail> listDetails = userDaoImpl.getUserList(userDetail);
             dispose();
             getUserTable.setTitle("User Data");
             getUserTable.displayRecords(listDetails);

@@ -17,42 +17,37 @@ import org.springframework.util.StringUtils;
 @Component
 public class Validation {
 
-    public String validateLogin(Login login) {
-
-        String response = null;
+    public void validateLogin(Login login) throws Exception {
         if ((StringUtils.isEmpty(login.getPassword())) || (StringUtils.isEmpty(login.getUsername()))) {
-            response = "Username or Password field is empty";
+            throw new Exception("Username or Password field is empty");
+        } else if (login.getRole().equals("select")) {
+            throw new Exception("Please select role");
         }
-        if (login.getRole().equals("select")) {
-            response = "Please select role";
-        }
-        return response;
     }
 
-    public String validateUser(UserDetail userDetail) {
+    public void validateUser(UserDetail userDetail) throws Exception {
 
-        String response = null;
         if (userDetail != null) {
             if (StringUtils.isEmpty(userDetail.getEmail())) {
-                response = "Emial field is empty";
+                throw new Exception("Please provide any Email ID");
             } else if (StringUtils.isEmpty(userDetail.getMobile())) {
-                response = "Mobile field is empty";
+                throw new Exception("Please provide Mobile Number ");
             } else if (StringUtils.isEmpty(userDetail.getName())) {
-                response = "Name field is empty";
+                throw new Exception("Please confirm your Name ");
             } else if (StringUtils.isEmpty(userDetail.getUsername())) {
-                response = "Username field is empty";
+                throw new Exception("Please create username ");
+
             }
         } else {
-            response = "Fields are Empty";
+            throw new Exception("Please fill User details");
         }
-        return response;
     }
 
     public String textFieldValidation(String textField) {
 
         String validate = null;
         if (StringUtils.isEmpty(textField) || StringUtils.containsWhitespace(textField)) {
-            validate = " field is empty or it contains white Spaces";
+            validate = "Field is empty or it contains white Spaces";
         }
         return validate;
     }
