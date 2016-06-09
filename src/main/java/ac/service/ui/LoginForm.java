@@ -7,8 +7,11 @@ package ac.service.ui;
 
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.Login;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -147,7 +150,15 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        acServiceImpl.login(new Login(username.getText(),passwrd.getText(),role.getSelectedItem().toString()));
+        try {
+            String response = acServiceImpl.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
+            if (StringUtils.isEmpty(response)) {
+                JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
     //TODO NEED TO CHECK

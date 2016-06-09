@@ -93,9 +93,19 @@ public class WelcomeForm extends javax.swing.JFrame {
         User.add(getUser);
 
         updateUser.setText("Update User");
+        updateUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateUserMousePressed(evt);
+            }
+        });
         User.add(updateUser);
 
         deleteUser.setText("Delete User");
+        deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                deleteUserMousePressed(evt);
+            }
+        });
         User.add(deleteUser);
 
         jMenuBar1.add(User);
@@ -161,6 +171,17 @@ public class WelcomeForm extends javax.swing.JFrame {
         getUserValue.setTitle("Get User Details");
         getUserValue.setVisible(true);
     }//GEN-LAST:event_getUserMousePressed
+
+    private void updateUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateUserMousePressed
+        dispose();
+        getUserValue.setTitle("Update User Details");
+        getUserValue.setVisible(true);
+    }//GEN-LAST:event_updateUserMousePressed
+
+    private void deleteUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteUserMousePressed
+        getUserValue.setTitle("Delete User Details");
+        getUserValue.setVisible(true);
+    }//GEN-LAST:event_deleteUserMousePressed
 
     /**
      * @param args the command line arguments

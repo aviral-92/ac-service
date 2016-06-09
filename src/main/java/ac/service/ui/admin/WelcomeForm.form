@@ -29,11 +29,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update User"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateUserMousePressed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteUser">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete User"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteUserMousePressed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

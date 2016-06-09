@@ -225,18 +225,18 @@ public class AddUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        // TODO add your handling code here:
-        if (password.getText().equals(cnfPassword.getText())) {
-            Login login = new Login(username.getText(), password.getText(), choice.getSelectedItem().toString());
-            UserDetail userDetail = new UserDetail();
-            userDetail.setEmail(email.getText());
-            userDetail.setMobile(mobile.getText());
-            userDetail.setName(name.getText());
-            userDetail.setUsername(username.getText());
-            String response = acServiceImpl.addUser(login, userDetail);
-            JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(new JFrame(), "Password and Confirm Password do no match", "Error", JOptionPane.ERROR_MESSAGE);
+
+        try {
+            if (password.getText().equals(cnfPassword.getText())) {
+                Login login = new Login(username.getText(), password.getText(), choice.getSelectedItem().toString());
+                UserDetail userDetail = new UserDetail(0, username.getText(), name.getText(), email.getText(), mobile.getText());
+                String response = acServiceImpl.addUser(login, userDetail);
+                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Password and Confirm Password do no match", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitActionPerformed
 

@@ -7,6 +7,8 @@ package ac.service.ui.admin;
 
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -196,9 +198,9 @@ public class UserModifyForm extends javax.swing.JFrame {
             UserDetail detail = new UserDetail(Integer.parseInt(userid.getText()),
                     username.getText(), name.getText(), email.getText(), mobile.getText());
             String response = acServiceImpl.updateUserData(detail);
-            System.out.println(response);
+            JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updateActionPerformed
 

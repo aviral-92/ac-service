@@ -5,11 +5,12 @@
  */
 package ac.service.ui.admin;
 
-
 import ac.service.db.impl.UserDaoImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,8 @@ public class GetUser extends javax.swing.JFrame {
     private AcServiceImpl acServiceImpl;
     @Autowired
     private UserModifyForm modifyForm;
+    @Autowired
+    private WelcomeForm welcomeForm;
 
     public GetUser() {
         initComponents();
@@ -191,25 +194,22 @@ public class GetUser extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
-        WelcomeForm welcomeForm = new WelcomeForm();
+//        WelcomeForm welcomeForm = new WelcomeForm();
         welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
 
-        UserDetail userDetail = new UserDetail();
-        userDetail.setEmail(email.getText());
-        userDetail.setMobile(mobile.getText());
-        userDetail.setUsername(username.getText());
-        if (getRB.isSelected()) {
-            List<UserDetail> listDetails = userDaoImpl.getUserList(userDetail);
-            dispose();
-            getUserTable.setTitle("User Data");
-            getUserTable.displayRecords(listDetails);
-            getUserTable.setVisible(true);
-        } else if (updateRB.isSelected()) {
-            try {
+        try {
+            UserDetail userDetail = new UserDetail(0, username.getText(), null, email.getText(), mobile.getText());
+            if (getRB.isSelected()) {
+                List<UserDetail> listDetails = userDaoImpl.getUserList(userDetail);
+                dispose();
+                getUserTable.setTitle("User Data");
+                getUserTable.displayRecords(listDetails);
+                getUserTable.setVisible(true);
+            } else if (updateRB.isSelected()) {
                 UserDetail userDetailResponse = acServiceImpl.getUserData(userDetail);
                 if (userDetailResponse == null) {
                     throw new Exception("Please give correct data to get details");
@@ -218,17 +218,12 @@ public class GetUser extends javax.swing.JFrame {
                 modifyForm.setValues(userDetailResponse);
                 modifyForm.setTitle("Update");
                 modifyForm.setVisible(true);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } else if (deleteRB.isSelected()) {
-            try {
-                
+            } else if (deleteRB.isSelected()) {
                 String response = acServiceImpl.deleteUserData(userDetail);
-                System.out.println(response);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitActionPerformed
 
