@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ac.service.db.impl;
+package ac.service.dao.impl;
 
-import ac.service.db.UserDao;
+
+import ac.service.dao.UserDao;
 import ac.service.extractor.LoginExtractor;
 import ac.service.extractor.UserExtractor;
 import ac.service.pojo.Login;

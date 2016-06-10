@@ -5,7 +5,7 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceImpl;
+import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.UserDetail;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,7 +22,7 @@ public class UserModifyForm extends javax.swing.JFrame {
     @Autowired
     private GetUser getUser;
     @Autowired
-    private AcServiceImpl acServiceImpl;
+    private AcServiceUserImpl acServiceImpl;
 
     /**
      * Creates new form UserModifyForm

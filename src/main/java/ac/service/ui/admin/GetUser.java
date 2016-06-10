@@ -5,8 +5,8 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.db.impl.UserDaoImpl;
-import ac.service.impl.AcServiceImpl;
+import ac.service.dao.impl.UserDaoImpl;
+import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.UserDetail;
 import java.util.List;
 import javax.swing.JFrame;
@@ -29,7 +29,7 @@ public class GetUser extends javax.swing.JFrame {
     @Autowired
     private GetUserTable getUserTable;
     @Autowired
-    private AcServiceImpl acServiceImpl;
+    private AcServiceUserImpl acServiceImpl;
     @Autowired
     private UserModifyForm modifyForm;
     @Autowired

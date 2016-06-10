@@ -5,7 +5,7 @@
  */
 package ac.service.impl;
 
-import ac.service.db.impl.UserDaoImpl;
+import ac.service.dao.impl.UserDaoImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import ac.service.ui.LoginForm;
@@ -22,7 +22,7 @@ import org.springframework.util.StringUtils;
  * @author amittal
  */
 @Component
-public class AcServiceImpl {
+public class AcServiceUserImpl {
 
     @Autowired
     private UserDaoImpl userDaoImpl;

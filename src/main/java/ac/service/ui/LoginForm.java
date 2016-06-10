@@ -5,7 +5,7 @@
  */
 package ac.service.ui;
 
-import ac.service.impl.AcServiceImpl;
+import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ import org.springframework.util.StringUtils;
 public class LoginForm extends javax.swing.JFrame {
 
     @Autowired
-    private AcServiceImpl acServiceImpl;
+    private AcServiceUserImpl acServiceImpl;
 
     /**
      * Creates new form LoginForm

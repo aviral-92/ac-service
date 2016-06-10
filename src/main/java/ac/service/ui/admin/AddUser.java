@@ -5,7 +5,7 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceImpl;
+import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import javax.swing.JFrame;
@@ -24,7 +24,7 @@ public class AddUser extends javax.swing.JFrame {
      * Creates new form AddUser
      */
     @Autowired
-    private AcServiceImpl acServiceImpl;
+    private AcServiceUserImpl acServiceImpl;
     @Autowired
     private WelcomeForm welcomeForm;
 
