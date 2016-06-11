@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ac.service.swings;
+package ac.service;
 
 import ac.service.ui.LoginForm;
 import org.springframework.context.ApplicationContext;

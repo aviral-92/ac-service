@@ -6,6 +6,7 @@
 package ac.service.dao;
 
 import ac.service.pojo.AcTypes;
+import ac.service.pojo.Customer;
 import java.util.List;
 
 /**
@@ -15,4 +16,6 @@ import java.util.List;
 public interface CustomerDao {
 
     public List<AcTypes> getAcTypes();
+    
+    public String addCustomer(Customer customer);
 }

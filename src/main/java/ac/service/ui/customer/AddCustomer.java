@@ -7,6 +7,7 @@ package ac.service.ui.customer;
 
 import ac.service.impl.AcServiceCustomerImpl;
 import ac.service.pojo.AcTypes;
+import ac.service.pojo.Customer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class AddCustomer extends javax.swing.JFrame {
         initComponents();
         acValueLabel.setVisible(false);
         acValueTxtFld.setVisible(false);
-
+        
     }
 
     /**
@@ -55,12 +56,12 @@ public class AddCustomer extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        type = new javax.swing.JComboBox<>();
+        type = new javax.swing.JComboBox<String>();
         acValueLabel = new javax.swing.JLabel();
         acValueTxtFld = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -111,7 +112,12 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Amount");
 
-        jButton1.setText("Submit");
+        submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Reset");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +151,7 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(submit)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(42, 42, 42)
@@ -210,7 +216,7 @@ public class AddCustomer extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(submit)
                             .addComponent(jButton2))
                         .addGap(22, 22, 22))))
         );
@@ -248,10 +254,13 @@ public class AddCustomer extends javax.swing.JFrame {
 
     public void getAcType() {
 
+        
         List<AcTypes> listAcType = acServiceCustomerImpl.getAcType();
         for (AcTypes acType : listAcType) {
             type.addItem(acType.getAcType());
+            type.setSelectedIndex(acType.getId());
         }
+        type.setSelectedIndex(1);
     }
 
     private void typeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_typeMousePressed
@@ -267,11 +276,20 @@ public class AddCustomer extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         getAcType();
+        System.out.println(type.getSelectedIndex());
+        System.out.println(type.getSelectedItem());
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        
+        Customer customer = new Customer();
+        System.out.println(type.getSelectedIndex());
+        System.out.println(type.getSelectedItem());
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,7 +331,6 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField acValueTxtFld;
     private javax.swing.JTextField amount;
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -330,6 +347,7 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton submit;
     private javax.swing.JComboBox<String> type;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
