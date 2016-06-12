@@ -9,6 +9,10 @@ import ac.service.impl.AcServiceCustomerImpl;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +33,7 @@ public class AddCustomer extends javax.swing.JFrame {
         initComponents();
         acValueLabel.setVisible(false);
         acValueTxtFld.setVisible(false);
-        
+
     }
 
     /**
@@ -44,17 +48,17 @@ public class AddCustomer extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        mobile = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        address = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        description = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         type = new javax.swing.JComboBox<String>();
         acValueLabel = new javax.swing.JLabel();
@@ -84,16 +88,16 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Mobile");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        address.setColumns(20);
+        address.setRows(5);
+        jScrollPane2.setViewportView(address);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        description.setColumns(20);
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("AC Type");
@@ -139,11 +143,11 @@ public class AddCustomer extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(59, 59, 59)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
@@ -197,12 +201,12 @@ public class AddCustomer extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -254,20 +258,17 @@ public class AddCustomer extends javax.swing.JFrame {
 
     public void getAcType() {
 
-        
         List<AcTypes> listAcType = acServiceCustomerImpl.getAcType();
         for (AcTypes acType : listAcType) {
             type.addItem(acType.getAcType());
-            type.setSelectedIndex(acType.getId());
         }
-        type.setSelectedIndex(1);
     }
 
     private void typeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_typeMousePressed
         // TODO add your handling code here:
-        if (type.getSelectedItem().equals("Split AC") || type.getSelectedItem().equals("Window AC") ) {
+        if (type.getSelectedItem().equals("Split AC") || type.getSelectedItem().equals("Window AC")) {
             acValueLabel.setText("AC Model No");
-        }else{
+        } else {
             acValueLabel.setText("Vehicle No");
         }
         acValueLabel.setVisible(true);
@@ -276,8 +277,6 @@ public class AddCustomer extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         getAcType();
-        System.out.println(type.getSelectedIndex());
-        System.out.println(type.getSelectedItem());
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -285,10 +284,22 @@ public class AddCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        
+
         Customer customer = new Customer();
-        System.out.println(type.getSelectedIndex());
-        System.out.println(type.getSelectedItem());
+        customer.setName(name.getText());
+        customer.setMobile(mobile.getText());
+        customer.setModel_Vehicle(acValueTxtFld.getText());
+        customer.setEmail(email.getText());
+        customer.setDescription(description.getText());
+        customer.setAmount(Double.parseDouble(amount.getText()));
+        customer.setAddress(address.getText());
+        customer.setAcId(type.getSelectedIndex() + 1);
+        try {
+            String response = acServiceCustomerImpl.addCustomer(customer);
+            JOptionPane.showMessageDialog(new JFrame(), response, "Message", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_submitActionPerformed
 
     /**
@@ -320,6 +331,7 @@ public class AddCustomer extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AddCustomer().setVisible(true);
             }
@@ -329,7 +341,9 @@ public class AddCustomer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acValueLabel;
     private javax.swing.JTextField acValueTxtFld;
+    private javax.swing.JTextArea address;
     private javax.swing.JTextField amount;
+    private javax.swing.JTextArea description;
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -343,10 +357,8 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField mobile;
+    private javax.swing.JTextField name;
     private javax.swing.JButton submit;
     private javax.swing.JComboBox<String> type;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

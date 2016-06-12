@@ -7,6 +7,7 @@ package ac.service.impl;
 
 import ac.service.dao.impl.CustomerDaoImpl;
 import ac.service.pojo.AcTypes;
+import ac.service.pojo.Customer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,5 +25,10 @@ public class AcServiceCustomerImpl {
     public List<AcTypes> getAcType() {
 
         return customerDaoImpl.getAcTypes();
+    }
+
+    public String addCustomer(Customer customer) throws Exception {
+
+        return customerDaoImpl.addCustomer(customer);
     }
 }

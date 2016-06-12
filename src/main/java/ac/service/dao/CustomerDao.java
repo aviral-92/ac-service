@@ -17,5 +17,7 @@ public interface CustomerDao {
 
     public List<AcTypes> getAcTypes();
     
-    public String addCustomer(Customer customer);
+    public String addCustomer(Customer customer) throws Exception;
+    
+    public boolean isExist(Customer customer);
 }
