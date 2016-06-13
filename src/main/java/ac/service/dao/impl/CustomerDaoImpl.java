@@ -37,17 +37,16 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String response = null;
         if (!isExist(customer)) {
-            String query = "INSERT INTO customer (customerId,acId,name,email,address,mobile,"
-                    + "description,amount,model_vehicle_no) VALUES (0,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO customer (customerId,acId,name,email,address,mobile) VALUES (0,?,?,?,?,?)";
             List<String> args = new ArrayList<>();
             args.add(String.valueOf(customer.getAcId()));
             args.add(customer.getName());
             args.add(customer.getEmail());
             args.add(customer.getAddress());
             args.add(customer.getMobile());
-            args.add(customer.getDescription());
-            args.add(String.valueOf(customer.getAmount()));
-            args.add(customer.getModel_Vehicle());
+//            args.add(customer.getDescription());
+//            args.add(String.valueOf(customer.getAmount()));
+//            args.add(customer.getModel_Vehicle());
             int result = jdbcTemplate.update(query, args.toArray());
             if (result > 0) {
                 response = "Customer " + customer.getName() + " successfully added";
@@ -114,15 +113,15 @@ public class CustomerDaoImpl implements CustomerDao {
             args.add(String.valueOf(customer.getCustomerId()));
             isCustomerId = true;
         }
-        if (isMobile || isEmail || isAddress || isCustomerId) {
-            if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
-                query.append(" OR model_vehicle_no = ? ");
-                args.add(customer.getModel_Vehicle());
-            }
-        } else if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
-            query.append(" WHERE model_vehicle_no = ? ");
-            args.add(customer.getModel_Vehicle());
-        }
+//        if (isMobile || isEmail || isAddress || isCustomerId) {
+//            if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
+//                query.append(" OR model_vehicle_no = ? ");
+//                args.add(customer.getM odel_Vehicle());
+//            }
+//        } else if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
+//            query.append(" WHERE model_vehicle_no = ? ");
+//            args.add(customer.getModel_Vehicle());
+//        }
 
         List<Customer> response = jdbcTemplate.query(query.toString(), new CustomerExtractor(), args.toArray());
 

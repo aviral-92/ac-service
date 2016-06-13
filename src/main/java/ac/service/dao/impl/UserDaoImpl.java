@@ -11,7 +11,7 @@ import ac.service.extractor.LoginExtractor;
 import ac.service.extractor.UserExtractor;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
-import ac.service.validator.Validation;
+import ac.service.validator.ValidateUser;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
-    private Validation validation;
+    private ValidateUser validation;
 
     @Override
     public boolean authenticateUser(Login login) {

@@ -26,7 +26,7 @@ public class AcTypesExtractor implements ResultSetExtractor<List<AcTypes>> {
         AcTypes acTypes;
         while (rs.next()) {
             acTypes = new AcTypes();
-            acTypes.setId(rs.getInt(1));
+            acTypes.setAcTypesid(rs.getInt(1));
             acTypes.setAcType(rs.getString(2));
             acTypesList.add(acTypes);
         }

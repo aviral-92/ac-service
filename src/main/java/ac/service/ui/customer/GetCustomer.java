@@ -190,7 +190,7 @@ public class GetCustomer extends javax.swing.JFrame  {
             }
             customer.setEmail(email.getText());
             customer.setMobile(mobile.getText());
-            customer.setModel_Vehicle(model.getText());
+//            customer.setModel_Vehicle(model.getText());
             List<Customer> response = acServiceCustomerImpl.getCustomerInfo(customer);
             if (!StringUtils.isEmpty(response) && response.size() > 0) {
                 customerTable.displayRecords(response);

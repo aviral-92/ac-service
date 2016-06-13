@@ -11,22 +11,8 @@ package ac.service.pojo;
  */
 public class AcTypes {
 
-    private int id;
+    private int acTypesid;
     private String acType;
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @return the acType
@@ -40,6 +26,20 @@ public class AcTypes {
      */
     public void setAcType(String acType) {
         this.acType = acType;
+    }
+
+    /**
+     * @return the acTypesid
+     */
+    public int getAcTypesid() {
+        return acTypesid;
+    }
+
+    /**
+     * @param acTypesid the acTypesid to set
+     */
+    public void setAcTypesid(int acTypesid) {
+        this.acTypesid = acTypesid;
     }
 
 }

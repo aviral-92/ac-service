@@ -287,10 +287,10 @@ public class AddCustomer extends javax.swing.JFrame {
         Customer customer = new Customer();
         customer.setName(name.getText());
         customer.setMobile(mobile.getText());
-        customer.setModel_Vehicle(acValueTxtFld.getText());
+//        customer.setModel_Vehicle(acValueTxtFld.getText());
         customer.setEmail(email.getText());
-        customer.setDescription(description.getText());
-        customer.setAmount(Double.parseDouble(amount.getText()));
+//        customer.setDescription(description.getText());
+//        customer.setAmount(Double.parseDouble(amount.getText()));
         customer.setAddress(address.getText());
         customer.setAcId(type.getSelectedIndex() + 1);
         try {

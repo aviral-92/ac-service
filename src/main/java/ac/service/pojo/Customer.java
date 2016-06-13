@@ -9,7 +9,7 @@ package ac.service.pojo;
  *
  * @author Aviral
  */
-public class Customer {
+public class Customer extends CustomerReparingDetail {
 
     private int customerId;
     private int acId;
@@ -17,24 +17,6 @@ public class Customer {
     private String email;
     private String address;
     private String mobile;
-    private String description;
-    private double amount;
-    private String model_Vehicle;
-
-    
-    /**
-     * @return the customerId
-     */
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * @param customerId the customerId to set
-     */
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 
     /**
      * @return the acId
@@ -107,45 +89,16 @@ public class Customer {
     }
 
     /**
-     * @return the description
+     * @return the customerId
      */
-    public String getDescription() {
-        return description;
+    public int getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param description the description to set
+     * @param customerId the customerId to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
-
-    /**
-     * @return the amount
-     */
-    public double getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    /**
-     * @return the model_Vehicle
-     */
-    public String getModel_Vehicle() {
-        return model_Vehicle;
-    }
-
-    /**
-     * @param model_Vehicle the model_Vehicle to set
-     */
-    public void setModel_Vehicle(String model_Vehicle) {
-        this.model_Vehicle = model_Vehicle;
-    }
-
 }

@@ -10,7 +10,7 @@ import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import ac.service.ui.LoginForm;
 import ac.service.ui.admin.WelcomeForm;
-import ac.service.validator.Validation;
+import ac.service.validator.ValidateUser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AcServiceUserImpl {
     @Autowired
     private UserDaoImpl userDaoImpl;
     @Autowired
-    private Validation validation;
+    private ValidateUser validation;
     @Autowired
     private WelcomeForm welcomeForm;
     @Autowired

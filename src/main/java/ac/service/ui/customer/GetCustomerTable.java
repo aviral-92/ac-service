@@ -33,11 +33,10 @@ public class GetCustomerTable extends javax.swing.JFrame {
     public void displayRecords(List<Customer> customers) {
 
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"CustomerID", "ACID", "Name", "Mobile", "Address", "Description",
-            "Amount", "Model"});
+        model.setColumnIdentifiers(new Object[]{"CustomerID", "ACID", "Name", "Mobile", "Address"});
         for (Customer customer : customers) {
             model.addRow(new Object[]{customer.getCustomerId(), customer.getAcId(), customer.getName(),
-                customer.getMobile(), customer.getAddress(), customer.getDescription(), customer.getAmount(), customer.getModel_Vehicle()});
+                customer.getMobile(), customer.getAddress()});
         }
         table.setModel(model);
         table.setEnabled(false);
