@@ -292,7 +292,7 @@ public class AddCustomer extends javax.swing.JFrame {
 //        customer.setDescription(description.getText());
 //        customer.setAmount(Double.parseDouble(amount.getText()));
         customer.setAddress(address.getText());
-        customer.setAcId(type.getSelectedIndex() + 1);
+        customer.setAcTypesid(type.getSelectedIndex() + 1);
         try {
             String response = acServiceCustomerImpl.addCustomer(customer);
             JOptionPane.showMessageDialog(new JFrame(), response, "Message", JOptionPane.INFORMATION_MESSAGE);

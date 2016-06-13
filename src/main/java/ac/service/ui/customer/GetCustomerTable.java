@@ -35,7 +35,7 @@ public class GetCustomerTable extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"CustomerID", "ACID", "Name", "Mobile", "Address"});
         for (Customer customer : customers) {
-            model.addRow(new Object[]{customer.getCustomerId(), customer.getAcId(), customer.getName(),
+            model.addRow(new Object[]{customer.getCustomerId(), customer.getAcTypesid(), customer.getName(),
                 customer.getMobile(), customer.getAddress()});
         }
         table.setModel(model);

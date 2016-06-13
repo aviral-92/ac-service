@@ -12,25 +12,10 @@ package ac.service.pojo;
 public class Customer extends CustomerReparingDetail {
 
     private int customerId;
-    private int acId;
     private String name;
     private String email;
     private String address;
     private String mobile;
-
-    /**
-     * @return the acId
-     */
-    public int getAcId() {
-        return acId;
-    }
-
-    /**
-     * @param acId the acId to set
-     */
-    public void setAcId(int acId) {
-        this.acId = acId;
-    }
 
     /**
      * @return the name

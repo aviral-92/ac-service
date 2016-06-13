@@ -39,7 +39,7 @@ public class CustomerDaoImpl implements CustomerDao {
         if (!isExist(customer)) {
             String query = "INSERT INTO customer (customerId,acId,name,email,address,mobile) VALUES (0,?,?,?,?,?)";
             List<String> args = new ArrayList<>();
-            args.add(String.valueOf(customer.getAcId()));
+            args.add(String.valueOf(customer.getAcTypesid()));
             args.add(customer.getName());
             args.add(customer.getEmail());
             args.add(customer.getAddress());
