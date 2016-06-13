@@ -32,9 +32,6 @@ public class CustomerExtractor implements ResultSetExtractor<List<Customer>> {
             customer.setEmail(rs.getString(4));
             customer.setAddress(rs.getString("address"));
             customer.setMobile(rs.getString("mobile"));
-//            customer.setDescription(rs.getString(7));
-//            customer.setAmount(rs.getDouble(8));
-//            customer.setModel_Vehicle(rs.getString(9));
             customerList.add(customer);
         }
         return customerList;

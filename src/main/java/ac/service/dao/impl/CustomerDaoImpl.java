@@ -44,9 +44,6 @@ public class CustomerDaoImpl implements CustomerDao {
             args.add(customer.getEmail());
             args.add(customer.getAddress());
             args.add(customer.getMobile());
-//            args.add(customer.getDescription());
-//            args.add(String.valueOf(customer.getAmount()));
-//            args.add(customer.getModel_Vehicle());
             int result = jdbcTemplate.update(query, args.toArray());
             if (result > 0) {
                 response = "Customer " + customer.getName() + " successfully added";

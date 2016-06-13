@@ -8,34 +8,47 @@
  * Created: Jun 10, 2016
  */
 
+create database IF NOT EXISTS ac_Service;
+
+CREATE TABLE IF NOT EXISTS `ac_Service`.`login` (
+     `username` VARCHAR(45) NOT NULL,
+       `password` VARCHAR(45) NOT NULL,
+       `role` VARCHAR(45) NOT NULL,
+       PRIMARY KEY (`username`) );
+
+insert into `ac_Service`.`login` values ('aviral','avi','admin');
+
 CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,
   `ac_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`acId`) );
 
 
-CREATE TABLE IF NOT EXISTS `ac_service`.`customer` (
-  `customerId` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  `acId` INTEGER UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `address` VARCHAR(95) NOT NULL,
-  `mobile` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
-  `amount` DOUBLE NOT NULL,
-  `model_vehicle_no` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`customerId`),
-  CONSTRAINT `FK_customer_1` FOREIGN KEY `FK_customer_1` (`acId`)
-    REFERENCES `ac_type` (`acId`)
+CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
+  `customerId` INT NOT NULL AUTO_INCREMENT ,
+  `acId` INT(11) NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL ,
+  `mobile` VARCHAR(45) NOT NULL ,
+  `address` VARCHAR(55) NOT NULL ,
+  `description` VARCHAR(95) NOT NULL ,
+  `amount` DOUBLE NOT NULL ,
+  `model/vehicle no` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`customerId`) ,
+  INDEX `ac` (`acId` ASC) ,
+  CONSTRAINT `ac`
+    FOREIGN KEY (`acId` )
+    REFERENCES `ac_service`.`ac_type` (`acId` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
-ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , DROP COLUMN `model_vehicle_no` ;
-
+ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
+DROP COLUMN `model/vehicle no` ;
 
 ALTER TABLE `ac_service`.`customer` AUTO_INCREMENT = 1000;
 
-
 CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
-  `repairId` INT NOT NULL ,
+  `repairId` INT NOT NULL AUTO_INCREMENT,
   `ac_Id` INT(11) NOT NULL ,
   `customer_Id` INT(11) NOT NULL ,
   `description` VARCHAR(95) NOT NULL ,
@@ -59,20 +72,3 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
--- CREATE  TABLE IF NOT EXISTS `shop`.`customer` (
---   `customerId` INT NOT NULL AUTO_INCREMENT ,
---   `acId` INT(11) NOT NULL ,
---   `name` VARCHAR(45) NOT NULL ,
---   `email` VARCHAR(45) NOT NULL ,
---   `mobile` VARCHAR(45) NOT NULL ,
---   `address` VARCHAR(55) NOT NULL ,
---   `description` VARCHAR(95) NOT NULL ,
---   `amount` DOUBLE NOT NULL ,
---   `model/vehicle no` VARCHAR(45) NOT NULL ,
---   PRIMARY KEY (`customerId`) ,
---   INDEX `ac` (`acId` ASC) ,
---   CONSTRAINT `ac`
---     FOREIGN KEY (`acId` )
---     REFERENCES `ac_service`.`ac_type` (`acId` )
---     ON DELETE CASCADE
---     ON UPDATE CASCADE);
