@@ -8,13 +8,13 @@
  * Created: Jun 10, 2016
  */
 
-CREATE  TABLE IF NOT EXISTS `shop`.`ac_type` (
+CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,
   `ac_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`acId`) );
 
 
-CREATE TABLE IF NOT EXISTS `shop`.`customer` (
+CREATE TABLE IF NOT EXISTS `ac_service`.`customer` (
   `customerId` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   `acId` INTEGER UNSIGNED NOT NULL,
   `name` VARCHAR(45) NOT NULL,
@@ -23,10 +23,13 @@ CREATE TABLE IF NOT EXISTS `shop`.`customer` (
   `mobile` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
   `amount` DOUBLE NOT NULL,
-  `model/vehicle no` VARCHAR(45) NOT NULL,
+  `model_vehicle_no` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`customerId`),
   CONSTRAINT `FK_customer_1` FOREIGN KEY `FK_customer_1` (`acId`)
     REFERENCES `ac_type` (`acId`)
+
+ALTER TABLE `ac_service`.`customer` AUTO_INCREMENT = 1000;
+
 
 -- CREATE  TABLE IF NOT EXISTS `shop`.`customer` (
 --   `customerId` INT NOT NULL AUTO_INCREMENT ,

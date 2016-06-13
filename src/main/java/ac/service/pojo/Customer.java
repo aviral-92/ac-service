@@ -21,6 +21,7 @@ public class Customer {
     private double amount;
     private String model_Vehicle;
 
+    
     /**
      * @return the customerId
      */

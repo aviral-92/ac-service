@@ -6,6 +6,7 @@
 package ac.service.ui.admin;
 
 import ac.service.ui.customer.AddCustomer;
+import ac.service.ui.customer.GetCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,8 @@ public class WelcomeForm extends javax.swing.JFrame {
     private GetUser getUserValue;
     @Autowired
     private AddCustomer customerAdd;
+    @Autowired
+    private GetCustomer getCustomerInfo;
 
     /**
      * Creates new form WelcomeForm
@@ -124,6 +127,11 @@ public class WelcomeForm extends javax.swing.JFrame {
         Customer.add(addCustomer);
 
         getCustomer.setText("Get Customer");
+        getCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                getCustomerMousePressed(evt);
+            }
+        });
         getCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getCustomerActionPerformed(evt);
@@ -196,6 +204,12 @@ public class WelcomeForm extends javax.swing.JFrame {
         customerAdd.setTitle("CUSTOMER ADD");
         customerAdd.setVisible(true);
     }//GEN-LAST:event_addCustomerMousePressed
+
+    private void getCustomerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getCustomerMousePressed
+        dispose();
+        getCustomerInfo.setTitle("Get Customer Info");
+        getCustomerInfo.setVisible(true);
+    }//GEN-LAST:event_getCustomerMousePressed
 
     /**
      * @param args the command line arguments

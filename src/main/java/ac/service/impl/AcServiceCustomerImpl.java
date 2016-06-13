@@ -31,4 +31,9 @@ public class AcServiceCustomerImpl {
 
         return customerDaoImpl.addCustomer(customer);
     }
+
+    public List<Customer> getCustomerInfo(Customer customer) {
+        
+        return customerDaoImpl.getCustomer(customer);
+    }
 }

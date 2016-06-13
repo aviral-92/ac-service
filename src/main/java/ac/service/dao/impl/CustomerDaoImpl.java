@@ -37,7 +37,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String response = null;
         if (!isExist(customer)) {
-            String query = "INSERT INTO customer VALUES (0,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO customer (customerId,acId,name,email,address,mobile,"
+                    + "description,amount,model_vehicle_no) VALUES (0,?,?,?,?,?,?,?,?)";
             List<String> args = new ArrayList<>();
             args.add(String.valueOf(customer.getAcId()));
             args.add(customer.getName());
@@ -70,5 +71,61 @@ public class CustomerDaoImpl implements CustomerDao {
             isExist = true;
         }
         return isExist;
+    }
+
+    @Override
+    public List<Customer> getCustomer(Customer customer) {
+
+        boolean isEmail = false, isMobile = false, isAddress = false, isCustomerId = false;
+        StringBuilder query = new StringBuilder("SELECT * FROM customer ");
+        List<String> args = new ArrayList<>();
+        if (!StringUtils.isEmpty(customer.getEmail())) {
+            query.append(" WHERE email = ? ");
+            args.add(customer.getEmail());
+            isEmail = true;
+        }
+        if (isEmail) {
+            if (!StringUtils.isEmpty(customer.getMobile())) {
+                query.append(" OR mobile = ? ");
+                args.add(customer.getMobile());
+                isMobile = true;
+            }
+        } else if (!StringUtils.isEmpty(customer.getMobile())) {
+            query.append(" WHERE mobile = ? ");
+            args.add(customer.getMobile());
+        }
+        if (isMobile || isEmail) {
+            if (!StringUtils.isEmpty(customer.getAddress())) {
+                query.append(" OR address LIKE ? ");
+                args.add("%" + customer.getAddress() + "%");
+            }
+        } else if (!StringUtils.isEmpty(customer.getAddress())) {
+            query.append(" WHERE address LIKE ? ");
+            args.add("%" + customer.getAddress() + "%");
+            isAddress = true;
+        }
+        if (isMobile || isEmail || isAddress) {
+            if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
+                query.append(" OR customerId = ? ");
+                args.add(String.valueOf(customer.getCustomerId()));
+            }
+        } else if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
+            query.append(" WHERE customerId = ? ");
+            args.add(String.valueOf(customer.getCustomerId()));
+            isCustomerId = true;
+        }
+        if (isMobile || isEmail || isAddress || isCustomerId) {
+            if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
+                query.append(" OR model_vehicle_no = ? ");
+                args.add(customer.getModel_Vehicle());
+            }
+        } else if (!StringUtils.isEmpty(customer.getModel_Vehicle())) {
+            query.append(" WHERE model_vehicle_no = ? ");
+            args.add(customer.getModel_Vehicle());
+        }
+
+        List<Customer> response = jdbcTemplate.query(query.toString(), new CustomerExtractor(), args.toArray());
+
+        return response;
     }
 }

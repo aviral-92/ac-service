@@ -20,4 +20,6 @@ public interface CustomerDao {
     public String addCustomer(Customer customer) throws Exception;
     
     public boolean isExist(Customer customer);
+    
+    public List<Customer> getCustomer(Customer customer);
 }
