@@ -14,6 +14,7 @@ import java.util.Date;
 public class CustomerReparingDetail extends AcTypes {
 
     private int repairId;
+    private int customerId;
     private String description;
     private String actualAmount;
     private String paidAmount;
@@ -132,6 +133,20 @@ public class CustomerReparingDetail extends AcTypes {
      */
     public void setModel_Vehicle(String model_Vehicle) {
         this.model_Vehicle = model_Vehicle;
+    }
+
+    /**
+     * @return the customerId
+     */
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * @param customerId the customerId to set
+     */
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
 }

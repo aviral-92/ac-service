@@ -11,7 +11,6 @@ package ac.service.pojo;
  */
 public class Customer extends CustomerReparingDetail {
 
-    private int customerId;
     private String name;
     private String email;
     private String address;
@@ -73,17 +72,4 @@ public class Customer extends CustomerReparingDetail {
         this.mobile = mobile;
     }
 
-    /**
-     * @return the customerId
-     */
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * @param customerId the customerId to set
-     */
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 }

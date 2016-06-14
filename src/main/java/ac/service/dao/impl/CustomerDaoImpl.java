@@ -10,6 +10,7 @@ import ac.service.extractor.AcTypesExtractor;
 import ac.service.extractor.CustomerExtractor;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
+import ac.service.pojo.CustomerReparingDetail;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,5 +124,28 @@ public class CustomerDaoImpl implements CustomerDao {
         List<Customer> response = jdbcTemplate.query(query.toString(), new CustomerExtractor(), args.toArray());
 
         return response;
+    }
+
+    @Override
+    public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail) {
+
+        if (!StringUtils.isEmpty(customerReparingDetail)) {
+            String query = "insert into customer_repairing_detail values (0,?,?,?,?,?,?,?,?,?)";
+            List<String> args = new ArrayList<>();
+            args.add(String.valueOf(customerReparingDetail.getAcTypesid()));
+            args.add(String.valueOf(customerReparingDetail.getCustomerId()));
+            args.add(customerReparingDetail.getDescription());
+            args.add(customerReparingDetail.getActualAmount());
+            args.add(customerReparingDetail.getPaidAmount());
+            args.add(customerReparingDetail.getUpdateDate().toString());
+            args.add(customerReparingDetail.getWarranty().toString());
+            args.add(customerReparingDetail.getModel_Vehicle());
+
+            int success = jdbcTemplate.update(query, args.toArray());
+            if (success > 0) {
+
+            }
+        }
+        return null;
     }
 }

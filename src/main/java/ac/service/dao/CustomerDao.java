@@ -7,6 +7,7 @@ package ac.service.dao;
 
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
+import ac.service.pojo.CustomerReparingDetail;
 import java.util.List;
 
 /**
@@ -22,4 +23,6 @@ public interface CustomerDao {
     public boolean isExist(Customer customer);
     
     public List<Customer> getCustomer(Customer customer);
+    
+    public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail);
 }
