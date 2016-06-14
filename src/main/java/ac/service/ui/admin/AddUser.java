@@ -234,7 +234,7 @@ public class AddUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void menu() {
-        menuBar.setFrame(this);
+       // menuBar.setFrame(this);
         getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }

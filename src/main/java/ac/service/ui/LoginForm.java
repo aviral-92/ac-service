@@ -5,6 +5,7 @@
  */
 package ac.service.ui;
 
+import ac.service.DevelopmentTool;
 import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
 import javax.swing.JFrame;
@@ -151,11 +152,13 @@ public class LoginForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
+            
             String response = acServiceImpl.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
+          if(!DevelopmentTool.isDevelopmentMode) {
             if (StringUtils.isEmpty(response)) {
                 JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -163,11 +166,13 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     //TODO NEED TO CHECK
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-
+        
+        if(!DevelopmentTool.isDevelopmentMode) {
         String response = acServiceImpl.validateField(username.getText());
         if (response != null) {
             username.setText("");
             username.requestFocus(true);
+        }
         }
     }//GEN-LAST:event_usernameFocusLost
 

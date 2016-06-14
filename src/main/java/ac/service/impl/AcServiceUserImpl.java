@@ -5,6 +5,7 @@
  */
 package ac.service.impl;
 
+import ac.service.DevelopmentTool;
 import ac.service.dao.impl.UserDaoImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
@@ -36,16 +37,21 @@ public class AcServiceUserImpl {
     public String login(Login login) throws Exception {
 
         String response = null;
-        validation.validateLogin(login);
-        if (StringUtils.isEmpty(response)) {
-            if (userDaoImpl.authenticateUser(login)) {
-                response = "Successfully Logged in";
-                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-                loginForm.dispose();
-                welcomeForm.setVisible(true);
+        if (!DevelopmentTool.isDevelopmentMode) {
+            validation.validateLogin(login);
+            if (StringUtils.isEmpty(response)) {
+                if (userDaoImpl.authenticateUser(login)) {
+                    response = "Successfully Logged in";
+                    JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
+                    loginForm.dispose();
+                    welcomeForm.setVisible(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
+            loginForm.dispose();
+            welcomeForm.setVisible(true);
         }
         return response;
     }

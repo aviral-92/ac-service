@@ -12,6 +12,7 @@ import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
 import ac.service.pojo.CustomerReparingDetail;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -131,16 +132,19 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String response = null;
         if (!StringUtils.isEmpty(customerReparingDetail)) {
-            String query = "insert into customer_repairing_detail values (0,?,?,?,?,?,?,?,?,?)";
-            List<String> args = new ArrayList<>();
+            String query = "insert into customer_repairing_detail (repairId, ac_Id, customer_Id, description,"
+                    + "actual_amount, paid_amount, model_vehicle_no, updated_date, warranty) "
+                    + "values (0,?,?,?,?,?,?,?,?)";
+            List<Object> args = new ArrayList<>();
+            List<Date> args1 = new ArrayList<>();
             args.add(String.valueOf(customerReparingDetail.getAcTypesid()));
             args.add(String.valueOf(customerReparingDetail.getCustomerId()));
             args.add(customerReparingDetail.getDescription());
             args.add(customerReparingDetail.getActualAmount());
             args.add(customerReparingDetail.getPaidAmount());
-            args.add(customerReparingDetail.getUpdateDate().toString());
-            args.add(customerReparingDetail.getWarranty().toString());
             args.add(customerReparingDetail.getModel_Vehicle());
+            args.add(customerReparingDetail.getUpdateDate());
+            args.add(customerReparingDetail.getWarranty());
 
             int success = jdbcTemplate.update(query, args.toArray());
             if (success > 0) {

@@ -12,9 +12,13 @@ import ac.service.pojo.Customer;
 import ac.service.pojo.CustomerReparingDetail;
 import ac.service.ui.admin.WelcomeForm;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,7 +42,7 @@ public class AddRepairDetails extends javax.swing.JFrame {
      * Creates new form AddRepairDetails
      */
     public void menu() {
-        menuBar.setFrame(this);
+//        menuBar.setFrame(this);
         getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }
@@ -323,10 +327,25 @@ public class AddRepairDetails extends javax.swing.JFrame {
         customerReparingDetail.setDescription(description.getText());
         customerReparingDetail.setModel_Vehicle(modelTextField.getText());
         customerReparingDetail.setPaidAmount(paidAmount.getText());
+        if (!StringUtils.isEmpty(todayDate.getText())) {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+          //  String datestr = dateFormat.format(todayDate.getText());
+            try {
+               
+                customerReparingDetail.setUpdateDate((Date)dateFormat.parse(todayDate.getText()));
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+                System.out.println("in CATCH BLOCK...........");
+            }
+        } else {
+            System.out.println(".............ERROR.........");
+        }
+
+        customerReparingDetail.setWarranty(warrenty.getDate());
 
         String response = acServiceCustomerImpl.addRepairDetail(customerReparingDetail);
         if (!StringUtils.isEmpty(response)) {
-
+            System.out.println(response);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

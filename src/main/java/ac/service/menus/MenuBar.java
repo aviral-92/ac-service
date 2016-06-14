@@ -12,7 +12,9 @@ import ac.service.ui.customer.GetCustomer;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -20,8 +22,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MenuBar {
-
-    private JFrame frame;
+    
     @Autowired
     private AddUser user;
     @Autowired
@@ -126,7 +127,7 @@ public class MenuBar {
     }
 
     private void Clicked(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+        //frame.dispose();
         user.setTitle("Add User");
         user.setVisible(true);
         System.out.println("Hello");
@@ -137,31 +138,31 @@ public class MenuBar {
     }
 
     private void getUserMousePressed(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+      //  frame.dispose();
         getUserValue.setTitle("Get User Details");
         getUserValue.setVisible(true);
     }
 
     private void updateUserMousePressed(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+      //  frame.dispose();
         getUserValue.setTitle("Update User Details");
         getUserValue.setVisible(true);
     }
 
     private void deleteUserMousePressed(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+       // frame.dispose();
         getUserValue.setTitle("Delete User Details");
         getUserValue.setVisible(true);
     }
 
     private void addCustomerMousePressed(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+       // frame.dispose();
         customerAdd.setTitle("CUSTOMER ADD");
         customerAdd.setVisible(true);
     }
 
     private void getCustomerMousePressed(java.awt.event.MouseEvent evt) {
-        frame.dispose();
+       // frame.dispose();
         getCustomerInfo.setTitle("Get Customer Info");
         getCustomerInfo.setVisible(true);
     }
@@ -169,14 +170,14 @@ public class MenuBar {
     /**
      * @return the frame
      */
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    /**
-     * @param frame the frame to set
-     */
-    public void setFrame(JFrame frame) {
-        this.frame = frame;
-    }
+//    public JFrame getFrame() {
+//        return frame;
+//    }
+//
+//    /**
+//     * @param frame the frame to set
+//     */
+//    public void setFrame(JFrame frame) {
+//        this.frame = frame;
+//    }
 }
