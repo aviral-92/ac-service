@@ -8,6 +8,7 @@ package ac.service.impl;
 import ac.service.dao.impl.CustomerDaoImpl;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
+import ac.service.pojo.CustomerReparingDetail;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,17 @@ public class AcServiceCustomerImpl {
     }
 
     public List<Customer> getCustomerInfo(Customer customer) {
-        
+
         return customerDaoImpl.getCustomer(customer);
+    }
+
+    public String addRepairDetail(CustomerReparingDetail customerReparingDetail) {
+
+        return customerDaoImpl.addCustomerRepairDetails(customerReparingDetail);
+    }
+
+    public Customer getCustomerID(Customer customer) {
+
+        return customerDaoImpl.getCustomerId(customer);
     }
 }

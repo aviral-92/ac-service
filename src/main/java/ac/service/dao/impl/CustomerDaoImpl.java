@@ -129,6 +129,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail) {
 
+        String response = null;
         if (!StringUtils.isEmpty(customerReparingDetail)) {
             String query = "insert into customer_repairing_detail values (0,?,?,?,?,?,?,?,?,?)";
             List<String> args = new ArrayList<>();
@@ -143,9 +144,23 @@ public class CustomerDaoImpl implements CustomerDao {
 
             int success = jdbcTemplate.update(query, args.toArray());
             if (success > 0) {
-
+                response = "success";
             }
         }
-        return null;
+        return response;
+    }
+
+    public Customer getCustomerId(Customer customer) {
+
+        if (!StringUtils.isEmpty(customer) && !StringUtils.isEmpty(customer.getEmail())) {
+            String query = "SELECT * FROM customer WHERE email = ? ";
+            List<String> args = new ArrayList<>();
+            args.add(customer.getEmail());
+            List<Customer> customerList = jdbcTemplate.query(query, new CustomerExtractor(), args.toArray());
+            if (!StringUtils.isEmpty(customerList) && customerList.size() > 0) {
+                customer.setCustomerId(customerList.get(0).getCustomerId());
+            }
+        }
+        return customer;
     }
 }

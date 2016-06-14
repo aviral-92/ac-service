@@ -6,9 +6,11 @@
 package ac.service.ui.admin;
 
 import ac.service.impl.AcServiceUserImpl;
+import ac.service.menus.MenuBar;
 import ac.service.pojo.UserDetail;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,8 @@ public class UserModifyForm extends javax.swing.JFrame {
     private GetUser getUser;
     @Autowired
     private AcServiceUserImpl acServiceImpl;
+    @Autowired
+    private MenuBar menuBar;
 
     /**
      * Creates new form UserModifyForm
@@ -65,6 +69,11 @@ public class UserModifyForm extends javax.swing.JFrame {
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel1.setText("UPDATE USER");
@@ -186,6 +195,18 @@ public class UserModifyForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void menu() {
+        menuBar.setFrame(this);
+        getRootPane().setMenuBar(menuBar.menu());
+        this.setRootPane(getRootPane());
+    }
+
+    @Override
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
+
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         dispose();
         getUser.setTitle("Welcome Form");
@@ -203,6 +224,10 @@ public class UserModifyForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updateActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        menu();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

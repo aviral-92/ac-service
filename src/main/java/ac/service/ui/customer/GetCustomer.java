@@ -6,8 +6,10 @@
 package ac.service.ui.customer;
 
 import ac.service.impl.AcServiceCustomerImpl;
+import ac.service.menus.MenuBar;
 import ac.service.pojo.Customer;
 import java.util.List;
+import javax.swing.JRootPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,7 +19,7 @@ import org.springframework.util.StringUtils;
  * @author amittal
  */
 @Component
-public class GetCustomer extends javax.swing.JFrame  {
+public class GetCustomer extends javax.swing.JFrame {
 
     public static final int NEGATIVE_CUSTOMER_ID = -1;
 
@@ -25,6 +27,8 @@ public class GetCustomer extends javax.swing.JFrame  {
     private AcServiceCustomerImpl acServiceCustomerImpl;
     @Autowired
     private GetCustomerTable customerTable;
+    @Autowired
+    private MenuBar menuBar;
 
     /**
      * Creates new form GetCustomer
@@ -60,6 +64,11 @@ public class GetCustomer extends javax.swing.JFrame  {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Get Customer Info");
@@ -178,6 +187,17 @@ public class GetCustomer extends javax.swing.JFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void menu() {
+        menuBar.setFrame(this);
+        getRootPane().setMenuBar(menuBar.menu());
+        this.setRootPane(getRootPane());
+    }
+
+    @Override
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
 
         try {
@@ -204,6 +224,10 @@ public class GetCustomer extends javax.swing.JFrame  {
         }
 
     }//GEN-LAST:event_submitActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        menu();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

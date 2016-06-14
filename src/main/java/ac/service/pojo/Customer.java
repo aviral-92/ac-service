@@ -9,13 +9,15 @@ package ac.service.pojo;
  *
  * @author Aviral
  */
-public class Customer extends CustomerReparingDetail {
+public class Customer extends AcTypes {
 
+    private int customerId;
     private String name;
     private String email;
     private String address;
     private String mobile;
 
+    
     /**
      * @return the name
      */
@@ -70,6 +72,20 @@ public class Customer extends CustomerReparingDetail {
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    /**
+     * @return the customerId
+     */
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * @param customerId the customerId to set
+     */
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
 }

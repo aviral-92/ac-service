@@ -9,7 +9,7 @@ package ac.service.pojo;
  *
  * @author amittal
  */
-public class AcTypes {
+public class AcTypes{
 
     private int acTypesid;
     private String acType;

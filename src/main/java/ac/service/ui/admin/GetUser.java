@@ -7,10 +7,12 @@ package ac.service.ui.admin;
 
 import ac.service.dao.impl.UserDaoImpl;
 import ac.service.impl.AcServiceUserImpl;
+import ac.service.menus.MenuBar;
 import ac.service.pojo.UserDetail;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +36,8 @@ public class GetUser extends javax.swing.JFrame {
     private UserModifyForm modifyForm;
     @Autowired
     private WelcomeForm welcomeForm;
+    @Autowired
+    private MenuBar menuBar;
 
     public GetUser() {
         initComponents();
@@ -65,6 +69,11 @@ public class GetUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel1.setText("USER DETAILS");
@@ -185,11 +194,23 @@ public class GetUser extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void menu() {
+        menuBar.setFrame(this);
+        getRootPane().setMenuBar(menuBar.menu());
+        this.setRootPane(getRootPane());
+    }
+
+    @Override
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -226,6 +247,10 @@ public class GetUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        menu();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

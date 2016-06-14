@@ -6,10 +6,12 @@
 package ac.service.ui.admin;
 
 import ac.service.impl.AcServiceUserImpl;
+import ac.service.menus.MenuBar;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,8 @@ public class AddUser extends javax.swing.JFrame {
     private AcServiceUserImpl acServiceImpl;
     @Autowired
     private WelcomeForm welcomeForm;
+    @Autowired
+    private MenuBar menuBar;
 
     public AddUser() {
         initComponents();
@@ -63,6 +67,11 @@ public class AddUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel1.setText("ADD USER");
@@ -224,6 +233,18 @@ public class AddUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void menu() {
+        menuBar.setFrame(this);
+        getRootPane().setMenuBar(menuBar.menu());
+        this.setRootPane(getRootPane());
+    }
+
+    @Override
+    public JRootPane getRootPane() {
+        return rootPane;
+    }
+
+
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
 
         try {
@@ -246,6 +267,10 @@ public class AddUser extends javax.swing.JFrame {
         welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        menu();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

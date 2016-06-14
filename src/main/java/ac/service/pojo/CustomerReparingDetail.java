@@ -11,10 +11,10 @@ import java.util.Date;
  *
  * @author amittal
  */
-public class CustomerReparingDetail extends AcTypes {
+public class CustomerReparingDetail extends Customer {
 
     private int repairId;
-    private int customerId;
+//    private int customerId;
     private String description;
     private String actualAmount;
     private String paidAmount;
@@ -135,18 +135,18 @@ public class CustomerReparingDetail extends AcTypes {
         this.model_Vehicle = model_Vehicle;
     }
 
-    /**
-     * @return the customerId
-     */
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * @param customerId the customerId to set
-     */
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
+//    /**
+//     * @return the customerId
+//     */
+//    public int getCustomerId() {
+//        return customerId;
+//    }
+//
+//    /**
+//     * @param customerId the customerId to set
+//     */
+//    public void setCustomerId(int customerId) {
+//        this.customerId = customerId;
+//    }
 
 }
