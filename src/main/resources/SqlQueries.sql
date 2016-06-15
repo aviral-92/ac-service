@@ -31,19 +31,24 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
   `email` VARCHAR(45) NOT NULL ,
   `mobile` VARCHAR(45) NOT NULL ,
   `address` VARCHAR(55) NOT NULL ,
-  `description` VARCHAR(95) NOT NULL ,
-  `amount` DOUBLE NOT NULL ,
-  `model/vehicle no` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`customerId`) ,
-  INDEX `ac` (`acId` ASC) ,
-  CONSTRAINT `ac`
-    FOREIGN KEY (`acId` )
-    REFERENCES `ac_service`.`ac_type` (`acId` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE);
+--   `description` VARCHAR(95) NOT NULL ,
+--   `amount` DOUBLE NOT NULL ,
+--   `model/vehicle no` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`customerId`) 
+--   INDEX `ac` (`acId` ASC) ,
+--   CONSTRAINT `ac`
+--     FOREIGN KEY (`acId` )
+--     REFERENCES `ac_service`.`ac_type` (`acId` )
+--     ON DELETE CASCADE
+--     ON UPDATE CASCADE
+);
 
-ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
-DROP COLUMN `model/vehicle no` ;
+-- ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
+-- DROP COLUMN `model/vehicle no` ;
+
+-- ALTER TABLE `ac_service`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
+-- , DROP INDEX `ac` ;
+
 
 ALTER TABLE `ac_service`.`customer` AUTO_INCREMENT = 1000;
 

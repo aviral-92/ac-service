@@ -19,22 +19,22 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  */
 public class CustomerExtractor implements ResultSetExtractor<List<Customer>> {
 
-    List<Customer> customerList = new ArrayList<>();
+	List<Customer> customerList = new ArrayList<>();
 
-    @Override
-    public List<Customer> extractData(ResultSet rs) throws SQLException, DataAccessException {
-        Customer customer;
-        while (rs.next()) {
-            customer = new Customer();
-            customer.setCustomerId(rs.getInt(1));
-            customer.setAcTypesid(rs.getInt(2));
-            customer.setName(rs.getString(3));
-            customer.setEmail(rs.getString(4));
-            customer.setAddress(rs.getString("address"));
-            customer.setMobile(rs.getString("mobile"));
-            customerList.add(customer);
-        }
-        return customerList;
-    }
+	@Override
+	public List<Customer> extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+		Customer customer;
+		while (rs.next()) {
+			customer = new Customer();
+			customer.setCustomerId(rs.getInt(1));
+			customer.setName(rs.getString(2));
+			customer.setEmail(rs.getString(3));
+			customer.setAddress(rs.getString("address"));
+			customer.setMobile(rs.getString("mobile"));
+			customerList.add(customer);
+		}
+		return customerList;
+	}
 
 }

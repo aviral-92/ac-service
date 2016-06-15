@@ -5,34 +5,38 @@
  */
 package ac.service.impl;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
 import ac.service.DevelopmentTool;
 import ac.service.dao.impl.UserDaoImpl;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
-import ac.service.ui.LoginForm;
 import ac.service.ui.admin.WelcomeForm;
 import ac.service.validator.ValidateUser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  *
  * @author amittal
  */
 @Component
+@Scope("prototype")
 public class AcServiceUserImpl {
 
     @Autowired
     private UserDaoImpl userDaoImpl;
     @Autowired
     private ValidateUser validation;
-    @Autowired
-    private WelcomeForm welcomeForm;
-    @Autowired
-    private LoginForm loginForm;
+    /*@Autowired
+    private WelcomeForm welcomeForm;*/
+    
+    /*@Autowired
+    private LoginForm loginForm;*/
 
     public String login(Login login) throws Exception {
 
@@ -43,15 +47,15 @@ public class AcServiceUserImpl {
                 if (userDaoImpl.authenticateUser(login)) {
                     response = "Successfully Logged in";
                     JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-                    loginForm.dispose();
-                    welcomeForm.setVisible(true);
+//                    loginForm.dispose();
+//                    welcomeForm.setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            loginForm.dispose();
-            welcomeForm.setVisible(true);
+//            loginForm.dispose();
+//            welcomeForm.setVisible(true);
         }
         return response;
     }
@@ -69,6 +73,8 @@ public class AcServiceUserImpl {
 
     public String addUser(Login login, UserDetail userDetail) throws Exception {
 
+    	validation.validateLogin(login);
+    	validation.validateUser(userDetail);
         return userDaoImpl.addUser(userDetail, login);
     }
 

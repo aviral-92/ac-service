@@ -7,6 +7,8 @@ package ac.service.validator;
 
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
  * @author amittal
  */
 @Component
+@Scope("prototype")
 public class ValidateUser {
 
     public void validateLogin(Login login) throws Exception {

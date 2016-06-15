@@ -5,26 +5,36 @@
  */
 package ac.service.ui;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
 import ac.service.DevelopmentTool;
 import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+import ac.service.ui.admin.WelcomeForm;
 
 /**
  *
  * @author Aviral
  */
 @Component
+@Scope("prototype")
 public class LoginForm extends javax.swing.JFrame {
 
-    @Autowired
-    private AcServiceUserImpl acServiceImpl;
-
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+    private AcServiceUserImpl acServiceImpl;
+	@Autowired
+    private WelcomeForm welcomeForm;
+    /*
      * Creates new form LoginForm
      */
     public LoginForm() {
@@ -157,7 +167,13 @@ public class LoginForm extends javax.swing.JFrame {
           if(!DevelopmentTool.isDevelopmentMode) {
             if (StringUtils.isEmpty(response)) {
                 JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+            	dispose();
+            	welcomeForm.setVisible(true);
             }
+            } else {
+            	dispose();
+            	welcomeForm.setVisible(true);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

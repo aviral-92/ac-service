@@ -6,11 +6,14 @@
 package ac.service.ui.customer;
 
 import ac.service.impl.AcServiceCustomerImpl;
-import ac.service.menus.MenuBar;
 import ac.service.pojo.Customer;
+
 import java.util.List;
+
 import javax.swing.JRootPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -19,6 +22,7 @@ import org.springframework.util.StringUtils;
  * @author amittal
  */
 @Component
+@Scope("prototype")
 public class GetCustomer extends javax.swing.JFrame {
 
     public static final int NEGATIVE_CUSTOMER_ID = -1;
@@ -27,8 +31,9 @@ public class GetCustomer extends javax.swing.JFrame {
     private AcServiceCustomerImpl acServiceCustomerImpl;
     @Autowired
     private GetCustomerTable customerTable;
-    @Autowired
-    private MenuBar menuBar;
+    
+    /*@Autowired
+    private MenuBar menuBar;*/
 
     /**
      * Creates new form GetCustomer
@@ -189,7 +194,7 @@ public class GetCustomer extends javax.swing.JFrame {
 
     public void menu() {
 //        menuBar.setFrame(this);
-        getRootPane().setMenuBar(menuBar.menu());
+//        getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }
 

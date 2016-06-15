@@ -12,9 +12,12 @@ import ac.service.extractor.UserExtractor;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 import ac.service.validator.ValidateUser;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -24,12 +27,13 @@ import org.springframework.util.StringUtils;
  * @author Aviral
  */
 @Component
+@Scope("prototype")
 public class UserDaoImpl implements UserDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private ValidateUser validation;
+    /*@Autowired
+    private ValidateUser validation;*/
 
     @Override
     public boolean authenticateUser(Login login) {
@@ -50,42 +54,38 @@ public class UserDaoImpl implements UserDao {
     @Override
     public String addUser(UserDetail userDetail, Login login) throws Exception {
 
-        validation.validateLogin(login);
+//        validation.validateLogin(login);
         String response = null;
         
             String userValidate = null;
-            validation.validateUser(userDetail);
-            if (userValidate == null) {
-                String insertLogin = " INSERT INTO login VALUES (?,?,?)";
-                String sql = "INSERT INTO userdetail (userId,name,email,mobile,username) values (0,?,?,?,?)";
-                if (!isUserExist(userDetail)) {
-                    List<String> args = null;
-                    args = new ArrayList<>();
-                    args.add(login.getUsername());
-                    args.add(login.getPassword());
-                    args.add(login.getRole());
-                    int success = jdbcTemplate.update(insertLogin, args.toArray());
-                    if (success > 0) {
-                        args = new ArrayList<>();
-                        args.add(userDetail.getName());
-                        args.add(userDetail.getEmail());
-                        args.add(userDetail.getMobile());
-                        args.add(userDetail.getUsername());
-                        int temp = jdbcTemplate.update(sql, args.toArray());
-                        if (temp > 0) {
-                            response = "Successfully added.";
-                        } else {
-                            response = "Unable to insert User";
-                        }
-                    } else {
-                        response = "Unable to insert in Login";
-                    }
-                } else {
-                    response = "User already Exist";
-                }
-            } else {
-                response = userValidate;
-            }
+//            validation.validateUser(userDetail);
+            String insertLogin = " INSERT INTO login VALUES (?,?,?)";
+			String sql = "INSERT INTO userdetail (userId,name,email,mobile,username) values (0,?,?,?,?)";
+			if (!isUserExist(userDetail)) {
+			    List<String> args = null;
+			    args = new ArrayList<>();
+			    args.add(login.getUsername());
+			    args.add(login.getPassword());
+			    args.add(login.getRole());
+			    int success = jdbcTemplate.update(insertLogin, args.toArray());
+			    if (success > 0) {
+			        args = new ArrayList<>();
+			        args.add(userDetail.getName());
+			        args.add(userDetail.getEmail());
+			        args.add(userDetail.getMobile());
+			        args.add(userDetail.getUsername());
+			        int temp = jdbcTemplate.update(sql, args.toArray());
+			        if (temp > 0) {
+			            response = "Successfully added.";
+			        } else {
+			            response = "Unable to insert User";
+			        }
+			    } else {
+			        response = "Unable to insert in Login";
+			    }
+			} else {
+			    response = "User already Exist";
+			}
         
         return response;
     }

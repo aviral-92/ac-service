@@ -9,11 +9,15 @@ import ac.service.dao.impl.UserDaoImpl;
 import ac.service.impl.AcServiceUserImpl;
 import ac.service.menus.MenuBar;
 import ac.service.pojo.UserDetail;
+
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,6 +25,7 @@ import org.springframework.stereotype.Component;
  * @author Aviral
  */
 @Component
+@Scope("prototype")
 public class GetUser extends javax.swing.JFrame {
 
     /**
@@ -34,11 +39,12 @@ public class GetUser extends javax.swing.JFrame {
     private AcServiceUserImpl acServiceImpl;
     @Autowired
     private UserModifyForm modifyForm;
-    @Autowired
-    private WelcomeForm welcomeForm;
-    @Autowired
+   /* @Autowired
+    private WelcomeForm welcomeForm;*/
+    
+    /*@Autowired
     private MenuBar menuBar;
-
+*/
     public GetUser() {
         initComponents();
     }
@@ -203,7 +209,7 @@ public class GetUser extends javax.swing.JFrame {
     public void menu() {
 //        menuBar.setFrame(this);
     
-        getRootPane().setMenuBar(menuBar.menu());
+//        getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }
 
@@ -217,8 +223,9 @@ public class GetUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 //        WelcomeForm welcomeForm = new WelcomeForm();
-        welcomeForm.setTitle("Welcome Admin");
-        welcomeForm.setVisible(true);
+        /*welcomeForm.setTitle("Welcome Admin");
+        welcomeForm.setVisible(true);*/
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed

@@ -6,9 +6,13 @@
 package ac.service.ui.admin;
 
 import ac.service.pojo.UserDetail;
+
 import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,15 +21,16 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Scope("prototype")
 public class GetUserTable extends javax.swing.JFrame {
 
     /**
      * Creates new form GetUserTable
      */
     
-    @Autowired
+ /*   @Autowired
     private WelcomeForm welcomeForm;
-    
+    */
     public GetUserTable() {
         initComponents();
     }
@@ -111,9 +116,9 @@ public class GetUserTable extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
 //        WelcomeForm welcomeForm = new WelcomeForm();
-        welcomeForm.setTitle("Welcome Admin");
+      /*  welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);
-
+*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

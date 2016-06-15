@@ -7,7 +7,9 @@ package ac.service.ui.admin;
 
 import ac.service.ui.customer.AddCustomer;
 import ac.service.ui.customer.GetCustomer;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,9 +17,14 @@ import org.springframework.stereotype.Component;
  * @author Aviral
  */
 @Component
+@Scope("prototype")
 public class WelcomeForm extends javax.swing.JFrame {
 
-    @Autowired
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
     private AddUser user;
     @Autowired
     private GetUser getUserValue;

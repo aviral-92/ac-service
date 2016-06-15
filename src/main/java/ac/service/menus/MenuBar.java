@@ -20,9 +20,11 @@ import org.springframework.stereotype.Service;
  *
  * @author amittal
  */
-@Component
+//@Component
+//@Scope("prototype")
 public class MenuBar {
-    
+   
+	/*
     @Autowired
     private AddUser user;
     @Autowired
@@ -126,7 +128,7 @@ public class MenuBar {
         return jMenuBar1;
     }
 
-    private void Clicked(java.awt.event.MouseEvent evt) {
+    /*private void Clicked(java.awt.event.MouseEvent evt) {
         //frame.dispose();
         user.setTitle("Add User");
         user.setVisible(true);
@@ -165,7 +167,7 @@ public class MenuBar {
        // frame.dispose();
         getCustomerInfo.setTitle("Get Customer Info");
         getCustomerInfo.setVisible(true);
-    }
+    }*/
 
     /**
      * @return the frame

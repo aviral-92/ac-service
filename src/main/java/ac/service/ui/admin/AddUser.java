@@ -9,10 +9,13 @@ import ac.service.impl.AcServiceUserImpl;
 import ac.service.menus.MenuBar;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,17 +23,22 @@ import org.springframework.stereotype.Component;
  * @author Aviral
  */
 @Component
+@Scope("prototype")
 public class AddUser extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form AddUser
      */
     @Autowired
     private AcServiceUserImpl acServiceImpl;
-    @Autowired
-    private WelcomeForm welcomeForm;
-    @Autowired
-    private MenuBar menuBar;
+    /*@Autowired
+    private WelcomeForm welcomeForm;*/
+    /*@Autowired
+    private MenuBar menuBar;*/
 
     public AddUser() {
         initComponents();
@@ -235,7 +243,7 @@ public class AddUser extends javax.swing.JFrame {
 
     public void menu() {
        // menuBar.setFrame(this);
-        getRootPane().setMenuBar(menuBar.menu());
+//        getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }
 
@@ -264,8 +272,9 @@ public class AddUser extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         dispose();
-        welcomeForm.setTitle("Welcome Admin");
-        welcomeForm.setVisible(true);
+        /*welcomeForm.setTitle("Welcome Admin");
+        welcomeForm.setVisible(true);*/
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

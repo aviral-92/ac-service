@@ -9,8 +9,12 @@ import ac.service.dao.impl.CustomerDaoImpl;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
 import ac.service.pojo.CustomerReparingDetail;
+import ac.service.validator.ValidateCustomer;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,10 +22,13 @@ import org.springframework.stereotype.Component;
  * @author amittal
  */
 @Component
+@Scope("prototype")
 public class AcServiceCustomerImpl {
 
     @Autowired
     private CustomerDaoImpl customerDaoImpl;
+    @Autowired
+    private ValidateCustomer validateCustomer;
 
     public List<AcTypes> getAcType() {
 
@@ -38,8 +45,9 @@ public class AcServiceCustomerImpl {
         return customerDaoImpl.getCustomer(customer);
     }
 
-    public String addRepairDetail(CustomerReparingDetail customerReparingDetail) {
-
+    public String addRepairDetail(CustomerReparingDetail customerReparingDetail) throws Exception {
+    	
+    	validateCustomer.isRepairDetails(customerReparingDetail);
         return customerDaoImpl.addCustomerRepairDetails(customerReparingDetail);
     }
 
