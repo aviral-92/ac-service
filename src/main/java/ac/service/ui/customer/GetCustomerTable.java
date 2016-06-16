@@ -5,9 +5,6 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.pojo.Customer;
-import ac.service.ui.admin.WelcomeForm;
-
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
@@ -18,13 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.Customer;
+
 /**
  *
  * @author amittal
  */
 @Component
 @Scope("prototype")
-public class GetCustomerTable extends javax.swing.JFrame {
+public class GetCustomerTable extends AcServiceImpl {
 
 	/*@Autowired
 	private WelcomeForm welcomeForm;*/

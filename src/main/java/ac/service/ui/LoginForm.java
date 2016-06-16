@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import ac.service.DevelopmentTool;
+import ac.service.impl.AcServiceImpl;
 import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
 import ac.service.ui.admin.WelcomeForm;
@@ -24,14 +25,14 @@ import ac.service.ui.admin.WelcomeForm;
  */
 @Component
 @Scope("prototype")
-public class LoginForm extends javax.swing.JFrame {
+public class LoginForm extends AcServiceImpl {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Autowired
-    private AcServiceUserImpl acServiceImpl;
+	/*@Autowired
+    private AcServiceUserImpl acServiceUserImpl;*/
 	@Autowired
     private WelcomeForm welcomeForm;
     /*
@@ -39,7 +40,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
-        super.setTitle("Login");
+        setTitle("Login");
     }
 
     /**
@@ -163,7 +164,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         try {
             
-            String response = acServiceImpl.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
+            String response = acServiceUserImpl.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
           if(!DevelopmentTool.isDevelopmentMode) {
             if (StringUtils.isEmpty(response)) {
                 JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -184,7 +185,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
         
         if(!DevelopmentTool.isDevelopmentMode) {
-        String response = acServiceImpl.validateField(username.getText());
+        String response = acServiceUserImpl.validateField(username.getText());
         if (response != null) {
             username.setText("");
             username.requestFocus(true);

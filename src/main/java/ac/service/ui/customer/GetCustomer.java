@@ -5,9 +5,6 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.impl.AcServiceCustomerImpl;
-import ac.service.pojo.Customer;
-
 import java.util.List;
 
 import javax.swing.JRootPane;
@@ -17,18 +14,22 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import ac.service.impl.AcServiceCustomerImpl;
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.Customer;
+
 /**
  *
  * @author amittal
  */
 @Component
 @Scope("prototype")
-public class GetCustomer extends javax.swing.JFrame {
+public class GetCustomer extends AcServiceImpl {
 
     public static final int NEGATIVE_CUSTOMER_ID = -1;
 
-    @Autowired
-    private AcServiceCustomerImpl acServiceCustomerImpl;
+    /*@Autowired
+    private AcServiceCustomerImpl acServiceCustomerImpl;*/
     @Autowired
     private GetCustomerTable customerTable;
     

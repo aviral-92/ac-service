@@ -5,17 +5,15 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceUserImpl;
-import ac.service.menus.MenuBar;
-import ac.service.pojo.UserDetail;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.UserDetail;
 
 /**
  *
@@ -23,17 +21,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
-public class UserModifyForm extends javax.swing.JFrame {
+public class UserModifyForm extends AcServiceImpl {
 
 //	@Autowired
 	//private GetUser getUser;
-	@Autowired
-	private AcServiceUserImpl acServiceImpl;
+	/*@Autowired
+	private AcServiceUserImpl acServiceUserImpl;*/
 
 	/*
 	 * @Autowired private MenuBar menuBar;
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates new form UserModifyForm
 	 */
@@ -361,7 +363,7 @@ public class UserModifyForm extends javax.swing.JFrame {
 			UserDetail detail = new UserDetail(Integer.parseInt(userid
 					.getText()), username.getText(), name.getText(),
 					email.getText(), mobile.getText());
-			String response = acServiceImpl.updateUserData(detail);
+			String response = acServiceUserImpl.updateUserData(detail);
 			JOptionPane.showMessageDialog(new JFrame(), response, response,
 					JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {

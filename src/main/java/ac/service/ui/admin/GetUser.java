@@ -5,11 +5,6 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.dao.impl.UserDaoImpl;
-import ac.service.impl.AcServiceUserImpl;
-import ac.service.menus.MenuBar;
-import ac.service.pojo.UserDetail;
-
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -20,13 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import ac.service.dao.impl.UserDaoImpl;
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.UserDetail;
+
 /**
  *
  * @author Aviral
  */
 @Component
 @Scope("prototype")
-public class GetUser extends javax.swing.JFrame {
+public class GetUser extends AcServiceImpl {
 
     /**
      * Creates new form GetUser
@@ -35,8 +34,8 @@ public class GetUser extends javax.swing.JFrame {
     private UserDaoImpl userDaoImpl;
     @Autowired
     private GetUserTable getUserTable;
-    @Autowired
-    private AcServiceUserImpl acServiceImpl;
+    /*@Autowired
+    private AcServiceUserImpl acServiceUserImpl;*/
     @Autowired
     private UserModifyForm modifyForm;
    /* @Autowired
@@ -239,7 +238,7 @@ public class GetUser extends javax.swing.JFrame {
                 getUserTable.displayRecords(listDetails);
                 getUserTable.setVisible(true);
             } else if (updateRB.isSelected()) {
-                UserDetail userDetailResponse = acServiceImpl.getUserData(userDetail);
+                UserDetail userDetailResponse = acServiceUserImpl.getUserData(userDetail);
                 if (userDetailResponse == null) {
                     throw new Exception("Please give correct data to get details");
                 }
@@ -248,7 +247,7 @@ public class GetUser extends javax.swing.JFrame {
                 modifyForm.setTitle("Update");
                 modifyForm.setVisible(true);
             } else if (deleteRB.isSelected()) {
-                String response = acServiceImpl.deleteUserData(userDetail);
+                String response = acServiceUserImpl.deleteUserData(userDetail);
                 JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {

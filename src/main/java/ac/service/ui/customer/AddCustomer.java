@@ -5,16 +5,7 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.impl.AcServiceCustomerImpl;
-import ac.service.menus.MenuBar;
-import ac.service.pojo.AcTypes;
-import ac.service.pojo.Customer;
-import ac.service.ui.admin.WelcomeForm;
-
-import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
@@ -23,16 +14,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.Customer;
+
 /**
  *
  * @author amittal
  */
 @Component
 @Scope("prototype")
-public class AddCustomer extends javax.swing.JFrame {
+public class AddCustomer extends AcServiceImpl {
 
-    @Autowired
-    private AcServiceCustomerImpl acServiceCustomerImpl;
+    /*@Autowired
+    private AcServiceCustomerImpl acServiceCustomerImpl;*/
     @Autowired
     private AddRepairDetails addRepairDetails;
     /*@Autowired

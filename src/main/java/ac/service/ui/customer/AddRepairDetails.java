@@ -5,13 +5,6 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.impl.AcServiceCustomerImpl;
-import ac.service.menus.MenuBar;
-import ac.service.pojo.AcTypes;
-import ac.service.pojo.Customer;
-import ac.service.pojo.CustomerReparingDetail;
-import ac.service.ui.admin.WelcomeForm;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,10 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import ac.service.impl.AcServiceImpl;
+import ac.service.pojo.AcTypes;
+import ac.service.pojo.Customer;
+import ac.service.pojo.CustomerReparingDetail;
 
 /**
  *
@@ -34,18 +31,18 @@ import org.springframework.util.StringUtils;
  */
 @Component
 @Scope("prototype")
-public class AddRepairDetails extends javax.swing.JFrame {
+public class AddRepairDetails extends AcServiceImpl {
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-    @Autowired
-    private AcServiceCustomerImpl acServiceCustomerImpl;
     /*@Autowired
-    private WelcomeForm welcomeForm;*/
+     private AcServiceCustomerImpl acServiceCustomerImpl;*/
     /*@Autowired
-    private MenuBar menuBar;*/
+     private WelcomeForm welcomeForm;*/
+    /*@Autowired
+     private MenuBar menuBar;*/
 
     /**
      * Creates new form AddRepairDetails
@@ -662,8 +659,9 @@ public class AddRepairDetails extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-       /* welcomeForm.setTitle("Welcome");
-        welcomeForm.setVisible(true);*/
+        
+        /* welcomeForm.setTitle("Welcome");
+         welcomeForm.setVisible(true);*/
     }// GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -674,10 +672,10 @@ public class AddRepairDetails extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed"
         // desc=" Look and feel setting code (optional) ">
         /*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase
-		 * /tutorial/uiswing/lookandfeel/plaf.html
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase
+         * /tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
@@ -690,19 +688,19 @@ public class AddRepairDetails extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger
                     .getLogger(AddRepairDetails.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
+                            java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             java.util.logging.Logger
                     .getLogger(AddRepairDetails.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
+                            java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger
                     .getLogger(AddRepairDetails.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
+                            java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger
                     .getLogger(AddRepairDetails.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
+                            java.util.logging.Level.SEVERE, null, ex);
         }
         // </editor-fold>
 
