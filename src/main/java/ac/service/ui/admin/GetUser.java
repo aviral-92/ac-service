@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import ac.service.dao.impl.UserDaoImpl;
+import ac.service.impl.AcServiceBackImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 
@@ -38,6 +39,8 @@ public class GetUser extends AcServiceImpl {
     private AcServiceUserImpl acServiceUserImpl;*/
     @Autowired
     private UserModifyForm modifyForm;
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
    /* @Autowired
     private WelcomeForm welcomeForm;*/
     
@@ -221,6 +224,8 @@ public class GetUser extends AcServiceImpl {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
+        acServiceBackImpl.backButtonCode(this);
+        
 //        WelcomeForm welcomeForm = new WelcomeForm();
         /*welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);*/

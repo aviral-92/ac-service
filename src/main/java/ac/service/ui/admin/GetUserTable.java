@@ -5,13 +5,15 @@
  */
 package ac.service.ui.admin;
 
+import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -19,18 +21,19 @@ import org.springframework.stereotype.Component;
  *
  * @author Aviral
  */
-
 @Component
 @Scope("prototype")
-public class GetUserTable extends javax.swing.JFrame {
+public class GetUserTable extends AcServiceImpl {
+
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
 
     /**
      * Creates new form GetUserTable
      */
-    
- /*   @Autowired
+    /*   @Autowired
     private WelcomeForm welcomeForm;
-    */
+     */
     public GetUserTable() {
         initComponents();
     }
@@ -39,7 +42,6 @@ public class GetUserTable extends javax.swing.JFrame {
 //        initComponents();
 //        displayRecords(userDetailList);
 //    }
-
     public void displayRecords(List<UserDetail> userDetails) {
 
         DefaultTableModel model = new DefaultTableModel();
@@ -115,10 +117,11 @@ public class GetUserTable extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         dispose();
+        acServiceBackImpl.backButtonCode(GetUserTable.class);
 //        WelcomeForm welcomeForm = new WelcomeForm();
-      /*  welcomeForm.setTitle("Welcome Admin");
+        /*  welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);
-*/
+         */
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

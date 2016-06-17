@@ -5,6 +5,7 @@
  */
 package ac.service.ui.admin;
 
+import ac.service.impl.AcServiceBackImpl;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -23,6 +25,8 @@ import ac.service.pojo.UserDetail;
 @Scope("prototype")
 public class UserModifyForm extends AcServiceImpl {
 
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
 //	@Autowired
 	//private GetUser getUser;
 	/*@Autowired
@@ -353,6 +357,7 @@ public class UserModifyForm extends AcServiceImpl {
 
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
 		dispose();
+                acServiceBackImpl.backButtonCode(this);
 	//	getUser.setTitle("Welcome Form");
 	//	getUser.setVisible(true);
 	}// GEN-LAST:event_backActionPerformed

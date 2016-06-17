@@ -5,6 +5,7 @@
  */
 package ac.service.ui.customer;
 
+import ac.service.impl.AcServiceBackImpl;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -29,6 +30,8 @@ public class AddCustomer extends AcServiceImpl {
     private AcServiceCustomerImpl acServiceCustomerImpl;*/
     @Autowired
     private AddRepairDetails addRepairDetails;
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
     /*@Autowired
     private WelcomeForm welcomeForm;*/
     
@@ -226,6 +229,7 @@ public class AddCustomer extends AcServiceImpl {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
+        acServiceBackImpl.backButtonCode(this);
        /* welcomeForm.setTitle("Welcome");
         welcomeForm.setVisible(true);*/
         

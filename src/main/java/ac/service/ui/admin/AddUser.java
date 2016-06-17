@@ -5,8 +5,9 @@
  */
 package ac.service.ui.admin;
 
+import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceImpl;
 import ac.service.impl.AcServiceUserImpl;
-import ac.service.menus.MenuBar;
 import ac.service.pojo.Login;
 import ac.service.pojo.UserDetail;
 
@@ -24,22 +25,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
-public class AddUser extends javax.swing.JFrame {
+public class AddUser extends AcServiceImpl {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Creates new form AddUser
      */
-    @Autowired
-    private AcServiceUserImpl acServiceImpl;
+
     /*@Autowired
     private WelcomeForm welcomeForm;*/
-    /*@Autowired
+ /*@Autowired
     private MenuBar menuBar;*/
-
+    
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
+    
     public AddUser() {
         initComponents();
     }
@@ -242,7 +246,7 @@ public class AddUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void menu() {
-       // menuBar.setFrame(this);
+        // menuBar.setFrame(this);
 //        getRootPane().setMenuBar(menuBar.menu());
         this.setRootPane(getRootPane());
     }
@@ -259,7 +263,7 @@ public class AddUser extends javax.swing.JFrame {
             if (password.getText().equals(cnfPassword.getText())) {
                 Login login = new Login(username.getText(), password.getText(), choice.getSelectedItem().toString());
                 UserDetail userDetail = new UserDetail(0, username.getText(), name.getText(), email.getText(), mobile.getText());
-                String response = acServiceImpl.addUser(login, userDetail);
+                String response = acServiceUserImpl.addUser(login, userDetail);
                 JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(new JFrame(), "Password and Confirm Password do no match", "Error", JOptionPane.ERROR_MESSAGE);
@@ -272,9 +276,10 @@ public class AddUser extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         dispose();
+        acServiceBackImpl.backButtonCode(this);
         /*welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);*/
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

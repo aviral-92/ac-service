@@ -5,6 +5,7 @@
  */
 package ac.service.ui.customer;
 
+import ac.service.impl.AcServiceBackImpl;
 import java.util.List;
 
 import javax.swing.JRootPane;
@@ -14,7 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import ac.service.impl.AcServiceCustomerImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.Customer;
 
@@ -32,6 +32,8 @@ public class GetCustomer extends AcServiceImpl {
     private AcServiceCustomerImpl acServiceCustomerImpl;*/
     @Autowired
     private GetCustomerTable customerTable;
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
     
     /*@Autowired
     private MenuBar menuBar;*/
@@ -104,6 +106,11 @@ public class GetCustomer extends AcServiceImpl {
 
         cancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,6 +241,11 @@ public class GetCustomer extends AcServiceImpl {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         menu();
     }//GEN-LAST:event_formWindowOpened
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        // TODO add your handling code here:
+        acServiceBackImpl.backButtonCode(this);
+    }//GEN-LAST:event_cancelActionPerformed
 
     /**
      * @param args the command line arguments

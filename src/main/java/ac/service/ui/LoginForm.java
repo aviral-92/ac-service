@@ -28,13 +28,14 @@ import ac.service.ui.admin.WelcomeForm;
 public class LoginForm extends AcServiceImpl {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/*@Autowired
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /*@Autowired
     private AcServiceUserImpl acServiceUserImpl;*/
-	@Autowired
+    @Autowired
     private WelcomeForm welcomeForm;
+
     /*
      * Creates new form LoginForm
      */
@@ -163,18 +164,18 @@ public class LoginForm extends AcServiceImpl {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            
+
             String response = acServiceUserImpl.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
-          if(!DevelopmentTool.isDevelopmentMode) {
-            if (StringUtils.isEmpty(response)) {
-                JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if (!DevelopmentTool.isDevelopmentMode) {
+                if (StringUtils.isEmpty(response)) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    dispose();
+                    welcomeForm.setVisible(true);
+                }
             } else {
-            	dispose();
-            	welcomeForm.setVisible(true);
-            }
-            } else {
-            	dispose();
-            	welcomeForm.setVisible(true);
+                dispose();
+                welcomeForm.setVisible(true);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -183,13 +184,13 @@ public class LoginForm extends AcServiceImpl {
     }//GEN-LAST:event_jButton1ActionPerformed
     //TODO NEED TO CHECK
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        
-        if(!DevelopmentTool.isDevelopmentMode) {
-        String response = acServiceUserImpl.validateField(username.getText());
-        if (response != null) {
-            username.setText("");
-            username.requestFocus(true);
-        }
+
+        if (!DevelopmentTool.isDevelopmentMode) {
+            String response = acServiceUserImpl.validateField(username.getText());
+            if (response != null) {
+                username.setText("");
+                username.requestFocus(true);
+            }
         }
     }//GEN-LAST:event_usernameFocusLost
 

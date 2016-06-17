@@ -5,6 +5,7 @@
  */
 package ac.service.ui.customer;
 
+import ac.service.impl.AcServiceBackImpl;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
 import ac.service.pojo.CustomerReparingDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -33,6 +35,8 @@ import ac.service.pojo.CustomerReparingDetail;
 @Scope("prototype")
 public class AddRepairDetails extends AcServiceImpl {
 
+    @Autowired
+    private AcServiceBackImpl acServiceBackImpl;
     /**
      *
      */
@@ -659,6 +663,7 @@ public class AddRepairDetails extends AcServiceImpl {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         dispose();
+        acServiceBackImpl.backButtonCode(this);
         
         /* welcomeForm.setTitle("Welcome");
          welcomeForm.setVisible(true);*/
