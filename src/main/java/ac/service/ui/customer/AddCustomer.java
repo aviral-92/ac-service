@@ -5,7 +5,7 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -31,7 +31,7 @@ public class AddCustomer extends AcServiceImpl {
     @Autowired
     private AddRepairDetails addRepairDetails;
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
     /*@Autowired
     private WelcomeForm welcomeForm;*/
     

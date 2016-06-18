@@ -8,6 +8,7 @@ package ac.service.dao.impl;
 import ac.service.dao.CustomerDao;
 import ac.service.extractor.AcTypesExtractor;
 import ac.service.extractor.CustomerExtractor;
+import ac.service.extractor.RepairingDetailExtractor;
 import ac.service.pojo.AcTypes;
 import ac.service.pojo.Customer;
 import ac.service.pojo.CustomerReparingDetail;
@@ -35,8 +36,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public List<AcTypes> getAcTypes() {
-		return jdbcTemplate.query("SELECT * FROM ac_type",
-				new AcTypesExtractor());
+		return jdbcTemplate.query("SELECT * FROM ac_type", new AcTypesExtractor());
 	}
 
 	@Override
@@ -52,8 +52,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			args.add(customer.getMobile());
 			int result = jdbcTemplate.update(query, args.toArray());
 			if (result > 0) {
-				response = "Customer " + customer.getName()
-						+ " successfully added";
+				response = "Customer " + customer.getName() + " successfully added";
 			}
 		} else {
 			throw new Exception("Email or Password already Exist");
@@ -69,8 +68,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		List<String> args = new ArrayList<>();
 		args.add(customer.getEmail());
 		args.add(customer.getMobile());
-		List<Customer> response = jdbcTemplate.query(query,
-				new CustomerExtractor(), args.toArray());
+		List<Customer> response = jdbcTemplate.query(query, new CustomerExtractor(), args.toArray());
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			isExist = true;
 		}
@@ -109,26 +107,22 @@ public class CustomerDaoImpl implements CustomerDao {
 			isAddress = true;
 		}
 		if (isMobile || isEmail || isAddress) {
-			if (!StringUtils.isEmpty(customer.getCustomerId())
-					&& customer.getCustomerId() != -1) {
+			if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
 				query.append(" OR customerId = ? ");
 				args.add(String.valueOf(customer.getCustomerId()));
 			}
-		} else if (!StringUtils.isEmpty(customer.getCustomerId())
-				&& customer.getCustomerId() != -1) {
+		} else if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
 			query.append(" WHERE customerId = ? ");
 			args.add(String.valueOf(customer.getCustomerId()));
 		}
 
-		List<Customer> response = jdbcTemplate.query(query.toString(),
-				new CustomerExtractor(), args.toArray());
+		List<Customer> response = jdbcTemplate.query(query.toString(), new CustomerExtractor(), args.toArray());
 
 		return response;
 	}
 
 	@Override
-	public String addCustomerRepairDetails(
-			CustomerReparingDetail customerReparingDetail) {
+	public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail) {
 
 		String response = null;
 		if (!StringUtils.isEmpty(customerReparingDetail)) {
@@ -155,17 +149,32 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	public Customer getCustomerId(Customer customer) {
 
-		if (!StringUtils.isEmpty(customer)
-				&& !StringUtils.isEmpty(customer.getEmail())) {
+		if (!StringUtils.isEmpty(customer) && !StringUtils.isEmpty(customer.getEmail())) {
 			String query = "SELECT * FROM customer WHERE email = ? ";
 			List<String> args = new ArrayList<>();
 			args.add(customer.getEmail());
-			List<Customer> customerList = jdbcTemplate.query(query,
-					new CustomerExtractor(), args.toArray());
+			List<Customer> customerList = jdbcTemplate.query(query, new CustomerExtractor(), args.toArray());
 			if (!StringUtils.isEmpty(customerList) && customerList.size() > 0) {
 				customer.setCustomerId(customerList.get(0).getCustomerId());
 			}
 		}
 		return customer;
+	}
+
+	@Override
+	public List<CustomerReparingDetail> findRepairDetailsByCustomerId(CustomerReparingDetail reparingDetail) {
+
+		String query = "SELECT * FROM CUSTOMER_REPAIRING_DETAIL AS CRD INNER JOIN CUSTOMER AS CUST ON CRD.CUSTOMER_ID = CUST.CUSTOMERID "
+				+ " WHERE CRD.CUSTOMER_ID = ? ";
+		List<String> args = new ArrayList<>();
+		if (!StringUtils.isEmpty(reparingDetail) && !StringUtils.isEmpty(reparingDetail.getCustomerId())) {
+			args.add(String.valueOf(reparingDetail.getCustomerId()));
+			List<CustomerReparingDetail> reparingDetailList = jdbcTemplate.query(query, new RepairingDetailExtractor(),
+					args.toArray());
+			if (!StringUtils.isEmpty(reparingDetailList) && reparingDetailList.size() > 0) {
+				return reparingDetailList;
+			}
+		}
+		return null;
 	}
 }

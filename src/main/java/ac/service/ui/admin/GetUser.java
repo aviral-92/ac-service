@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import ac.service.dao.impl.UserDaoImpl;
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 
@@ -40,7 +40,7 @@ public class GetUser extends AcServiceImpl {
     @Autowired
     private UserModifyForm modifyForm;
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
    /* @Autowired
     private WelcomeForm welcomeForm;*/
     

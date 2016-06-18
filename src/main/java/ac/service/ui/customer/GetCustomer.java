@@ -5,7 +5,7 @@
  */
 package ac.service.ui.customer;
 
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import java.util.List;
 
 import javax.swing.JRootPane;
@@ -33,7 +33,7 @@ public class GetCustomer extends AcServiceImpl {
     @Autowired
     private GetCustomerTable customerTable;
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
     
     /*@Autowired
     private MenuBar menuBar;*/

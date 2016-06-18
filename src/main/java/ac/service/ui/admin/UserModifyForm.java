@@ -5,7 +5,7 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserModifyForm extends AcServiceImpl {
 
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
 //	@Autowired
 	//private GetUser getUser;
 	/*@Autowired

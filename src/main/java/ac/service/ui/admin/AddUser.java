@@ -5,7 +5,7 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.impl.AcServiceUserImpl;
 import ac.service.pojo.Login;
@@ -42,7 +42,7 @@ public class AddUser extends AcServiceImpl {
     private MenuBar menuBar;*/
     
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
     
     public AddUser() {
         initComponents();

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * @author amittal
  */
 @Component
-public class AcServiceBackImpl {
+public class AcServiceGoBackImpl {
 
     @Autowired
     private WelcomeForm welcomeForm;

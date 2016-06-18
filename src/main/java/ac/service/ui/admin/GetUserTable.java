@@ -5,7 +5,7 @@
  */
 package ac.service.ui.admin;
 
-import ac.service.impl.AcServiceBackImpl;
+import ac.service.impl.AcServiceGoBackImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.UserDetail;
 
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 public class GetUserTable extends AcServiceImpl {
 
     @Autowired
-    private AcServiceBackImpl acServiceBackImpl;
+    private AcServiceGoBackImpl acServiceBackImpl;
 
     /**
      * Creates new form GetUserTable

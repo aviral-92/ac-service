@@ -48,6 +48,12 @@
 			<artifactId>jcalendar</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/net.java.dev.swing-layout/swing-layout -->
+		<dependency>
+			<groupId>net.java.dev.swing-layout</groupId>
+			<artifactId>swing-layout</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
 	</dependencies>
 </project>

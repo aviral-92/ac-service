@@ -16,13 +16,15 @@ import java.util.List;
  */
 public interface CustomerDao {
 
-    public List<AcTypes> getAcTypes();
-    
-    public String addCustomer(Customer customer) throws Exception;
-    
-    public boolean isExist(Customer customer);
-    
-    public List<Customer> getCustomer(Customer customer);
-    
-    public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail);
+	public List<AcTypes> getAcTypes();
+
+	public String addCustomer(Customer customer) throws Exception;
+
+	public boolean isExist(Customer customer);
+
+	public List<Customer> getCustomer(Customer customer);
+
+	public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail);
+
+	public List<CustomerReparingDetail> findRepairDetailsByCustomerId(CustomerReparingDetail reparingDetail);
 }
