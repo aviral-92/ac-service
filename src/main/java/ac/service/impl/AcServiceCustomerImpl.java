@@ -69,7 +69,7 @@ public class AcServiceCustomerImpl {
 			Date date = new Date();
 			for (CustomerReparingDetail customerReparingDetail : reparingDetails) {
 				reparingDetail = customerReparingDetail;
-				if (date.compareTo(customerReparingDetail.getWarranty()) == 0) {
+				if (customerReparingDetail.getWarranty().compareTo(date) == 0) {
 					System.out.println("Today is your last day of Warrenty");
 					reparingDetail.setIsWarrantyExpired("NO");
 				} else if (reparingDetail.getWarranty().compareTo(date) == 1) {
