@@ -1,0 +1,45 @@
+package ac.service.dao.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import ac.service.dao.ReportDao;
+import ac.service.extractor.RepairingDetailExtractor;
+import ac.service.pojo.CustomerReparingDetail;
+import ac.service.pojo.ReportGenerator;
+
+@Component
+public class ReportDaoImpl implements ReportDao {
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Override
+	public List<CustomerReparingDetail> startToEndDate(
+			ReportGenerator reportGenerator) {
+
+		String query = "SELECT * FROM ac_service.customer_repairing_detail WHERE "
+				+ "updated_date BETWEEN (STR_TO_DATE('?','%d-%m-%Y')) AND STR_TO_DATE('?','%d-%m-%Y')";
+		List<String> args = new ArrayList<>();
+		if (StringUtils.isEmpty(reportGenerator.getStartDate())
+				|| StringUtils.isEmpty(reportGenerator.getEndDate())) {
+
+			return null;
+		}
+		args.add(reportGenerator.getStartDate());
+		args.add(reportGenerator.getEndDate());
+		List<CustomerReparingDetail> listResult = jdbcTemplate.query(query,
+				new RepairingDetailExtractor(), args.toArray());
+		for(CustomerReparingDetail detail : listResult){
+			System.out.println(detail.getName());
+			System.out.println(detail.getUpdateDate());
+		}
+		return listResult;
+	}
+
+}

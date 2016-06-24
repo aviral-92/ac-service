@@ -63,6 +63,8 @@ public class WelcomeForm extends javax.swing.JFrame {
         getCustomer = new javax.swing.JMenuItem();
         updateCustomer = new javax.swing.JMenuItem();
         deleteCustomer = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
@@ -84,7 +86,7 @@ public class WelcomeForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         User.setText("USER");
@@ -154,6 +156,18 @@ public class WelcomeForm extends javax.swing.JFrame {
 
         jMenuBar1.add(Customer);
 
+        jMenu1.setText("REPORT");
+
+        jMenuItem1.setText("Monthly Report");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,6 +232,10 @@ public class WelcomeForm extends javax.swing.JFrame {
         getCustomerInfo.setVisible(true);
     }//GEN-LAST:event_getCustomerMousePressed
 
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -263,7 +281,9 @@ public class WelcomeForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem getCustomer;
     private javax.swing.JMenuItem getUser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem updateCustomer;
     private javax.swing.JMenuItem updateUser;

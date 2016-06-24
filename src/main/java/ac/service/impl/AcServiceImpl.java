@@ -14,6 +14,8 @@ public class AcServiceImpl extends JFrame {
 	protected AcServiceUserImpl acServiceUserImpl;
 	@Autowired
 	protected AcServiceCustomerImpl acServiceCustomerImpl;
+	@Autowired
+	protected AcReportGeneratorImpl acReportGeneratorImpl;
 //	public JFrame frame = new JFrame();
 	
 
