@@ -7,6 +7,7 @@ package ac.service.ui.admin;
 
 import ac.service.ui.customer.AddCustomer;
 import ac.service.ui.customer.GetCustomer;
+import ac.service.ui.report.ReportForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,6 +33,8 @@ public class WelcomeForm extends javax.swing.JFrame {
     private AddCustomer customerAdd;
     @Autowired
     private GetCustomer getCustomerInfo;
+    @Autowired
+    private ReportForm reportForm;
 
     /**
      * Creates new form WelcomeForm
@@ -233,7 +236,8 @@ public class WelcomeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_getCustomerMousePressed
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
-        
+        this.dispose();
+    	reportForm.setVisible(true);
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     /**

@@ -23,8 +23,8 @@ public class ReportDaoImpl implements ReportDao {
 	public List<CustomerReparingDetail> startToEndDate(
 			ReportGenerator reportGenerator) {
 
-		String query = "SELECT * FROM ac_service.customer_repairing_detail WHERE "
-				+ "updated_date BETWEEN (STR_TO_DATE('?','%d-%m-%Y')) AND STR_TO_DATE('?','%d-%m-%Y')";
+		String query = "SELECT * FROM ac_service.customer_repairing_detail AS CRD INNER JOIN customer AS CUST WHERE "
+				+ " CRD.customer_Id=CUST.customerId AND updated_date BETWEEN (STR_TO_DATE(?,'%d-%m-%Y')) AND STR_TO_DATE(?,'%d-%m-%Y')";
 		List<String> args = new ArrayList<>();
 		if (StringUtils.isEmpty(reportGenerator.getStartDate())
 				|| StringUtils.isEmpty(reportGenerator.getEndDate())) {
