@@ -8,13 +8,14 @@ public class ReportGenerator {
 	private String custName;
 	private String amount;
 	private String visitDate;
+	private String year;
 
 	public ReportGenerator() {
 		super();
 	}
 
 	public ReportGenerator(String customerId, String startDate, String endDate, String custName, String amount,
-			String visitDate) {
+			String visitDate, String year) {
 		super();
 		this.customerId = customerId;
 		this.startDate = startDate;
@@ -22,6 +23,7 @@ public class ReportGenerator {
 		this.custName = custName;
 		this.amount = amount;
 		this.visitDate = visitDate;
+		this.year = year;
 	}
 
 	public String getCustomerId() {
@@ -70,6 +72,14 @@ public class ReportGenerator {
 
 	public void setVisitDate(String visitDate) {
 		this.visitDate = visitDate;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 }

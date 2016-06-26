@@ -20,26 +20,37 @@ public class ReportDaoImpl implements ReportDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<CustomerReparingDetail> startToEndDate(
-			ReportGenerator reportGenerator) {
+	public List<CustomerReparingDetail> startToEndDate(ReportGenerator reportGenerator) {
 
 		String query = "SELECT * FROM ac_service.customer_repairing_detail AS CRD INNER JOIN customer AS CUST WHERE "
 				+ " CRD.customer_Id=CUST.customerId AND updated_date BETWEEN (STR_TO_DATE(?,'%d-%m-%Y')) AND STR_TO_DATE(?,'%d-%m-%Y')";
 		List<String> args = new ArrayList<>();
-		if (StringUtils.isEmpty(reportGenerator.getStartDate())
-				|| StringUtils.isEmpty(reportGenerator.getEndDate())) {
+		if (StringUtils.isEmpty(reportGenerator.getStartDate()) || StringUtils.isEmpty(reportGenerator.getEndDate())) {
 
 			return null;
 		}
 		args.add(reportGenerator.getStartDate());
 		args.add(reportGenerator.getEndDate());
-		List<CustomerReparingDetail> listResult = jdbcTemplate.query(query,
-				new RepairingDetailExtractor(), args.toArray());
-		for(CustomerReparingDetail detail : listResult){
-			System.out.println(detail.getName());
-			System.out.println(detail.getUpdateDate());
-		}
+		List<CustomerReparingDetail> listResult = jdbcTemplate.query(query, new RepairingDetailExtractor(),
+				args.toArray());
 		return listResult;
 	}
 
+	public List<CustomerReparingDetail> monthlyReportGenerator(ReportGenerator reportGenerator) {
+
+		if (StringUtils.isEmpty(reportGenerator.getYear())) {
+
+			String query = "SELECT * FROM ac_service.customer_repairing_detail AS CRD INNER JOIN customer AS CUST WHERE "
+					+ " CRD.customer_Id=CUST.customerId AND updated_date BETWEEN (STR_TO_DATE('01-01-"
+					+ reportGenerator.getYear() + "','%d-%m-%Y')) " + "AND STR_TO_DATE('31-12-"
+					+ reportGenerator.getYear() + "','%d-%m-%Y')";
+			// List<String> args = new ArrayList<>();
+
+			// args.add(reportGenerator.getYear());
+			// args.add(reportGenerator.getYear());
+			List<CustomerReparingDetail> listResult = jdbcTemplate.query(query, new RepairingDetailExtractor());
+			return listResult;
+		}
+		return null;
+	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -16,6 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -36,10 +38,27 @@ public class AcReportGeneratorImpl {
 		return reportDaoImpl.startToEndDate(reportGenerator);
 	}
 
-	public void generateExcelReport(JTable table) {
+	public List<CustomerReparingDetail> MonthlyReports(ReportGenerator reportGenerator) {
 
+		List<CustomerReparingDetail> reparingDetailsList = reportDaoImpl.monthlyReportGenerator(reportGenerator);
+		if (!StringUtils.isEmpty(reparingDetailsList) && reparingDetailsList.size() > 0) {
+			bussinessLogicMonthlyReport(reparingDetailsList);
+		}
+		return null;
+	}
+
+	private void bussinessLogicMonthlyReport(List<CustomerReparingDetail> reparingDetails) {
+
+		SimpleDateFormat fmt = new java.text.SimpleDateFormat("MM");
+		for(CustomerReparingDetail customerReparingDetail : reparingDetails){
+			fmt.format(customerReparingDetail.getUpdateDate());
+		}
+	}
+
+	public boolean generateExcelReport(JTable table) {
+
+		boolean success = false;
 		try {
-
 			Workbook wb = new XSSFWorkbook(); // Excell workbook
 			Sheet sheet = wb.createSheet(); // WorkSheet
 			Row row = sheet.createRow(2); // Row created at line 3
@@ -63,13 +82,17 @@ public class AcReportGeneratorImpl {
 				row = sheet.createRow((rows + 3));
 			}
 			fileSaved(".xls", wb, null);
+			success = true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			success = false;
 		}
+		return success;
 	}
 
-	public void generatePdfReport(JTable table) {
+	public boolean generatePdfReport(JTable table) {
 
+		boolean success = false;
 		try {
 			Document doc = new Document();
 			fileSaved(".pdf", null, doc);
@@ -90,9 +113,12 @@ public class AcReportGeneratorImpl {
 			doc.add(pdfTable);
 			doc.close();
 			System.out.println("done");
+			success = true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			success = false;
 		}
+		return success;
 	}
 
 	private void fileSaved(String fileExtension, Workbook wb, Document doc) throws IOException, DocumentException {
