@@ -12,8 +12,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import ac.service.impl.AcServiceGoBackImpl;
 import ac.service.impl.AcServiceImpl;
 import ac.service.pojo.CustomerReparingDetail;
 
@@ -23,6 +25,7 @@ import ac.service.pojo.CustomerReparingDetail;
  */
 
 @Component
+@Scope("prototype")
 public class GetCustomerPreviousRecords extends AcServiceImpl {
 
 	/**
@@ -32,6 +35,8 @@ public class GetCustomerPreviousRecords extends AcServiceImpl {
 
 	@Autowired
 	private AddRepairDetails addRepairDetails;
+	@Autowired
+	private AcServiceGoBackImpl acServiceGoBackImpl;
 
 	/**
 	 * Creates new form GetCustomerPreviousRecords
@@ -55,13 +60,15 @@ public class GetCustomerPreviousRecords extends AcServiceImpl {
 		if (jTable1.getModel().getRowCount() > 0) {
 			initComponents();
 		}
+		model.fireTableDataChanged();
 		jTable1.setModel(model);
 
 		jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				CustomerReparingDetail reparingDetail = new CustomerReparingDetail();
-				reparingDetail.setCustomerId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+				reparingDetail
+						.setCustomerId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
 				reparingDetail.setName(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
 				dispose();
 				addRepairDetails.setCustomerID(reparingDetail);
@@ -80,150 +87,89 @@ public class GetCustomerPreviousRecords extends AcServiceImpl {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        refresh = new javax.swing.JButton();
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jTable1 = new javax.swing.JTable();
+		jLabel1 = new javax.swing.JLabel();
+		back = new javax.swing.JButton();
+		refresh = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-            },
-            new String [] {
+		}, new String[] {
 
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+		}));
+		jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Customer Previous Record");
+		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		jLabel1.setText("Customer Previous Record");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Back");
-
-        refresh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        refresh.setText("Refresh");
-        refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(304, 304, 304))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(319, 319, 319)
-                .addComponent(jButton1)
-                .addGap(68, 68, 68)
-                .addComponent(refresh)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(refresh))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-
-    	if(jTable1.getModel().getRowCount()>0){
-    		CustomerReparingDetail reparingDetail = new CustomerReparingDetail();
-    		reparingDetail.setCustomerId(Integer.parseInt(jTable1.getModel().getValueAt(0, 0).toString()));
-    		List<CustomerReparingDetail> infoList = acServiceCustomerImpl.getRepairDetailByCustomerId(reparingDetail);
-			displayContent(infoList);
-    	}
-    	
-    	/*jTable1.getModel().getValueAt(0, 0);
-    	jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				CustomerReparingDetail reparingDetail = new CustomerReparingDetail();
-				reparingDetail.setCustomerId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
-				reparingDetail.setName(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-				List<CustomerReparingDetail> infoList = acServiceCustomerImpl.getRepairDetailByCustomerId(reparingDetail);
-				displayContent(infoList);
-
-			}
-		});*/
-
-    }//GEN-LAST:event_refreshActionPerformed
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting
-		// code (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.
-		 * html
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(GetCustomerPreviousRecords.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(GetCustomerPreviousRecords.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(GetCustomerPreviousRecords.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(GetCustomerPreviousRecords.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new GetCustomerPreviousRecords().setVisible(true);
+		back.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		back.setText("Back");
+		back.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				backActionPerformed(evt);
 			}
 		});
+
+		refresh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		refresh.setText("Refresh");
+		refresh.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				refreshActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addContainerGap()
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+						.addGap(23, 23, 23))
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+						layout.createSequentialGroup()
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(304, 304, 304))
+				.addGroup(layout.createSequentialGroup().addGap(319, 319, 319).addComponent(back).addGap(68, 68, 68)
+						.addComponent(refresh).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createSequentialGroup().addGap(14, 14, 14)
+								.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(18, 18, 18)
+								.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(28, 28, 28)
+								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(back).addComponent(refresh))
+								.addContainerGap(25, Short.MAX_VALUE)));
+
+		pack();
+	}// </editor-fold>//GEN-END:initComponents
+
+	private void refreshActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refreshActionPerformed
+
+	}// GEN-LAST:event_refreshActionPerformed
+	
+	private void backActionPerformed(java.awt.event.ActionEvent evt){
+		
+		dispose();
+		acServiceGoBackImpl.backButtonCode(this);
 	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton refresh;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton back;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JTable jTable1;
+	private javax.swing.JButton refresh;
+	// End of variables declaration//GEN-END:variables
 }

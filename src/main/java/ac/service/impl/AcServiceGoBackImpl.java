@@ -13,6 +13,7 @@ import ac.service.ui.admin.WelcomeForm;
 import ac.service.ui.customer.AddCustomer;
 import ac.service.ui.customer.AddRepairDetails;
 import ac.service.ui.customer.GetCustomer;
+import ac.service.ui.customer.GetCustomerPreviousRecords;
 import ac.service.ui.customer.GetCustomerTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,8 @@ public class AcServiceGoBackImpl {
         }else if(back instanceof AddRepairDetails){
             goBack();
         }else if(back instanceof GetCustomer){
+            goBack();
+        }else if(back instanceof GetCustomerPreviousRecords){
             goBack();
         }
     }
