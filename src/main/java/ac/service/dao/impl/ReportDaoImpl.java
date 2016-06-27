@@ -38,7 +38,7 @@ public class ReportDaoImpl implements ReportDao {
 
 	public List<CustomerReparingDetail> monthlyReportGenerator(ReportGenerator reportGenerator) {
 
-		if (StringUtils.isEmpty(reportGenerator.getYear())) {
+		if (!StringUtils.isEmpty(reportGenerator.getYear())) {
 
 			String query = "SELECT * FROM ac_service.customer_repairing_detail AS CRD INNER JOIN customer AS CUST WHERE "
 					+ " CRD.customer_Id=CUST.customerId AND updated_date BETWEEN (STR_TO_DATE('01-01-"
