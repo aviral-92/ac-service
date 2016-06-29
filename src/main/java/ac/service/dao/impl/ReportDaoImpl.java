@@ -40,14 +40,8 @@ public class ReportDaoImpl implements ReportDao {
 
 		if (!StringUtils.isEmpty(reportGenerator.getYear())) {
 
-			String query = "SELECT * FROM ac_service.customer_repairing_detail AS CRD INNER JOIN customer AS CUST WHERE "
-					+ " CRD.customer_Id=CUST.customerId AND updated_date BETWEEN (STR_TO_DATE('01-01-"
-					+ reportGenerator.getYear() + "','%d-%m-%Y')) " + "AND STR_TO_DATE('31-12-"
-					+ reportGenerator.getYear() + "','%d-%m-%Y')";
-			// List<String> args = new ArrayList<>();
-
-			// args.add(reportGenerator.getYear());
-			// args.add(reportGenerator.getYear());
+			String query = "SELECT SUM(actual_amount) AS amount,DATE_FORMAT(updated_date,'%M-%Y') AS updatedDate "
+					+ "FROM ac_service.customer_repairing_detail GROUP BY STR_TO_DATE(DATE_FORMAT(updated_date,'%m-%Y'),'%m-%Y')";
 			List<CustomerReparingDetail> listResult = jdbcTemplate.query(query, new RepairingDetailExtractor());
 			return listResult;
 		}

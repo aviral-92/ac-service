@@ -14,7 +14,6 @@ import java.util.Date;
 public class CustomerReparingDetail extends Customer {
 
 	private int repairId;
-	// private int customerId;
 	private String description;
 	private String actualAmount;
 	private String paidAmount;
@@ -23,6 +22,8 @@ public class CustomerReparingDetail extends Customer {
 	private Date warranty;
 	private String model_Vehicle;
 	private String isWarrantyExpired;
+	private String finalAmount;
+	private String updatedDateRetun;
 
 	/**
 	 * @return the repairId
@@ -150,5 +151,21 @@ public class CustomerReparingDetail extends Customer {
 
 	public void setIsWarrantyExpired(String isWarrantyExpired) {
 		this.isWarrantyExpired = isWarrantyExpired;
+	}
+
+	public String getUpdatedDateRetun() {
+		return updatedDateRetun;
+	}
+
+	public void setUpdatedDateRetun(String updatedDateRetun) {
+		this.updatedDateRetun = updatedDateRetun;
+	}
+
+	public String getFinalAmount() {
+		return finalAmount;
+	}
+
+	public void setFinalAmount(String finalAmount) {
+		this.finalAmount = finalAmount;
 	}
 }
