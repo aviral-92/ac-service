@@ -16,6 +16,7 @@ public class Customer extends AcTypes {
     private String email;
     private String address;
     private String mobile;
+	private String registeredOn;
 
     
     /**
@@ -87,5 +88,13 @@ public class Customer extends AcTypes {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
+
+	public String getRegisteredOn() {
+		return registeredOn;
+	}
+
+	public void setRegisteredOn(String registeredOn) {
+		this.registeredOn = registeredOn;
+	}
 
 }

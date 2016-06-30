@@ -31,6 +31,7 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
   `email` VARCHAR(45) NOT NULL ,
   `mobile` VARCHAR(45) NOT NULL ,
   `address` VARCHAR(55) NOT NULL ,
+  `RegisteredDate` DATETIME  NOT NULL ,
 --   `description` VARCHAR(95) NOT NULL ,
 --   `amount` DOUBLE NOT NULL ,
 --   `model/vehicle no` VARCHAR(45) NOT NULL ,

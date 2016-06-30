@@ -13,7 +13,8 @@ public class QueryConstant {
 
     public static String AC_SERVICE = "SELECT * FROM ac_type";
 
-    public static String ADDCUSTOMER = "INSERT INTO customer (customerId,name,email,address,mobile) VALUES (0,?,?,?,?)";
+    public static String ADDCUSTOMER = "INSERT INTO customer (customerId,name,email,address,mobile,RegisteredDate) "
+    		+ "VALUES (0,?,?,?,?,NOW())";
 
     public static String ISEXIST = "SELECT * FROM customer WHERE email = ? OR mobile = ?";
     

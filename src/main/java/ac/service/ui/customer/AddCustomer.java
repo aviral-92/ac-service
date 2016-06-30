@@ -5,7 +5,10 @@
  */
 package ac.service.ui.customer;
 
+import java.util.Date;
+
 import ac.service.impl.AcServiceGoBackImpl;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -242,6 +245,7 @@ public class AddCustomer extends AcServiceImpl {
         customer.setMobile(mobile.getText());
         customer.setEmail(email.getText());
         customer.setAddress(address.getText());
+        customer.setRegisteredOn(new Date().toString());
 
         try {
             String response = acServiceCustomerImpl.addCustomer(customer);
