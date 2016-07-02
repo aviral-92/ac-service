@@ -46,10 +46,10 @@ public class GetCustomerTable extends AcServiceImpl {
 	public void displayRecords(List<Customer> customers) {
 
 		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(new Object[] { "CustomerID", "Name", "Email", "Mobile", "Address" });
+		model.setColumnIdentifiers(new Object[] { "CustomerID", "Name", "Email", "Mobile", "Address", "Regestered On" });
 		for (Customer customer : customers) {
 			model.addRow(new Object[] { customer.getCustomerId(), customer.getName(), customer.getEmail(),
-					customer.getMobile(), customer.getAddress() });
+					customer.getMobile(), customer.getAddress(), customer.getRegisteredOn() });
 		}
 		/* table.setModel(null); */
 		if (table.getModel().getRowCount() > 0) {

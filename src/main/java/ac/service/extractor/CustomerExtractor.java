@@ -22,8 +22,7 @@ public class CustomerExtractor implements ResultSetExtractor<List<Customer>> {
 	List<Customer> customerList = new ArrayList<>();
 
 	@Override
-	public List<Customer> extractData(ResultSet rs) throws SQLException,
-			DataAccessException {
+	public List<Customer> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		Customer customer;
 		while (rs.next()) {
 			customer = new Customer();
@@ -32,6 +31,7 @@ public class CustomerExtractor implements ResultSetExtractor<List<Customer>> {
 			customer.setEmail(rs.getString("email"));
 			customer.setAddress(rs.getString("address"));
 			customer.setMobile(rs.getString("mobile"));
+			customer.setRegisteredOn(rs.getDate("RegisteredDate") + " " + rs.getTime("RegisteredDate"));
 			customerList.add(customer);
 		}
 		return customerList;
