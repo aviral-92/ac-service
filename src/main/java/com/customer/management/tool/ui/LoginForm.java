@@ -32,9 +32,8 @@ public class LoginForm extends AcServiceImpl {
 
 	private String loginForm;
 	
-	@Autowired
-	
-	ResourceBundleMessageSource messageSource ;
+/*	@Autowired
+	ResourceBundleMessageSource messageSource ;*/
 	
 
 	public String getLoginForm() {
@@ -59,9 +58,10 @@ public class LoginForm extends AcServiceImpl {
 	 * Creates new form LoginForm
 	 */
 
-	public LoginForm() {
+	
+	public LoginForm(ResourceBundleMessageSource messageSource) {
 		initComponents();
-		System.out.println(messageSource.getMessage("loginForm", null, Locale.getDefault()));
+		System.out.println("=========="+messageSource.getMessage("loginForm", null, Locale.getDefault()));
 		setTitle("Login");
 	}
 

@@ -30,7 +30,7 @@ public class WelcomeForm extends javax.swing.JFrame {
     @Autowired
     private GetUser getUserValue;
     @Autowired
-    private AddCustomer customerAdd;
+    private AddCustomer addCustomer;
     @Autowired
     private GetCustomer getCustomerInfo;
     @Autowired
@@ -62,7 +62,7 @@ public class WelcomeForm extends javax.swing.JFrame {
         updateUser = new javax.swing.JMenuItem();
         deleteUser = new javax.swing.JMenuItem();
         Customer = new javax.swing.JMenu();
-        addCustomer = new javax.swing.JMenuItem();
+        customerAdd = new javax.swing.JMenuItem();
         getCustomer = new javax.swing.JMenuItem();
         updateCustomer = new javax.swing.JMenuItem();
         deleteCustomer = new javax.swing.JMenuItem();
@@ -130,13 +130,13 @@ public class WelcomeForm extends javax.swing.JFrame {
 
         Customer.setText("CUSTOMER");
 
-        addCustomer.setText("Add Customer");
-        addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+        customerAdd.setText("Add Customer");
+        customerAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 addCustomerMousePressed(evt);
             }
         });
-        Customer.add(addCustomer);
+        Customer.add(customerAdd);
 
         getCustomer.setText("Get Customer");
         getCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,11 +223,11 @@ public class WelcomeForm extends javax.swing.JFrame {
         getUserValue.setVisible(true);
     }//GEN-LAST:event_deleteUserMousePressed
 
-    private void addCustomerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerMousePressed
+    private void addCustomerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerAddMousePressed
         dispose();
-        customerAdd.setTitle("CUSTOMER ADD");
-        customerAdd.setVisible(true);
-    }//GEN-LAST:event_addCustomerMousePressed
+        addCustomer.setTitle("CUSTOMER ADD");
+        addCustomer.setVisible(true);
+    }//GEN-LAST:event_customerAddMousePressed
 
     private void getCustomerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getCustomerMousePressed
         dispose();
@@ -278,7 +278,7 @@ public class WelcomeForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Customer;
     private javax.swing.JMenu User;
-    private javax.swing.JMenuItem addCustomer;
+    private javax.swing.JMenuItem customerAdd;
     private javax.swing.JMenuItem addUser;
     private javax.swing.JMenuItem deleteCustomer;
     private javax.swing.JMenuItem deleteUser;
