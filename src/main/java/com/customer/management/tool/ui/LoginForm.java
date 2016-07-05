@@ -52,7 +52,10 @@ public class LoginForm extends CMTServiceImpl {
 	@Autowired
 	private Welcome welcome;
 	
-	
+	public LoginForm(){
+		initComponents();
+		setTitle("CMTLogin");
+	}
 	
 	public LoginForm(ResourceBundleMessageSource messageSource) {
 		initComponents();

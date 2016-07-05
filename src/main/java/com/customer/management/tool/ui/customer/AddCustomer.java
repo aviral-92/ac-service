@@ -40,11 +40,11 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
 	/*@Autowired
     private CMTImpl acServiceCustomerImpl;*/
     @Autowired
-    private AddCustomerRepairDetail addRepairDetails;
+    private AddCustomerRepairDetail addCustomerRepairDetail;
     @Autowired
-    private CMTGoBackImpl acServiceBackImpl;
+    private CMTGoBackImpl CMTgoBackImpl;
     
-    ResourceBundleMessageSource messageResource ;
+    //ResourceBundleMessageSource messageResource ;
     
     /*@Autowired
     private Welcome welcomeForm;*/
@@ -55,8 +55,10 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
     /**
      * Creates new form AddCustomer
      */
+    public AddCustomer(){
+    	initComponents();
+    }
     public AddCustomer(ResourceBundleMessageSource messageResource) {
-    	this.messageResource = messageResource ;
         initComponents();
     }
 
@@ -196,9 +198,8 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        System.out.println("Testting Here Bro ======"+messageResource.getMessage("addcustomer",null,Locale.getDefault()));
-        jLabel1.setText(messageResource.getMessage(CMTMessageCode.ADD_CUSTOMER.getValue(), null, Locale.getDefault()));
-
+        //jLabel1.setText(messageResource.getMessage(CMTMessageCode.ADD_CUSTOMER.getValue(), null, Locale.getDefault()));
+        jLabel1.setText("Add Customer");
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +245,7 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        acServiceBackImpl.backButtonCode(this);
+        CMTgoBackImpl.backButtonCode(this);
        /* welcomeForm.setTitle("Welcome");
         welcomeForm.setVisible(true);*/
         
@@ -267,9 +268,9 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
                 if (yesNo == JOptionPane.YES_OPTION) {
                     dispose();
                     customer.setCustomerId(acServiceCustomerImpl.getCustomerID(customer).getCustomerId());
-                    addRepairDetails.setCustomerID(customer);
-                    addRepairDetails.setTitle("ADD CUSTOMER REPAIR DETAILS");
-                    addRepairDetails.setVisible(true);
+                    addCustomerRepairDetail.setCustomerID(customer);
+                    addCustomerRepairDetail.setTitle("ADD CUSTOMER REPAIR DETAILS");
+                    addCustomerRepairDetail.setVisible(true);
                 } else {
 
                 }

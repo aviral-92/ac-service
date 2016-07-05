@@ -23,11 +23,11 @@ import com.customer.management.tool.ui.customer.CustomerDetail;
  *
  * @author amittal
  */
-@Component
+@Component("CMTgoBackImpl")
 public class CMTGoBackImpl {
 
     @Autowired
-    private Welcome welcomeForm;
+    private Welcome welcome;
 
     public void backButtonCode(Object back) {
 
@@ -53,7 +53,7 @@ public class CMTGoBackImpl {
     }
 
     private void goBack() {
-        welcomeForm.setTitle("Welcome");
-        welcomeForm.setVisible(true);
+        welcome.setTitle("Welcome");
+        welcome.setVisible(true);
     }
 }
