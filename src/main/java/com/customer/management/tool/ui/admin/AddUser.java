@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.impl.AcServiceGoBackImpl;
-import com.customer.management.tool.impl.AcServiceImpl;
-import com.customer.management.tool.pojo.Login;
+import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.CMTServiceImpl;
+import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
 
 /**
@@ -24,7 +24,7 @@ import com.customer.management.tool.pojo.UserDetail;
  */
 @Component
 @Scope("prototype")
-public class AddUser extends AcServiceImpl {
+public class AddUser extends CMTServiceImpl {
 
 	/**
 	*
@@ -36,7 +36,7 @@ public class AddUser extends AcServiceImpl {
 	 */
 
 	@Autowired
-	private AcServiceGoBackImpl acServiceBackImpl;
+	private CMTGoBackImpl acServiceBackImpl;
 
 	public AddUser() {
 
@@ -264,7 +264,7 @@ public class AddUser extends AcServiceImpl {
 
 		try {
 			if (password.getText().equals(cnfPassword.getText())) {
-				Login login = new Login(username.getText(), password.getText(), choice.getSelectedItem().toString());
+				CMTLogin login = new CMTLogin(username.getText(), password.getText(), choice.getSelectedItem().toString());
 				UserDetail userDetail = new UserDetail(0, username.getText(), name.getText(), email.getText(),
 						mobile.getText());
 				String response = acServiceUserImpl.addUser(login, userDetail);

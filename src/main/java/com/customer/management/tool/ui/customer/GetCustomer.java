@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.impl.AcServiceGoBackImpl;
-import com.customer.management.tool.impl.AcServiceImpl;
+import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
 
 /**
@@ -24,17 +24,17 @@ import com.customer.management.tool.pojo.Customer;
  */
 @Component
 @Scope("prototype")
-public class GetCustomer extends AcServiceImpl {
+public class GetCustomer extends CMTServiceImpl {
 
 	public static final int NEGATIVE_CUSTOMER_ID = -1;
 
 	/*
-	 * @Autowired private AcServiceCustomerImpl acServiceCustomerImpl;
+	 * @Autowired private CMTImpl acServiceCustomerImpl;
 	 */
 	@Autowired
-	private GetCustomerTable customerTable;
+	private CustomerDetail customerTable;
 	@Autowired
-	private AcServiceGoBackImpl acServiceBackImpl;
+	private CMTGoBackImpl acServiceBackImpl;
 
 	/*
 	 * @Autowired private MenuBar menuBar;

@@ -19,9 +19,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.constants.MessageCode;
-import com.customer.management.tool.impl.AcServiceGoBackImpl;
-import com.customer.management.tool.impl.AcServiceImpl;
+import com.customer.management.tool.constants.CMTMessageCode;
+import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
 
 /**
@@ -30,7 +30,7 @@ import com.customer.management.tool.pojo.Customer;
  */
 @Component
 @Scope("prototype")
-public class AddCustomer extends AcServiceImpl implements Serializable{
+public class AddCustomer extends CMTServiceImpl implements Serializable{
 
     /**
 	 * 
@@ -38,16 +38,16 @@ public class AddCustomer extends AcServiceImpl implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/*@Autowired
-    private AcServiceCustomerImpl acServiceCustomerImpl;*/
+    private CMTImpl acServiceCustomerImpl;*/
     @Autowired
-    private AddRepairDetails addRepairDetails;
+    private AddCustomerRepairDetail addRepairDetails;
     @Autowired
-    private AcServiceGoBackImpl acServiceBackImpl;
+    private CMTGoBackImpl acServiceBackImpl;
     
     ResourceBundleMessageSource messageResource ;
     
     /*@Autowired
-    private WelcomeForm welcomeForm;*/
+    private Welcome welcomeForm;*/
     
     /*@Autowired
     private MenuBar menuBar;
@@ -197,7 +197,7 @@ public class AddCustomer extends AcServiceImpl implements Serializable{
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         System.out.println("Testting Here Bro ======"+messageResource.getMessage("addcustomer",null,Locale.getDefault()));
-        jLabel1.setText(messageResource.getMessage(MessageCode.ADD_CUSTOMER.getValue(), null, Locale.getDefault()));
+        jLabel1.setText(messageResource.getMessage(CMTMessageCode.ADD_CUSTOMER.getValue(), null, Locale.getDefault()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

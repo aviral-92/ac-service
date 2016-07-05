@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.dao.impl.UserDaoImpl;
-import com.customer.management.tool.impl.AcServiceGoBackImpl;
-import com.customer.management.tool.impl.AcServiceImpl;
+import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
+import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetail;
 
 /**
@@ -26,23 +26,23 @@ import com.customer.management.tool.pojo.UserDetail;
  */
 @Component
 @Scope("prototype")
-public class GetUser extends AcServiceImpl {
+public class GetUser extends CMTServiceImpl {
 
     /**
      * Creates new form GetUser
      */
     @Autowired
-    private UserDaoImpl userDaoImpl;
+    private UserManagementDaoImpl userDaoImpl;
     @Autowired
-    private GetUserTable getUserTable;
+    private GetUsers getUserTable;
     /*@Autowired
-    private AcServiceUserImpl acServiceUserImpl;*/
+    private CMTUserManagementImpl acServiceUserImpl;*/
     @Autowired
-    private UserModifyForm modifyForm;
+    private ModifyUser modifyForm;
     @Autowired
-    private AcServiceGoBackImpl acServiceBackImpl;
+    private CMTGoBackImpl acServiceBackImpl;
    /* @Autowired
-    private WelcomeForm welcomeForm;*/
+    private Welcome welcomeForm;*/
     
     /*@Autowired
     private MenuBar menuBar;
@@ -226,7 +226,7 @@ public class GetUser extends AcServiceImpl {
         dispose();
         acServiceBackImpl.backButtonCode(this);
         
-//        WelcomeForm welcomeForm = new WelcomeForm();
+//        Welcome welcomeForm = new Welcome();
         /*welcomeForm.setTitle("Welcome Admin");
         welcomeForm.setVisible(true);*/
         

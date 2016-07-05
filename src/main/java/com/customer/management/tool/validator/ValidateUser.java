@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.pojo.Login;
+import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
 
 /**
@@ -20,7 +20,7 @@ import com.customer.management.tool.pojo.UserDetail;
 @Scope("prototype")
 public class ValidateUser {
 
-    public void validateLogin(Login login) throws Exception {
+    public void validateLogin(CMTLogin login) throws Exception {
         if ((StringUtils.isEmpty(login.getPassword())) || (StringUtils.isEmpty(login.getUsername()))) {
             throw new Exception("Username or Password field is empty");
         } else if (login.getRole().equals("select")) {

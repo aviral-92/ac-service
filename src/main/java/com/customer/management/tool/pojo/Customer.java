@@ -9,7 +9,7 @@ package com.customer.management.tool.pojo;
  *
  * @author Aviral
  */
-public class Customer extends AcTypes {
+public class Customer extends CMTTypes {
 
     private int customerId;
     private String name;

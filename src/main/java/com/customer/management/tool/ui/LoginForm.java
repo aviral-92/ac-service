@@ -17,10 +17,10 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.DevelopmentTool;
-import com.customer.management.tool.impl.AcServiceImpl;
-import com.customer.management.tool.pojo.Login;
-import com.customer.management.tool.ui.admin.WelcomeForm;
+import com.customer.management.tool.CMTDevelopmentTool;
+import com.customer.management.tool.impl.CMTServiceImpl;
+import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.ui.admin.Welcome;
 
 /**
  *
@@ -28,12 +28,10 @@ import com.customer.management.tool.ui.admin.WelcomeForm;
  */
 @Component
 @Scope("prototype")
-public class LoginForm extends AcServiceImpl {
+public class LoginForm extends CMTServiceImpl {
 
 	private String loginForm;
 	
-/*	@Autowired
-	ResourceBundleMessageSource messageSource ;*/
 	
 
 	public String getLoginForm() {
@@ -49,20 +47,17 @@ public class LoginForm extends AcServiceImpl {
 	 */
 	private static final long serialVersionUID = 1L;
 	/*
-	 * @Autowired private AcServiceUserImpl acServiceUserImpl;
+	 * @Autowired private CMTUserManagementImpl acServiceUserImpl;
 	 */
 	@Autowired
-	private WelcomeForm welcomeForm;
-
-	/*
-	 * Creates new form LoginForm
-	 */
-
+	private Welcome welcome;
+	
+	
 	
 	public LoginForm(ResourceBundleMessageSource messageSource) {
 		initComponents();
 		System.out.println("=========="+messageSource.getMessage("loginForm", null, Locale.getDefault()));
-		setTitle("Login");
+		setTitle("CMTLogin");
 	}
 
 	/**
@@ -104,7 +99,7 @@ public class LoginForm extends AcServiceImpl {
 		});
 
 		jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jButton1.setText("Login");
+		jButton1.setText("CMTLogin");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
@@ -179,18 +174,18 @@ public class LoginForm extends AcServiceImpl {
 		try {
 
 			String response = acServiceUserImpl
-					.login(new Login(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
-			if (!DevelopmentTool.isDevelopmentMode) {
+					.login(new CMTLogin(username.getText(), passwrd.getText(), role.getSelectedItem().toString()));
+			if (!CMTDevelopmentTool.isDevelopmentMode) {
 				if (StringUtils.isEmpty(response)) {
 					JOptionPane.showMessageDialog(new JFrame(), "Username Or Password is incorrect", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					dispose();
-					welcomeForm.setVisible(true);
+					welcome.setVisible(true);
 				}
 			} else {
 				dispose();
-				welcomeForm.setVisible(true);
+				welcome.setVisible(true);
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -201,7 +196,7 @@ public class LoginForm extends AcServiceImpl {
 
 	private void usernameFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_usernameFocusLost
 
-		if (!DevelopmentTool.isDevelopmentMode) {
+		if (!CMTDevelopmentTool.isDevelopmentMode) {
 			String response = acServiceUserImpl.validateField(username.getText());
 			if (response != null) {
 				username.setText("");
