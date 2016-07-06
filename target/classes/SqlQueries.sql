@@ -77,4 +77,24 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
     REFERENCES `ac_service`.`customer` (`customerId` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
+    
+    
+   CREATE  TABLE IF NOT EXISTS `ac_service`.`customerhistory` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `customerId` INT NOT NULL ,
+  `customer_emal` VARCHAR(45) NOT NULL ,
+  `customer_mobile` VARCHAR(45) NOT NULL ,
+  `RegisteredDate` DATETIME NOT NULL ,
+  `DeletedDate` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`) );
+  
+  ALTER TABLE `ac_service`.`customerhistory` 
+  ADD CONSTRAINT `Foreign_key`
+  FOREIGN KEY (`customerId` )
+  REFERENCES `ac_service`.`customer` (`customerId` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+, ADD INDEX `Foreign_key` (`customerId` ASC) ;
+
+
 

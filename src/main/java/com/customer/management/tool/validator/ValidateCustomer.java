@@ -7,6 +7,8 @@ package com.customer.management.tool.validator;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -73,8 +75,17 @@ public class ValidateCustomer {
 		}
 	}
 
-	public void isValidCustomerReport() {
+	public void isValidMobileNumber(String mobile) throws Exception {
 
+		if ("".equals(mobile) && mobile.length() == 10) {
+			String regex = "^\\+?[0-9. ()-]{10,25}$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(mobile);
+			if (!matcher.matches()) {
+				throw new Exception("Please provide numbers only");
+			}
+		} else {
+			throw new Exception("Please input 10 digit mobile Number");
+		}
 	}
-
 }

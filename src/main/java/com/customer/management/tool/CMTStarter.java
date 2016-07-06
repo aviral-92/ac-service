@@ -22,5 +22,7 @@ public class CMTStarter {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(CMTStarter.class).headless(false).run(args);
 		context.getBean(LoginForm.class).setVisible(true);
+		context.getBean(LoginForm.class).setResizable(false);
+		
 	}
 }

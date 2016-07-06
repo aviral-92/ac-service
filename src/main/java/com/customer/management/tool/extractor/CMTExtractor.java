@@ -24,7 +24,8 @@ public class CMTExtractor implements ResultSetExtractor<List<Customer>> {
 	List<Customer> customerList = new ArrayList<>();
 
 	@Override
-	public List<Customer> extractData(ResultSet rs) throws SQLException, DataAccessException {
+	public List<Customer> extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
 		Customer customer;
 		while (rs.next()) {
 			customer = new Customer();
@@ -33,7 +34,8 @@ public class CMTExtractor implements ResultSetExtractor<List<Customer>> {
 			customer.setEmail(rs.getString("email"));
 			customer.setAddress(rs.getString("address"));
 			customer.setMobile(rs.getString("mobile"));
-			customer.setRegisteredOn(rs.getTimestamp("RegisteredDate").toString());
+			customer.setRegisteredOn(rs.getTimestamp("RegisteredDate")
+					.toString());
 			customerList.add(customer);
 		}
 		return customerList;
