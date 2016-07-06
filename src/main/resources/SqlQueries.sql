@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `ac_Service`.`login` (
        `role` VARCHAR(45) NOT NULL,
        PRIMARY KEY (`username`) );
 
-insert into `ac_Service`.`login` values ('aviral','avi','admin');
+insert into `ac_Service`.`login` values ('admin','admin','admin');
 
 CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,
