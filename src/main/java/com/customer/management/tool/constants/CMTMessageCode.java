@@ -4,7 +4,11 @@ package com.customer.management.tool.constants;
 public enum CMTMessageCode  implements java.io.Serializable {
 
 	ADD_CUSTOMER("addcustomer") ,
-	LOGIN("login");
+	LOGIN("login"),
+	TITLE("title"),
+	USERNAME("username"),
+	PASSWORD("pswd"),
+	ROLE("role"), SUBMIT("submitButton");
 	
 	
 	
