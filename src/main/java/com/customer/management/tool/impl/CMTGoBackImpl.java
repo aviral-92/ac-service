@@ -26,13 +26,13 @@ import com.customer.management.tool.ui.customer.CustomerDetail;
 @Component("CMTgoBackImpl")
 public class CMTGoBackImpl {
 
-  /*  @Autowired
+    @Autowired
     private WelcomeForm welcomeForm;
 
-   */ public void backButtonCode(Object back) {
+    public void backButtonCode(Object back) {
 
     		goBack();
-    	/*
+    	
         if (back instanceof GetUsers) {
             goBack();
         } else if (back instanceof GetUser) {
@@ -51,11 +51,11 @@ public class CMTGoBackImpl {
             goBack();
         }else if(back instanceof CustomerHistory){
             goBack();
-        }*/
+        }
     }
 
     private void goBack() {
-    /*    welcome.setTitle("WelcomeForm");
-        welcome.setVisible(true);*/
+        welcomeForm.setTitle("WelcomeForm");
+        welcomeForm.setVisible(true);
     }
 }
