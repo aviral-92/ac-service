@@ -358,7 +358,7 @@ public class ModifyUser extends CMTServiceImpl {
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
 		dispose();
                 acServiceBackImpl.backButtonCode(this);
-	//	getUser.setTitle("Welcome Form");
+	//	getUser.setTitle("WelcomeForm Form");
 	//	getUser.setVisible(true);
 	}// GEN-LAST:event_backActionPerformed
 

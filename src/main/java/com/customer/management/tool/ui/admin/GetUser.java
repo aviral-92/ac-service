@@ -32,17 +32,17 @@ public class GetUser extends CMTServiceImpl {
      * Creates new form GetUser
      */
     @Autowired
-    private UserManagementDaoImpl userDaoImpl;
+    private UserManagementDaoImpl userManagementDaoImpl;
     @Autowired
-    private GetUsers getUserTable;
+    private GetUsers getUsers;
     /*@Autowired
     private CMTUserManagementImpl acServiceUserImpl;*/
     @Autowired
-    private ModifyUser modifyForm;
+    private ModifyUser modifyUser;
     @Autowired
-    private CMTGoBackImpl acServiceBackImpl;
+    private CMTGoBackImpl CMTgoBackImpl;
    /* @Autowired
-    private Welcome welcomeForm;*/
+    private WelcomeForm welcomeForm;*/
     
     /*@Autowired
     private MenuBar menuBar;
@@ -224,10 +224,10 @@ public class GetUser extends CMTServiceImpl {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
-        acServiceBackImpl.backButtonCode(this);
+        CMTgoBackImpl.backButtonCode(this);
         
-//        Welcome welcomeForm = new Welcome();
-        /*welcomeForm.setTitle("Welcome Admin");
+//        WelcomeForm welcomeForm = new WelcomeForm();
+        /*welcomeForm.setTitle("WelcomeForm Admin");
         welcomeForm.setVisible(true);*/
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -237,20 +237,20 @@ public class GetUser extends CMTServiceImpl {
         try {
             UserDetail userDetail = new UserDetail(0, username.getText(), null, email.getText(), mobile.getText());
             if (getRB.isSelected()) {
-                List<UserDetail> listDetails = userDaoImpl.getUserList(userDetail);
+                List<UserDetail> listDetails = userManagementDaoImpl.getUserList(userDetail);
                 dispose();
-                getUserTable.setTitle("User Data");
-                getUserTable.displayRecords(listDetails);
-                getUserTable.setVisible(true);
+                getUsers.setTitle("User Data");
+                getUsers.displayRecords(listDetails);
+                getUsers.setVisible(true);
             } else if (updateRB.isSelected()) {
                 UserDetail userDetailResponse = acServiceUserImpl.getUserData(userDetail);
                 if (userDetailResponse == null) {
                     throw new Exception("Please give correct data to get details");
                 }
                 dispose();
-                modifyForm.setValues(userDetailResponse);
-                modifyForm.setTitle("Update");
-                modifyForm.setVisible(true);
+                modifyUser.setValues(userDetailResponse);
+                modifyUser.setTitle("Update");
+                modifyUser.setVisible(true);
             } else if (deleteRB.isSelected()) {
                 String response = acServiceUserImpl.deleteUserData(userDetail);
                 JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);

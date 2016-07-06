@@ -29,7 +29,7 @@ import com.customer.management.tool.pojo.CustomerReparingDetail;
 public class CustomerDetail extends CMTServiceImpl {
 
 	/*
-	 * @Autowired private Welcome welcomeForm;
+	 * @Autowired private WelcomeForm welcomeForm;
 	 */
 	@Autowired
 	private CMTGoBackImpl acServiceBackImpl;
@@ -135,7 +135,7 @@ public class CustomerDetail extends CMTServiceImpl {
 		dispose();
 		acServiceBackImpl.backButtonCode(this);
 		/*
-		 * welcomeForm.setTitle("Welcome"); welcomeForm.setVisible(true);
+		 * welcomeForm.setTitle("WelcomeForm"); welcomeForm.setVisible(true);
 		 */
 	}// GEN-LAST:event_jButton1ActionPerformed
 

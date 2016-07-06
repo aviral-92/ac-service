@@ -7,7 +7,6 @@ package com.customer.management.tool.ui;
 
 import java.util.Locale;
 
-import javax.annotation.PostConstruct;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -18,9 +17,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.CMTDevelopmentTool;
+import com.customer.management.tool.constants.CMTMessageCode;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
-import com.customer.management.tool.ui.admin.Welcome;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 
 /**
  *
@@ -50,15 +50,15 @@ public class LoginForm extends CMTServiceImpl {
 	 * @Autowired private CMTUserManagementImpl acServiceUserImpl;
 	 */
 	@Autowired
-	private Welcome welcome;
+	private WelcomeForm welcomeForm;
 	
-	public LoginForm(){
+/*	public LoginForm(){
 		initComponents();
 		setTitle("CMTLogin");
-	}
+	}*/
 	
 	public LoginForm(ResourceBundleMessageSource messageSource) {
-		initComponents();
+		initComponents(messageSource);
 		System.out.println("=========="+messageSource.getMessage("loginForm", null, Locale.getDefault()));
 		setTitle("CMTLogin");
 	}
@@ -71,7 +71,7 @@ public class LoginForm extends CMTServiceImpl {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+	private void initComponents(ResourceBundleMessageSource messageSource) {
 
 		jPanel1 = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
@@ -102,7 +102,7 @@ public class LoginForm extends CMTServiceImpl {
 		});
 
 		jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jButton1.setText("CMTLogin");
+		jButton1.setText(messageSource.getMessage(CMTMessageCode.LOGIN.getValue(), null, "Login", Locale.getDefault()));
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
@@ -184,11 +184,11 @@ public class LoginForm extends CMTServiceImpl {
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					dispose();
-					welcome.setVisible(true);
+					welcomeForm.setVisible(true);
 				}
 			} else {
 				dispose();
-				welcome.setVisible(true);
+				welcomeForm.setVisible(true);
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

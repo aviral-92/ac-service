@@ -32,7 +32,7 @@ public class GetUsers extends CMTServiceImpl {
      * Creates new form GetUsers
      */
     /*   @Autowired
-    private Welcome welcomeForm;
+    private WelcomeForm welcomeForm;
      */
     public GetUsers() {
         initComponents();
@@ -118,8 +118,8 @@ public class GetUsers extends CMTServiceImpl {
         // TODO add your handling code here:
         dispose();
         acServiceBackImpl.backButtonCode(GetUsers.class);
-//        Welcome welcomeForm = new Welcome();
-        /*  welcomeForm.setTitle("Welcome Admin");
+//        WelcomeForm welcomeForm = new WelcomeForm();
+        /*  welcomeForm.setTitle("WelcomeForm Admin");
         welcomeForm.setVisible(true);
          */
     }//GEN-LAST:event_jButton1ActionPerformed

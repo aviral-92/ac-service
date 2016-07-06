@@ -18,8 +18,8 @@ import com.customer.management.tool.ui.report.CMTReport;
  *
  * @author Aviral
  */
-
-public class Welcome extends javax.swing.JFrame {
+@Component
+public class WelcomeForm extends javax.swing.JFrame {
 
     /**
 	 * 
@@ -37,18 +37,15 @@ public class Welcome extends javax.swing.JFrame {
     private CMTReport CMTReport;
 
     /**
-     * Creates new form Welcome
+     * Creates new form WelcomeForm
      */
-    public Welcome() {
-//        initComponents();
-  //      super.setTitle("Welcome");
-    }
+
 
     
-    public Welcome(ResourceBundleMessageSource messageSource){
+    public WelcomeForm(ResourceBundleMessageSource messageSource){
     	 initComponents();
     	 System.out.println("----------------Parameter "+messageSource);
-         super.setTitle("Welcome");
+         super.setTitle("WelcomeForm");
     }
     
     /**
@@ -80,7 +77,7 @@ public class Welcome extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel1.setText("Welcome Admin");
+        jLabel1.setText("WelcomeForm Admin");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -264,20 +261,20 @@ public class Welcome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WelcomeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WelcomeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WelcomeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WelcomeForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
          Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Welcome().setVisible(true);
+                new WelcomeForm().setVisible(true);
             }
         });
 */    }

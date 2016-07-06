@@ -433,7 +433,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 		acServiceBackImpl.backButtonCode(this);
 
 		/*
-		 * welcomeForm.setTitle("Welcome"); welcomeForm.setVisible(true);
+		 * welcomeForm.setTitle("WelcomeForm"); welcomeForm.setVisible(true);
 		 */
 	}// GEN-LAST:event_jButton2ActionPerformed
 

@@ -36,7 +36,7 @@ public class AddUser extends CMTServiceImpl {
 	 */
 
 	@Autowired
-	private CMTGoBackImpl acServiceBackImpl;
+	private CMTGoBackImpl CMTgoBackImpl;
 
 	public AddUser() {
 
@@ -281,9 +281,9 @@ public class AddUser extends CMTServiceImpl {
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
 
 		dispose();
-		acServiceBackImpl.backButtonCode(this);
+		CMTgoBackImpl.backButtonCode(this);
 		/*
-		 * welcomeForm.setTitle("Welcome Admin"); welcomeForm.setVisible(true);
+		 * welcomeForm.setTitle("WelcomeForm Admin"); welcomeForm.setVisible(true);
 		 */
 
 	}// GEN-LAST:event_jButton2ActionPerformed

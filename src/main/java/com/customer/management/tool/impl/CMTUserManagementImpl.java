@@ -17,7 +17,7 @@ import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
-import com.customer.management.tool.ui.admin.Welcome;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 import com.customer.management.tool.validator.ValidateUser;
 
 /**
@@ -33,7 +33,7 @@ public class CMTUserManagementImpl {
     @Autowired
     private ValidateUser validation;
     /*@Autowired
-    private Welcome welcomeForm;*/
+    private WelcomeForm welcomeForm;*/
     
     /*@Autowired
     private LoginForm loginForm;*/

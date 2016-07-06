@@ -12,7 +12,7 @@ import com.customer.management.tool.ui.admin.AddUser;
 import com.customer.management.tool.ui.admin.GetUser;
 import com.customer.management.tool.ui.admin.GetUsers;
 import com.customer.management.tool.ui.admin.ModifyUser;
-import com.customer.management.tool.ui.admin.Welcome;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 import com.customer.management.tool.ui.customer.AddCustomer;
 import com.customer.management.tool.ui.customer.AddCustomerRepairDetail;
 import com.customer.management.tool.ui.customer.GetCustomer;
@@ -26,11 +26,13 @@ import com.customer.management.tool.ui.customer.CustomerDetail;
 @Component("CMTgoBackImpl")
 public class CMTGoBackImpl {
 
-    @Autowired
-    private Welcome welcome;
+  /*  @Autowired
+    private WelcomeForm welcomeForm;
 
-    public void backButtonCode(Object back) {
+   */ public void backButtonCode(Object back) {
 
+    		goBack();
+    	/*
         if (back instanceof GetUsers) {
             goBack();
         } else if (back instanceof GetUser) {
@@ -49,11 +51,11 @@ public class CMTGoBackImpl {
             goBack();
         }else if(back instanceof CustomerHistory){
             goBack();
-        }
+        }*/
     }
 
     private void goBack() {
-        welcome.setTitle("Welcome");
-        welcome.setVisible(true);
+    /*    welcome.setTitle("WelcomeForm");
+        welcome.setVisible(true);*/
     }
 }

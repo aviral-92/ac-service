@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-import com.customer.management.tool.ui.admin.Welcome;
+import com.customer.management.tool.ui.LoginForm;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 
 @Configuration
 public class CMTPropertiesConfiguration {
@@ -18,10 +19,14 @@ public class CMTPropertiesConfiguration {
 	}
 	
 	
+	@Bean
+	public LoginForm loginForm() {
+		return new LoginForm(messageSource());
+	}
 	
 	
 	@Bean
-	public Welcome welcome() {
-		return new Welcome(messageSource());
+	public WelcomeForm welcomeForm() {
+		return new WelcomeForm(messageSource());
 	}
 }

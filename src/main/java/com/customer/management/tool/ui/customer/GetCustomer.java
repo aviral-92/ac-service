@@ -32,9 +32,9 @@ public class GetCustomer extends CMTServiceImpl {
 	 * @Autowired private CMTImpl acServiceCustomerImpl;
 	 */
 	@Autowired
-	private CustomerDetail customerTable;
+	private CustomerDetail customerDetail;
 	@Autowired
-	private CMTGoBackImpl acServiceBackImpl;
+	private CMTGoBackImpl getUsers;
 
 	/*
 	 * @Autowired private MenuBar menuBar;
@@ -230,9 +230,9 @@ public class GetCustomer extends CMTServiceImpl {
 			// customer.setModel_Vehicle(model.getText());
 			List<Customer> response = acServiceCustomerImpl.getCustomerInfo(customer);
 			if (!StringUtils.isEmpty(response) && response.size() > 0) {
-				customerTable.displayRecords(response);
+				customerDetail.displayRecords(response);
 				dispose();
-				customerTable.setVisible(true);
+				customerDetail.setVisible(true);
 			} else {
 				throw new Exception("Please provide valid inputs");
 			}
@@ -248,7 +248,7 @@ public class GetCustomer extends CMTServiceImpl {
 
 	private void cancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelActionPerformed
 		// TODO add your handling code here:
-		acServiceBackImpl.backButtonCode(this);
+		getUsers.backButtonCode(this);
 	}// GEN-LAST:event_cancelActionPerformed
 
 	/**

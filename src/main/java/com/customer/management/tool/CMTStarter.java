@@ -5,11 +5,9 @@
  */
 package com.customer.management.tool;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import com.customer.management.tool.ui.LoginForm;
 
@@ -17,29 +15,12 @@ import com.customer.management.tool.ui.LoginForm;
  *
  * @author Aviral
  */
-@Configuration
+
+@SpringBootApplication
 public class CMTStarter {
 
-    private static ApplicationContext applicationContext;
-    
-    static {
-        setApplicationContext(new AnnotationConfigApplicationContext("com.customer.management.tool"));
-    }
-    
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
-    private static void setApplicationContext(ApplicationContext aApplicationContext) {
-        applicationContext = aApplicationContext;
-    }
-
-    public static void main(String[] args) {
-        getApplicationContext().getBean(LoginForm.class).setVisible(true);
-    }
+	public static void main(String[] args) {
+		ConfigurableApplicationContext context = new SpringApplicationBuilder(CMTStarter.class).headless(false).run(args);
+		context.getBean(LoginForm.class).setVisible(true);
+	}
 }

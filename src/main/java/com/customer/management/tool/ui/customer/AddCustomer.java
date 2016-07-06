@@ -47,7 +47,7 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
     //ResourceBundleMessageSource messageResource ;
     
     /*@Autowired
-    private Welcome welcomeForm;*/
+    private WelcomeForm welcomeForm;*/
     
     /*@Autowired
     private MenuBar menuBar;
@@ -246,7 +246,7 @@ public class AddCustomer extends CMTServiceImpl implements Serializable{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
         CMTgoBackImpl.backButtonCode(this);
-       /* welcomeForm.setTitle("Welcome");
+       /* welcomeForm.setTitle("WelcomeForm");
         welcomeForm.setVisible(true);*/
         
     }//GEN-LAST:event_jButton2ActionPerformed
