@@ -5,6 +5,8 @@
  */
 package com.customer.management.tool.ui.admin;
 
+import java.util.Date;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -17,6 +19,7 @@ import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
  *
@@ -265,8 +268,8 @@ public class AddUser extends CMTServiceImpl {
 		try {
 			if (password.getText().equals(cnfPassword.getText())) {
 				CMTLogin login = new CMTLogin(username.getText(), password.getText(), choice.getSelectedItem().toString());
-				UserDetail userDetail = new UserDetail(0, username.getText(), name.getText(), email.getText(),
-						mobile.getText());
+				UserDetailHistory userDetail = new UserDetailHistory(0, username.getText(), name.getText(), email.getText(),
+						mobile.getText(),new Date().toString(),new Date().toString(),"add");
 				String response = acServiceUserImpl.addUser(login, userDetail);
 				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
 			} else {

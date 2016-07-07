@@ -34,6 +34,9 @@ CREATE TABLE IF NOT EXISTS `ac_service`.`userdetail` (
     REFERENCES `ac_service`.`login` (`username`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
+    
+ALTER TABLE `ac_service`.`userdetail` 
+	ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `registeredDate`;
 
 -- Create User Detail History Table
  CREATE TABLE IF NOT EXISTS `ac_service`.`user_detail_history` (
@@ -55,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `ac_service`.`userdetail` (
     ON UPDATE NO ACTION);
     
 --Alter table to add Foreign key
-ALTER TABLE IF EXISTS `ac_service`.`user_detail_history` 
+ALTER TABLE `ac_service`.`user_detail_history` 
 ADD INDEX `Foreign_Key_Username_idx` (`username` ASC);
 ALTER TABLE `ac_service`.`user_detail_history` 
 ADD CONSTRAINT `Foreign_Key_Username`
@@ -63,6 +66,9 @@ ADD CONSTRAINT `Foreign_Key_Username`
   REFERENCES `ac_service`.`login` (`username`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
+  
+  ALTER TABLE `ac_service`.`user_detail_history` 
+ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `description`;
 
 CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,

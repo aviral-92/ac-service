@@ -19,6 +19,7 @@ import com.customer.management.tool.extractor.CMTLoginExtractor;
 import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
 import com.customer.management.tool.validator.ValidateUser;
 
 /**
@@ -124,7 +125,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				query.append(" WHERE mobile = ? ");
 				args.add(detail.getMobile());
 			}
-			List<UserDetail> userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
+			List<UserDetailHistory> userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
 					args.toArray());
 			if (!StringUtils.isEmpty(userDetail) && userDetail.size() > 0) {
 				isExist = true;
@@ -148,7 +149,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	}
 
 	@Override
-	public List<UserDetail> getUserList(UserDetail detail) {
+	public List<UserDetailHistory> getUserList(UserDetailHistory detail) {
 
 		boolean isUsername = false, isEmail = false;
 		StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
@@ -161,7 +162,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			}
 			if (isUsername) {
 				if (!StringUtils.isEmpty(detail.getEmail())) {
-					query.append(" AND email = ? ");
+					query.append(" OR email = ? ");
 					args.add(detail.getEmail());
 				}
 			} else if (!StringUtils.isEmpty(detail.getEmail())) {
@@ -171,7 +172,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			}
 			if (isUsername || isEmail) {
 				if (!StringUtils.isEmpty(detail.getMobile())) {
-					query.append(" AND mobile = ? ");
+					query.append(" OR mobile = ? ");
 					args.add(detail.getMobile());
 				}
 			} else if (!StringUtils.isEmpty(detail.getMobile())) {
@@ -179,7 +180,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				args.add(detail.getMobile());
 			}
 		}
-		List<UserDetail> userDetailList = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
+		List<UserDetailHistory> userDetailList = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
 				args.toArray());
 		return userDetailList;
 	}
@@ -234,4 +235,36 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return delete;
 	}
 
+	@Override
+	public void addUserDetailHistory(UserDetailHistory userDetailHistory) {
+
+		String description = null,
+				sql = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,description,lastUpdated) "
+						+ "values (0,?,?,?,?,?,?,?,NOW())";
+		if (!StringUtils.isEmpty(userDetailHistory)) {
+			List<UserDetailHistory> history = getUserList(userDetailHistory);
+			if (!StringUtils.isEmpty(history) && history.size() > 0) {
+
+				userDetailHistory.setEmail(history.get(0).getEmail());
+				userDetailHistory.setMobile(history.get(0).getMobile());
+				userDetailHistory.setName(history.get(0).getName());
+				userDetailHistory.setRegisteredDate(history.get(0).getRegisteredDate());
+				userDetailHistory.setUsername(history.get(0).getUsername());
+				userDetailHistory.setUserId(history.get(0).getUserId());
+
+				if ("add".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					description = "User Successfully Added";
+					Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(),
+							userDetailHistory.getUsername(), userDetailHistory.getEmail(),
+							userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(), description };
+					int executed = jdbcTemplate.update(sql, args);
+					if (executed > 0) {
+						System.out.println("Success");
+					} else {
+						System.out.println("Failure");
+					}
+				}
+			}
+		}
+	}
 }
