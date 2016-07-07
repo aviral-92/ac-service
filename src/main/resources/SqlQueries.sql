@@ -8,6 +8,8 @@
  * Created: Jun 10, 2016
  */
 
+
+
 create database IF NOT EXISTS ac_Service;
 
 CREATE TABLE IF NOT EXISTS `ac_Service`.`login` (
@@ -17,6 +19,50 @@ CREATE TABLE IF NOT EXISTS `ac_Service`.`login` (
        PRIMARY KEY (`username`) );
 
 insert into `ac_Service`.`login` values ('admin','admin','admin');
+
+CREATE TABLE IF NOT EXISTS `ac_service`.`userdetail` (
+  `userId` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `mobile` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `registeredDate` DATETIME NOT NULL,
+  PRIMARY KEY (`userId`),
+  INDEX `Foreign_Key_Username_idx` (`username` ASC),
+  CONSTRAINT `Foreign_Key_Username`
+    FOREIGN KEY (`username`)
+    REFERENCES `ac_service`.`login` (`username`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
+-- Create User Detail History Table
+ CREATE TABLE IF NOT EXISTS `ac_service`.`user_detail_history` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `userId` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `mobile` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `registeredDate` DATETIME NOT NULL,
+  `lastUpdated` DATETIME NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `Foreign_Key_UserId_idx` (`userId` ASC),
+  CONSTRAINT `Foreign_Key_UserId`
+    FOREIGN KEY (`userId`)
+    REFERENCES `ac_service`.`userdetail` (`userId`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+    
+--Alter table to add Foreign key
+ALTER TABLE IF EXISTS `ac_service`.`user_detail_history` 
+ADD INDEX `Foreign_Key_Username_idx` (`username` ASC);
+ALTER TABLE `ac_service`.`user_detail_history` 
+ADD CONSTRAINT `Foreign_Key_Username`
+  FOREIGN KEY (`username`)
+  REFERENCES `ac_service`.`login` (`username`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
 
 CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,
@@ -32,24 +78,8 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
   `mobile` VARCHAR(45) NOT NULL ,
   `address` VARCHAR(55) NOT NULL ,
   `RegisteredDate` DATETIME  NOT NULL ,
---   `description` VARCHAR(95) NOT NULL ,
---   `amount` DOUBLE NOT NULL ,
---   `model/vehicle no` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`customerId`) 
---   INDEX `ac` (`acId` ASC) ,
---   CONSTRAINT `ac`
---     FOREIGN KEY (`acId` )
---     REFERENCES `ac_service`.`ac_type` (`acId` )
---     ON DELETE CASCADE
---     ON UPDATE CASCADE
 );
-
--- ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
--- DROP COLUMN `model/vehicle no` ;
-
--- ALTER TABLE `ac_service`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
--- , DROP INDEX `ac` ;
-
 
 ALTER TABLE `ac_service`.`customer` AUTO_INCREMENT = 1000;
 
@@ -78,23 +108,28 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
     
-    
-   CREATE  TABLE IF NOT EXISTS `ac_service`.`customerhistory` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `customerId` INT NOT NULL ,
-  `customer_emal` VARCHAR(45) NOT NULL ,
-  `customer_mobile` VARCHAR(45) NOT NULL ,
-  `RegisteredDate` DATETIME NOT NULL ,
-  `DeletedDate` DATETIME NOT NULL ,
-  PRIMARY KEY (`id`) );
-  
-  ALTER TABLE `ac_service`.`customerhistory` 
-  ADD CONSTRAINT `Foreign_key`
-  FOREIGN KEY (`customerId` )
-  REFERENCES `ac_service`.`customer` (`customerId` )
-  ON DELETE CASCADE
-  ON UPDATE CASCADE
-, ADD INDEX `Foreign_key` (`customerId` ASC) ;
+-- ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
+-- DROP COLUMN `model/vehicle no` ;
 
+-- ALTER TABLE `ac_service`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
+-- , DROP INDEX `ac` ;
+
+--   CREATE  TABLE IF NOT EXISTS `ac_service`.`customerhistory` (
+--  `id` INT NOT NULL AUTO_INCREMENT ,
+--  `customerId` INT NOT NULL ,
+--  `customer_emal` VARCHAR(45) NOT NULL ,
+--  `customer_mobile` VARCHAR(45) NOT NULL ,
+--  `RegisteredDate` DATETIME NOT NULL ,
+--  `DeletedDate` DATETIME NOT NULL ,
+--  PRIMARY KEY (`id`) );
+--  
+--  ALTER TABLE `ac_service`.`customerhistory` 
+--  ADD CONSTRAINT `Foreign_key`
+--  FOREIGN KEY (`customerId` )
+--  REFERENCES `ac_service`.`customer` (`customerId` )
+--  ON DELETE CASCADE
+--  ON UPDATE CASCADE
+--, ADD INDEX `Foreign_key` (`customerId` ASC) ;
+--
 
 
