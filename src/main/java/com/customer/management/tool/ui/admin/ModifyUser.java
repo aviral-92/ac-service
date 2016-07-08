@@ -5,6 +5,8 @@
  */
 package com.customer.management.tool.ui.admin;
 
+import java.util.Date;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
  *
@@ -230,8 +233,8 @@ public class ModifyUser extends CMTServiceImpl {
 	private void updateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateActionPerformed
 
 		try {
-			UserDetail detail = new UserDetail(Integer.parseInt(userid.getText()), username.getText(), name.getText(),
-					email.getText(), mobile.getText(), null);
+			UserDetailHistory detail = new UserDetailHistory(Integer.parseInt(userid.getText()), username.getText(), name.getText(),
+					email.getText(), mobile.getText(), null, new Date().toString(), "update");
 			String response = acServiceUserImpl.updateUserData(detail);
 			JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {

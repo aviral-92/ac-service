@@ -20,7 +20,6 @@ import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
-import com.customer.management.tool.validator.ValidateUser;
 
 /**
  *
@@ -189,45 +188,41 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	public String updateUser(UserDetail detail) {
 
 		String updated = null;
-		if (!isUserExist(detail)) {
-			String query = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
-			List<String> args = new ArrayList<>();
-			args.add(detail.getName());
-			args.add(detail.getEmail());
-			args.add(detail.getMobile());
-			args.add(String.valueOf(detail.getUserId()));
-			int update = jdbcTemplate.update(query, args.toArray());
-			if (update > 0) {
-				updated = "Updated Successfully";
-			}
-		} else {
-			updated = "Email or Mobile already Exist, please provide other.";
+		// if (!isUserExist(detail)) {
+		String query = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
+		Object[] args = { detail.getName(), detail.getEmail(), detail.getMobile(), String.valueOf(detail.getUserId()) };
+		int update = jdbcTemplate.update(query, args);
+		if (update > 0) {
+			updated = "Updated Successfully";
 		}
+		// } else {
+		// updated = "Email or Mobile already Exist, please provide other.";
+		// }
 		return updated;
 	}
 
 	@Override
-	public String deleteUser(UserDetail detail) {
+	public String deleteUser(UserDetailHistory detailHistory) {
 
 		String delete = null;
-		StringBuilder query = new StringBuilder("DELETE FROM userdetail ");
 		List<String> args = new ArrayList<>();
-		if (!StringUtils.isEmpty(detail)) {
-			if (!StringUtils.isEmpty(detail.getUsername())) {
-				query.append(" WHERE username = ? ");
-				args.add(detail.getUsername());
-			} else if (!StringUtils.isEmpty(detail.getEmail())) {
-				query.append(" WHERE email = ? ");
-				args.add(detail.getEmail());
-			} else if (!StringUtils.isEmpty(detail.getMobile())) {
-				query.append(" WHERE mobile = ? ");
-				args.add(detail.getMobile());
+		StringBuilder sql = new StringBuilder("UPDATE userdetail SET status = 'd' ");
+		if (!StringUtils.isEmpty(detailHistory)) {
+			if (!StringUtils.isEmpty(detailHistory.getUsername())) {
+				sql.append(" WHERE username = ? ");
+				args.add(detailHistory.getUsername());
+			} else if (!StringUtils.isEmpty(detailHistory.getEmail())) {
+				sql.append(" WHERE email = ? ");
+				args.add(detailHistory.getEmail());
+			} else if (!StringUtils.isEmpty(detailHistory.getMobile())) {
+				sql.append(" WHERE mobile = ? ");
+				args.add(detailHistory.getMobile());
 			} else {
 				delete = "Please provide atleast one field.";
 			}
 		}
 		if (StringUtils.isEmpty(delete)) {
-			int response = jdbcTemplate.update(query.toString(), args.toArray());
+			int response = jdbcTemplate.update(sql.toString(), args.toArray());
 			if (response > 0) {
 				delete = "Successfully Deleted";
 			}
@@ -238,9 +233,6 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	@Override
 	public void addUserDetailHistory(UserDetailHistory userDetailHistory) {
 
-		String description = null,
-				sql = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,description,lastUpdated) "
-						+ "values (0,?,?,?,?,?,?,?,NOW())";
 		if (!StringUtils.isEmpty(userDetailHistory)) {
 			List<UserDetailHistory> history = getUserList(userDetailHistory);
 			if (!StringUtils.isEmpty(history) && history.size() > 0) {
@@ -253,18 +245,29 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				userDetailHistory.setUserId(history.get(0).getUserId());
 
 				if ("add".equalsIgnoreCase(userDetailHistory.getDescription())) {
-					description = "User Successfully Added";
-					Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(),
-							userDetailHistory.getUsername(), userDetailHistory.getEmail(),
-							userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(), description };
-					int executed = jdbcTemplate.update(sql, args);
-					if (executed > 0) {
-						System.out.println("Success");
-					} else {
-						System.out.println("Failure");
-					}
+					commonsAddUserDetailHistory("User Successfully Added", userDetailHistory);
+				} else if ("update".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Updated", userDetailHistory);
+				}else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully deleted", userDetailHistory);
 				}
 			}
 		}
+	}
+
+	private void commonsAddUserDetailHistory(String description, UserDetailHistory userDetailHistory) {
+
+		String sql = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,description,lastUpdated) "
+				+ "values (0,?,?,?,?,?,?,?,NOW())";
+		Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(), userDetailHistory.getUsername(),
+				userDetailHistory.getEmail(), userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(),
+				description };
+		int executed = jdbcTemplate.update(sql, args);
+		if (executed > 0) {
+			System.out.println("Success");
+		} else {
+			System.out.println("Failure");
+		}
+
 	}
 }

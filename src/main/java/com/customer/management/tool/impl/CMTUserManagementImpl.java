@@ -90,22 +90,29 @@ public class CMTUserManagementImpl {
 	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateGeteUser(detail);
-		if (!userDaoImpl.getUserList(detail).isEmpty()) {
-			return userDaoImpl.getUserList(detail).get(0);
-		} else {
-			return null;
+		// if (!userDaoImpl.getUserList(detail).isEmpty()) {
+		UserDetailHistory response = userDaoImpl.getUserList(detail).get(0);
+		return response;
+		// }
+	}
+
+	public String updateUserData(UserDetailHistory detail) throws Exception {
+
+		validation.validateUpdate_DeleteUser(detail);
+		String response = userDaoImpl.updateUser(detail);
+		if (response.contains("Successfully")) {
+			userDaoImpl.addUserDetailHistory(detail);
 		}
+		return response;
 	}
 
-	public String updateUserData(UserDetail detail) throws Exception {
+	public String deleteUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateUpdate_DeleteUser(detail);
-		return userDaoImpl.updateUser(detail);
-	}
-
-	public String deleteUserData(UserDetail detail) throws Exception {
-
-		validation.validateUpdate_DeleteUser(detail);
-		return userDaoImpl.deleteUser(detail);
+		String response = userDaoImpl.deleteUser(detail);
+		if (response.contains("Successfully")) {
+			userDaoImpl.addUserDetailHistory(detail);
+		}
+		return response;
 	}
 }
