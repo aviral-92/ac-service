@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
  *
@@ -16,16 +17,18 @@ import com.customer.management.tool.pojo.UserDetail;
  */
 public interface UserManagementDao {
 
-    public boolean authenticateUser(CMTLogin login);
+	public boolean authenticateUser(CMTLogin login);
 
-    public String addUser(UserDetail userDetail, CMTLogin login) throws Exception;
+	public String addUser(UserDetail userDetail, CMTLogin login) throws Exception;
 
-    public boolean isUserExist(UserDetail detail);
+	public boolean isUserExist(UserDetail detail);
 
-    public List<UserDetail> getUserList(UserDetail detail);
+	public List<UserDetailHistory> getUserList(UserDetailHistory detail);
 
-    public String updateUser(UserDetail detail);
-    
-     public String deleteUser(UserDetail detail);
+	public String updateUser(UserDetail detail);
+
+	public String deleteUser(UserDetail detail);
+
+	public void addUserDetailHistory(UserDetailHistory userDetailHistory);
 
 }

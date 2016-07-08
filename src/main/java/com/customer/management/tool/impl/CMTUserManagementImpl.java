@@ -17,6 +17,7 @@ import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
 import com.customer.management.tool.ui.admin.WelcomeForm;
 import com.customer.management.tool.validator.ValidateUser;
 
@@ -28,75 +29,83 @@ import com.customer.management.tool.validator.ValidateUser;
 @Scope("prototype")
 public class CMTUserManagementImpl {
 
-    @Autowired
-    private UserManagementDaoImpl userDaoImpl;
-    @Autowired
-    private ValidateUser validation;
-    /*@Autowired
-    private WelcomeForm welcomeForm;*/
-    
-    /*@Autowired
-    private LoginForm loginForm;*/
+	@Autowired
+	private UserManagementDaoImpl userDaoImpl;
+	@Autowired
+	private ValidateUser validation;
+	/*
+	 * @Autowired private WelcomeForm welcomeForm;
+	 */
 
-    public String login(CMTLogin login) throws Exception {
+	/*
+	 * @Autowired private LoginForm loginForm;
+	 */
 
-        String response = null;
-        if (!CMTDevelopmentTool.isDevelopmentMode) {
-            validation.validateLogin(login);
-            if (StringUtils.isEmpty(response)) {
-                if (userDaoImpl.authenticateUser(login)) {
-                    response = "Successfully Logged in";
-                    JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-//                    loginForm.dispose();
-//                    welcomeForm.setVisible(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-//            loginForm.dispose();
-//            welcomeForm.setVisible(true);
-        }
-        return response;
-    }
+	public String login(CMTLogin login) throws Exception {
 
-    public String validateField(String field) {
+		String response = null;
+		if (!CMTDevelopmentTool.isDevelopmentMode) {
+			validation.validateLogin(login);
+			if (StringUtils.isEmpty(response)) {
+				if (userDaoImpl.authenticateUser(login)) {
+					response = "Successfully Logged in";
+					JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
+					// loginForm.dispose();
+					// welcomeForm.setVisible(true);
+				}
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			// loginForm.dispose();
+			// welcomeForm.setVisible(true);
+		}
+		return response;
+	}
 
-        String data = null;
-        String response = validation.textFieldValidation(field);
-        if (response != null) {
-            JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
-            data = "Success";
-        }
-        return data;
-    }
+	public String validateField(String field) {
 
-    public String addUser(CMTLogin login, UserDetail userDetail) throws Exception {
+		String data = null;
+		String response = validation.textFieldValidation(field);
+		if (response != null) {
+			JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
+			data = "Success";
+		}
+		return data;
+	}
 
-    	validation.validateLogin(login);
-    	validation.validateUser(userDetail);
-        return userDaoImpl.addUser(userDetail, login);
-    }
+	public String addUser(CMTLogin login, UserDetailHistory userDetail) throws Exception {
 
-    public UserDetail getUserData(UserDetail detail) throws Exception {
+		validation.validateLogin(login);
+		validation.validateUser(userDetail);
+		String response = userDaoImpl.addUser(userDetail, login);
+		if (response.contains("Successfully")) {
+			userDaoImpl.addUserDetailHistory(userDetail);
+		} else {
+			System.out.println("It does not contains anything");
+		}
+		return response;
+	}
 
-        validation.validateGeteUser(detail);
-        if (!userDaoImpl.getUserList(detail).isEmpty()) {
-            return userDaoImpl.getUserList(detail).get(0);
-        } else {
-            return null;
-        }
-    }
+	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
-    public String updateUserData(UserDetail detail) throws Exception {
+		validation.validateGeteUser(detail);
+		if (!userDaoImpl.getUserList(detail).isEmpty()) {
+			return userDaoImpl.getUserList(detail).get(0);
+		} else {
+			return null;
+		}
+	}
 
-        validation.validateUpdate_DeleteUser(detail);
-        return userDaoImpl.updateUser(detail);
-    }
+	public String updateUserData(UserDetail detail) throws Exception {
 
-    public String deleteUserData(UserDetail detail) throws Exception {
+		validation.validateUpdate_DeleteUser(detail);
+		return userDaoImpl.updateUser(detail);
+	}
 
-        validation.validateUpdate_DeleteUser(detail);
-        return userDaoImpl.deleteUser(detail);
-    }
+	public String deleteUserData(UserDetail detail) throws Exception {
+
+		validation.validateUpdate_DeleteUser(detail);
+		return userDaoImpl.deleteUser(detail);
+	}
 }

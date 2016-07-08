@@ -25,12 +25,13 @@ import com.customer.management.tool.pojo.UserDetail;
 @Scope("prototype")
 public class ModifyUser extends CMTServiceImpl {
 
-    @Autowired
-    private CMTGoBackImpl acServiceBackImpl;
-//	@Autowired
-	//private GetUser getUser;
-	/*@Autowired
-	private CMTUserManagementImpl acServiceUserImpl;*/
+	@Autowired
+	private CMTGoBackImpl acServiceBackImpl;
+	// @Autowired
+	// private GetUser getUser;
+	/*
+	 * @Autowired private CMTUserManagementImpl acServiceUserImpl;
+	 */
 
 	/*
 	 * @Autowired private MenuBar menuBar;
@@ -40,6 +41,7 @@ public class ModifyUser extends CMTServiceImpl {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Creates new form ModifyUser
 	 */
@@ -122,224 +124,87 @@ public class ModifyUser extends CMTServiceImpl {
 			}
 		});
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
-				jPanel1);
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout
-				.setHorizontalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addGap(100,
-																				100,
-																				100)
-																		.addComponent(
-																				jLabel1,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				132,
-																				javax.swing.GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																jPanel1Layout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanel1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addGroup(
-																								jPanel1Layout
-																										.createSequentialGroup()
-																										.addGap(29,
-																												29,
-																												29)
-																										.addGroup(
-																												jPanel1Layout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING,
-																																false)
-																														.addComponent(
-																																jLabel2,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																jLabel3,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																jLabel4,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																jLabel5,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)
-																														.addComponent(
-																																jLabel6,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																javax.swing.GroupLayout.DEFAULT_SIZE,
-																																Short.MAX_VALUE)))
-																						.addGroup(
-																								jPanel1Layout
-																										.createSequentialGroup()
-																										.addGap(52,
-																												52,
-																												52)
-																										.addComponent(
-																												update)))
-																		.addGap(27,
-																				27,
-																				27)
-																		.addGroup(
-																				jPanel1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								userid,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								username,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								Short.MAX_VALUE)
-																						.addComponent(
-																								name)
-																						.addComponent(
-																								email)
-																						.addComponent(
-																								mobile,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								129,
-																								Short.MAX_VALUE)
-																						.addGroup(
-																								jPanel1Layout
-																										.createSequentialGroup()
-																										.addGap(24,
-																												24,
-																												24)
-																										.addComponent(
-																												back)))))
-										.addContainerGap(41, Short.MAX_VALUE)));
-		jPanel1Layout
-				.setVerticalGroup(jPanel1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addGap(19, 19, 19)
-										.addComponent(
-												jLabel1,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												28,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(26, 26, 26)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel2)
-														.addComponent(
-																userid,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																17,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel3)
-														.addComponent(
-																name,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																false)
-														.addComponent(
-																username,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																jLabel4,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel5)
-														.addComponent(
-																email,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel6)
-														.addComponent(
-																mobile,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(update)
-														.addComponent(back))
-										.addContainerGap(23, Short.MAX_VALUE)));
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGap(100, 100, 100).addComponent(jLabel1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+								.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel1Layout.createSequentialGroup().addGap(29, 29, 29)
+										.addGroup(jPanel1Layout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+								.addGroup(
+										jPanel1Layout.createSequentialGroup().addGap(52, 52, 52).addComponent(update)))
+								.addGap(27, 27, 27)
+								.addGroup(jPanel1Layout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(userid, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(name).addComponent(email)
+										.addComponent(mobile, javax.swing.GroupLayout.DEFAULT_SIZE, 129,
+												Short.MAX_VALUE)
+										.addGroup(jPanel1Layout.createSequentialGroup().addGap(24, 24, 24)
+												.addComponent(back)))))
+						.addContainerGap(41, Short.MAX_VALUE)));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(19, 19, 19)
+						.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(26, 26, 26)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel2).addComponent(userid, javax.swing.GroupLayout.PREFERRED_SIZE, 17,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel3).addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+								.addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel5).addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel6).addComponent(mobile, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(18, 18, 18)
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(update).addComponent(back))
+						.addContainerGap(23, Short.MAX_VALUE)));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup()
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)
-						.addComponent(jPanel1,
-								javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
+				layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jPanel1,
-								javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addContainerGap()
+						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
@@ -357,23 +222,20 @@ public class ModifyUser extends CMTServiceImpl {
 
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
 		dispose();
-                acServiceBackImpl.backButtonCode(this);
-	//	getUser.setTitle("WelcomeForm Form");
-	//	getUser.setVisible(true);
+		acServiceBackImpl.backButtonCode(this);
+		// getUser.setTitle("WelcomeForm Form");
+		// getUser.setVisible(true);
 	}// GEN-LAST:event_backActionPerformed
 
 	private void updateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateActionPerformed
 
 		try {
-			UserDetail detail = new UserDetail(Integer.parseInt(userid
-					.getText()), username.getText(), name.getText(),
-					email.getText(), mobile.getText());
+			UserDetail detail = new UserDetail(Integer.parseInt(userid.getText()), username.getText(), name.getText(),
+					email.getText(), mobile.getText(), null);
 			String response = acServiceUserImpl.updateUserData(detail);
-			JOptionPane.showMessageDialog(new JFrame(), response, response,
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(),
-					"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}// GEN-LAST:event_updateActionPerformed
 
@@ -396,25 +258,24 @@ public class ModifyUser extends CMTServiceImpl {
 		 * /tutorial/uiswing/lookandfeel/plaf.html
 		 */
 		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-					.getInstalledLookAndFeels()) {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(ModifyUser.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(ModifyUser.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(ModifyUser.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(ModifyUser.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
 		}
 		// </editor-fold>
 
