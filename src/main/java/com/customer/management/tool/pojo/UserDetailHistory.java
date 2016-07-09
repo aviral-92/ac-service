@@ -4,6 +4,7 @@ public class UserDetailHistory extends UserDetail {
 
 	private String lastUpdated;
 	private String description;
+	private String status;
 
 	public String getStatus() {
 		return status;
@@ -12,8 +13,6 @@ public class UserDetailHistory extends UserDetail {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	private String status;
 
 	public String getLastUpdated() {
 		return lastUpdated;

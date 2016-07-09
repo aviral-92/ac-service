@@ -269,7 +269,7 @@ public class AddUser extends CMTServiceImpl {
 			if (password.getText().equals(cnfPassword.getText())) {
 				CMTLogin login = new CMTLogin(username.getText(), password.getText(), choice.getSelectedItem().toString());
 				UserDetailHistory userDetail = new UserDetailHistory(0, username.getText(), name.getText(), email.getText(),
-						mobile.getText(),new Date().toString(),new Date().toString(),"add");
+						mobile.getText(),new Date().toString(),new Date().toString(),"add","a");
 				String response = acServiceUserImpl.addUser(login, userDetail);
 				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
 			} else {

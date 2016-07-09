@@ -115,6 +115,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 		List<String> args = new ArrayList<>();
 		if (!StringUtils.isEmpty(detail)) {
+			args.add(detail.getStatus());
 			if (!StringUtils.isEmpty(detail.getUsername())) {
 				query.append(" AND username = ? ");
 				args.add(detail.getUsername());
@@ -164,14 +165,15 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		List<String> args = new ArrayList<>();
 		StringBuilder query = new StringBuilder(CMTQueryConstant.DELETE_USER);
 		if (!StringUtils.isEmpty(detailHistory)) {
+			args.add(detailHistory.getStatus());
 			if (!StringUtils.isEmpty(detailHistory.getUsername())) {
-				query.append(" AND username = ? ");
+				query.append(" WHERE username = ? ");
 				args.add(detailHistory.getUsername());
 			} else if (!StringUtils.isEmpty(detailHistory.getEmail())) {
-				query.append(" AND email = ? ");
+				query.append(" WHERE email = ? ");
 				args.add(detailHistory.getEmail());
 			} else if (!StringUtils.isEmpty(detailHistory.getMobile())) {
-				query.append(" AND mobile = ? ");
+				query.append(" WHERE mobile = ? ");
 				args.add(detailHistory.getMobile());
 			} else {
 				delete = "Please provide atleast one field.";
@@ -199,7 +201,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				userDetailHistory.setRegisteredDate(history.get(0).getRegisteredDate());
 				userDetailHistory.setUsername(history.get(0).getUsername());
 				userDetailHistory.setUserId(history.get(0).getUserId());
-
+				userDetailHistory.setStatus(history.get(0).getStatus());
 				if ("add".equalsIgnoreCase(userDetailHistory.getDescription())) {
 					commonsAddUserDetailHistory("User Successfully Added", userDetailHistory);
 				} else if ("update".equalsIgnoreCase(userDetailHistory.getDescription())) {
@@ -215,7 +217,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 		Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(), userDetailHistory.getUsername(),
 				userDetailHistory.getEmail(), userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(),
-				description };
+				description, userDetailHistory.getStatus() };
 		int executed = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
 		if (executed > 0) {
 			System.out.println("Success");

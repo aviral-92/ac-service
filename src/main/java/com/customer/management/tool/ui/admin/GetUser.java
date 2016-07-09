@@ -239,6 +239,7 @@ public class GetUser extends CMTServiceImpl {
 					new Date().toString(),new Date().toString(),null);
 			if (getRB.isSelected()) {
 				userDetail.setDescription("get");
+				userDetail.setStatus("a");
 				List<UserDetailHistory> listDetails = userManagementDaoImpl.getUserList(userDetail);
 				dispose();
 				getUsers.setTitle("User Data");
@@ -246,6 +247,7 @@ public class GetUser extends CMTServiceImpl {
 				getUsers.setVisible(true);
 			} else if (updateRB.isSelected()) {
 				userDetail.setDescription("update");
+				userDetail.setStatus("a");
 				UserDetailHistory userDetailResponse = acServiceUserImpl.getUserData(userDetail);
 				if (userDetailResponse == null) {
 					throw new Exception("Please give correct data to get details");
@@ -256,6 +258,7 @@ public class GetUser extends CMTServiceImpl {
 				modifyUser.setVisible(true);
 			} else if (deleteRB.isSelected()) {
 				userDetail.setDescription("delete");
+				userDetail.setStatus("d");
 				String response = acServiceUserImpl.deleteUserData(userDetail);
 				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
 			}

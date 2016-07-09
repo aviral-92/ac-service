@@ -17,16 +17,16 @@ public class CMTQueryConstant {
 
 	public static String INSERT_USERDETAIL = "INSERT INTO userdetail (userId,name,email,mobile,username,registeredDate) values (0,?,?,?,?,NOW())";
 
-	public static String GET_USERDETAIL = " SELECT * FROM userdetail WHERE status = 'a' ";
+	public static String GET_USERDETAIL = " SELECT * FROM userdetail WHERE status = ? ";
 
 	public static String IS_USERNAME_EXIST = "SELECT * from login where username = ? ";
 
 	public static String UPDATE_USER = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
 
-	public static String DELETE_USER = "UPDATE userdetail SET status = 'd' ";
+	public static String DELETE_USER = "UPDATE userdetail SET status = ? ";
 
 	public static String INSERT_USERDETAILHISTORY = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,"
-			+ "description,lastUpdated) values (0,?,?,?,?,?,?,?,NOW())";
+			+ "description,lastUpdated, status) values (0,?,?,?,?,?,?,?,NOW(),?)";
 
 	public static String AC_SERVICE = "SELECT * FROM ac_type";
 
