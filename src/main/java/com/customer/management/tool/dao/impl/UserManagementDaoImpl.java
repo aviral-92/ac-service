@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.customer.management.tool.configuration.Cipher;
 import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.CMTLoginExtractor;
@@ -36,13 +37,15 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private Cipher Cipher;
 
 	@Override
 	public boolean authenticateUser(CMTLogin login) {
 		boolean loginSuccess = false;
 		List<String> args = new ArrayList<>();
 		args.add(login.getUsername());
-		args.add(login.getPassword());
+		args.add(Cipher.encode(login.getPassword()));
 		args.add(login.getRole());
 		CMTLogin loginDetail = jdbcTemplate.query(CMTQueryConstant.AUTHENTICATE_USER_CREDENTIALS,
 				new CMTLoginExtractor(), args.toArray());
@@ -68,7 +71,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			List<String> args = null;
 			args = new ArrayList<>();
 			args.add(login.getUsername());
-			args.add(login.getPassword());
+			args.add(Cipher.encode(login.getPassword()));
 			args.add(login.getRole());
 			int success = jdbcTemplate.update(CMTQueryConstant.INSERT_IN_LOGIN, args.toArray());
 			if (success > 0) {
@@ -105,13 +108,15 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return isExist;
 	}
 
-	private boolean isUsernameExist(UserDetail detail) {
+	private boolean isUsernameExist(UserDetailHistory detail) {
 
 		boolean isExist = false;
 		if (!StringUtils.isEmpty(detail) && !StringUtils.isEmpty(detail.getUsername())) {
 			Object[] args = { detail.getUsername() };
-			CMTLogin login = jdbcTemplate.query(CMTQueryConstant.IS_USERNAME_EXIST, new CMTLoginExtractor(), args);
-			if (!StringUtils.isEmpty(login)) {
+			List<UserDetailHistory> exist = jdbcTemplate.query(CMTQueryConstant.IS_USERNAME_EXIST,
+					new UserManagementExtractor(), args);
+			if (!StringUtils.isEmpty(exist) && exist.size() > 0) {
+				detail.setStatus(exist.get(0).getStatus());
 				isExist = true;
 				LOG.error("Username already Exist");
 			}
@@ -208,10 +213,8 @@ public class UserManagementDaoImpl implements UserManagementDao {
 					query.append(" WHERE mobile = ? ");
 					args.add(detailHistory.getMobile());
 				}
-				// activeDeactive = "Please provide atleast one field.";
 			}
 		}
-		// if (StringUtils.isEmpty(activeDeactive)) {
 		int response = jdbcTemplate.update(query.toString(), args.toArray());
 		CMTLogin cmtLogin = null;
 		if (response > 0) {
@@ -271,7 +274,6 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			LOG.info("Successfully Added in History");
 		} else {
 			LOG.error("Unable to Add History");
-			String h = "kkk";
 		}
 	}
 }

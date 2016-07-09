@@ -9,7 +9,6 @@ import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -252,13 +251,18 @@ public class AddUser extends CMTServiceImpl {
 						email.getText(), mobile.getText(), new Date().toString(), new Date().toString(), "add", "a");
 				String response = acServiceUserImpl.addUser(login, userDetail);
 				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-				if(response.toLowerCase().contains("exist")){
-					int yesNo = JOptionPane.showConfirmDialog(new JFrame(),
-							response + ", Do you wish to active USER Account", "Message",
-							JOptionPane.YES_NO_OPTION);
-					if (yesNo == JOptionPane.YES_OPTION) {
-						String activeDeactive = acServiceUserImpl.activateUser(userDetail);
-						JOptionPane.showMessageDialog(new JFrame(), activeDeactive, "Message", JOptionPane.INFORMATION_MESSAGE);
+				
+				if (userDetail.getStatus().equalsIgnoreCase("d")) {
+					userDetail.setStatus("a");
+					if (response.toLowerCase().contains("exist")) {
+						int yesNo = JOptionPane.showConfirmDialog(new JFrame(),
+								response + ", Do you wish to active USER Account", "Message",
+								JOptionPane.YES_NO_OPTION);
+						if (yesNo == JOptionPane.YES_OPTION) {
+							String activeDeactive = acServiceUserImpl.activateUser(userDetail);
+							JOptionPane.showMessageDialog(new JFrame(), activeDeactive, "Message",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 				}
 			} else {

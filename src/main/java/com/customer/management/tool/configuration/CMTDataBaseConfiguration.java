@@ -35,7 +35,7 @@ public class CMTDataBaseConfiguration {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(dbDriver);
 		if (System.getProperty("user.name").equalsIgnoreCase("aviral")) {
-			dataSource.setUrl("jdbc:mysql://localhost/ac_service");
+			dataSource.setUrl("jdbc:mysql://localhost/customer_mgmt_tool");
 		} else {
 			dataSource.setUrl(dbURL);
 		}
