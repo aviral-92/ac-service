@@ -14,14 +14,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.CMTDao;
-import com.customer.management.tool.extractor.CMTTypesExtractor;
 import com.customer.management.tool.extractor.CMTExtractor;
+import com.customer.management.tool.extractor.CMTTypesExtractor;
 import com.customer.management.tool.extractor.CustomerRepairingDetailExtractor;
 import com.customer.management.tool.pojo.CMTTypes;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerReparingDetail;
-import com.customer.management.tool.query.CMTQueryConstant;
 
 /**
  *
@@ -69,7 +69,7 @@ public class CMTDaoImpl implements CMTDao {
 		List<String> args = new ArrayList<>();
 		args.add(customer.getEmail());
 		args.add(customer.getMobile());
-		List<Customer> response = jdbcTemplate.query(CMTQueryConstant.ISEXIST,
+		List<Customer> response = jdbcTemplate.query(CMTQueryConstant.IS_CUSTOMER_EXIST,
 				new CMTExtractor(), args.toArray());
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			isExist = true;

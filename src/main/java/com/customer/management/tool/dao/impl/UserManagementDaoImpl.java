@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.CMTLoginExtractor;
 import com.customer.management.tool.extractor.UserManagementExtractor;
@@ -38,13 +39,12 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	@Override
 	public boolean authenticateUser(CMTLogin login) {
 		boolean loginSuccess = false;
-		String sql = "SELECT * FROM LOGIN WHERE username = ? AND password = ? AND role = ?";
-
 		List<String> args = new ArrayList<>();
 		args.add(login.getUsername());
 		args.add(login.getPassword());
 		args.add(login.getRole());
-		CMTLogin loginDetail = jdbcTemplate.query(sql, new CMTLoginExtractor(), args.toArray());
+		CMTLogin loginDetail = jdbcTemplate.query(CMTQueryConstant.AUTHENTICATE_USER_CREDENTIALS,
+				new CMTLoginExtractor(), args.toArray());
 		if (!StringUtils.isEmpty(loginDetail)) {
 			loginSuccess = true;
 		}
@@ -52,30 +52,23 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	}
 
 	@Override
-	public String addUser(UserDetail userDetail, CMTLogin login) throws Exception {
+	public String addUser(UserDetailHistory userDetail, CMTLogin login) throws Exception {
 
-		// validation.validateLogin(login);
 		String response = null;
-
-		String userValidate = null;
-		// validation.validateUser(userDetail);
-		String insertLogin = " INSERT INTO login VALUES (?,?,?)";
-		String sql = "INSERT INTO userdetail (userId,name,email,mobile,username,registeredDate) values (0,?,?,?,?,NOW())";
-
 		if (!isUserExist(userDetail)) {
 			List<String> args = null;
 			args = new ArrayList<>();
 			args.add(login.getUsername());
 			args.add(login.getPassword());
 			args.add(login.getRole());
-			int success = jdbcTemplate.update(insertLogin, args.toArray());
+			int success = jdbcTemplate.update(CMTQueryConstant.INSERT_IN_LOGIN, args.toArray());
 			if (success > 0) {
 				args = new ArrayList<>();
 				args.add(userDetail.getName());
 				args.add(userDetail.getEmail());
 				args.add(userDetail.getMobile());
 				args.add(userDetail.getUsername());
-				int temp = jdbcTemplate.update(sql, args.toArray());
+				int temp = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAIL, args.toArray());
 				if (temp > 0) {
 					response = "Successfully added.";
 				} else {
@@ -87,46 +80,15 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		} else {
 			response = "User already Exist";
 		}
-
 		return response;
 	}
 
 	@Override
-	public boolean isUserExist(UserDetail detail) {
+	public boolean isUserExist(UserDetailHistory detail) {
 
 		boolean isExist = isUsernameExist(detail);
 		if (!isExist) {
-			boolean isUsername = false, isEmail = false;
-			List<String> args = new ArrayList<>();
-			StringBuilder query = new StringBuilder(" SELECT * FROM userdetail ");
-
-			if (!StringUtils.isEmpty(detail.getUsername())) {
-				query.append(" WHERE username = ? ");
-				args.add(detail.getUsername());
-				isUsername = true;
-			}
-			if (isUsername) {
-				if (!StringUtils.isEmpty(detail.getEmail())) {
-					query.append(" OR email = ? ");
-					args.add(detail.getEmail());
-				}
-			} else if (!StringUtils.isEmpty(detail.getEmail())) {
-				query.append(" WHERE email = ? ");
-				args.add(detail.getEmail());
-				isEmail = true;
-			}
-			if (isUsername || isEmail) {
-				if (!StringUtils.isEmpty(detail.getMobile())) {
-					query.append(" OR mobile = ? ");
-					args.add(detail.getMobile());
-				}
-			} else if (!StringUtils.isEmpty(detail.getMobile())) {
-				query.append(" WHERE mobile = ? ");
-				args.add(detail.getMobile());
-			}
-			List<UserDetailHistory> userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
-					args.toArray());
-			if (!StringUtils.isEmpty(userDetail) && userDetail.size() > 0) {
+			if (!StringUtils.isEmpty(getUserList(detail)) && getUserList(detail).size() > 0) {
 				isExist = true;
 			}
 		}
@@ -138,8 +100,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		boolean isExist = false;
 		if (!StringUtils.isEmpty(detail) && !StringUtils.isEmpty(detail.getUsername())) {
 			Object[] args = { detail.getUsername() };
-			CMTLogin login = jdbcTemplate.query("SELECT * from login where username = ? ", new CMTLoginExtractor(),
-					args);
+			CMTLogin login = jdbcTemplate.query(CMTQueryConstant.IS_USERNAME_EXIST, new CMTLoginExtractor(), args);
 			if (!StringUtils.isEmpty(login)) {
 				isExist = true;
 			}
@@ -151,11 +112,11 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	public List<UserDetailHistory> getUserList(UserDetailHistory detail) {
 
 		boolean isUsername = false, isEmail = false;
-		StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
+		StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 		List<String> args = new ArrayList<>();
 		if (!StringUtils.isEmpty(detail)) {
 			if (!StringUtils.isEmpty(detail.getUsername())) {
-				query.append(" WHERE username = ? ");
+				query.append(" AND username = ? ");
 				args.add(detail.getUsername());
 				isUsername = true;
 			}
@@ -165,7 +126,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 					args.add(detail.getEmail());
 				}
 			} else if (!StringUtils.isEmpty(detail.getEmail())) {
-				query.append(" WHERE email = ? ");
+				query.append(" AND email = ? ");
 				args.add(detail.getEmail());
 				isEmail = true;
 			}
@@ -175,7 +136,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 					args.add(detail.getMobile());
 				}
 			} else if (!StringUtils.isEmpty(detail.getMobile())) {
-				query.append(" WHERE mobile = ? ");
+				query.append(" AND mobile = ? ");
 				args.add(detail.getMobile());
 			}
 		}
@@ -188,16 +149,11 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	public String updateUser(UserDetail detail) {
 
 		String updated = null;
-		// if (!isUserExist(detail)) {
-		String query = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
 		Object[] args = { detail.getName(), detail.getEmail(), detail.getMobile(), String.valueOf(detail.getUserId()) };
-		int update = jdbcTemplate.update(query, args);
+		int update = jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, args);
 		if (update > 0) {
 			updated = "Updated Successfully";
 		}
-		// } else {
-		// updated = "Email or Mobile already Exist, please provide other.";
-		// }
 		return updated;
 	}
 
@@ -206,23 +162,23 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 		String delete = null;
 		List<String> args = new ArrayList<>();
-		StringBuilder sql = new StringBuilder("UPDATE userdetail SET status = 'd' ");
+		StringBuilder query = new StringBuilder(CMTQueryConstant.DELETE_USER);
 		if (!StringUtils.isEmpty(detailHistory)) {
 			if (!StringUtils.isEmpty(detailHistory.getUsername())) {
-				sql.append(" WHERE username = ? ");
+				query.append(" AND username = ? ");
 				args.add(detailHistory.getUsername());
 			} else if (!StringUtils.isEmpty(detailHistory.getEmail())) {
-				sql.append(" WHERE email = ? ");
+				query.append(" AND email = ? ");
 				args.add(detailHistory.getEmail());
 			} else if (!StringUtils.isEmpty(detailHistory.getMobile())) {
-				sql.append(" WHERE mobile = ? ");
+				query.append(" AND mobile = ? ");
 				args.add(detailHistory.getMobile());
 			} else {
 				delete = "Please provide atleast one field.";
 			}
 		}
 		if (StringUtils.isEmpty(delete)) {
-			int response = jdbcTemplate.update(sql.toString(), args.toArray());
+			int response = jdbcTemplate.update(query.toString(), args.toArray());
 			if (response > 0) {
 				delete = "Successfully Deleted";
 			}
@@ -248,7 +204,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 					commonsAddUserDetailHistory("User Successfully Added", userDetailHistory);
 				} else if ("update".equalsIgnoreCase(userDetailHistory.getDescription())) {
 					commonsAddUserDetailHistory("User Successfully Updated", userDetailHistory);
-				}else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
+				} else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
 					commonsAddUserDetailHistory("User Successfully deleted", userDetailHistory);
 				}
 			}
@@ -257,12 +213,10 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 	private void commonsAddUserDetailHistory(String description, UserDetailHistory userDetailHistory) {
 
-		String sql = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,description,lastUpdated) "
-				+ "values (0,?,?,?,?,?,?,?,NOW())";
 		Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(), userDetailHistory.getUsername(),
 				userDetailHistory.getEmail(), userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(),
 				description };
-		int executed = jdbcTemplate.update(sql, args);
+		int executed = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
 		if (executed > 0) {
 			System.out.println("Success");
 		} else {

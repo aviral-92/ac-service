@@ -19,9 +19,9 @@ public interface UserManagementDao {
 
 	public boolean authenticateUser(CMTLogin login);
 
-	public String addUser(UserDetail userDetail, CMTLogin login) throws Exception;
+	public String addUser(UserDetailHistory userDetail, CMTLogin login) throws Exception;
 
-	public boolean isUserExist(UserDetail detail);
+	public boolean isUserExist(UserDetailHistory detail);
 
 	public List<UserDetailHistory> getUserList(UserDetailHistory detail);
 
