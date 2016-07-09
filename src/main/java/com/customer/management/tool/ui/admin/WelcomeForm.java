@@ -189,14 +189,12 @@ public class WelcomeForm extends javax.swing.JFrame {
 	}// GEN-LAST:event_getCustomerActionPerformed
 
 	private void Clicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_Clicked
-		// TODO add your handling code here:
 		dispose();
 		addUser.setTitle("Add User");
 		addUser.setVisible(true);
 	}// GEN-LAST:event_Clicked
 
 	private void getUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_getUserMousePressed
-		// TODO add your handling code here:
 		dispose();
 		getUser.setTitle("Get User Details");
 		getUser.setVisible(true);
