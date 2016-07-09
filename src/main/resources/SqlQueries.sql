@@ -10,17 +10,17 @@
 
 
 
-create database IF NOT EXISTS ac_Service;
+create database IF NOT EXISTS customer_mgmt_tool;
 
-CREATE TABLE IF NOT EXISTS `ac_Service`.`login` (
+CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`login` (
      `username` VARCHAR(45) NOT NULL,
        `password` VARCHAR(45) NOT NULL,
        `role` VARCHAR(45) NOT NULL,
        PRIMARY KEY (`username`) );
 
-insert into `ac_Service`.`login` values ('admin','admin','admin');
+insert into `customer_mgmt_tool`.`login` values ('admin','admin','admin');
 
-CREATE TABLE IF NOT EXISTS `ac_service`.`userdetail` (
+CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`userdetail` (
   `userId` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -31,15 +31,15 @@ CREATE TABLE IF NOT EXISTS `ac_service`.`userdetail` (
   INDEX `Foreign_Key_Username_idx` (`username` ASC),
   CONSTRAINT `Foreign_Key_Username`
     FOREIGN KEY (`username`)
-    REFERENCES `ac_service`.`login` (`username`)
+    REFERENCES `customer_mgmt_tool`.`login` (`username`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
     
-ALTER TABLE `ac_service`.`userdetail` 
+ALTER TABLE `customer_mgmt_tool`.`userdetail` 
 	ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `registeredDate`;
 
 -- Create User Detail History Table
- CREATE TABLE IF NOT EXISTS `ac_service`.`user_detail_history` (
+ CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`user_detail_history` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `userId` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
@@ -53,30 +53,30 @@ ALTER TABLE `ac_service`.`userdetail`
   INDEX `Foreign_Key_UserId_idx` (`userId` ASC),
   CONSTRAINT `Foreign_Key_UserId`
     FOREIGN KEY (`userId`)
-    REFERENCES `ac_service`.`userdetail` (`userId`)
+    REFERENCES `customer_mgmt_tool`.`userdetail` (`userId`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
     
 --Alter table to add Foreign key
-ALTER TABLE `ac_service`.`user_detail_history` 
+ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
 ADD INDEX `Foreign_Key_Username_idx` (`username` ASC);
-ALTER TABLE `ac_service`.`user_detail_history` 
+ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
 ADD CONSTRAINT `Foreign_Key_Username`
   FOREIGN KEY (`username`)
-  REFERENCES `ac_service`.`login` (`username`)
+  REFERENCES `customer_mgmt_tool`.`login` (`username`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
   
-  ALTER TABLE `ac_service`.`user_detail_history` 
+  ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
 ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `description`;
 
-CREATE  TABLE IF NOT EXISTS `ac_service`.`ac_type` (
+CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`ac_type` (
   `acId` INT NOT NULL AUTO_INCREMENT ,
   `ac_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`acId`) );
 
 
-CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
+CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
   `customerId` INT NOT NULL AUTO_INCREMENT ,
   `acId` INT(11) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
@@ -87,9 +87,9 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer` (
   PRIMARY KEY (`customerId`) 
 );
 
-ALTER TABLE `ac_service`.`customer` AUTO_INCREMENT = 1000;
+ALTER TABLE `customer_mgmt_tool`.`customer` AUTO_INCREMENT = 1000;
 
-CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
+CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer_repairing_detail` (
   `repairId` INT NOT NULL AUTO_INCREMENT,
   `ac_Id` INT(11) NOT NULL ,
   `customer_Id` INT(11) NOT NULL ,
@@ -105,22 +105,22 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
   INDEX `New_Customer_ID` (`customer_Id` ASC) ,
   CONSTRAINT `New_Ac_ID`
     FOREIGN KEY (`ac_Id` )
-    REFERENCES `ac_service`.`ac_type` (`acId` )
+    REFERENCES `customer_mgmt_tool`.`ac_type` (`acId` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `New_Customer_ID`
     FOREIGN KEY (`customer_Id` )
-    REFERENCES `ac_service`.`customer` (`customerId` )
+    REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
     
--- ALTER TABLE `ac_service`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
+-- ALTER TABLE `customer_mgmt_tool`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
 -- DROP COLUMN `model/vehicle no` ;
 
--- ALTER TABLE `ac_service`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
+-- ALTER TABLE `customer_mgmt_tool`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
 -- , DROP INDEX `ac` ;
 
---   CREATE  TABLE IF NOT EXISTS `ac_service`.`customerhistory` (
+--   CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customerhistory` (
 --  `id` INT NOT NULL AUTO_INCREMENT ,
 --  `customerId` INT NOT NULL ,
 --  `customer_emal` VARCHAR(45) NOT NULL ,
@@ -129,10 +129,10 @@ CREATE  TABLE IF NOT EXISTS `ac_service`.`customer_repairing_detail` (
 --  `DeletedDate` DATETIME NOT NULL ,
 --  PRIMARY KEY (`id`) );
 --  
---  ALTER TABLE `ac_service`.`customerhistory` 
+--  ALTER TABLE `customer_mgmt_tool`.`customerhistory` 
 --  ADD CONSTRAINT `Foreign_key`
 --  FOREIGN KEY (`customerId` )
---  REFERENCES `ac_service`.`customer` (`customerId` )
+--  REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
 --  ON DELETE CASCADE
 --  ON UPDATE CASCADE
 --, ADD INDEX `Foreign_key` (`customerId` ASC) ;
