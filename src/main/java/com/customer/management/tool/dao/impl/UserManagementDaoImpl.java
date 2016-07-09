@@ -8,6 +8,7 @@ package com.customer.management.tool.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,15 +27,15 @@ import com.customer.management.tool.pojo.UserDetailHistory;
  *
  * @author Aviral
  */
+
 @Component
 @Scope("prototype")
 public class UserManagementDaoImpl implements UserManagementDao {
 
+	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class);
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	/*
-	 * @Autowired private ValidateUser validation;
-	 */
 
 	@Override
 	public boolean authenticateUser(CMTLogin login) {
@@ -47,8 +48,16 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				new CMTLoginExtractor(), args.toArray());
 		if (!StringUtils.isEmpty(loginDetail)) {
 			loginSuccess = true;
+			LOG.info(login.getUsername() + " Successfully Login");
 		}
 		return loginSuccess;
+	}
+
+	public CMTLogin getUsernamePassword(String username) {
+
+		Object[] args = { username };
+		CMTLogin cmtLogin = jdbcTemplate.query(CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(), args);
+		return cmtLogin;
 	}
 
 	@Override
@@ -80,6 +89,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		} else {
 			response = "User already Exist";
 		}
+		LOG.info(response);
 		return response;
 	}
 
@@ -103,6 +113,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			CMTLogin login = jdbcTemplate.query(CMTQueryConstant.IS_USERNAME_EXIST, new CMTLoginExtractor(), args);
 			if (!StringUtils.isEmpty(login)) {
 				isExist = true;
+				LOG.error("Username already Exist");
 			}
 		}
 		return isExist;
@@ -154,38 +165,76 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		int update = jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, args);
 		if (update > 0) {
 			updated = "Updated Successfully";
+			LOG.info(detail.getName() + " " + update);
+		} else {
+			LOG.error("Something Went Wrong... Try again Later.");
 		}
 		return updated;
 	}
 
 	@Override
-	public String deleteUser(UserDetailHistory detailHistory) {
+	public String activateDeactivateUser(UserDetailHistory detailHistory) {
 
-		String delete = null;
+		String activeDeactive = null;
 		List<String> args = new ArrayList<>();
+		boolean isusername = false, isEmail = false;
 		StringBuilder query = new StringBuilder(CMTQueryConstant.DELETE_USER);
 		if (!StringUtils.isEmpty(detailHistory)) {
 			args.add(detailHistory.getStatus());
 			if (!StringUtils.isEmpty(detailHistory.getUsername())) {
 				query.append(" WHERE username = ? ");
 				args.add(detailHistory.getUsername());
-			} else if (!StringUtils.isEmpty(detailHistory.getEmail())) {
-				query.append(" WHERE email = ? ");
-				args.add(detailHistory.getEmail());
-			} else if (!StringUtils.isEmpty(detailHistory.getMobile())) {
-				query.append(" WHERE mobile = ? ");
-				args.add(detailHistory.getMobile());
+				isusername = true;
+			}
+			if (isusername) {
+				if (!StringUtils.isEmpty(detailHistory.getEmail())) {
+					query.append(" OR email = ? ");
+					args.add(detailHistory.getEmail());
+				}
 			} else {
-				delete = "Please provide atleast one field.";
+				if (!StringUtils.isEmpty(detailHistory.getEmail())) {
+					query.append(" WHERE email = ? ");
+					args.add(detailHistory.getEmail());
+					isEmail = true;
+				}
+			}
+			if (isEmail | isusername) {
+				if (!StringUtils.isEmpty(detailHistory.getMobile())) {
+					query.append(" OR mobile = ? ");
+					args.add(detailHistory.getMobile());
+				}
+			} else {
+				if (!StringUtils.isEmpty(detailHistory.getMobile())) {
+					query.append(" WHERE mobile = ? ");
+					args.add(detailHistory.getMobile());
+				}
+				// activeDeactive = "Please provide atleast one field.";
 			}
 		}
-		if (StringUtils.isEmpty(delete)) {
-			int response = jdbcTemplate.update(query.toString(), args.toArray());
-			if (response > 0) {
-				delete = "Successfully Deleted";
+		// if (StringUtils.isEmpty(activeDeactive)) {
+		int response = jdbcTemplate.update(query.toString(), args.toArray());
+		CMTLogin cmtLogin = null;
+		if (response > 0) {
+			if (detailHistory.getStatus().equalsIgnoreCase("d")) {
+				activeDeactive = "Successfully Deleted";
+				LOG.info(activeDeactive);
+			} else if (detailHistory.getStatus().equalsIgnoreCase("a")) {
+				if (isUsernameExist(detailHistory)) {
+					cmtLogin = getUsernamePassword(detailHistory.getUsername());
+				} else {
+					List<UserDetailHistory> userList = getUserList(detailHistory);
+					if (!StringUtils.isEmpty(userList) && userList.size() > 0) {
+						cmtLogin = getUsernamePassword(userList.get(0).getUsername());
+					}
+				}
+				activeDeactive = "User Successfully Activated, username = " + cmtLogin.getUsername()
+						+ " AND password = " + cmtLogin.getPassword();
+				LOG.info("User Successfully Activated");
 			}
+		} else {
+			LOG.error("Something Went Wrong... Try again Later.");
 		}
-		return delete;
+		return activeDeactive;
 	}
 
 	@Override
@@ -194,7 +243,6 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		if (!StringUtils.isEmpty(userDetailHistory)) {
 			List<UserDetailHistory> history = getUserList(userDetailHistory);
 			if (!StringUtils.isEmpty(history) && history.size() > 0) {
-
 				userDetailHistory.setEmail(history.get(0).getEmail());
 				userDetailHistory.setMobile(history.get(0).getMobile());
 				userDetailHistory.setName(history.get(0).getName());
@@ -220,10 +268,10 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				description, userDetailHistory.getStatus() };
 		int executed = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
 		if (executed > 0) {
-			System.out.println("Success");
+			LOG.info("Successfully Added in History");
 		} else {
-			System.out.println("Failure");
+			LOG.error("Unable to Add History");
+			String h = "kkk";
 		}
-
 	}
 }

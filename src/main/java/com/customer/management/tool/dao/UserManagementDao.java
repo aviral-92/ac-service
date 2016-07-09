@@ -27,7 +27,7 @@ public interface UserManagementDao {
 
 	public String updateUser(UserDetail detail);
 
-	public String deleteUser(UserDetailHistory detailHistory);
+	public String activateDeactivateUser(UserDetailHistory detailHistory);
 
 	public void addUserDetailHistory(UserDetailHistory userDetailHistory);
 

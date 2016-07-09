@@ -16,9 +16,7 @@ import org.springframework.util.StringUtils;
 import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
 import com.customer.management.tool.pojo.CMTLogin;
-import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
-import com.customer.management.tool.ui.admin.WelcomeForm;
 import com.customer.management.tool.validator.ValidateUser;
 
 /**
@@ -33,13 +31,6 @@ public class CMTUserManagementImpl {
 	private UserManagementDaoImpl userDaoImpl;
 	@Autowired
 	private ValidateUser validation;
-	/*
-	 * @Autowired private WelcomeForm welcomeForm;
-	 */
-
-	/*
-	 * @Autowired private LoginForm loginForm;
-	 */
 
 	public String login(CMTLogin login) throws Exception {
 
@@ -87,13 +78,16 @@ public class CMTUserManagementImpl {
 		return response;
 	}
 
+	public String activateUser(UserDetailHistory userDetailHistory) {
+
+		return userDaoImpl.activateDeactivateUser(userDetailHistory);
+	}
+
 	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateGeteUser(detail);
-		// if (!userDaoImpl.getUserList(detail).isEmpty()) {
 		UserDetailHistory response = userDaoImpl.getUserList(detail).get(0);
 		return response;
-		// }
 	}
 
 	public String updateUserData(UserDetailHistory detail) throws Exception {
@@ -109,7 +103,7 @@ public class CMTUserManagementImpl {
 	public String deleteUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateUpdate_DeleteUser(detail);
-		String response = userDaoImpl.deleteUser(detail);
+		String response = userDaoImpl.activateDeactivateUser(detail);
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(detail);
 		}
