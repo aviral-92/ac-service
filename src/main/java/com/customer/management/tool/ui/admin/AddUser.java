@@ -251,14 +251,14 @@ public class AddUser extends CMTServiceImpl {
 						email.getText(), mobile.getText(), new Date().toString(), new Date().toString(), "add", "a");
 				String response = acServiceUserImpl.addUser(login, userDetail);
 				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
-				
+
 				if (userDetail.getStatus().equalsIgnoreCase("d")) {
 					userDetail.setStatus("a");
 					if (response.toLowerCase().contains("exist")) {
-						int yesNo = JOptionPane.showConfirmDialog(new JFrame(),
-								response + ", Do you wish to active USER Account", "Message",
-								JOptionPane.YES_NO_OPTION);
+						int yesNo = JOptionPane.showConfirmDialog(new JFrame(), "Do you wish to active USER Account",
+								"Message", JOptionPane.YES_NO_OPTION);
 						if (yesNo == JOptionPane.YES_OPTION) {
+							userDetail.setDescription("active");
 							String activeDeactive = acServiceUserImpl.activateUser(userDetail);
 							JOptionPane.showMessageDialog(new JFrame(), activeDeactive, "Message",
 									JOptionPane.INFORMATION_MESSAGE);

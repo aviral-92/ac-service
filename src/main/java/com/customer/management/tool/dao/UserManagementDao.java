@@ -8,7 +8,6 @@ package com.customer.management.tool.dao;
 import java.util.List;
 
 import com.customer.management.tool.pojo.CMTLogin;
-import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -25,7 +24,7 @@ public interface UserManagementDao {
 
 	public List<UserDetailHistory> getUserList(UserDetailHistory detail);
 
-	public String updateUser(UserDetail detail);
+	public String updateUser(UserDetailHistory detail);
 
 	public String activateDeactivateUser(UserDetailHistory detailHistory);
 

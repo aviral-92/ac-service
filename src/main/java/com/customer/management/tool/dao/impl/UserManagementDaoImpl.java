@@ -127,6 +127,8 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	@Override
 	public List<UserDetailHistory> getUserList(UserDetailHistory detail) {
 
+		List<UserDetailHistory> userDetailList = null;
+		// if (isUserActive(detail)) {
 		boolean isUsername = false, isEmail = false;
 		StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 		List<String> args = new ArrayList<>();
@@ -157,24 +159,44 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				args.add(detail.getMobile());
 			}
 		}
-		List<UserDetailHistory> userDetailList = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
-				args.toArray());
+		userDetailList = jdbcTemplate.query(query.toString(), new UserManagementExtractor(), args.toArray());
+		// }
+
 		return userDetailList;
 	}
 
 	@Override
-	public String updateUser(UserDetail detail) {
+	public String updateUser(UserDetailHistory detail) {
 
 		String updated = null;
-		Object[] args = { detail.getName(), detail.getEmail(), detail.getMobile(), String.valueOf(detail.getUserId()) };
-		int update = jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, args);
-		if (update > 0) {
-			updated = "Updated Successfully";
-			LOG.info(detail.getName() + " " + update);
+		if (isUserActive(detail)) {
+			Object[] args = { detail.getName(), detail.getEmail(), detail.getMobile(),
+					String.valueOf(detail.getUserId()) };
+			int update = jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, args);
+			if (update > 0) {
+				updated = "Updated Successfully";
+				LOG.info(detail.getName() + " " + update);
+			} else {
+				LOG.error("Something Went Wrong... Try again Later.");
+			}
 		} else {
-			LOG.error("Something Went Wrong... Try again Later.");
+			updated = "User is deactive, please activate it to update";
 		}
 		return updated;
+	}
+
+	private boolean isUserActive(UserDetailHistory detail) {
+
+		boolean active = false;
+		if (!StringUtils.isEmpty(detail) && !StringUtils.isEmpty(detail.getUsername())) {
+			Object[] args = { detail.getUsername() };
+			List<UserDetailHistory> details = jdbcTemplate.query(CMTQueryConstant.IS_USER_ACTIVE,
+					new UserManagementExtractor(), args);
+			if (!StringUtils.isEmpty(details) && details.size() > 0) {
+				active = true;
+			}
+		}
+		return active;
 	}
 
 	@Override
@@ -259,6 +281,8 @@ public class UserManagementDaoImpl implements UserManagementDao {
 					commonsAddUserDetailHistory("User Successfully Updated", userDetailHistory);
 				} else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
 					commonsAddUserDetailHistory("User Successfully deleted", userDetailHistory);
+				} else if ("active".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Activated", userDetailHistory);
 				}
 			}
 		}

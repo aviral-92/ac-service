@@ -5,6 +5,8 @@
  */
 package com.customer.management.tool.impl;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -73,21 +75,30 @@ public class CMTUserManagementImpl {
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(userDetail);
 		} else {
-			System.out.println("It does not contains anything");
+			System.out.println("It does not contains anything in addUser");
 		}
 		return response;
 	}
 
 	public String activateUser(UserDetailHistory userDetailHistory) {
 
-		return userDaoImpl.activateDeactivateUser(userDetailHistory);
+		String response = userDaoImpl.activateDeactivateUser(userDetailHistory);
+		if (response.toLowerCase().contains("successfully")) {
+			userDaoImpl.addUserDetailHistory(userDetailHistory);
+		}else {
+			System.out.println("It does not contains anything in activateUser ");
+		}
+		return response;
 	}
 
 	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateGeteUser(detail);
-		UserDetailHistory response = userDaoImpl.getUserList(detail).get(0);
-		return response;
+		List<UserDetailHistory> response = userDaoImpl.getUserList(detail);
+		if (!StringUtils.isEmpty(response) && response.size() > 0) {
+			return response.get(0);
+		}
+		throw new Exception("User is deactive, please activate it to update");
 	}
 
 	public String updateUserData(UserDetailHistory detail) throws Exception {
