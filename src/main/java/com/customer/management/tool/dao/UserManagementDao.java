@@ -22,7 +22,7 @@ public interface UserManagementDao {
 
 	public boolean isUserExist(UserDetailHistory detail);
 
-	public List<UserDetailHistory> getUserList(UserDetailHistory detail);
+	public List<UserDetailHistory> getUsers(UserDetailHistory detail);
 
 	public String updateUser(UserDetailHistory detail);
 

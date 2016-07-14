@@ -21,7 +21,6 @@ import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.CMTLoginExtractor;
 import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
-import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -47,8 +46,13 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		args.add(login.getUsername());
 		args.add(Cipher.encode(login.getPassword()));
 		args.add(login.getRole());
-		CMTLogin loginDetail = jdbcTemplate.query(CMTQueryConstant.AUTHENTICATE_USER_CREDENTIALS,
+
+		// TODO Add one more thing STATUS='A' in AUTHENTICATE_USER_CREDENTIALS
+		// and use Capital 'A'
+		CMTLogin loginDetail = jdbcTemplate.query(
+				CMTQueryConstant.AUTHENTICATE_USER_CREDENTIALS,
 				new CMTLoginExtractor(), args.toArray());
+
 		if (!StringUtils.isEmpty(loginDetail)) {
 			loginSuccess = true;
 			LOG.info(login.getUsername() + " Successfully Login");
@@ -56,15 +60,17 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return loginSuccess;
 	}
 
-	public CMTLogin getUsernamePassword(String username) {
+	public CMTLogin getUserLoginDetailByUserName(String username) {
 
 		Object[] args = { username };
-		CMTLogin cmtLogin = jdbcTemplate.query(CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(), args);
+		CMTLogin cmtLogin = jdbcTemplate.query(
+				CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(),
+				args);
 		return cmtLogin;
 	}
 
 	@Override
-	public String addUser(UserDetailHistory userDetail, CMTLogin login) throws Exception {
+	public String addUser(UserDetailHistory userDetail, CMTLogin login) {
 
 		String response = null;
 		if (!isUserExist(userDetail)) {
@@ -73,14 +79,16 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			args.add(login.getUsername());
 			args.add(Cipher.encode(login.getPassword()));
 			args.add(login.getRole());
-			int success = jdbcTemplate.update(CMTQueryConstant.INSERT_IN_LOGIN, args.toArray());
+			int success = jdbcTemplate.update(CMTQueryConstant.INSERT_IN_LOGIN,
+					args.toArray());
 			if (success > 0) {
 				args = new ArrayList<>();
 				args.add(userDetail.getName());
 				args.add(userDetail.getEmail());
 				args.add(userDetail.getMobile());
 				args.add(userDetail.getUsername());
-				int temp = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAIL, args.toArray());
+				int temp = jdbcTemplate.update(
+						CMTQueryConstant.INSERT_USERDETAIL, args.toArray());
 				if (temp > 0) {
 					response = "Successfully added.";
 				} else {
@@ -98,34 +106,29 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 	@Override
 	public boolean isUserExist(UserDetailHistory detail) {
-
-		boolean isExist = isUsernameExist(detail);
-		if (!isExist) {
-			if (!StringUtils.isEmpty(getUserList(detail)) && getUserList(detail).size() > 0) {
-				isExist = true;
-			}
-		}
-		return isExist;
-	}
-
-	private boolean isUsernameExist(UserDetailHistory detail) {
-
 		boolean isExist = false;
-		if (!StringUtils.isEmpty(detail) && !StringUtils.isEmpty(detail.getUsername())) {
-			Object[] args = { detail.getUsername() };
-			List<UserDetailHistory> exist = jdbcTemplate.query(CMTQueryConstant.IS_USERNAME_EXIST,
-					new UserManagementExtractor(), args);
-			if (!StringUtils.isEmpty(exist) && exist.size() > 0) {
-				detail.setStatus(exist.get(0).getStatus());
-				isExist = true;
-				LOG.error("Username already Exist");
-			}
-		}
+		List<UserDetailHistory> userDetailHistories = getUsers(detail);
+		if (!StringUtils.isEmpty(userDetailHistories)
+				&& !userDetailHistories.isEmpty())
+			isExist = true;
+
 		return isExist;
 	}
+
+	/*
+	 * private boolean isUsernameExist(UserDetailHistory detail) {
+	 * 
+	 * boolean isExist = false; if (!StringUtils.isEmpty(detail) &&
+	 * !StringUtils.isEmpty(detail.getUsername())) { Object[] args = {
+	 * detail.getUsername() }; List<UserDetailHistory> exist =
+	 * jdbcTemplate.query( CMTQueryConstant.IS_USERNAME_EXIST, new
+	 * UserManagementExtractor(), args); if (!StringUtils.isEmpty(exist) &&
+	 * !exist.isEmpty()) { detail.setStatus(exist.get(0).getStatus()); isExist =
+	 * true; LOG.error("Username already Exist"); } } return isExist; }
+	 */
 
 	@Override
-	public List<UserDetailHistory> getUserList(UserDetailHistory detail) {
+	public List<UserDetailHistory> getUsers(UserDetailHistory detail) {
 
 		List<UserDetailHistory> userDetailList = null;
 		// if (isUserActive(detail)) {
@@ -159,7 +162,8 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				args.add(detail.getMobile());
 			}
 		}
-		userDetailList = jdbcTemplate.query(query.toString(), new UserManagementExtractor(), args.toArray());
+		userDetailList = jdbcTemplate.query(query.toString(),
+				new UserManagementExtractor(), args.toArray());
 		// }
 
 		return userDetailList;
@@ -170,9 +174,10 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 		String updated = null;
 		if (isUserActive(detail)) {
-			Object[] args = { detail.getName(), detail.getEmail(), detail.getMobile(),
-					String.valueOf(detail.getUserId()) };
-			int update = jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, args);
+			Object[] args = { detail.getName(), detail.getEmail(),
+					detail.getMobile(), String.valueOf(detail.getUserId()) };
+			int update = jdbcTemplate
+					.update(CMTQueryConstant.UPDATE_USER, args);
 			if (update > 0) {
 				updated = "Updated Successfully";
 				LOG.info(detail.getName() + " " + update);
@@ -188,9 +193,11 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	private boolean isUserActive(UserDetailHistory detail) {
 
 		boolean active = false;
-		if (!StringUtils.isEmpty(detail) && !StringUtils.isEmpty(detail.getUsername())) {
+		if (!StringUtils.isEmpty(detail)
+				&& !StringUtils.isEmpty(detail.getUsername())) {
 			Object[] args = { detail.getUsername() };
-			List<UserDetailHistory> details = jdbcTemplate.query(CMTQueryConstant.IS_USER_ACTIVE,
+			List<UserDetailHistory> details = jdbcTemplate.query(
+					CMTQueryConstant.IS_USER_ACTIVE,
 					new UserManagementExtractor(), args);
 			if (!StringUtils.isEmpty(details) && details.size() > 0) {
 				active = true;
@@ -244,16 +251,19 @@ public class UserManagementDaoImpl implements UserManagementDao {
 				activeDeactive = "Successfully Deleted";
 				LOG.info(activeDeactive);
 			} else if (detailHistory.getStatus().equalsIgnoreCase("a")) {
-				if (isUsernameExist(detailHistory)) {
-					cmtLogin = getUsernamePassword(detailHistory.getUsername());
+				if (isUserExist(detailHistory)) {
+					cmtLogin = getUserLoginDetailByUserName(detailHistory
+							.getUsername());
 				} else {
-					List<UserDetailHistory> userList = getUserList(detailHistory);
+					List<UserDetailHistory> userList = getUsers(detailHistory);
 					if (!StringUtils.isEmpty(userList) && userList.size() > 0) {
-						cmtLogin = getUsernamePassword(userList.get(0).getUsername());
+						cmtLogin = getUserLoginDetailByUserName(userList.get(0)
+								.getUsername());
 					}
 				}
-				activeDeactive = "User Successfully Activated, username = " + cmtLogin.getUsername()
-						+ " AND password = " + cmtLogin.getPassword();
+				activeDeactive = "User Successfully Activated, username = "
+						+ cmtLogin.getUsername() + " AND password = "
+						+ cmtLogin.getPassword();
 				LOG.info("User Successfully Activated");
 			}
 		} else {
@@ -266,34 +276,46 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	public void addUserDetailHistory(UserDetailHistory userDetailHistory) {
 
 		if (!StringUtils.isEmpty(userDetailHistory)) {
-			List<UserDetailHistory> history = getUserList(userDetailHistory);
+			List<UserDetailHistory> history = getUsers(userDetailHistory);
 			if (!StringUtils.isEmpty(history) && history.size() > 0) {
 				userDetailHistory.setEmail(history.get(0).getEmail());
 				userDetailHistory.setMobile(history.get(0).getMobile());
 				userDetailHistory.setName(history.get(0).getName());
-				userDetailHistory.setRegisteredDate(history.get(0).getRegisteredDate());
+				userDetailHistory.setRegisteredDate(history.get(0)
+						.getRegisteredDate());
 				userDetailHistory.setUsername(history.get(0).getUsername());
 				userDetailHistory.setUserId(history.get(0).getUserId());
 				userDetailHistory.setStatus(history.get(0).getStatus());
 				if ("add".equalsIgnoreCase(userDetailHistory.getDescription())) {
-					commonsAddUserDetailHistory("User Successfully Added", userDetailHistory);
-				} else if ("update".equalsIgnoreCase(userDetailHistory.getDescription())) {
-					commonsAddUserDetailHistory("User Successfully Updated", userDetailHistory);
-				} else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
-					commonsAddUserDetailHistory("User Successfully deleted", userDetailHistory);
-				} else if ("active".equalsIgnoreCase(userDetailHistory.getDescription())) {
-					commonsAddUserDetailHistory("User Successfully Activated", userDetailHistory);
+					commonsAddUserDetailHistory("User Successfully Added",
+							userDetailHistory);
+				} else if ("update".equalsIgnoreCase(userDetailHistory
+						.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Updated",
+							userDetailHistory);
+				} else if ("delete".equalsIgnoreCase(userDetailHistory
+						.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully deleted",
+							userDetailHistory);
+				} else if ("active".equalsIgnoreCase(userDetailHistory
+						.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Activated",
+							userDetailHistory);
 				}
 			}
 		}
 	}
 
-	private void commonsAddUserDetailHistory(String description, UserDetailHistory userDetailHistory) {
+	private void commonsAddUserDetailHistory(String description,
+			UserDetailHistory userDetailHistory) {
 
-		Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(), userDetailHistory.getUsername(),
-				userDetailHistory.getEmail(), userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(),
-				description, userDetailHistory.getStatus() };
-		int executed = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
+		Object[] args = { userDetailHistory.getUserId(),
+				userDetailHistory.getName(), userDetailHistory.getUsername(),
+				userDetailHistory.getEmail(), userDetailHistory.getMobile(),
+				userDetailHistory.getRegisteredDate(), description,
+				userDetailHistory.getStatus() };
+		int executed = jdbcTemplate.update(
+				CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
 		if (executed > 0) {
 			LOG.info("Successfully Added in History");
 		} else {
