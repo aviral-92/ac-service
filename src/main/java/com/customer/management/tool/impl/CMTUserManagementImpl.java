@@ -94,7 +94,7 @@ public class CMTUserManagementImpl {
 	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateGeteUser(detail);
-		List<UserDetailHistory> response = userDaoImpl.getUserList(detail);
+		List<UserDetailHistory> response = userDaoImpl.getUsers(detail);
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			return response.get(0);
 		}

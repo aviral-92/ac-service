@@ -222,7 +222,7 @@ public class GetUser extends CMTServiceImpl implements Serializable {
 			if (getRB.isSelected()) {
 				userDetail.setDescription("get");
 				userDetail.setStatus("a");
-				List<UserDetailHistory> listDetails = userManagementDaoImpl.getUserList(userDetail);
+				List<UserDetailHistory> listDetails = userManagementDaoImpl.getUsers(userDetail);
 				dispose();
 				getUsers.setTitle("User Data");
 				getUsers.displayRecords(listDetails);
