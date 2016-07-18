@@ -104,14 +104,28 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return response;
 	}
 
+	public CMTLogin getUsernamePassword(String username) {
+
+		Object[] args = { username };
+		CMTLogin cmtLogin = jdbcTemplate.query(
+				CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(),
+				args);
+		return cmtLogin;
+	}
+
 	@Override
 	public boolean isUserExist(UserDetailHistory detail) {
 		boolean isExist = false;
-		List<UserDetailHistory> userDetailHistories = getUsers(detail);
-		if (!StringUtils.isEmpty(userDetailHistories)
-				&& !userDetailHistories.isEmpty())
-			isExist = true;
 
+		if (detail != null && detail.getUsername() != null
+				&& getUsernamePassword(detail.getUsername()) != null) {
+			isExist = true;
+		} else {
+			List<UserDetailHistory> userDetailHistories = getUsers(detail);
+			if (!StringUtils.isEmpty(userDetailHistories)
+					&& !userDetailHistories.isEmpty())
+				isExist = true;
+		}
 		return isExist;
 	}
 
@@ -132,44 +146,53 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 		List<UserDetailHistory> userDetailList = null;
 		// if (isUserActive(detail)) {
-		boolean isUsername = false, isEmail = false;
+		// boolean isUsername = false, isEmail = false;
 		StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 		List<String> args = new ArrayList<>();
 		if (!StringUtils.isEmpty(detail)) {
-			args.add(detail.getStatus());
-			if (!StringUtils.isEmpty(detail.getUsername())) {
-				query.append(" AND username = ? ");
-				args.add(detail.getUsername());
-				isUsername = true;
+
+			if (detail.getStatus() != null
+					&& (detail.getStatus().equalsIgnoreCase("A") || detail
+							.getStatus().equalsIgnoreCase("D"))) {
+				args.add(detail.getStatus());
+			} else {
+				args.add("A");
 			}
-			if (isUsername) {
-				if (!StringUtils.isEmpty(detail.getEmail())) {
-					query.append(" OR email = ? ");
-					args.add(detail.getEmail());
-				}
-			} else if (!StringUtils.isEmpty(detail.getEmail())) {
-				query.append(" AND email = ? ");
+
+			/*
+			 * if (!StringUtils.isEmpty(detail.getUsername())) {
+			 * query.append(" AND username = ? ");
+			 * args.add(detail.getUsername()); isUsername = true; }
+			 */
+			// if (isUsername) {
+			if (!StringUtils.isEmpty(detail.getEmail())) {
+				query.append(" OR email = ? ");
 				args.add(detail.getEmail());
-				isEmail = true;
 			}
-			if (isUsername || isEmail) {
-				if (!StringUtils.isEmpty(detail.getMobile())) {
-					query.append(" OR mobile = ? ");
-					args.add(detail.getMobile());
-				}
-			} else if (!StringUtils.isEmpty(detail.getMobile())) {
-				query.append(" AND mobile = ? ");
+			/*
+			 * } else if (!StringUtils.isEmpty(detail.getEmail())) {
+			 * query.append(" AND email = ? "); args.add(detail.getEmail());
+			 * isEmail = true; }
+			 */
+			// if (isUsername || isEmail) {
+			if (!StringUtils.isEmpty(detail.getMobile())) {
+				query.append(" OR mobile = ? ");
 				args.add(detail.getMobile());
 			}
+			/*
+			 * } else if (!StringUtils.isEmpty(detail.getMobile())) {
+			 * query.append(" AND mobile = ? "); args.add(detail.getMobile()); }
+			 */
+
+			userDetailList = jdbcTemplate.query(query.toString(),
+					new UserManagementExtractor(), args.toArray());
 		}
-		userDetailList = jdbcTemplate.query(query.toString(),
-				new UserManagementExtractor(), args.toArray());
-		// }
 
 		return userDetailList;
 	}
 
-	@Override
+	@Override // TODO need to think ...
+	
 	public String updateUser(UserDetailHistory detail) {
 
 		String updated = null;
@@ -189,17 +212,17 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		}
 		return updated;
 	}
-
-	private boolean isUserActive(UserDetailHistory detail) {
+//
+	private boolean isUserActive(UserDetailHistory detail /*This is modified Bro*/) {
 
 		boolean active = false;
-		if (!StringUtils.isEmpty(detail)
+		if (!StringUtils.isEmpty(detail /*Here*/)
 				&& !StringUtils.isEmpty(detail.getUsername())) {
 			Object[] args = { detail.getUsername() };
 			List<UserDetailHistory> details = jdbcTemplate.query(
 					CMTQueryConstant.IS_USER_ACTIVE,
 					new UserManagementExtractor(), args);
-			if (!StringUtils.isEmpty(details) && details.size() > 0) {
+			if (!StringUtils.isEmpty(details) && !details.isEmpty()) {
 				active = true;
 			}
 		}

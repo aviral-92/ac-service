@@ -14,7 +14,6 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -41,7 +40,7 @@ public class UserManagementExtractor implements ResultSetExtractor<List<UserDeta
 			for (int x = 1; x <= columns; x++) {
 				if ("customer_Id".equals(rsmd.getColumnName(x))) {
 					userDetailHistory.setLastUpdated(rs.getTimestamp("lastUpdated").toString());
-				} else if ("ac_type".equals(rsmd.getColumnName(x))) {
+				} else if ("ac_type".equals(rsmd.getColumnName(x))) { // Need to Modify AC_TYPE with CMT_TYPE
 					userDetailHistory.setDescription(rs.getString("description"));
 				}
 			}
