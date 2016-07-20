@@ -3,12 +3,13 @@ package com.customer.management.tool.constants;
 
 public enum CMTMessageCode  implements java.io.Serializable {
 
-	ADD_CUSTOMER("addcustomer") ,
+	ADD_CUSTOMER("addcustomer") ,ADD_USER("addUser"), UPDATE_USER("updateUser"),
 	LOGIN("login"),
 	TITLE("title"),
 	USERNAME("username"),
-	PASSWORD("pswd"),
-	ROLE("role"), SUBMIT("submitButton");
+	PASSWORD("pswd"),CONFIRM_PASSWRD("confirmPswd"),
+	ROLE("role"), SUBMIT("submitButton"),BACK("back"), NAME("name"),MOBILE("mobile"),EMAIL("email"),
+	USER_DETAIL("userDetail"), GET("get"), UPDATE("update"), DELETE("delete"), USER_ID("userId"), REGISTER_DATE("registerDate");
 	
 	
 	

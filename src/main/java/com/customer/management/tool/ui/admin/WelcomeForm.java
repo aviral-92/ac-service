@@ -22,9 +22,6 @@ import com.customer.management.tool.ui.report.CMTReport;
 public class WelcomeForm extends javax.swing.JFrame {
 
 	static Logger LOG = Logger.getLogger(WelcomeForm.class);
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private AddUser addUser;

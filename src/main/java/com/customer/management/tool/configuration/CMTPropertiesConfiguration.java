@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 import com.customer.management.tool.ui.LoginForm;
+import com.customer.management.tool.ui.admin.AddUser;
+import com.customer.management.tool.ui.admin.GetUser;
+import com.customer.management.tool.ui.admin.GetUsers;
+import com.customer.management.tool.ui.admin.ModifyUser;
 import com.customer.management.tool.ui.admin.WelcomeForm;
 
 @Configuration
@@ -25,5 +29,25 @@ public class CMTPropertiesConfiguration {
 	@Bean
 	public WelcomeForm welcomeForm() {
 		return new WelcomeForm(messageSource());
+	}
+	
+	@Bean
+	public AddUser addUser(){
+		return new AddUser(messageSource());
+	}
+	
+	@Bean
+	public GetUser getUser(){
+		return new GetUser(messageSource());
+	}
+	
+	@Bean
+	public GetUsers getUsers(){
+		return new GetUsers(messageSource());
+	}
+	
+	@Bean
+	public ModifyUser modifyUser(){
+		return new ModifyUser(messageSource());
 	}
 }
