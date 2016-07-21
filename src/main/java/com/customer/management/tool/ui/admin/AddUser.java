@@ -252,6 +252,7 @@ public class AddUser extends CMTServiceImpl {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	@SuppressWarnings("deprecation")
 	private void submitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_submitActionPerformed
 
 		try {
