@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.configuration.Cipher;
@@ -15,6 +16,7 @@ import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
+@Component
 public class UserMgmtDaoImpl implements UserManagementDao {
 
 	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class);
@@ -70,9 +72,9 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 		boolean isExist = false;
 		if (!StringUtils.isEmpty(detail)) {
 			if (!StringUtils.isEmpty(detail.getUsername())) {
-				List<UserDetailHistory> detailHistories = jdbcTemplate.query(
-						"Select * from userdetail where username = ? ", new UserManagementExtractor(),
-						detail.getUsername().toCharArray());
+				Object[] args = { detail.getUsername() };
+				List<UserDetailHistory> detailHistories = jdbcTemplate
+						.query("Select * from userdetail where username = ? ", new UserManagementExtractor(), args);
 				if (!StringUtils.isEmpty(detailHistories) && !detailHistories.isEmpty()) {
 					return true;
 				}
@@ -96,8 +98,9 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 		boolean isExist = false;
 		if (!StringUtils.isEmpty(email)) {
+			Object[] args = { email };
 			List<UserDetailHistory> detailHistories = jdbcTemplate.query("Select * from userdetail where email = ? ",
-					new UserManagementExtractor(), email.toCharArray());
+					new UserManagementExtractor(), args);
 			if (!StringUtils.isEmpty(detailHistories) && !detailHistories.isEmpty()) {
 				isExist = true;
 			}
@@ -109,8 +112,9 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 		boolean isExist = false;
 		if (!StringUtils.isEmpty(mobile)) {
+			Object[] args = { mobile };
 			List<UserDetailHistory> detailHistories = jdbcTemplate.query("Select * from userdetail where mobile = ? ",
-					new UserManagementExtractor(), mobile.toCharArray());
+					new UserManagementExtractor(), args);
 			if (!StringUtils.isEmpty(detailHistories) && !detailHistories.isEmpty()) {
 				isExist = true;
 			}
@@ -140,6 +144,40 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 	public void addUserDetailHistory(UserDetailHistory userDetailHistory) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public String activateUser(String username) {
+
+		String response;
+		if (!StringUtils.isEmpty(username)) {
+			Object[] args = { username };
+			int executed = jdbcTemplate.update("UPDATE userdetail set status = 'a' WHERE username = ? ", args);
+			if (executed > 0) {
+				response = "User Activated Successfully";
+			} else {
+				response = "User remains Deactive, try again later";
+			}
+		} else {
+			response = "Please provide valid username to activate User";
+		}
+		return response;
+	}
+
+	public String deactivateUser(String username) {
+
+		String response;
+		if (!StringUtils.isEmpty(username)) {
+			Object[] args = { username };
+			int executed = jdbcTemplate.update("UPDATE userdetail set status = 'd' WHERE username = ? ", args);
+			if (executed > 0) {
+				response = "User Deactivated Successfully";
+			} else {
+				response = "User remains Active, try again later";
+			}
+		} else {
+			response = "Please provide valid username to deactivate User";
+		}
+		return response;
 	}
 
 }

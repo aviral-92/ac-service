@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
+import com.customer.management.tool.dao.impl.UserMgmtDaoImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
 import com.customer.management.tool.validator.ValidateUser;
@@ -33,6 +34,8 @@ public class CMTUserManagementImpl {
 	private UserManagementDaoImpl userDaoImpl;
 	@Autowired
 	private ValidateUser validation;
+	@Autowired
+	UserMgmtDaoImpl userMgmtDaoImpl;
 
 	public String login(CMTLogin login) throws Exception {
 
@@ -71,7 +74,8 @@ public class CMTUserManagementImpl {
 
 		validation.validateLogin(login);
 		validation.validateUser(userDetail);
-		String response = userDaoImpl.addUser(userDetail, login);
+//		String response = userDaoImpl.addUser(userDetail, login);
+		String response = userMgmtDaoImpl.addUser(userDetail, login);
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(userDetail);
 		} else {
