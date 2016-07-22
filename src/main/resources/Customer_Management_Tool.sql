@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`login` (
      `username` VARCHAR(45) NOT NULL,
        `password` VARCHAR(45) NOT NULL,
        `role` VARCHAR(45) NOT NULL,
-       `status` VARCHAR(5) NOT NULL DEFAULT 'a' ,
        PRIMARY KEY (`username`) );
 
 ALTER TABLE `customer_mgmt_tool`.`login` 
