@@ -123,8 +123,9 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		} else {
 			List<UserDetailHistory> userDetailHistories = getUsers(detail);
 			if (!StringUtils.isEmpty(userDetailHistories)
-					&& !userDetailHistories.isEmpty())
+					&& !userDetailHistories.isEmpty()){
 				isExist = true;
+			}
 		}
 		return isExist;
 	}
@@ -147,6 +148,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		List<UserDetailHistory> userDetailList = null;
 		// if (isUserActive(detail)) {
 		// boolean isUsername = false, isEmail = false;
+		
 		StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 		List<String> args = new ArrayList<>();
 		if (!StringUtils.isEmpty(detail)) {
@@ -165,20 +167,36 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			 * args.add(detail.getUsername()); isUsername = true; }
 			 */
 			// if (isUsername) {
-			if (!StringUtils.isEmpty(detail.getEmail())) {
-				query.append(" OR email = ? ");
+			
+			if(!StringUtils.isEmpty(detail.getEmail()) && !StringUtils.isEmpty(detail.getMobile())){
+				query.append("AND  (email = ? or  mobile = ?)");
+				args.add(detail.getEmail());
+				args.add(detail.getMobile());
+			}else if(!StringUtils.isEmpty(detail.getEmail()) && StringUtils.isEmpty(detail.getMobile())) {
+				query.append(" AND email = ? ");
+				args.add(detail.getEmail());
+			} else if(StringUtils.isEmpty(detail.getEmail()) && !StringUtils.isEmpty(detail.getMobile())) {
+				query.append(" AND mobile = ? ");
+				args.add(detail.getMobile());
+			}else {
+				return userDetailList ;
+			}
+			
+			
+		/*	if (!StringUtils.isEmpty(detail.getEmail())) {
+				query.append(" AND email = ? ");
 				args.add(detail.getEmail());
 			}
-			/*
+			
 			 * } else if (!StringUtils.isEmpty(detail.getEmail())) {
 			 * query.append(" AND email = ? "); args.add(detail.getEmail());
 			 * isEmail = true; }
 			 */
 			// if (isUsername || isEmail) {
-			if (!StringUtils.isEmpty(detail.getMobile())) {
-				query.append(" OR mobile = ? ");
+		/*	if (!StringUtils.isEmpty(detail.getMobile())) {
+				query.append(" AND mobile = ? ");
 				args.add(detail.getMobile());
-			}
+			}*/
 			/*
 			 * } else if (!StringUtils.isEmpty(detail.getMobile())) {
 			 * query.append(" AND mobile = ? "); args.add(detail.getMobile()); }

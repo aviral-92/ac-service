@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -37,6 +38,9 @@ public class CMTUserManagementImpl {
 	@Autowired
 	UserMgmtDaoImpl userMgmtDaoImpl;
 
+	@Value("${userManagementDaoImplEnable}")
+	boolean userManagementDaoImplEnable;
+
 	public String login(CMTLogin login) throws Exception {
 
 		String response = null;
@@ -45,12 +49,14 @@ public class CMTUserManagementImpl {
 			if (StringUtils.isEmpty(response)) {
 				if (userDaoImpl.authenticateUser(login)) {
 					response = "Successfully Logged in";
-					JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(new JFrame(), response,
+							response, JOptionPane.INFORMATION_MESSAGE);
 					// loginForm.dispose();
 					// welcomeForm.setVisible(true);
 				}
 			} else {
-				JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), response, response,
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			// loginForm.dispose();
@@ -64,18 +70,24 @@ public class CMTUserManagementImpl {
 		String data = null;
 		String response = validation.textFieldValidation(field);
 		if (response != null) {
-			JOptionPane.showMessageDialog(new JFrame(), response, response, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), response, response,
+					JOptionPane.ERROR_MESSAGE);
 			data = "Success";
 		}
 		return data;
 	}
 
-	public String addUser(CMTLogin login, UserDetailHistory userDetail) throws Exception {
-
+	public String addUser(CMTLogin login, UserDetailHistory userDetail)
+			throws Exception {
+		String response = null;
 		validation.validateLogin(login);
 		validation.validateUser(userDetail);
-//		String response = userDaoImpl.addUser(userDetail, login);
-		String response = userMgmtDaoImpl.addUser(userDetail, login);
+
+		if (userManagementDaoImplEnable)
+			response = userMgmtDaoImpl.addUser(userDetail, login);
+		else
+			response = userDaoImpl.addUser(userDetail, login);
+
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(userDetail);
 		} else {
@@ -89,13 +101,15 @@ public class CMTUserManagementImpl {
 		String response = userDaoImpl.activateDeactivateUser(userDetailHistory);
 		if (response.toLowerCase().contains("successfully")) {
 			userDaoImpl.addUserDetailHistory(userDetailHistory);
-		}else {
-			System.out.println("It does not contains anything in activateUser ");
+		} else {
+			System.out
+					.println("It does not contains anything in activateUser ");
 		}
 		return response;
 	}
 
-	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
+	public UserDetailHistory getUserData(UserDetailHistory detail)
+			throws Exception {
 
 		validation.validateGeteUser(detail);
 		List<UserDetailHistory> response = userDaoImpl.getUsers(detail);
