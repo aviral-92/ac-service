@@ -39,7 +39,7 @@ public class CMTUserManagementImpl {
 	UserMgmtDaoImpl userMgmtDaoImpl;
 
 	@Value("${userManagementDaoImplEnable}")
-	boolean userManagementDaoImplEnable;
+	String userManagementDaoImplEnable;
 
 	public String login(CMTLogin login) throws Exception {
 
@@ -83,7 +83,7 @@ public class CMTUserManagementImpl {
 		validation.validateLogin(login);
 		validation.validateUser(userDetail);
 
-		if (userManagementDaoImplEnable)
+		if (userManagementDaoImplEnable.equalsIgnoreCase("true"))
 			response = userMgmtDaoImpl.addUser(userDetail, login);
 		else
 			response = userDaoImpl.addUser(userDetail, login);
