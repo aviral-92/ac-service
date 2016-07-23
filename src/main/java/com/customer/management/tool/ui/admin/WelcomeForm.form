@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="User">
+        <Menu class="javax.swing.JMenu" name="user">
           <Properties>
             <Property name="text" type="java.lang.String" value="USER"/>
           </Properties>
@@ -43,7 +43,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Customer">
+        <Menu class="javax.swing.JMenu" name="customer">
           <Properties>
             <Property name="text" type="java.lang.String" value="CUSTOMER"/>
           </Properties>
@@ -77,7 +77,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="report">
           <Properties>
             <Property name="text" type="java.lang.String" value="REPORT"/>
           </Properties>
@@ -88,6 +88,37 @@
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem1MousePressed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="userManagement">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="USER MANAGEMENT"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="activateUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Activate User"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="activateUserMousePressed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="deactivateUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Deactivate User"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deactivateUserMousePressed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="userDelete">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete User"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userDeleteMousePressed"/>
               </Events>
             </MenuItem>
           </SubComponents>

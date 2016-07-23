@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.*;
 
 import com.customer.management.tool.configuration.Cipher;
 import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 @Component
@@ -146,20 +148,51 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 	}
 
-	public String activateUser(String username) {
+	public String userManagement(UserDetailHistory userDetailHistory) {
 
-		String response;
-		if (!StringUtils.isEmpty(username)) {
-			Object[] args = { username };
-			int executed = jdbcTemplate.update("UPDATE userdetail set status = 'a' WHERE username = ? ", args);
+		String response = null;
+		StringBuffer query = new StringBuffer("UPDATE userdetail SET status = ? ");
+		List<String> args = new ArrayList<>();
+		args.add(userDetailHistory.getStatus());
+		if (!StringUtils.isEmpty(userDetailHistory)) {
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getUsername())) {
+				query.append(" WHERE USERNAME = ? ");
+				args.add(userDetailHistory.getUsername());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getEmail())) {
+				query.append(" WHERE EMAIL = ? ");
+				args.add(userDetailHistory.getEmail());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getMobile())) {
+				query.append(" WHERE MOBILE = ? ");
+				args.add(userDetailHistory.getMobile());
+			}
+			int executed = jdbcTemplate.update(query.toString(), args.toArray());
 			if (executed > 0) {
-				response = "User Activated Successfully";
+				if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getUsername())
+						&& org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getStatus())) {
+					response = loginStatusChange(userDetailHistory.getUsername(), userDetailHistory.getStatus());
+				} else {
+					UserDetailHistory userDetails = getUser(userDetailHistory);
+					if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.getUsername())
+							&& org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.getStatus())) {
+						response = loginStatusChange(userDetails.getUsername(), userDetails.getStatus());
+					}
+				}
+				if (response != null) {
+					if (userDetailHistory.getStatus().equalsIgnoreCase("A")) {
+						response = "User Activated Successfully";
+					} else if (userDetailHistory.getStatus().equalsIgnoreCase("D")) {
+						response = "User Deactivated Successfully";
+					} else {
+						response = "User Deleted Successfully";
+					}
+				}
 			} else {
-				response = "User remains Deactive, try again later";
+				response = "Please provide valid username to activate User";
 			}
 		} else {
-			response = "Please provide valid username to activate User";
+			response = "User status = " + userDetailHistory.getStatus() + " not able to change, try again later";
 		}
+
 		return response;
 	}
 
@@ -176,6 +209,50 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 			}
 		} else {
 			response = "Please provide valid username to deactivate User";
+		}
+		return response;
+	}
+
+	public UserDetailHistory getUser(UserDetailHistory userDetailHistory) {
+
+		StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
+		List<String> args = new ArrayList<>();
+		if (!StringUtils.isEmpty(userDetailHistory)) {
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getUsername())) {
+				query.append(" WHERE username = ? ");
+				args.add(userDetailHistory.getUsername());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getEmail())) {
+				query.append(" WHERE EMAIL = ? ");
+				args.add(userDetailHistory.getEmail());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getMobile())) {
+				query.append(" WHERE MOBILE = ? ");
+				args.add(userDetailHistory.getMobile());
+			}
+		} else {
+			return null;
+		}
+		List<UserDetailHistory> userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
+				args.toArray());
+		if (!StringUtils.isEmpty(userDetail) && !userDetail.isEmpty()) {
+			return userDetail.get(0);
+		}
+		return null;
+	}
+
+	public String loginStatusChange(String username, String status) {
+
+		String response = null;
+		if (org.apache.commons.lang3.StringUtils.isNotEmpty(username)
+				&& org.apache.commons.lang3.StringUtils.isNotEmpty(status)) {
+			Object[] args = { status, username };
+			int executed = jdbcTemplate.update("UPDATE LOGIN SET STATUS = ? WHERE USERNAME = ? ", args);
+			if (executed > 0) {
+				response = "Successfully updated";
+			} else {
+				response = "Not able to update, try again later";
+			}
+		} else {
+			response = "Fields are empty";
 		}
 		return response;
 	}
