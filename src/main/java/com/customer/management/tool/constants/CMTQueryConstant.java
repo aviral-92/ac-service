@@ -13,7 +13,7 @@ public class CMTQueryConstant {
 
 	public static String AUTHENTICATE_USER_CREDENTIALS = "SELECT * FROM LOGIN WHERE username = ? AND password = ? AND role = ?";
 
-	public static String INSERT_IN_LOGIN = " INSERT INTO login VALUES (?,?,?)";
+	public static String INSERT_IN_LOGIN = " INSERT INTO login (username,password,role) VALUES (?,?,?)";
 	
 	public static String GET_LOGIN_DETAIL = "SELECT * FROM login WHERE username = ? ";
 

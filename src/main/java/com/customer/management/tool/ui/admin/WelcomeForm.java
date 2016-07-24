@@ -254,14 +254,16 @@ public class WelcomeForm extends javax.swing.JFrame {
 
 	private void getUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_getUserMousePressed
 		dispose();
-		getUserDetail.setTitle("Get User Details");
-		getUserDetail.setVisible(true);
+		/*getUserDetail.setTitle("Get User Details");
+		getUserDetail.setVisible(true);*/
+		userMgmt.getContent();
 	}// GEN-LAST:event_getUserMousePressed
 
 	private void updateUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_updateUserMousePressed
 		dispose();
-		getUserDetail.setTitle("Update User Details");
-		getUserDetail.setVisible(true);
+		/*getUserDetail.setTitle("Update User Details");
+		getUserDetail.setVisible(true);*/
+		userMgmt.updateContent();
 	}// GEN-LAST:event_updateUserMousePressed
 
 	private void deleteUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_deleteUserMousePressed

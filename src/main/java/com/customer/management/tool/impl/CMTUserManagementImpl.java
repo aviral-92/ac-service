@@ -106,7 +106,7 @@ public class CMTUserManagementImpl {
 	public UserDetailHistory getUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateGeteUser(detail);
-		List<UserDetailHistory> response = userDaoImpl.getUsers(detail);
+		List<UserDetailHistory> response = userMgmtDaoImpl.getUsers(detail);
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			return response.get(0);
 		}
@@ -116,7 +116,7 @@ public class CMTUserManagementImpl {
 	public String updateUserData(UserDetailHistory detail) throws Exception {
 
 		validation.validateUpdate_DeleteUser(detail);
-		String response = userDaoImpl.updateUser(detail);
+		String response = userMgmtDaoImpl.updateUser(detail);
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(detail);
 		}
@@ -140,8 +140,8 @@ public class CMTUserManagementImpl {
 		return response;
 	}
 	
-	public UserDetailHistory getSingleUser(UserDetailHistory detailHistory){
+	public List<UserDetailHistory> getUser(UserDetailHistory detailHistory){
 		
-		return userMgmtDaoImpl.getUser(detailHistory);
+		return userMgmtDaoImpl.getUsers(detailHistory);
 	}
 }

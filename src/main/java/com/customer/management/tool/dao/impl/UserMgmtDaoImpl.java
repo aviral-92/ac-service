@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.apache.commons.lang3.*;
 
 import com.customer.management.tool.configuration.Cipher;
 import com.customer.management.tool.constants.CMTQueryConstant;
+import com.customer.management.tool.constants.UserManagementCode;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.UserManagementExtractor;
 import com.customer.management.tool.pojo.CMTLogin;
-import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 @Component
@@ -126,14 +125,77 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 	@Override
 	public List<UserDetailHistory> getUsers(UserDetailHistory detail) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<UserDetailHistory> userDetail = null;
+		if (!StringUtils.isEmpty(detail)) {
+			StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
+			List<String> args = new ArrayList<>();
+			if (detail.getStatus() != null
+					&& (detail.getStatus().equalsIgnoreCase(UserManagementCode.ACTIVATE.getPrperty())
+							|| detail.getStatus().equalsIgnoreCase(UserManagementCode.DEACTIVATE.getPrperty()))) {
+				args.add(detail.getStatus());
+			} else {
+				args.add(UserManagementCode.ACTIVATE.getPrperty());
+			}
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getUsername())) {
+				query.append(" AND USERNAME = ? ");
+				args.add(detail.getUsername());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getEmail())) {
+				query.append(" AND EMAIL = ? ");
+				args.add(detail.getEmail());
+			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getMobile())) {
+				query.append(" AND MOBILE = ? ");
+				args.add(detail.getMobile());
+			}
+			userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(), args.toArray());
+		}
+		return userDetail;
 	}
 
 	@Override
 	public String updateUser(UserDetailHistory detail) {
-		// TODO Auto-generated method stub
-		return null;
+
+		String response = null;
+		if (!StringUtils.isEmpty(detail)) {
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getUsername())
+					|| org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getEmail())
+					|| org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getMobile())) {
+				List<UserDetailHistory> user = getUsers(detail);
+				if (!StringUtils.isEmpty(user) && !user.isEmpty() && user.get(0).getStatus() != null) {
+					if (user.get(0).getStatus().equalsIgnoreCase(UserManagementCode.ACTIVATE.getPrperty())) {
+						StringBuilder query = new StringBuilder("SELECT * FROM USERDETAIL WHERE USERNAME != ? ");
+						List<String> args = new ArrayList<>();
+						args.add(user.get(0).getUsername());
+						if (!StringUtils.isEmpty(detail.getEmail()) && !StringUtils.isEmpty(detail.getMobile())) {
+							query.append("AND  (email = ? or  mobile = ?)");
+							args.add(detail.getEmail());
+							args.add(detail.getMobile());
+						} else if (!StringUtils.isEmpty(detail.getEmail()) && StringUtils.isEmpty(detail.getMobile())) {
+							query.append(" AND email = ? ");
+							args.add(detail.getEmail());
+						} else if (StringUtils.isEmpty(detail.getEmail()) && !StringUtils.isEmpty(detail.getMobile())) {
+							query.append(" AND mobile = ? ");
+							args.add(detail.getMobile());
+						} else {
+							return "not updated due to inappropirate data";
+						}
+						List<UserDetailHistory> users = jdbcTemplate.query(query.toString(),
+								new UserManagementExtractor(), args.toArray());
+						if (users.isEmpty()) {
+							Object[] arg = { detail.getName(), detail.getEmail(), detail.getMobile(),
+									String.valueOf(detail.getUserId()) };
+							if (jdbcTemplate.update(CMTQueryConstant.UPDATE_USER, arg) > 0) {
+								response = "Successfully Updated";
+							}
+						} else {
+							response = "Email or Mobile already Registered with us.";
+						}
+					} else
+						response = "User is deactive, please activate to update.";
+				}
+			}
+		}
+		return response;
 	}
 
 	@Override
@@ -144,7 +206,30 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 	@Override
 	public void addUserDetailHistory(UserDetailHistory userDetailHistory) {
-		// TODO Auto-generated method stub
+
+		if (!StringUtils.isEmpty(userDetailHistory)) {
+			List<UserDetailHistory> history = getUsers(userDetailHistory);
+			if (!StringUtils.isEmpty(history) && history.size() > 0) {
+				userDetailHistory.setEmail(history.get(0).getEmail());
+				userDetailHistory.setMobile(history.get(0).getMobile());
+				userDetailHistory.setName(history.get(0).getName());
+				userDetailHistory.setRegisteredDate(history.get(0).getRegisteredDate());
+				userDetailHistory.setUsername(history.get(0).getUsername());
+				userDetailHistory.setUserId(history.get(0).getUserId());
+				userDetailHistory.setStatus(history.get(0).getStatus());
+				if ("add".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Added", userDetailHistory);
+				} else if ("update".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Updated", userDetailHistory);
+				} else if ("delete".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully deleted", userDetailHistory);
+				} else if ("active".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Activated", userDetailHistory);
+				} else if ("deactive".equalsIgnoreCase(userDetailHistory.getDescription())) {
+					commonsAddUserDetailHistory("User Successfully Deactivated", userDetailHistory);
+				}
+			}
+		}
 
 	}
 
@@ -171,19 +256,22 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 						&& org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getStatus())) {
 					response = loginStatusChange(userDetailHistory.getUsername(), userDetailHistory.getStatus());
 				} else {
-					UserDetailHistory userDetails = getUser(userDetailHistory);
-					if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.getUsername())
-							&& org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.getStatus())) {
-						response = loginStatusChange(userDetails.getUsername(), userDetails.getStatus());
-					}
-				}
-				if (response != null) {
-					if (userDetailHistory.getStatus().equalsIgnoreCase("A")) {
-						response = "User Activated Successfully";
-					} else if (userDetailHistory.getStatus().equalsIgnoreCase("D")) {
-						response = "User Deactivated Successfully";
-					} else {
-						response = "User Deleted Successfully";
+					List<UserDetailHistory> userDetails = getUsers(userDetailHistory);
+					if (StringUtils.isEmpty(userDetails) && !userDetails.isEmpty()) {
+						if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.get(0).getUsername())
+								&& org.apache.commons.lang3.StringUtils.isNotEmpty(userDetails.get(0).getStatus())) {
+							response = loginStatusChange(userDetails.get(0).getUsername(),
+									userDetails.get(0).getStatus());
+						}
+						if (response != null) {
+							if (userDetailHistory.getStatus().equalsIgnoreCase("A")) {
+								response = "User Activated Successfully";
+							} else if (userDetailHistory.getStatus().equalsIgnoreCase("D")) {
+								response = "User Deactivated Successfully";
+							} else {
+								response = "User Deleted Successfully";
+							}
+						}
 					}
 				}
 			} else {
@@ -213,32 +301,27 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 		return response;
 	}
 
-	public UserDetailHistory getUser(UserDetailHistory userDetailHistory) {
-
-		StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
-		List<String> args = new ArrayList<>();
-		if (!StringUtils.isEmpty(userDetailHistory)) {
-			if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getUsername())) {
-				query.append(" WHERE username = ? ");
-				args.add(userDetailHistory.getUsername());
-			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getEmail())) {
-				query.append(" WHERE EMAIL = ? ");
-				args.add(userDetailHistory.getEmail());
-			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.getMobile())) {
-				query.append(" WHERE MOBILE = ? ");
-				args.add(userDetailHistory.getMobile());
-			}
-		} else {
-			return null;
-		}
-		List<UserDetailHistory> userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(),
-				args.toArray());
-		if (!StringUtils.isEmpty(userDetail) && !userDetail.isEmpty()) {
-			return userDetail.get(0);
-		}
-		return null;
-	}
-
+	// get Single User
+	/*
+	 * public UserDetailHistory getUser(UserDetailHistory userDetailHistory) {
+	 * 
+	 * StringBuilder query = new StringBuilder("SELECT * FROM userdetail ");
+	 * List<String> args = new ArrayList<>(); if
+	 * (!StringUtils.isEmpty(userDetailHistory)) { if
+	 * (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.
+	 * getUsername())) { query.append(" WHERE username = ? ");
+	 * args.add(userDetailHistory.getUsername()); } else if
+	 * (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.
+	 * getEmail())) { query.append(" WHERE EMAIL = ? ");
+	 * args.add(userDetailHistory.getEmail()); } else if
+	 * (org.apache.commons.lang3.StringUtils.isNotEmpty(userDetailHistory.
+	 * getMobile())) { query.append(" WHERE MOBILE = ? ");
+	 * args.add(userDetailHistory.getMobile()); } } else { return null; }
+	 * List<UserDetailHistory> userDetail = jdbcTemplate.query(query.toString(),
+	 * new UserManagementExtractor(), args.toArray()); if
+	 * (!StringUtils.isEmpty(userDetail) && !userDetail.isEmpty()) { return
+	 * userDetail.get(0); } return null; }
+	 */
 	public String loginStatusChange(String username, String status) {
 
 		String response = null;
@@ -257,4 +340,16 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 		return response;
 	}
 
+	private void commonsAddUserDetailHistory(String description, UserDetailHistory userDetailHistory) {
+
+		Object[] args = { userDetailHistory.getUserId(), userDetailHistory.getName(), userDetailHistory.getUsername(),
+				userDetailHistory.getEmail(), userDetailHistory.getMobile(), userDetailHistory.getRegisteredDate(),
+				description, userDetailHistory.getStatus() };
+		int executed = jdbcTemplate.update(CMTQueryConstant.INSERT_USERDETAILHISTORY, args);
+		if (executed > 0) {
+			LOG.info("Successfully Added in History");
+		} else {
+			LOG.error("Unable to Add History");
+		}
+	}
 }

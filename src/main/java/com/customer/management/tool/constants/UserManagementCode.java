@@ -2,7 +2,7 @@ package com.customer.management.tool.constants;
 
 public enum UserManagementCode {
 
-	ACTIVATE_USER("A"), DEACTIVATE_USER("D"), DELETE_USER("DE");
+	ACTIVATE("A"), DEACTIVATE("D"), DELETE("DE");
 
 	private String prperty = null;
 
