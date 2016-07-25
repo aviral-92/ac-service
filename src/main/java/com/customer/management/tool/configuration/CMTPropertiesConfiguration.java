@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
+import com.customer.management.tool.dao.impl.UserMgmtDaoImpl;
 import com.customer.management.tool.ui.LoginForm;
 import com.customer.management.tool.ui.admin.AddUser;
 import com.customer.management.tool.ui.admin.GetUser;
@@ -49,5 +50,10 @@ public class CMTPropertiesConfiguration {
 	@Bean
 	public ModifyUser modifyUser(){
 		return new ModifyUser(messageSource());
+	}
+	
+	@Bean
+	public UserMgmtDaoImpl userMgmtDaoImpl(){
+		return new UserMgmtDaoImpl(messageSource());
 	}
 }

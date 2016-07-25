@@ -262,7 +262,7 @@ public class UserManagement extends CMTServiceImpl {
 			int selectedRowIndex = jTable1.getSelectedRow();
 			if (selectedRowIndex >= 0) {
 				UserDetailHistory detailHistory = new UserDetailHistory();
-				detailHistory.setUsername(jTable1.getModel().getValueAt(selectedRowIndex, 1).toString());
+				detailHistory.setUsername(jTable1.getModel().getValueAt(selectedRowIndex, 0).toString());
 				detailHistory.setEmail(jTable1.getModel().getValueAt(selectedRowIndex, 3).toString());
 				detailHistory.setMobile(jTable1.getModel().getValueAt(selectedRowIndex, 4).toString());
 				if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.ACTIVATE.toString())) {
