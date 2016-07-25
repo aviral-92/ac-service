@@ -109,7 +109,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Add Customer Repair Details");
+        jLabel1.setText("Add Customer Job Details");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Customer ID");

@@ -73,15 +73,15 @@ ADD CONSTRAINT `Foreign_Key_Username`
   ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
 ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `description`;
 
-CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`ac_type` (
-  `acId` INT NOT NULL AUTO_INCREMENT ,
-  `ac_type` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`acId`) );
+CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`jobwork` (
+  `jobId` INT NOT NULL AUTO_INCREMENT ,
+  `job_type` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`jobId`) );
 
 
 CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
   `customerId` INT NOT NULL AUTO_INCREMENT ,
-  `acId` INT(11) NOT NULL ,
+  `jobId` INT(11) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
   `mobile` VARCHAR(45) NOT NULL ,
@@ -92,30 +92,45 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
 
 ALTER TABLE `customer_mgmt_tool`.`customer` AUTO_INCREMENT = 1000;
 
+--CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer_repairing_detail` (
+--  `repairId` INT NOT NULL AUTO_INCREMENT,
+--  `job_Id` INT(11) NOT NULL ,
+--  `customer_Id` INT(11) NOT NULL ,
+--  `description` VARCHAR(95) NOT NULL ,
+--  `actual_amount` VARCHAR(45) NOT NULL ,
+--  `paid_amount` VARCHAR(45) NOT NULL ,
+--  `updated_date` DATE NOT NULL ,
+--  `status` VARCHAR(5) NOT NULL DEFAULT 'a' ,
+--  `warranty` DATE NOT NULL ,
+--   `model_vehicle_no` VARCHAR(45) NOT NULL ,
+--  PRIMARY KEY (`repairId`) ,
+--  INDEX `New_Ac_ID` (`job_Id` ASC) ,
+--  INDEX `New_Customer_ID` (`customer_Id` ASC) ,
+--  CONSTRAINT `New_Ac_ID`
+--    FOREIGN KEY (`job_Id` )
+--    REFERENCES `customer_mgmt_tool`.`job_type` (`jobId` )
+--    ON DELETE CASCADE
+--    ON UPDATE NO ACTION,
+--  CONSTRAINT `New_Customer_ID`
+--    FOREIGN KEY (`customer_Id` )
+--    REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
+--    ON DELETE CASCADE
+--    ON UPDATE NO ACTION);
+
 CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer_repairing_detail` (
-  `repairId` INT NOT NULL AUTO_INCREMENT,
-  `ac_Id` INT(11) NOT NULL ,
-  `customer_Id` INT(11) NOT NULL ,
+  `repairId` INT NOT NULL AUTO_INCREMENT ,
+  `job_Id` INT NOT NULL ,
+  `customer_Id` INT NOT NULL ,
   `description` VARCHAR(95) NOT NULL ,
   `actual_amount` VARCHAR(45) NOT NULL ,
   `paid_amount` VARCHAR(45) NOT NULL ,
-  `updated_date` DATE NOT NULL ,
-  `status` VARCHAR(5) NOT NULL DEFAULT 'a' ,
+  `updated_date` DATETIME NOT NULL ,
   `warranty` DATE NOT NULL ,
-   `model_vehicle_no` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`repairId`) ,
-  INDEX `New_Ac_ID` (`ac_Id` ASC) ,
-  INDEX `New_Customer_ID` (`customer_Id` ASC) ,
-  CONSTRAINT `New_Ac_ID`
-    FOREIGN KEY (`ac_Id` )
-    REFERENCES `customer_mgmt_tool`.`ac_type` (`acId` )
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `New_Customer_ID`
-    FOREIGN KEY (`customer_Id` )
-    REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION);
+  `jobcode` VARCHAR(45) NOT NULL ,
+  `status` VARCHAR(4) NOT NULL ,
+  PRIMARY KEY (`repairId`) );
+  
+  
     
 -- ALTER TABLE `customer_mgmt_tool`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
 -- DROP COLUMN `model/vehicle no` ;
