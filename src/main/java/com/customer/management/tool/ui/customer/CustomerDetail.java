@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -28,6 +28,10 @@ import com.customer.management.tool.pojo.CustomerReparingDetail;
 @Scope("prototype")
 public class CustomerDetail extends CMTServiceImpl {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*
 	 * @Autowired private WelcomeForm welcomeForm;
 	 */
@@ -62,13 +66,13 @@ public class CustomerDetail extends CMTServiceImpl {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				CustomerReparingDetail customer = new CustomerReparingDetail();
+				CustomerJobDetail customer = new CustomerJobDetail();
 				customer.setCustomerId(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
-				customer.setName(table.getValueAt(table.getSelectedRow(), 1).toString());
+//				customer.setName(table.getValueAt(table.getSelectedRow(), 1).toString());
 				dispose();
 				// addRepairDetails.setCustomerID(customer);
 				// addRepairDetails.setVisible(true);
-				List<CustomerReparingDetail> response = acServiceCustomerImpl.getRepairDetailByCustomerId(customer);
+				List<CustomerJobDetail> response = acServiceCustomerImpl.getRepairDetailByCustomerId(customer);
 				customerPreviousRecords.displayContent(response);
 				customerPreviousRecords.setVisible(true);
 

@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.dao.impl.CMTDaoImpl;
-import com.customer.management.tool.pojo.CMTTypes;
+import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.validator.ValidateCustomer;
 
 /**
@@ -33,7 +33,7 @@ public class CMTImpl {
 	@Autowired
 	private ValidateCustomer validateCustomer;
 
-	public List<CMTTypes> getAcType() {
+	public List<CMTUniqueDetail> getAcType() {
 
 		return customerDaoImpl.getAcTypes();
 	}
@@ -48,7 +48,8 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomer(customer);
 	}
 
-	public String addRepairDetail(CustomerReparingDetail customerReparingDetail) throws Exception {
+	public String addRepairDetail(CustomerJobDetail customerReparingDetail)
+			throws Exception {
 
 		validateCustomer.isRepairDetails(customerReparingDetail);
 		return customerDaoImpl.addCustomerRepairDetails(customerReparingDetail);
@@ -59,28 +60,31 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomerId(customer);
 	}
 
-	public List<CustomerReparingDetail> getRepairDetailByCustomerId(CustomerReparingDetail reparingDetail) {
+	public List<CustomerJobDetail> getRepairDetailByCustomerId(
+			CustomerJobDetail jobDetail) {
 
-		List<CustomerReparingDetail> customerReparingDetails = new ArrayList<>();
+		List<CustomerJobDetail> customerReparingDetails = new ArrayList<>();
 
-		List<CustomerReparingDetail> reparingDetails = customerDaoImpl.findRepairDetailsByCustomerId(reparingDetail);
+		List<CustomerJobDetail> customerJobDetails = customerDaoImpl
+				.findRepairDetailsByCustomerId(jobDetail);
 
-		if (!StringUtils.isEmpty(reparingDetails) && reparingDetails.size() > 0) {
+		if (!StringUtils.isEmpty(customerJobDetails)
+				&& !customerJobDetails.isEmpty()) {
 			Date date = new Date();
-			for (CustomerReparingDetail customerReparingDetail : reparingDetails) {
-				reparingDetail = customerReparingDetail;
-				if (customerReparingDetail.getWarranty().compareTo(date) == 0) {
+			for (CustomerJobDetail customerJobDetail : customerJobDetails) {
+				jobDetail = customerJobDetail;
+				if (customerJobDetail.getWarranty().compareTo(date) == 0) {
 					System.out.println("Today is your last day of Warrenty");
-					reparingDetail.setIsWarrantyExpired("NO");
-				} else if (reparingDetail.getWarranty().compareTo(date) == 1) {
-					customerReparingDetail.setIsWarrantyExpired("NO");
+					jobDetail.setIsWarrantyExpired("NO");
+				} else if (jobDetail.getWarranty().compareTo(date) == 1) {
+					customerJobDetail.setIsWarrantyExpired("NO");
 				} else {
-					customerReparingDetail.setIsWarrantyExpired("YES");
+					customerJobDetail.setIsWarrantyExpired("YES");
 				}
-				customerReparingDetails.add(reparingDetail);
+				customerReparingDetails.add(jobDetail);
 			}
 		} else {
-			reparingDetail = new CustomerReparingDetail();
+			jobDetail = new CustomerJobDetail();
 		}
 		return customerReparingDetails;
 	}

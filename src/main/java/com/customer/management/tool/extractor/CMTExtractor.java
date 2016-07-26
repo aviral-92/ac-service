@@ -36,6 +36,7 @@ public class CMTExtractor implements ResultSetExtractor<List<Customer>> {
 			customer.setMobile(rs.getString("mobile"));
 			customer.setRegisteredOn(rs.getTimestamp("RegisteredDate")
 					.toString());
+			customer.setStatus(rs.getString("status"));
 			customerList.add(customer);
 		}
 		return customerList;

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -45,15 +45,15 @@ public class CustomerHistory extends CMTServiceImpl {
 		initComponents();
 	}
 
-	public void displayContent(List<CustomerReparingDetail> reparingDetails) {
+	public void displayContent(List<CustomerJobDetail> reparingDetails) {
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(new Object[] { "CustomerID", "Name", "Description", "Actual Amount", "Paid Amount",
 				"Work Date", "Model No", "Warrenty Upto", "Warranty Expired" });
-		for (CustomerReparingDetail reparingDetail : reparingDetails) {
-			model.addRow(new Object[] { reparingDetail.getCustomerId(), reparingDetail.getName(),
+		for (CustomerJobDetail reparingDetail : reparingDetails) {
+			model.addRow(new Object[] { reparingDetail.getCustomerId(), /*reparingDetail.getName(),*/
 					reparingDetail.getDescription(), reparingDetail.getActualAmount(), reparingDetail.getPaidAmount(),
-					reparingDetail.getUpdateDate(), reparingDetail.getModel_Vehicle(), reparingDetail.getWarranty(),
+					reparingDetail.getUpdateDate(), /*reparingDetail.getModel_Vehicle(),*/ reparingDetail.getWarranty(),
 					reparingDetail.getIsWarrantyExpired() });
 		}
 
@@ -66,12 +66,12 @@ public class CustomerHistory extends CMTServiceImpl {
 		jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				CustomerReparingDetail reparingDetail = new CustomerReparingDetail();
+				CustomerJobDetail reparingDetail = new CustomerJobDetail();
 				reparingDetail
 						.setCustomerId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
-				reparingDetail.setName(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+//				reparingDetail.setName(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
 				dispose();
-				addRepairDetails.setCustomerID(reparingDetail);
+//				addRepairDetails.setCustomerID(reparingDetail);
 				addRepairDetails.setVisible(true);
 
 			}

@@ -13,26 +13,27 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTTypes;
+import com.customer.management.tool.pojo.CMTUniqueDetail;
 
 /**
  *
  * @author amittal
  */
-public class CMTTypesExtractor implements ResultSetExtractor<List<CMTTypes>> {
+public class CMTTypesExtractor implements ResultSetExtractor<List<CMTUniqueDetail>> {
 
     @Override
-    public List<CMTTypes> extractData(ResultSet rs) throws SQLException, DataAccessException {
+    public List<CMTUniqueDetail> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
-        List<CMTTypes> acTypesList = new ArrayList<>();
-        CMTTypes acTypes;
+        List<CMTUniqueDetail> cmtUniqueDetails = new ArrayList<>();
+        CMTUniqueDetail cmtUniqueDetail;
         while (rs.next()) {
-            acTypes = new CMTTypes();
-            acTypes.setAcTypesid(rs.getInt(1));
-            acTypes.setAcType(rs.getString(2));
-            acTypesList.add(acTypes);
+            cmtUniqueDetail = new CMTUniqueDetail();
+            cmtUniqueDetail.setUnique_Id(rs.getInt("unique_Id"));
+            cmtUniqueDetail.setUnique_description(rs.getString("unique_description"));
+            cmtUniqueDetail.setUnique_Status(rs.getString("status"));
+            cmtUniqueDetails.add(cmtUniqueDetail);
         }
-        return acTypesList;
+        return cmtUniqueDetails;
     }
 
 }

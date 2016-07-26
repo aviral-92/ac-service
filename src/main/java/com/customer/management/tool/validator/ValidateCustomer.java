@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -57,7 +57,7 @@ public class ValidateCustomer {
 		}
 	}
 
-	public void isRepairDetails(CustomerReparingDetail reparingDetail)
+	public void isRepairDetails(CustomerJobDetail reparingDetail)
 			throws Exception {
 
 		if (StringUtils.isEmpty(reparingDetail)) {
@@ -66,9 +66,9 @@ public class ValidateCustomer {
 			throw new Exception("Actual Amount is Empty");
 		} else if (StringUtils.isEmpty(reparingDetail.getDescription())) {
 			throw new Exception("Description is Empty");
-		} else if (StringUtils.isEmpty(reparingDetail.getModel_Vehicle())) {
+		} /*else if (StringUtils.isEmpty(reparingDetail.getModel_Vehicle())) {
 			throw new Exception("Model Numer is Empty");
-		} else if (StringUtils.isEmpty(reparingDetail.getPaidAmount())) {
+		}*/ else if (StringUtils.isEmpty(reparingDetail.getPaidAmount())) {
 			throw new Exception("Paid Amount is Empty");
 		} else if (StringUtils.isEmpty(reparingDetail.getWarranty())) {
 			throw new Exception("Warrenty Date is Empty");

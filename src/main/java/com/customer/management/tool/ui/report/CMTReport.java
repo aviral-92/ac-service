@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import org.springframework.stereotype.Component;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.pojo.ReportGenerator;
 
 /**
@@ -37,15 +37,15 @@ public class CMTReport extends CMTServiceImpl {
 		initComponents();
 	}
 
-	public void displayMonthlyRecords(List<CustomerReparingDetail> customersList) {
+	public void displayMonthlyRecords(List<CustomerJobDetail> customersList) {
 
 		double sum = 0;
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(new Object[] { "Customer ID",
 				"Customer Name", "Visit Date", "Amount" });
-		for (CustomerReparingDetail reparingDetail : customersList) {
+		for (CustomerJobDetail reparingDetail : customersList) {
 			model.addRow(new Object[] { reparingDetail.getCustomerId(),
-					reparingDetail.getName(), reparingDetail.getUpdateDate(),
+					/*reparingDetail.getName(),*/ reparingDetail.getUpdateDate(),
 					reparingDetail.getActualAmount() });
 			sum += Double.parseDouble(reparingDetail.getActualAmount());
 		}
@@ -55,12 +55,12 @@ public class CMTReport extends CMTServiceImpl {
 
 	}
 
-	public void displayMonThRecord(List<CustomerReparingDetail> customersList) {
+	public void displayMonThRecord(List<CustomerJobDetail> customersList) {
 
 		double sum = 0;
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(new Object[] { "Month", "Amount" });
-		for (CustomerReparingDetail reparingDetail : customersList) {
+		for (CustomerJobDetail reparingDetail : customersList) {
 			model.addRow(new Object[] { reparingDetail.getUpdatedDateRetun(),
 					reparingDetail.getFinalAmount() });
 			sum += Double.parseDouble(reparingDetail.getFinalAmount());
@@ -458,7 +458,7 @@ public class CMTReport extends CMTServiceImpl {
 
 		ReportGenerator reportGenerator = new ReportGenerator(null, null, null,
 				null, null, null, String.valueOf(yearChooser.getYear()));
-		List<CustomerReparingDetail> reparingDetails = acReportGeneratorImpl
+		List<CustomerJobDetail> reparingDetails = acReportGeneratorImpl
 				.MonthlyReports(reportGenerator);
 		if (reparingDetails != null && reparingDetails.size() > 0) {
 			displayMonThRecord(reparingDetails);
@@ -483,7 +483,7 @@ public class CMTReport extends CMTServiceImpl {
 		ReportGenerator reportGenerator = new ReportGenerator(null,
 				fmt.format(startDate.getDate()), fmt.format(endDate.getDate()),
 				null, null, null, null);
-		List<CustomerReparingDetail> response = acReportGeneratorImpl
+		List<CustomerJobDetail> response = acReportGeneratorImpl
 				.startToEndDateRecords(reportGenerator);
 		// this.dispose();
 		// this.initComponents();

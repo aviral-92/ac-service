@@ -8,8 +8,6 @@
  * Created: Jun 10, 2016
  */
 
-
-
 create database IF NOT EXISTS customer_mgmt_tool;
 
 CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`login` (
@@ -73,15 +71,10 @@ ADD CONSTRAINT `Foreign_Key_Username`
   ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
 ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `description`;
 
---CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`jobwork` (
---  `jobId` INT NOT NULL AUTO_INCREMENT ,
---  `job_type` VARCHAR(45) NOT NULL ,
---  PRIMARY KEY (`jobId`) );
-
 
 CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
   `customerId` INT NOT NULL AUTO_INCREMENT ,
-  `jobId` INT(11) NOT NULL ,
+--  `jobId` INT(11) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
   `mobile` VARCHAR(45) NOT NULL ,
@@ -90,32 +83,9 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
   PRIMARY KEY (`customerId`) 
 );
 
+ALTER TABLE `customer_mgmt_tool`.`customer` ADD COLUMN `status` VARCHAR(4) NOT NULL  AFTER `RegisteredDate` ;
 ALTER TABLE `customer_mgmt_tool`.`customer` AUTO_INCREMENT = 1000;
 
---CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer_repairing_detail` (
---  `repairId` INT NOT NULL AUTO_INCREMENT,
---  `job_Id` INT(11) NOT NULL ,
---  `customer_Id` INT(11) NOT NULL ,
---  `description` VARCHAR(95) NOT NULL ,
---  `actual_amount` VARCHAR(45) NOT NULL ,
---  `paid_amount` VARCHAR(45) NOT NULL ,
---  `updated_date` DATE NOT NULL ,
---  `status` VARCHAR(5) NOT NULL DEFAULT 'a' ,
---  `warranty` DATE NOT NULL ,
---   `model_vehicle_no` VARCHAR(45) NOT NULL ,
---  PRIMARY KEY (`repairId`) ,
---  INDEX `New_Ac_ID` (`job_Id` ASC) ,
---  INDEX `New_Customer_ID` (`customer_Id` ASC) ,
---  CONSTRAINT `New_Ac_ID`
---    FOREIGN KEY (`job_Id` )
---    REFERENCES `customer_mgmt_tool`.`job_type` (`jobId` )
---    ON DELETE CASCADE
---    ON UPDATE NO ACTION,
---  CONSTRAINT `New_Customer_ID`
---    FOREIGN KEY (`customer_Id` )
---    REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
---    ON DELETE CASCADE
---    ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`unique_detail` (
   `unique_id` INT NOT NULL,
@@ -124,23 +94,11 @@ CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`unique_detail` (
   PRIMARY KEY (`unique_id`))
 ENGINE = InnoDB;
 
---CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer_repairing_detail` (
---  `repairId` INT NOT NULL AUTO_INCREMENT ,
---  `job_Id` INT NOT NULL ,
---  `customer_Id` INT NOT NULL ,
---  `description` VARCHAR(95) NOT NULL ,
---  `actual_amount` VARCHAR(45) NOT NULL ,
---  `paid_amount` VARCHAR(45) NOT NULL ,
---  `updated_date` DATETIME NOT NULL ,
---  `warranty` DATE NOT NULL ,
---  `jobcode` VARCHAR(45) NOT NULL ,
---  `status` VARCHAR(4) NOT NULL ,
---  PRIMARY KEY (`repairId`) );
-  
   CREATE TABLE IF NOT EXISTS`customer_mgmt_tool`.`customer_job_detail` (
   `job_id` INT NOT NULL AUTO_INCREMENT,
   `unique_id` INT NOT NULL,
   `customer_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
   `actual_amount` VARCHAR(45) NOT NULL,
   `paid_amount` VARCHAR(45) NOT NULL,
   `description` VARCHAR(95) NOT NULL,
@@ -159,30 +117,17 @@ ENGINE = InnoDB;
     FOREIGN KEY (`customer_id`)
     REFERENCES `customer_mgmt_tool`.`customer` (`customerId`)
     ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `ProductIDKey`
+  	 FOREIGN KEY (`product_id`)
+    REFERENCES `customer_mgmt_tool`.`product` (`productId`)
+    ON DELETE CASCADE
     ON UPDATE CASCADE);
     
--- ALTER TABLE `customer_mgmt_tool`.`customer` DROP COLUMN `amount` , DROP COLUMN `description` , 
--- DROP COLUMN `model/vehicle no` ;
-
--- ALTER TABLE `customer_mgmt_tool`.`customer` DROP COLUMN `acId` , DROP FOREIGN KEY `ac` 
--- , DROP INDEX `ac` ;
-
---   CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customerhistory` (
---  `id` INT NOT NULL AUTO_INCREMENT ,
---  `customerId` INT NOT NULL ,
---  `customer_emal` VARCHAR(45) NOT NULL ,
---  `customer_mobile` VARCHAR(45) NOT NULL ,
---  `RegisteredDate` DATETIME NOT NULL ,
---  `DeletedDate` DATETIME NOT NULL ,
---  PRIMARY KEY (`id`) );
---  
---  ALTER TABLE `customer_mgmt_tool`.`customerhistory` 
---  ADD CONSTRAINT `Foreign_key`
---  FOREIGN KEY (`customerId` )
---  REFERENCES `customer_mgmt_tool`.`customer` (`customerId` )
---  ON DELETE CASCADE
---  ON UPDATE CASCADE
---, ADD INDEX `Foreign_key` (`customerId` ASC) ;
---
-
-
+ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
+  `productId` INT NOT NULL AUTO_INCREMENT ,
+  `product_name` VARCHAR(45) NOT NULL ,
+  `product_description` VARCHAR(95) NOT NULL ,
+  `status` VARCHAR(4) NOT NULL ,
+ PRIMARY KEY (`productId`) )
+	AUTO_INCREMENT = 1000;

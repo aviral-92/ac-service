@@ -16,16 +16,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTTypes;
+import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -325,21 +325,21 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
-		CustomerReparingDetail customerReparingDetail = new CustomerReparingDetail();
-		customerReparingDetail.setAcTypesid(type.getSelectedIndex() + 1);
-		customerReparingDetail.setActualAmount(actualAmount.getText());
+		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
+		customerJobDetail.setUnique_Id(type.getSelectedIndex() + 1); //TODO check
+		customerJobDetail.setActualAmount(actualAmount.getText());
 		if (!StringUtils.isEmpty(customerId.getText())) {
-			customerReparingDetail.setCustomerId(Integer.parseInt(customerId.getText()));
+			customerJobDetail.setCustomerId(Integer.parseInt(customerId.getText()));
 		}
-		customerReparingDetail.setDescription(description.getText());
-		customerReparingDetail.setModel_Vehicle(modelTextField.getText());
-		customerReparingDetail.setPaidAmount(paidAmount.getText());
+		customerJobDetail.setDescription(description.getText());
+//		customerJobDetail.setModel_Vehicle(modelTextField.getText());
+		customerJobDetail.setPaidAmount(paidAmount.getText());
 		if (!StringUtils.isEmpty(todayDate.getText())) {
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			// String datestr = dateFormat.format(todayDate.getText());
 			try {
 
-				customerReparingDetail.setUpdateDate((Date) dateFormat.parse(todayDate.getText()));
+				customerJobDetail.setUpdateDate((Date) dateFormat.parse(todayDate.getText()));
 			} catch (ParseException ex) {
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -349,11 +349,11 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 					JOptionPane.ERROR_MESSAGE);
 		}
 
-		customerReparingDetail.setWarranty(warrenty.getDate());
+		customerJobDetail.setWarranty(warrenty.getDate());
 
 		String response;
 		try {
-			response = acServiceCustomerImpl.addRepairDetail(customerReparingDetail);
+			response = acServiceCustomerImpl.addRepairDetail(customerJobDetail);
 			if (!StringUtils.isEmpty(response)) {
 				JOptionPane.showMessageDialog(new JFrame(), response, "Successfully Insereted",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -387,9 +387,9 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 	public void getAcType() {
 
-		List<CMTTypes> listAcType = acServiceCustomerImpl.getAcType();
-		for (CMTTypes acType : listAcType) {
-			type.addItem(acType.getAcType());
+		List<CMTUniqueDetail> cmtUniqueDetails = acServiceCustomerImpl.getAcType();
+		for (CMTUniqueDetail cmtUniqueDetail : cmtUniqueDetails) {
+			type.addItem(cmtUniqueDetail.getUnique_description());
 		}
 	}
 

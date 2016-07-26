@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.dao.impl.CMTReportDaoImpl;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.pojo.ReportGenerator;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -33,12 +33,12 @@ public class CMTReportGeneratorImpl {
 	@Autowired
 	private CMTReportDaoImpl reportDaoImpl;
 
-	public List<CustomerReparingDetail> startToEndDateRecords(
+	public List<CustomerJobDetail> startToEndDateRecords(
 			ReportGenerator reportGenerator) {
 		return reportDaoImpl.startToEndDate(reportGenerator);
 	}
 
-	public List<CustomerReparingDetail> MonthlyReports(
+	public List<CustomerJobDetail> MonthlyReports(
 			ReportGenerator reportGenerator) {
 
 		return reportDaoImpl.monthlyReportGenerator(reportGenerator);

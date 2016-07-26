@@ -18,10 +18,10 @@ import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.CMTDao;
 import com.customer.management.tool.extractor.CMTExtractor;
 import com.customer.management.tool.extractor.CMTTypesExtractor;
-import com.customer.management.tool.extractor.CustomerRepairingDetailExtractor;
-import com.customer.management.tool.pojo.CMTTypes;
+import com.customer.management.tool.extractor.CustomerJobDetailExtractor;
+import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -35,7 +35,7 @@ public class CMTDaoImpl implements CMTDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<CMTTypes> getAcTypes() {
+	public List<CMTUniqueDetail> getAcTypes() {
 		return jdbcTemplate.query(CMTQueryConstant.AC_SERVICE,
 				new CMTTypesExtractor());
 	}
@@ -128,7 +128,7 @@ public class CMTDaoImpl implements CMTDao {
 
 	@Override
 	public String addCustomerRepairDetails(
-			CustomerReparingDetail customerReparingDetail) {
+			CustomerJobDetail customerReparingDetail) {
 
 		String response = null;
 		if (!StringUtils.isEmpty(customerReparingDetail)) {
@@ -136,12 +136,12 @@ public class CMTDaoImpl implements CMTDao {
 					+ "actual_amount, paid_amount, model_vehicle_no, updated_date, warranty) "
 					+ "values (0,?,?,?,?,?,?,?,?)";
 			List<Object> args = new ArrayList<>();
-			args.add(String.valueOf(customerReparingDetail.getAcTypesid()));
+			args.add(String.valueOf(customerReparingDetail.getJobId()));
 			args.add(String.valueOf(customerReparingDetail.getCustomerId()));
 			args.add(customerReparingDetail.getDescription());
 			args.add(customerReparingDetail.getActualAmount());
 			args.add(customerReparingDetail.getPaidAmount());
-			args.add(customerReparingDetail.getModel_Vehicle());
+//			args.add(customerReparingDetail.getModel_Vehicle());
 			args.add(customerReparingDetail.getUpdateDate());
 			args.add(customerReparingDetail.getWarranty());
 
@@ -170,8 +170,8 @@ public class CMTDaoImpl implements CMTDao {
 	}
 
 	@Override
-	public List<CustomerReparingDetail> findRepairDetailsByCustomerId(
-			CustomerReparingDetail reparingDetail) {
+	public List<CustomerJobDetail> findRepairDetailsByCustomerId(
+			CustomerJobDetail reparingDetail) {
 
 		String query = "select * from ( ( select * from ac_service.CUSTOMER_REPAIRING_DETAIL where customer_Id=? ) a , (select * from ac_service.CUSTOMER  where CUSTOMERID =?) b ) where a.customer_Id = b.CUSTOMERID";
 		List<String> args = new ArrayList<>();
@@ -180,13 +180,12 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			System.out.println(System.currentTimeMillis());
-			List<CustomerReparingDetail> reparingDetailList = jdbcTemplate
-					.query(query, new CustomerRepairingDetailExtractor(),
+			List<CustomerJobDetail> customerJobDetails = jdbcTemplate
+					.query(query, new CustomerJobDetailExtractor(),
 							args.toArray());
-			System.out.println(System.currentTimeMillis());
-			if (!StringUtils.isEmpty(reparingDetailList)
-					&& reparingDetailList.size() > 0) {
-				return reparingDetailList;
+//			System.out.println(System.currentTimeMillis());
+			if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
+				return customerJobDetails;
 			}
 		}
 		return null;

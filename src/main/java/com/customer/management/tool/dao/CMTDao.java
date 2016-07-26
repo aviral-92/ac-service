@@ -7,9 +7,9 @@ package com.customer.management.tool.dao;
 
 import java.util.List;
 
-import com.customer.management.tool.pojo.CMTTypes;
+import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
-import com.customer.management.tool.pojo.CustomerReparingDetail;
+import com.customer.management.tool.pojo.CustomerJobDetail;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.customer.management.tool.pojo.CustomerReparingDetail;
  */
 public interface CMTDao {
 
-	public List<CMTTypes> getAcTypes();
+	public List<CMTUniqueDetail> getAcTypes();
 
 	public String addCustomer(Customer customer) throws Exception;
 
@@ -25,7 +25,7 @@ public interface CMTDao {
 
 	public List<Customer> getCustomer(Customer customer);
 
-	public String addCustomerRepairDetails(CustomerReparingDetail customerReparingDetail);
+	public String addCustomerRepairDetails(CustomerJobDetail customerReparingDetail);
 
-	public List<CustomerReparingDetail> findRepairDetailsByCustomerId(CustomerReparingDetail reparingDetail);
+	public List<CustomerJobDetail> findRepairDetailsByCustomerId(CustomerJobDetail reparingDetail);
 }
