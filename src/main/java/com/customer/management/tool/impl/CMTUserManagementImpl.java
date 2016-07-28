@@ -38,9 +38,9 @@ public class CMTUserManagementImpl {
 	@Autowired
 	UserMgmtDaoImpl userMgmtDaoImpl;
 
-	/*@Value("${userManagementDaoImplEnable}")
+	@Value("${userManagementDaoImplEnable}")
 	String userManagementDaoImplEnable;
-*/
+
 	public String login(CMTLogin login) throws Exception {
 
 		String response = null;
@@ -79,11 +79,11 @@ public class CMTUserManagementImpl {
 		validation.validateLogin(login);
 		validation.validateUser(userDetail);
 
-//		if (userManagementDaoImplEnable.equalsIgnoreCase("true")) {
+		if (userManagementDaoImplEnable.equalsIgnoreCase("true")) {
 			response = userMgmtDaoImpl.addUser(userDetail, login);
-//		} else {
-//			response = userDaoImpl.addUser(userDetail, login);
-//		}
+		} else {
+			response = userDaoImpl.addUser(userDetail, login);
+		}
 		if (response.contains("Successfully")) {
 			userDaoImpl.addUserDetailHistory(userDetail);
 		} else {

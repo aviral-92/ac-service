@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.customer.management.tool.cache.CacheManager;
 import com.customer.management.tool.ui.LoginForm;
 
 /**
@@ -39,7 +40,7 @@ public class CMTStarter {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(CMTStarter.class).headless(false).run(args);
 		context.getBean(LoginForm.class).setVisible(true);
 		context.getBean(LoginForm.class).setResizable(false);
-		
+		context.getBean(CacheManager.class).insertInCategoryMap();
 		
 	}
 }
