@@ -22,8 +22,16 @@ import org.springframework.util.StringUtils;
 import com.customer.management.tool.dao.impl.CMTReportDaoImpl;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.pojo.ReportGenerator;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -87,9 +95,19 @@ public class CMTReportGeneratorImpl {
 		try {
 			Document doc = new Document();
 			fileSaved(".pdf", null, doc);
-			doc.open();
+			//doc.open();
+			Paragraph paragraph = new Paragraph(
+			        " Customer Report",new Font(Font.FontFamily.HELVETICA, 25));
+			paragraph.setAlignment(1);
+			paragraph.setSpacingAfter(23);
+			doc.add(paragraph);
 			PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
 			// adding table headers
+			PdfPCell cell = new PdfPCell();
+			cell.setColspan(table.getColumnCount());
+			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);			
+			
+			pdfTable.addCell(cell);
 			for (int i = 0; i < table.getColumnCount(); i++) {
 				pdfTable.addCell(table.getColumnName(i));
 			}
@@ -115,7 +133,7 @@ public class CMTReportGeneratorImpl {
 
 	private void fileSaved(String fileExtension, Workbook wb, Document doc)
 			throws IOException, DocumentException {
-
+		   String IMAGE = "resources/images/cmtreport_pdftbackground.jpg";
 		JFileChooser chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new File("/home/me/Documents"));
 		int retrival = chooser.showSaveDialog(null);
@@ -127,9 +145,16 @@ public class CMTReportGeneratorImpl {
 					wb.write(new FileOutputStream(chooser.getSelectedFile()
 							+ fileExtension));
 				} else {
-					PdfWriter.getInstance(doc,
+				
+					com.itextpdf.text.pdf.PdfWriter writer=	PdfWriter.getInstance(doc,
 							new FileOutputStream(chooser.getSelectedFile()
 									+ fileExtension));
+					doc.open();
+					PdfContentByte canvas = writer.getDirectContentUnder();
+					 Image image = Image.getInstance(IMAGE);
+					 image.scaleAbsolute(PageSize.A4.getWidth(),PageSize.A4.getHeight());
+				        image.setAbsolutePosition(0, 0);
+				        canvas.addImage(image);
 				}
 			}
 		}
