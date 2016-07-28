@@ -226,7 +226,7 @@ public class GetCustomer extends CMTServiceImpl {
 			customer.setEmail(email.getText());
 			customer.setMobile(mobile.getText());
 			// customer.setModel_Vehicle(model.getText());
-			List<Customer> response = acServiceCustomerImpl
+			List<Customer> response = cmtImpl
 					.getCustomerInfo(customer);
 			if (!StringUtils.isEmpty(response) && response.size() > 0) {
 				customerDetail.displayRecords(response);

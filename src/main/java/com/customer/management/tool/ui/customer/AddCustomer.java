@@ -218,14 +218,14 @@ public class AddCustomer extends CMTServiceImpl implements Serializable {
 		customer.setRegisteredOn(new Date().toString());
 
 		try {
-			String response = acServiceCustomerImpl.addCustomer(customer);
+			String response = cmtImpl.addCustomer(customer);
 			if (!StringUtils.isEmpty(response)) {
 				int yesNo = JOptionPane.showConfirmDialog(new JFrame(),
 						response + ", Do you wish to add Customer Repair Details", "Message",
 						JOptionPane.YES_NO_OPTION);
 				if (yesNo == JOptionPane.YES_OPTION) {
 					dispose();
-					customer.setCustomerId(acServiceCustomerImpl.getCustomerID(customer).getCustomerId());
+					customer.setCustomerId(cmtImpl.getCustomerID(customer).getCustomerId());
 					addCustomerRepairDetail.setCustomerID(customer);
 					addCustomerRepairDetail.setTitle("ADD CUSTOMER REPAIR DETAILS");
 					addCustomerRepairDetail.setVisible(true);

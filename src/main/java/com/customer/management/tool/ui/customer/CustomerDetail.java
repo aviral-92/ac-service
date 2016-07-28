@@ -72,7 +72,7 @@ public class CustomerDetail extends CMTServiceImpl {
 				dispose();
 				// addRepairDetails.setCustomerID(customer);
 				// addRepairDetails.setVisible(true);
-				List<CustomerJobDetail> response = acServiceCustomerImpl.getRepairDetailByCustomerId(customer);
+				List<CustomerJobDetail> response = cmtImpl.getRepairDetailByCustomerId(customer);
 				customerPreviousRecords.displayContent(response);
 				customerPreviousRecords.setVisible(true);
 

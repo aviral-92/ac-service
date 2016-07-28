@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.dao.impl.CMTDaoImpl;
+import com.customer.management.tool.dao.impl.CMTJobDaoImpl;
+import com.customer.management.tool.pojo.CMTCategory;
 import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
@@ -25,13 +27,15 @@ import com.customer.management.tool.validator.ValidateCustomer;
  * @author amittal
  */
 @Component
-@Scope("prototype")
+//@Scope("prototype")
 public class CMTImpl {
 
 	@Autowired
 	private CMTDaoImpl customerDaoImpl;
 	@Autowired
 	private ValidateCustomer validateCustomer;
+	@Autowired
+	private CMTJobDaoImpl cmtJobDaoImpl;
 
 	public List<CMTUniqueDetail> getAcType() {
 
@@ -87,5 +91,17 @@ public class CMTImpl {
 			jobDetail = new CustomerJobDetail();
 		}
 		return customerReparingDetails;
+	}
+
+	public String addNewCategory(CMTCategory category) {
+
+		String response = null;
+		response = cmtJobDaoImpl.addCategory(category);
+		return response;
+	}
+
+	public List<CMTCategory> getAllCategories() {
+
+		return cmtJobDaoImpl.getCategories();
 	}
 }

@@ -32,7 +32,7 @@ import com.customer.management.tool.pojo.UserDetailHistory;
 @Scope("prototype")
 public class UserManagementDaoImpl implements UserManagementDao {
 
-	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class);
+	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class.getName());
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

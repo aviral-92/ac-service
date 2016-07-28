@@ -13,7 +13,7 @@ public class CMTServiceImpl extends JFrame {
 	@Autowired
 	protected CMTUserManagementImpl acServiceUserImpl;
 	@Autowired
-	protected CMTImpl acServiceCustomerImpl;
+	protected CMTImpl cmtImpl;
 	@Autowired
 	protected CMTReportGeneratorImpl acReportGeneratorImpl;
 //	public JFrame frame = new JFrame();

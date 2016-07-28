@@ -353,7 +353,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 		String response;
 		try {
-			response = acServiceCustomerImpl.addRepairDetail(customerJobDetail);
+			response = cmtImpl.addRepairDetail(customerJobDetail);
 			if (!StringUtils.isEmpty(response)) {
 				JOptionPane.showMessageDialog(new JFrame(), response, "Successfully Insereted",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -387,7 +387,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 	public void getAcType() {
 
-		List<CMTUniqueDetail> cmtUniqueDetails = acServiceCustomerImpl.getAcType();
+		List<CMTUniqueDetail> cmtUniqueDetails = cmtImpl.getAcType();
 		for (CMTUniqueDetail cmtUniqueDetail : cmtUniqueDetails) {
 			type.addItem(cmtUniqueDetail.getUnique_description());
 		}

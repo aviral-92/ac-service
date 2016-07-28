@@ -23,7 +23,7 @@ import com.customer.management.tool.pojo.UserDetailHistory;
 @Component
 public class UserMgmtDaoImpl implements UserManagementDao {
 
-	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class);
+	static Logger LOG = Logger.getLogger(UserManagementDaoImpl.class.getName());
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

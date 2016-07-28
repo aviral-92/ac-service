@@ -124,6 +124,25 @@ ENGINE = InnoDB;
     ON DELETE CASCADE
     ON UPDATE CASCADE);
     
+ ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` DROP COLUMN `product_id` , DROP FOREIGN KEY `ProductIDKey` 
+  , DROP INDEX `ProductIDKey` ;
+ 
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` ADD COLUMN `category_id` INT NOT NULL  AFTER `customer_id` ;
+  
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+  ADD CONSTRAINT `CategoryIDKey`
+  FOREIGN KEY (`category_id` )
+  REFERENCES `customer_mgmt_tool`.`category` (`categoryId` )
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION
+, ADD INDEX `CategoryIDKey` (`category_id` ASC) ;
+
+  CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`category` (
+  `categoryId` INT NOT NULL AUTO_INCREMENT ,
+  `category_name` VARCHAR(45) NOT NULL ,
+  `status` VARCHAR(4) NOT NULL DEFAULT 'A' ,
+  PRIMARY KEY (`categoryId`) );
+
  CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
   `productId` INT NOT NULL AUTO_INCREMENT ,
   `product_name` VARCHAR(45) NOT NULL ,
