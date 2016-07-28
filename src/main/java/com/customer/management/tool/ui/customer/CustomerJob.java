@@ -7,10 +7,12 @@ package com.customer.management.tool.ui.customer;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.customer.management.tool.cache.CacheManager;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTCategory;
 
@@ -22,6 +24,8 @@ import com.customer.management.tool.pojo.CMTCategory;
 @Scope("prototype")
 public class CustomerJob extends CMTServiceImpl {
 
+	@Autowired
+	private AddNewCategory newCategory;
 	/**
 	 * 
 	 */
@@ -870,8 +874,8 @@ public class CustomerJob extends CMTServiceImpl {
 
 	private void addNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addNewCategoryActionPerformed
 
-		AddNewCategory cat = new AddNewCategory();
-		cat.setVisible(true);
+		newCategory.setVisible(true);
+		newCategory.setTitle("Add New Category");
 	}// GEN-LAST:event_addNewCategoryActionPerformed
 
 	private void submitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_submitActionPerformed
@@ -883,52 +887,53 @@ public class CustomerJob extends CMTServiceImpl {
 		// TODO add your handling code here:
 		List<CMTCategory> categories = cmtImpl.getAllCategories();
 		if (!StringUtils.isEmpty(categories) && !categories.isEmpty()) {
+			categoryList.removeAllItems();
 			for (CMTCategory cmtCategory : categories) {
 				categoryList.addItem(cmtCategory.getCategory_name());
 			}
 		}
 	}// GEN-LAST:event_categoryListFocusGained
 
+	/*private void getList(){
+		
+		List<CMTCategory> categories = cmtImpl.getAllCategories();
+		if (!StringUtils.isEmpty(categories) && !categories.isEmpty()) {
+			categoryList.removeAllItems();
+			for (CMTCategory cmtCategory : categories) {
+//				categoryList.addItem(cmtCategory.getCategory_name());
+				CacheManager.categoryMap.put(cmtCategory.getCategory_id(), cmtCategory.getCategory_name());
+			}
+		}
+	}*/
+	
 	/**
 	 * @param args
 	 *            the command line arguments
 	 */
-	/*TODO
-	 * public static void main(String args[]) {
-		 Set the Nimbus look and feel 
-		// <editor-fold defaultstate="collapsed"
-		// desc=" Look and feel setting code (optional) ">
-		
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the
-		 * default look and feel. For details see
-		 * http://download.oracle.com/javase
-		 * /tutorial/uiswing/lookandfeel/plaf.html
-		 
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-					.getInstalledLookAndFeels()) {
-				if ("Windows".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(CustomerJob.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		// </editor-fold>
-
-		// </editor-fold>
-
-		 Create and display the form 
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new CustomerJob().setVisible(true);
-			}
-		});
-	}*/
+	/*
+	 * TODO public static void main(String args[]) { Set the Nimbus look and
+	 * feel // <editor-fold defaultstate="collapsed" //
+	 * desc=" Look and feel setting code (optional) ">
+	 * 
+	 * If Nimbus (introduced in Java SE 6) is not available, stay with the
+	 * default look and feel. For details see http://download.oracle.com/javase
+	 * /tutorial/uiswing/lookandfeel/plaf.html
+	 * 
+	 * try { for (javax.swing.UIManager.LookAndFeelInfo info :
+	 * javax.swing.UIManager .getInstalledLookAndFeels()) { if
+	 * ("Windows".equals(info.getName())) {
+	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
+	 * catch (ClassNotFoundException | InstantiationException |
+	 * IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
+	 * { java.util.logging.Logger.getLogger(CustomerJob.class.getName())
+	 * .log(java.util.logging.Level.SEVERE, null, ex); } // </editor-fold>
+	 * 
+	 * // </editor-fold>
+	 * 
+	 * Create and display the form java.awt.EventQueue.invokeLater(new
+	 * Runnable() { public void run() { new CustomerJob().setVisible(true); }
+	 * }); }
+	 */
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton addNewCategory;
