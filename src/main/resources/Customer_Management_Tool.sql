@@ -94,6 +94,14 @@ CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`unique_detail` (
   PRIMARY KEY (`unique_id`))
 ENGINE = InnoDB;
 
+CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
+  `productId` INT NOT NULL AUTO_INCREMENT ,
+  `product_name` VARCHAR(45) NOT NULL ,
+  `product_description` VARCHAR(95) NOT NULL ,
+  `status` VARCHAR(4) NOT NULL ,
+ PRIMARY KEY (`productId`) )
+	AUTO_INCREMENT = 1000;
+	
   CREATE TABLE IF NOT EXISTS`customer_mgmt_tool`.`customer_job_detail` (
   `job_id` INT NOT NULL AUTO_INCREMENT,
   `unique_id` INT NOT NULL,
@@ -143,10 +151,33 @@ ENGINE = InnoDB;
   `status` VARCHAR(4) NOT NULL DEFAULT 'A' ,
   PRIMARY KEY (`categoryId`) );
 
- CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
-  `productId` INT NOT NULL AUTO_INCREMENT ,
-  `product_name` VARCHAR(45) NOT NULL ,
-  `product_description` VARCHAR(95) NOT NULL ,
-  `status` VARCHAR(4) NOT NULL ,
- PRIMARY KEY (`productId`) )
-	AUTO_INCREMENT = 1000;
+	CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`order_mgmt` (
+  `orderId` INT NOT NULL AUTO_INCREMENT,
+  `order_status` VARCHAR(15) NOT NULL,
+  `order_description` VARCHAR(95) NULL,
+  `order_date` DATETIME NOT NULL,
+  `order_completion` DATETIME NOT NULL,
+  `status` VARCHAR(4) NOT NULL,
+  PRIMARY KEY (`orderId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 10000;
+
+ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+ADD COLUMN `order_id` INT NOT NULL AFTER `category_id`,
+ADD INDEX `OrderIDKey_idx` (`order_id` ASC);
+ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+ADD CONSTRAINT `OrderIDKey`
+  FOREIGN KEY (`order_id`)
+  REFERENCES `customer_mgmt_tool`.`order_mgmt` (`orderId`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
+ADD INDEX `CustomerIDKey_idx` (`customer_id` ASC);
+ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+ADD CONSTRAINT `CustomerIDKey`
+  FOREIGN KEY (`customer_id`)
+  REFERENCES `customer_mgmt_tool`.`customer` (`customerId`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;

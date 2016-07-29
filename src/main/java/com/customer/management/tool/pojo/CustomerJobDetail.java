@@ -17,7 +17,7 @@ public class CustomerJobDetail {
 	private int jobId;
 	private int customerId;
 	private int unique_Id;
-	private int productId;
+	private int order_id;
 	private String description;
 	private String actualAmount;
 	private String paidAmount;
@@ -71,21 +71,6 @@ public class CustomerJobDetail {
 	 */
 	public void setUnique_Id(int unique_Id) {
 		this.unique_Id = unique_Id;
-	}
-
-	/**
-	 * @return the productId
-	 */
-	public int getProductId() {
-		return productId;
-	}
-
-	/**
-	 * @param productId
-	 *            the productId to set
-	 */
-	public void setProductId(int productId) {
-		this.productId = productId;
 	}
 
 	/**
@@ -204,5 +189,13 @@ public class CustomerJobDetail {
 	 */
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
+	}
+
+	public int getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
 	}
 }
