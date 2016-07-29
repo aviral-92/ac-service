@@ -177,6 +177,8 @@ ADD CONSTRAINT `OrderIDKey`
   
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `unique_id` `unique_id` VARCHAR(45) NULL  
   AFTER `order_id` , DROP FOREIGN KEY `UniqueIDKey` ;
+  
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `updated_date` `due_date` DATETIME NOT NULL  ;
 
 ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
  ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
@@ -193,3 +195,4 @@ ADD CONSTRAINT `CustomerIDKey`
   
   DROP TABLE IF EXISTS `customer_mgmt_tool`.`unique_detail`;
   
+ 

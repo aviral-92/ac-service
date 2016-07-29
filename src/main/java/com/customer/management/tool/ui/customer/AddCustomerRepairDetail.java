@@ -326,7 +326,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
 		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
-		customerJobDetail.setUnique_Id(type.getSelectedIndex() + 1); //TODO check
+		customerJobDetail.setUnique_Id(String.valueOf(type.getSelectedIndex() + 1)); //TODO check
 		customerJobDetail.setActualAmount(actualAmount.getText());
 		if (!StringUtils.isEmpty(customerId.getText())) {
 			customerJobDetail.setCustomerId(Integer.parseInt(customerId.getText()));
@@ -336,20 +336,13 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 		customerJobDetail.setPaidAmount(paidAmount.getText());
 		if (!StringUtils.isEmpty(todayDate.getText())) {
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			// String datestr = dateFormat.format(todayDate.getText());
-			try {
-
-				customerJobDetail.setUpdateDate((Date) dateFormat.parse(todayDate.getText()));
-			} catch (ParseException ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
+			customerJobDetail.setUpdateDate(todayDate.getText());
 		} else {
 			JOptionPane.showMessageDialog(new JFrame(), "Please provide some input", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 
-		customerJobDetail.setWarranty(warrenty.getDate());
+		customerJobDetail.setWarranty(warrenty.getDate().toString());
 
 		String response;
 		try {

@@ -26,8 +26,8 @@ public class CustomerJobDetailExtractor implements
 			customerJobDetail.setActualAmount(rs.getString("actual_amount"));
 			customerJobDetail.setPaidAmount(rs.getString("paid_amount"));
 			customerJobDetail.setDescription(rs.getString("description"));
-			customerJobDetail.setUpdateDate(rs.getTimestamp("updated_date"));
-			customerJobDetail.setWarranty(rs.getDate("warranty"));
+			customerJobDetail.setUpdateDate(rs.getTimestamp("updated_date").toString());
+			customerJobDetail.setWarranty(rs.getDate("warranty").toString());
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetails.add(customerJobDetail);
 		}

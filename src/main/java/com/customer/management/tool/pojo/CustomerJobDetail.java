@@ -18,12 +18,16 @@ public class CustomerJobDetail {
 	private int customerId;
 	private int order_id;
 	private String unique_Id;
+	private int category_id;
+	private String customer_name;
 	private String description;
 	private String actualAmount;
 	private String paidAmount;
-	private Date updateDate;
+	private String updateDate;
 	private String status;
-	private Date warranty;
+	private String warranty;
+	private String dueDate;
+	private String reason;
 	private String isWarrantyExpired;
 	private String finalAmount;
 	private String updatedDateRetun;
@@ -106,7 +110,7 @@ public class CustomerJobDetail {
 	/**
 	 * @return the updateDate
 	 */
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
 
@@ -114,7 +118,7 @@ public class CustomerJobDetail {
 	 * @param updateDate
 	 *            the updateDate to set
 	 */
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 
@@ -136,7 +140,7 @@ public class CustomerJobDetail {
 	/**
 	 * @return the warranty
 	 */
-	public Date getWarranty() {
+	public String getWarranty() {
 		return warranty;
 	}
 
@@ -144,7 +148,7 @@ public class CustomerJobDetail {
 	 * @param warranty
 	 *            the warranty to set
 	 */
-	public void setWarranty(Date warranty) {
+	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}
 
@@ -197,5 +201,62 @@ public class CustomerJobDetail {
 
 	public void setOrder_id(int order_id) {
 		this.order_id = order_id;
+	}
+
+	/**
+	 * @return the customer_name
+	 */
+	public String getCustomer_name() {
+		return customer_name;
+	}
+
+	/**
+	 * @param customer_name
+	 *            the customer_name to set
+	 */
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+
+	/**
+	 * @return the category_id
+	 */
+	public int getCategory_id() {
+		return category_id;
+	}
+
+	/**
+	 * @param category_id the category_id to set
+	 */
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
+
+	/**
+	 * @return the dueDate
+	 */
+	public String getDueDate() {
+		return dueDate;
+	}
+
+	/**
+	 * @param dueDate the dueDate to set
+	 */
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	/**
+	 * @return the reason
+	 */
+	public String getReason() {
+		return reason;
+	}
+
+	/**
+	 * @param reason the reason to set
+	 */
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

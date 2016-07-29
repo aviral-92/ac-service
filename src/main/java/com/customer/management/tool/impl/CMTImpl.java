@@ -76,10 +76,10 @@ public class CMTImpl {
 			Date date = new Date();
 			for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 				jobDetail = customerJobDetail;
-				if (customerJobDetail.getWarranty().compareTo(date) == 0) {
+				if (customerJobDetail.getWarranty().compareTo(date.toString()) == 0) {
 					System.out.println("Today is your last day of Warrenty");
 					jobDetail.setIsWarrantyExpired("NO");
-				} else if (jobDetail.getWarranty().compareTo(date) == 1) {
+				} else if (jobDetail.getWarranty().compareTo(date.toString()) == 1) {
 					customerJobDetail.setIsWarrantyExpired("NO");
 				} else {
 					customerJobDetail.setIsWarrantyExpired("YES");
@@ -102,5 +102,12 @@ public class CMTImpl {
 	public List<CMTCategory> getAllCategories() {
 
 		return cmtJobDaoImpl.getCategories();
+	}
+	
+	public String addCustomerJobDetails(CustomerJobDetail customerJobDetail){
+		
+		String response = null;
+		cmtJobDaoImpl.addCustomerJob(customerJobDetail);
+		return response;
 	}
 }
