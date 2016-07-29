@@ -180,6 +180,8 @@ ADD CONSTRAINT `OrderIDKey`
   
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `updated_date` `due_date` DATETIME NOT NULL  ;
 
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` ADD COLUMN `reason` VARCHAR(95) NULL  AFTER `status` ;
+
 ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
  ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
  ADD INDEX `CustomerIDKey_idx` (`customer_id` ASC);

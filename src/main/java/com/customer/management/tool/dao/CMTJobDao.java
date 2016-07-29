@@ -16,5 +16,5 @@ public interface CMTJobDao {
 	
 	public String addCustomerJob(CustomerJobDetail customerJobDetail);
 	
-	public String getLastInsertedID();
+	public int getLastInsertedID();
 }

@@ -70,8 +70,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	@Override
 	public String addCustomerJob(CustomerJobDetail customerJobDetail) {
 
-		String query = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion"
-				+ "order_date) VALUES (?,?,?,STR_TO_DATE(?,'%d,%m,%Y'),now()) ";
+		String queryForOrderMgmt = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
+				+ "order_date) VALUES (?,?,?,?,now()) ";
 		List<Object> args = new ArrayList<Object>();
 		args.add(customerJobDetail.getCustomerId());
 		args.add(customerJobDetail.getDescription());
@@ -80,22 +80,22 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			args.add(customerJobDetail.getDueDate());
 		} else {
 			args.add(CMTOrderStatusCode.PENDING.getPrperty());
-			args.add(new Date());
+			args.add(Calendar.getInstance());
 		}
 
-		int execute = jdbcTemplate.update(query, args.toArray());
+		int execute = jdbcTemplate.update(queryForOrderMgmt, args.toArray());
 		if (execute > 0) {
-			System.out.println("Hurrreeeeyyyyyy");
-			getLastInsertedID();
+			int orderid = getLastInsertedID();
+			// TODO need to add in customer_job_detail
 		}
 		return null;
 	}
 
 	@Override
-	public String getLastInsertedID() {
+	public int getLastInsertedID() {
 
-		String query = "SELECT LAST_INSERT_ID() AS ID ";
-		String id = jdbcTemplate.query(query, new GetLastInsertedIDExtractor());
+		String query = "SELECT max(orderId) as orderId FROM customer_mgmt_tool.order_mgmt";
+		int id = jdbcTemplate.query(query, new GetLastInsertedIDExtractor());
 		return id;
 	}
 

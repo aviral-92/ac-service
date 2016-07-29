@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-public class GetLastInsertedIDExtractor implements ResultSetExtractor<String> {
+public class GetLastInsertedIDExtractor implements ResultSetExtractor<Integer> {
 
 	@Override
-	public String extractData(ResultSet rs) throws SQLException,
+	public Integer extractData(ResultSet rs) throws SQLException,
 			DataAccessException {
 
-		String lastId = null;
+		int lastId = 0;
 		if (rs.next()) {
-			lastId = rs.getString("ID");
+			lastId = rs.getInt("orderId");
 		}
 		return lastId;
 	}
