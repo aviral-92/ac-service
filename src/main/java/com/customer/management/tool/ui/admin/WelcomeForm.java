@@ -11,8 +11,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
 import com.customer.management.tool.ui.customer.AddCustomer;
-import com.customer.management.tool.ui.customer.AddNewCategory;
-import com.customer.management.tool.ui.customer.CustomerJob;
+import com.customer.management.tool.ui.customer.job.AddNewCategory;
+import com.customer.management.tool.ui.customer.job.CustomerJob;
 import com.customer.management.tool.ui.customer.GetCustomer;
 import com.customer.management.tool.ui.report.CMTReport;
 

@@ -107,7 +107,7 @@ public class CMTImpl {
 	public String addCustomerJobDetails(CustomerJobDetail customerJobDetail){
 		
 		String response = null;
-		cmtJobDaoImpl.addCustomerJob(customerJobDetail);
+		response = cmtJobDaoImpl.addCustomerJob(customerJobDetail);
 		return response;
 	}
 }

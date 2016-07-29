@@ -181,6 +181,13 @@ ADD CONSTRAINT `OrderIDKey`
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `updated_date` `due_date` DATETIME NOT NULL  ;
 
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` ADD COLUMN `reason` VARCHAR(95) NULL  AFTER `status` ;
+  
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+CHANGE COLUMN `description` `description` VARCHAR(95) NULL ,
+CHANGE COLUMN `warranty` `warranty` DATE NULL ;
+
+ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+CHANGE COLUMN `due_date` `due_date` VARCHAR(45) NOT NULL ;
 
 ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
  ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
@@ -192,6 +199,9 @@ ADD CONSTRAINT `CustomerIDKey`
   REFERENCES `customer_mgmt_tool`.`customer` (`customerId`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
+  
+  ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+CHANGE COLUMN `order_completion` `order_completion` VARCHAR(45) NOT NULL ;
   
   DROP TABLE IF EXISTS `customer_mgmt_tool`.`product`;
   

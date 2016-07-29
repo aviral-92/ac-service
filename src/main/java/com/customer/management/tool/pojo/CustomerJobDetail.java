@@ -5,8 +5,6 @@
  */
 package com.customer.management.tool.pojo;
 
-import java.util.Date;
-
 /**
  *
  * @author amittal
