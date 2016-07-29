@@ -104,7 +104,7 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
 	
   CREATE TABLE IF NOT EXISTS`customer_mgmt_tool`.`customer_job_detail` (
   `job_id` INT NOT NULL AUTO_INCREMENT,
-  `unique_id` INT NOT NULL,
+  `unique_id` VARCHAR(45) ,
   `customer_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `actual_amount` VARCHAR(45) NOT NULL,
