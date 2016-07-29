@@ -22,8 +22,7 @@ public class CustomerJobDetailExtractor implements
 			customerJobDetail = new CustomerJobDetail();
 			customerJobDetail.setJobId(rs.getInt("job_id"));
 			customerJobDetail.setCustomerId(rs.getInt("customer_id"));
-			customerJobDetail.setUnique_Id(rs.getInt("unique_id"));
-			customerJobDetail.setProductId(rs.getInt("product_id"));
+			customerJobDetail.setUnique_Id(rs.getString("unique_id"));
 			customerJobDetail.setActualAmount(rs.getString("actual_amount"));
 			customerJobDetail.setPaidAmount(rs.getString("paid_amount"));
 			customerJobDetail.setDescription(rs.getString("description"));

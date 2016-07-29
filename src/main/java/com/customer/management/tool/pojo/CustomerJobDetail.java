@@ -16,8 +16,8 @@ public class CustomerJobDetail {
 
 	private int jobId;
 	private int customerId;
-	private int unique_Id;
 	private int order_id;
+	private String unique_Id;
 	private String description;
 	private String actualAmount;
 	private String paidAmount;
@@ -61,7 +61,7 @@ public class CustomerJobDetail {
 	/**
 	 * @return the unique_Id
 	 */
-	public int getUnique_Id() {
+	public String getUnique_Id() {
 		return unique_Id;
 	}
 
@@ -69,7 +69,7 @@ public class CustomerJobDetail {
 	 * @param unique_Id
 	 *            the unique_Id to set
 	 */
-	public void setUnique_Id(int unique_Id) {
+	public void setUnique_Id(String unique_Id) {
 		this.unique_Id = unique_Id;
 	}
 

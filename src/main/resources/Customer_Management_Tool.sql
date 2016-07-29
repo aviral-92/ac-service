@@ -175,9 +175,12 @@ ADD CONSTRAINT `OrderIDKey`
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
   
-  ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
-ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
-ADD INDEX `CustomerIDKey_idx` (`customer_id` ASC);
+  ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `unique_id` `unique_id` VARCHAR(45) NULL  
+  AFTER `order_id` , DROP FOREIGN KEY `UniqueIDKey` ;
+
+ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+ ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
+ ADD INDEX `CustomerIDKey_idx` (`customer_id` ASC);
 
 ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
 ADD CONSTRAINT `CustomerIDKey`
@@ -185,3 +188,8 @@ ADD CONSTRAINT `CustomerIDKey`
   REFERENCES `customer_mgmt_tool`.`customer` (`customerId`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
+  
+  DROP TABLE IF EXISTS `customer_mgmt_tool`.`product`;
+  
+  DROP TABLE IF EXISTS `customer_mgmt_tool`.`unique_detail`;
+  
