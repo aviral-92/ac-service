@@ -71,7 +71,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		String queryForOrderMgmt = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
 				+ "order_date) VALUES (?,?,?,?,now()) ";
-		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail  ";
+		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,) VALUES () ";
 		
 		List<Object> args = new ArrayList<Object>();
 		args.add(customerJobDetail.getCustomerId());

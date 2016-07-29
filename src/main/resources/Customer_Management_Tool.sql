@@ -104,7 +104,7 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
 	
   CREATE TABLE IF NOT EXISTS`customer_mgmt_tool`.`customer_job_detail` (
   `job_id` INT NOT NULL AUTO_INCREMENT,
-  `unique_id` VARCHAR(45) ,
+  `unique_id` INT NOT NULL,
   `customer_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `actual_amount` VARCHAR(45) NOT NULL,
@@ -176,7 +176,7 @@ ADD CONSTRAINT `OrderIDKey`
   ON UPDATE NO ACTION;
   
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `unique_id` `unique_id` VARCHAR(45) NULL  
-  AFTER `order_id` , DROP FOREIGN KEY `UniqueIDKey` ;
+  AFTER `order_id` , DROP FOREIGN KEY `UniqueIDKey` , DROP INDEX `UniqueIDKey_idx`  ;
   
   ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` CHANGE COLUMN `updated_date` `due_date` DATETIME NOT NULL  ;
 
