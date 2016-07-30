@@ -104,26 +104,27 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	@Override
 	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
 
-		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId ";
+		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId "
+				+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id WHERE CUST.customerStatus = 'A' AND CAT.category_status = 'A' ";
 		StringBuilder query = new StringBuilder(sql);
 		List<Object> args = new ArrayList<>();
 		if (customerJobDetail.getJobId() > 0) {
-			query.append(" WHERE CJD.job_id = ?");
+			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
 		} else if (customerJobDetail.getOrder_id() > 0) {
-			query.append(" WHERE CJD.order_id = ?");
+			query.append(" AND CJD.order_id = ?");
 			args.add(customerJobDetail.getOrder_id());
 		} else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
-			query.append(" WHERE CJD.unique_id LIKE ?");
+			query.append(" AND CJD.unique_id LIKE ?");
 			args.add("%" + customerJobDetail.getUnique_Id() + "%");
 		} else if (customerJobDetail.getCustomerId() > 0) {
-			query.append(" WHERE CJD.customer_id = ?");
+			query.append(" AND CJD.customer_id = ?");
 			args.add(customerJobDetail.getCustomerId());
 		} else if (!StringUtils.isEmpty(customerJobDetail.getEmail())) {
-			query.append(" WHERE CUST.email = ?");
+			query.append(" AND CUST.email = ?");
 			args.add(customerJobDetail.getEmail());
 		} else if (!StringUtils.isEmpty(customerJobDetail.getMobile())) {
-			query.append(" WHERE CUST.mobile = ?");
+			query.append(" AND CUST.mobile = ?");
 			args.add(customerJobDetail.getMobile());
 		}
 		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(query.toString(), new CustomerJobDetailExtractor(),
