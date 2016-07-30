@@ -4,7 +4,7 @@ public class CMTOrderManagement {
 
 	private int orderId;
 	private int customer_id;
-	private String order_status;
+	private CMTOrderStatus cmtOrderStatus;
 	private String description;
 	private String order_date;
 	private String completion_date;
@@ -38,21 +38,6 @@ public class CMTOrderManagement {
 	 */
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
-	}
-
-	/**
-	 * @return the order_status
-	 */
-	public String getOrder_status() {
-		return order_status;
-	}
-
-	/**
-	 * @param order_status
-	 *            the order_status to set
-	 */
-	public void setOrder_status(String order_status) {
-		this.order_status = order_status;
 	}
 
 	/**
@@ -113,6 +98,14 @@ public class CMTOrderManagement {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public CMTOrderStatus getCmtOrderStatus() {
+		return cmtOrderStatus;
+	}
+
+	public void setCmtOrderStatus(CMTOrderStatus cmtOrderStatus) {
+		this.cmtOrderStatus = cmtOrderStatus;
 	}
 
 }

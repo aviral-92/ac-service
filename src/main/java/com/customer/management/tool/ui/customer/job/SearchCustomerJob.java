@@ -9,7 +9,17 @@ package com.customer.management.tool.ui.customer.job;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
+import com.customer.management.tool.pojo.CMTOrderManagement;
 import com.customer.management.tool.pojo.CustomerJobDetail;
+import com.customer.management.tool.pojo.UserDetailHistory;
+
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -243,11 +253,12 @@ public class SearchCustomerJob extends CMTServiceImpl {
 	private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchButtonActionPerformed
 		// TODO add your handling code here:
 		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
+		CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
 		if (!StringUtils.isEmpty(jobId.getText())) {
 			customerJobDetail.setJobId(Integer.parseInt(jobId.getText()));
 		}
 		if (!StringUtils.isEmpty(orderId.getText())) {
-			customerJobDetail.setOrder_id(Integer.parseInt(orderId.getText()));
+			cmtOrderManagement.setOrderId(Integer.parseInt(orderId.getText()));
 		}
 		if (!StringUtils.isEmpty(custId.getText())) {
 			customerJobDetail.setCustomerId(Integer.parseInt(custId.getText()));
@@ -255,17 +266,43 @@ public class SearchCustomerJob extends CMTServiceImpl {
 		customerJobDetail.setUnique_Id(uniqueId.getText());
 		customerJobDetail.setEmail(email.getText());
 		customerJobDetail.setMobile(mobile.getText());
-		cmtImpl.getOrSearchJobList(customerJobDetail);
+		customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
+		List<CustomerJobDetail> customerJobDetails = cmtImpl.getOrSearchJobList(customerJobDetail);
+		if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
+			display(customerJobDetails);
+		} else {
+			JOptionPane.showMessageDialog(new JFrame(), "No Data Found", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}// GEN-LAST:event_searchButtonActionPerformed
 
 	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
+	public void display(List<CustomerJobDetail> customerJobDetails) {
+
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(new Object[] { "Customer ID", "Name", "Job ID", "Order ID", "Order Status",
+				"Category", "Amount Paid", "Due Date", "Reason", "Warrenty" });
+
+		for (CustomerJobDetail customerJobDetail : customerJobDetails) {
+			
+			model.addRow(new Object[] { customerJobDetail.getCustomerId(), customerJobDetail.getName(),
+					customerJobDetail.getJobId(), customerJobDetail.getCmtOrderManagement().getOrderId(),
+					customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),
+					customerJobDetail.getCmtCategory().getCategory_name(), customerJobDetail.getPaidAmount(),
+					customerJobDetail.getDueDate(), customerJobDetail.getReason(), customerJobDetail.getWarranty() });
+		}
+		jTable1.setModel(model);
+		jTable1.setEnabled(false);
+		// jTable1.setRowSelectionAllowed(true);
+		// jTable1.setCellSelectionEnabled(false);
+		// jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		// selectionTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		model.fireTableDataChanged();
+		// dataChanged(model);
+	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton cancelButton;

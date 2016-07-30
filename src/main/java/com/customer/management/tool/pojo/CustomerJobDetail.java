@@ -13,7 +13,7 @@ package com.customer.management.tool.pojo;
 public class CustomerJobDetail extends Customer {
 
 	private int jobId;
-	private int order_id;
+	// private int order_id;
 	private String unique_Id;
 	private int category_id;
 	private String customer_name;
@@ -29,6 +29,7 @@ public class CustomerJobDetail extends Customer {
 	private String finalAmount;
 	private String updatedDateRetun;
 	private CMTCategory cmtCategory;
+	private CMTOrderManagement cmtOrderManagement;
 
 	/**
 	 * @return the description
@@ -178,14 +179,6 @@ public class CustomerJobDetail extends Customer {
 		this.jobId = jobId;
 	}
 
-	public int getOrder_id() {
-		return order_id;
-	}
-
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
-	}
-
 	/**
 	 * @return the customer_name
 	 */
@@ -252,5 +245,13 @@ public class CustomerJobDetail extends Customer {
 
 	public void setCmtCategory(CMTCategory cmtCategory) {
 		this.cmtCategory = cmtCategory;
+	}
+
+	public CMTOrderManagement getCmtOrderManagement() {
+		return cmtOrderManagement;
+	}
+
+	public void setCmtOrderManagement(CMTOrderManagement cmtOrderManagement) {
+		this.cmtOrderManagement = cmtOrderManagement;
 	}
 }

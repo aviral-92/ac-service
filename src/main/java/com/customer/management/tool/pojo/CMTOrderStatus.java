@@ -2,36 +2,37 @@ package com.customer.management.tool.pojo;
 
 public class CMTOrderStatus {
 
-	private String status_code;
-	private String status_value;
+	private String order_status;
+	private String order_value;
 
 	/**
-	 * @return the status_code
+	 * @return the order_status
 	 */
-	public String getStatus_code() {
-		return status_code;
+	public String getOrder_status() {
+		return order_status;
 	}
 
 	/**
-	 * @param status_code
-	 *            the status_code to set
+	 * @param order_status
+	 *            the order_status to set
 	 */
-	public void setStatus_code(String status_code) {
-		this.status_code = status_code;
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
 	}
 
 	/**
-	 * @return the status_value
+	 * @return the order_value
 	 */
-	public String getStatus_value() {
-		return status_value;
+	public String getOrder_value() {
+		return order_value;
 	}
 
 	/**
-	 * @param status_value
-	 *            the status_value to set
+	 * @param order_value
+	 *            the order_value to set
 	 */
-	public void setStatus_value(String status_value) {
-		this.status_value = status_value;
+	public void setOrder_value(String order_value) {
+		this.order_value = order_value;
 	}
+
 }

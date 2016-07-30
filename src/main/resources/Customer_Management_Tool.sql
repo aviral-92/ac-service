@@ -192,6 +192,9 @@ CHANGE COLUMN `warranty` `warranty` DATE NULL ;
 ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
 CHANGE COLUMN `due_date` `due_date` VARCHAR(45) NOT NULL ;
 
+ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+CHANGE COLUMN `warranty` `warranty` VARCHAR(45) NULL DEFAULT NULL ;
+
 ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
  ADD COLUMN `customer_id` INT NOT NULL AFTER `orderId`,
  ADD INDEX `CustomerIDKey_idx` (`customer_id` ASC);
@@ -210,4 +213,20 @@ CHANGE COLUMN `order_completion` `order_completion` VARCHAR(45) NOT NULL ;
   
   DROP TABLE IF EXISTS `customer_mgmt_tool`.`unique_detail`;
   
- 
+ CREATE TABLE `customer_mgmt_tool`.`customer_order_status` (
+  `order_status` VARCHAR(4) NOT NULL,
+  `order_value` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`order_status`));
+  
+INSERT INTO `customer_mgmt_tool`.`customer_order_status` (`order_status`, `order_value`) VALUES ('C', 'Completed');
+INSERT INTO `customer_mgmt_tool`.`customer_order_status` (`order_status`, `order_value`) VALUES ('P', 'Pending');
+INSERT INTO `customer_mgmt_tool`.`customer_order_status` (`order_status`, `order_value`) VALUES ('R', 'Reopen');
+
+ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+ADD INDEX `OrderStatusKey_idx` (`order_status` ASC);
+ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+ADD CONSTRAINT `OrderStatusKey`
+  FOREIGN KEY (`order_status`)
+  REFERENCES `customer_mgmt_tool`.`customer_order_status` (`order_status`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
