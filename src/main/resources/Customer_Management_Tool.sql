@@ -69,7 +69,7 @@ ADD CONSTRAINT `Foreign_Key_Username`
   ON UPDATE NO ACTION;
   
   ALTER TABLE `customer_mgmt_tool`.`user_detail_history` 
-ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'a' AFTER `description`;
+ADD COLUMN `status` VARCHAR(5) NOT NULL DEFAULT 'A' AFTER `description`;
 
 
 CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
@@ -83,7 +83,7 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
   PRIMARY KEY (`customerId`) 
 );
 
-ALTER TABLE `customer_mgmt_tool`.`customer` ADD COLUMN `status` VARCHAR(4) NOT NULL  AFTER `RegisteredDate` ;
+ALTER TABLE `customer_mgmt_tool`.`customer` ADD COLUMN `customerStatus` VARCHAR(4) NOT NULL DEFAULT 'A' AFTER `RegisteredDate` ;
 ALTER TABLE `customer_mgmt_tool`.`customer` AUTO_INCREMENT = 1000;
 
 

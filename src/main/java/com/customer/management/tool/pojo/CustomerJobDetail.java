@@ -10,10 +10,9 @@ package com.customer.management.tool.pojo;
  * @author amittal
  */
 
-public class CustomerJobDetail {
+public class CustomerJobDetail extends Customer {
 
 	private int jobId;
-	private int customerId;
 	private int order_id;
 	private String unique_Id;
 	private int category_id;
@@ -22,7 +21,7 @@ public class CustomerJobDetail {
 	private String actualAmount;
 	private String paidAmount;
 	private String updateDate;
-	private String status;
+	private String jobStatus;
 	private String warranty;
 	private String dueDate;
 	private String reason;
@@ -43,21 +42,6 @@ public class CustomerJobDetail {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the customerId
-	 */
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	/**
-	 * @param customerId
-	 *            the customerId to set
-	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
 	}
 
 	/**
@@ -124,7 +108,7 @@ public class CustomerJobDetail {
 	 * @return the status
 	 */
 	public String getStatus() {
-		return status;
+		return jobStatus;
 	}
 
 	/**
@@ -132,7 +116,7 @@ public class CustomerJobDetail {
 	 *            the status to set
 	 */
 	public void setStatus(String status) {
-		this.status = status;
+		this.jobStatus = status;
 	}
 
 	/**

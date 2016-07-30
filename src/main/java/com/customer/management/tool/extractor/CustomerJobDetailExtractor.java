@@ -1,6 +1,7 @@
 package com.customer.management.tool.extractor;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,13 @@ public class CustomerJobDetailExtractor implements
 			customerJobDetail.setWarranty(rs.getDate("warranty").toString());
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetail.setReason(rs.getString("reason"));
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columns = rsmd.getColumnCount();
+			for (int x = 1; x <= columns; x++) {
+				if ("customerId".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setCategory_id(rs.getInt("customerId"));
+				}
+			}
 			customerJobDetails.add(customerJobDetail);
 		}
 		return customerJobDetails;

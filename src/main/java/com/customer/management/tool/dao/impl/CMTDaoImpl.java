@@ -16,7 +16,7 @@ import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.CMTDao;
-import com.customer.management.tool.extractor.CMTExtractor;
+import com.customer.management.tool.extractor.CMTCustomerExtractor;
 import com.customer.management.tool.extractor.CMTTypesExtractor;
 import com.customer.management.tool.extractor.CustomerJobDetailExtractor;
 import com.customer.management.tool.pojo.CMTUniqueDetail;
@@ -70,7 +70,7 @@ public class CMTDaoImpl implements CMTDao {
 		args.add(customer.getEmail());
 		args.add(customer.getMobile());
 		List<Customer> response = jdbcTemplate.query(CMTQueryConstant.IS_CUSTOMER_EXIST,
-				new CMTExtractor(), args.toArray());
+				new CMTCustomerExtractor(), args.toArray());
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			isExist = true;
 		}
@@ -121,7 +121,7 @@ public class CMTDaoImpl implements CMTDao {
 		}
 
 		List<Customer> response = jdbcTemplate.query(query.toString(),
-				new CMTExtractor(), args.toArray());
+				new CMTCustomerExtractor(), args.toArray());
 
 		return response;
 	}
@@ -161,7 +161,7 @@ public class CMTDaoImpl implements CMTDao {
 			List<String> args = new ArrayList<>();
 			args.add(customer.getEmail());
 			List<Customer> customerList = jdbcTemplate.query(query,
-					new CMTExtractor(), args.toArray());
+					new CMTCustomerExtractor(), args.toArray());
 			if (!StringUtils.isEmpty(customerList) && customerList.size() > 0) {
 				customer.setCustomerId(customerList.get(0).getCustomerId());
 			}

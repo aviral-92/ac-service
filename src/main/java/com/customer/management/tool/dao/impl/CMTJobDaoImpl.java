@@ -1,7 +1,6 @@
 package com.customer.management.tool.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import com.customer.management.tool.dao.CMTJobDao;
 import com.customer.management.tool.extractor.CMTCategoryExtractor;
 import com.customer.management.tool.extractor.GetLastInsertedIDExtractor;
 import com.customer.management.tool.pojo.CMTCategory;
-import com.customer.management.tool.pojo.CMTOrderManagement;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
 @Component
