@@ -28,6 +28,7 @@ public class CustomerJobDetail extends Customer {
 	private String isWarrantyExpired;
 	private String finalAmount;
 	private String updatedDateRetun;
+	private CMTCategory cmtCategory;
 
 	/**
 	 * @return the description
@@ -208,7 +209,8 @@ public class CustomerJobDetail extends Customer {
 	}
 
 	/**
-	 * @param category_id the category_id to set
+	 * @param category_id
+	 *            the category_id to set
 	 */
 	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
@@ -222,7 +224,8 @@ public class CustomerJobDetail extends Customer {
 	}
 
 	/**
-	 * @param dueDate the dueDate to set
+	 * @param dueDate
+	 *            the dueDate to set
 	 */
 	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
@@ -236,9 +239,18 @@ public class CustomerJobDetail extends Customer {
 	}
 
 	/**
-	 * @param reason the reason to set
+	 * @param reason
+	 *            the reason to set
 	 */
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public CMTCategory getCmtCategory() {
+		return cmtCategory;
+	}
+
+	public void setCmtCategory(CMTCategory cmtCategory) {
+		this.cmtCategory = cmtCategory;
 	}
 }

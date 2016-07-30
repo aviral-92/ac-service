@@ -23,7 +23,7 @@ public class CMTCategoryExtractor implements
 			category = new CMTCategory();
 			category.setCategory_id(rs.getInt("categoryId"));
 			category.setCategory_name(rs.getString("category_name"));
-			category.setStatus(rs.getString("status"));
+			category.setStatus(rs.getString("category_status"));
 			categories.add(category);
 		}
 		return categories;

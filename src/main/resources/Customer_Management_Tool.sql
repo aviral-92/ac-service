@@ -153,6 +153,9 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`product` (
   `status` VARCHAR(4) NOT NULL DEFAULT 'A' ,
   PRIMARY KEY (`categoryId`) );
 
+  ALTER TABLE `customer_mgmt_tool`.`category` 
+CHANGE COLUMN `status` `category_status` VARCHAR(4) NOT NULL DEFAULT 'A' ;
+
 	CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`order_mgmt` (
   `orderId` INT NOT NULL AUTO_INCREMENT,
   `order_status` VARCHAR(15) NOT NULL,
