@@ -45,7 +45,6 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		return categories;
 	}
 
-	
 	@Override
 	public String addCustomerJob(CustomerJobDetail customerJobDetail) {
 
@@ -87,7 +86,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			}
 			int executed = jdbcTemplate.update(queryForCustomerJobDetail, args.toArray());
 			if (executed > 0) {
-				response = "Customer Job details Successfully Added, orderID is " +orderid;
+				response = "Customer Job details Successfully Added, orderID is " + orderid;
 			}
 		}
 		return response;
@@ -101,4 +100,31 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		return id;
 	}
 
+	@Override
+	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
+
+		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId";
+		StringBuilder query = new StringBuilder(sql);
+		List<Object> args = new ArrayList<>();
+		if(!StringUtils.isEmpty(customerJobDetail.getJobId())){
+			query.append("WHERE CJD.job_id = ?");
+			args.add(customerJobDetail.getJobId());
+		}else if(!StringUtils.isEmpty(customerJobDetail.getOrder_id())){
+			query.append("WHERE CJD.order_id = ?");
+			args.add(customerJobDetail.getOrder_id());
+		}else if(!StringUtils.isEmpty(customerJobDetail.getUnique_Id())){
+			query.append("WHERE CJD.unique_id LIKE ?");
+			args.add("%"+customerJobDetail.getUnique_Id()+"%");
+		}else if(!StringUtils.isEmpty(customerJobDetail.getCustomerId())){
+			query.append("WHERE CJD.customer_id = ?");
+			args.add(customerJobDetail.getCustomerId());
+		}else if(!StringUtils.isEmpty(customerJobDetail.getEmail())){
+			query.append("WHERE CUST.email = ?");
+			args.add(customerJobDetail.getEmail());
+		}else if(!StringUtils.isEmpty(customerJobDetail.getMobile())){
+			query.append("WHERE CUST.mobile = ?");
+			args.add(customerJobDetail.getMobile());
+		}
+		return null;
+	}
 }

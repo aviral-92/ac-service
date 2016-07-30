@@ -14,5 +14,7 @@ public interface CMTJobDao {
 	public String addCustomerJob(CustomerJobDetail customerJobDetail);
 	
 	public int getLastInsertedOrderID();
+	
+	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail);
 
 }

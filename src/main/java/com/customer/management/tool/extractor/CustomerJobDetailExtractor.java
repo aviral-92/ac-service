@@ -11,12 +11,10 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
-public class CustomerJobDetailExtractor implements
-		ResultSetExtractor<List<CustomerJobDetail>> {
+public class CustomerJobDetailExtractor implements ResultSetExtractor<List<CustomerJobDetail>> {
 
 	@Override
-	public List<CustomerJobDetail> extractData(ResultSet rs)
-			throws SQLException, DataAccessException {
+	public List<CustomerJobDetail> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		List<CustomerJobDetail> customerJobDetails = new ArrayList<CustomerJobDetail>();
 		CustomerJobDetail customerJobDetail = null;
 		if (rs.next()) {
@@ -38,6 +36,18 @@ public class CustomerJobDetailExtractor implements
 			for (int x = 1; x <= columns; x++) {
 				if ("customerId".equals(rsmd.getColumnName(x))) {
 					customerJobDetail.setCategory_id(rs.getInt("customerId"));
+				} else if ("name".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setName(rs.getString("name"));
+				} else if ("email".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setEmail(rs.getString("email"));
+				} else if ("mobile".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setMobile(rs.getString("mobile"));
+				} else if ("address".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setAddress(rs.getString("address"));
+				} else if ("RegisteredDate".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setRegisteredOn(rs.getString("RegisteredDate"));
+				} else if ("address".equals(rsmd.getColumnName(x))) {
+					customerJobDetail.setAddress(rs.getString("address"));
 				}
 			}
 			customerJobDetails.add(customerJobDetail);
