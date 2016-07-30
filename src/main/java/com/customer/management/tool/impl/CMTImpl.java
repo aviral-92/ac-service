@@ -26,7 +26,7 @@ import com.customer.management.tool.validator.ValidateCustomer;
  * @author amittal
  */
 @Component
-//@Scope("prototype")
+// @Scope("prototype")
 public class CMTImpl {
 
 	@Autowired
@@ -51,8 +51,7 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomer(customer);
 	}
 
-	public String addRepairDetail(CustomerJobDetail customerReparingDetail)
-			throws Exception {
+	public String addRepairDetail(CustomerJobDetail customerReparingDetail) throws Exception {
 
 		validateCustomer.isRepairDetails(customerReparingDetail);
 		return customerDaoImpl.addCustomerRepairDetails(customerReparingDetail);
@@ -63,16 +62,13 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomerId(customer);
 	}
 
-	public List<CustomerJobDetail> getRepairDetailByCustomerId(
-			CustomerJobDetail jobDetail) {
+	public List<CustomerJobDetail> getRepairDetailByCustomerId(CustomerJobDetail jobDetail) {
 
 		List<CustomerJobDetail> customerReparingDetails = new ArrayList<>();
 
-		List<CustomerJobDetail> customerJobDetails = customerDaoImpl
-				.findRepairDetailsByCustomerId(jobDetail);
+		List<CustomerJobDetail> customerJobDetails = customerDaoImpl.findRepairDetailsByCustomerId(jobDetail);
 
-		if (!StringUtils.isEmpty(customerJobDetails)
-				&& !customerJobDetails.isEmpty()) {
+		if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
 			Date date = new Date();
 			for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 				jobDetail = customerJobDetail;
@@ -103,11 +99,16 @@ public class CMTImpl {
 
 		return cmtJobDaoImpl.getCategories();
 	}
-	
-	public String addCustomerJobDetails(CustomerJobDetail customerJobDetail){
-		
+
+	public String addCustomerJobDetails(CustomerJobDetail customerJobDetail) {
+
 		String response = null;
 		response = cmtJobDaoImpl.addCustomerJob(customerJobDetail);
 		return response;
+	}
+
+	public List<CustomerJobDetail> getOrSearchJobList(CustomerJobDetail customerJobDetail) {
+
+		return cmtJobDaoImpl.searchJobOfCustomer(customerJobDetail);
 	}
 }

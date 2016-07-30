@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import com.customer.management.tool.constants.CMTOrderStatusCode;
 import com.customer.management.tool.dao.CMTJobDao;
 import com.customer.management.tool.extractor.CMTCategoryExtractor;
+import com.customer.management.tool.extractor.CustomerJobDetailExtractor;
 import com.customer.management.tool.extractor.GetLastInsertedIDExtractor;
 import com.customer.management.tool.pojo.CMTCategory;
 import com.customer.management.tool.pojo.CustomerJobDetail;
@@ -103,28 +104,31 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	@Override
 	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
 
-		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId";
+		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId ";
 		StringBuilder query = new StringBuilder(sql);
 		List<Object> args = new ArrayList<>();
-		if(!StringUtils.isEmpty(customerJobDetail.getJobId())){
-			query.append("WHERE CJD.job_id = ?");
+		if (customerJobDetail.getJobId() > 0) {
+			query.append(" WHERE CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		}else if(!StringUtils.isEmpty(customerJobDetail.getOrder_id())){
-			query.append("WHERE CJD.order_id = ?");
+		} else if (customerJobDetail.getOrder_id() > 0) {
+			query.append(" WHERE CJD.order_id = ?");
 			args.add(customerJobDetail.getOrder_id());
-		}else if(!StringUtils.isEmpty(customerJobDetail.getUnique_Id())){
-			query.append("WHERE CJD.unique_id LIKE ?");
-			args.add("%"+customerJobDetail.getUnique_Id()+"%");
-		}else if(!StringUtils.isEmpty(customerJobDetail.getCustomerId())){
-			query.append("WHERE CJD.customer_id = ?");
+		} else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
+			query.append(" WHERE CJD.unique_id LIKE ?");
+			args.add("%" + customerJobDetail.getUnique_Id() + "%");
+		} else if (customerJobDetail.getCustomerId() > 0) {
+			query.append(" WHERE CJD.customer_id = ?");
 			args.add(customerJobDetail.getCustomerId());
-		}else if(!StringUtils.isEmpty(customerJobDetail.getEmail())){
-			query.append("WHERE CUST.email = ?");
+		} else if (!StringUtils.isEmpty(customerJobDetail.getEmail())) {
+			query.append(" WHERE CUST.email = ?");
 			args.add(customerJobDetail.getEmail());
-		}else if(!StringUtils.isEmpty(customerJobDetail.getMobile())){
-			query.append("WHERE CUST.mobile = ?");
+		} else if (!StringUtils.isEmpty(customerJobDetail.getMobile())) {
+			query.append(" WHERE CUST.mobile = ?");
 			args.add(customerJobDetail.getMobile());
 		}
-		return null;
+		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(query.toString(), new CustomerJobDetailExtractor(),
+				args.toArray());
+
+		return jobDetails;
 	}
 }

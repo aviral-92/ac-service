@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.customer.management.tool.ui.customer.AddCustomer;
 import com.customer.management.tool.ui.customer.job.AddNewCategory;
 import com.customer.management.tool.ui.customer.job.CustomerJob;
+import com.customer.management.tool.ui.customer.job.SearchCustomerJob;
 import com.customer.management.tool.ui.customer.GetCustomer;
 import com.customer.management.tool.ui.report.CMTReport;
 
@@ -41,6 +42,8 @@ public class WelcomeForm extends javax.swing.JFrame {
 	private CustomerJob customerJob;
 	@Autowired
 	private AddNewCategory addNewCategory;
+	@Autowired
+	private SearchCustomerJob searchCustomerJob;
 
 	/**
 	 * Creates new form WelcomeForm
@@ -58,196 +61,204 @@ public class WelcomeForm extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        user = new javax.swing.JMenu();
-        addUser = new javax.swing.JMenuItem();
-        getUser = new javax.swing.JMenuItem();
-        updateUser = new javax.swing.JMenuItem();
-        deleteUser = new javax.swing.JMenuItem();
-        customer = new javax.swing.JMenu();
-        addCustomer = new javax.swing.JMenuItem();
-        getCustomer = new javax.swing.JMenuItem();
-        updateCustomer = new javax.swing.JMenuItem();
-        deleteCustomer = new javax.swing.JMenuItem();
-        addCustomerJob = new javax.swing.JMenuItem();
-        report = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        userManagement = new javax.swing.JMenu();
-        activateUser = new javax.swing.JMenuItem();
-        deactivateUser = new javax.swing.JMenuItem();
-        userDelete = new javax.swing.JMenuItem();
+		jPanel1 = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		jMenuBar1 = new javax.swing.JMenuBar();
+		user = new javax.swing.JMenu();
+		addUser = new javax.swing.JMenuItem();
+		getUser = new javax.swing.JMenuItem();
+		updateUser = new javax.swing.JMenuItem();
+		deleteUser = new javax.swing.JMenuItem();
+		customer = new javax.swing.JMenu();
+		addCustomer = new javax.swing.JMenuItem();
+		getCustomer = new javax.swing.JMenuItem();
+		updateCustomer = new javax.swing.JMenuItem();
+		deleteCustomer = new javax.swing.JMenuItem();
+		addCustomerJob = new javax.swing.JMenuItem();
+		searchJob = new javax.swing.JMenuItem();
+		report = new javax.swing.JMenu();
+		jMenuItem1 = new javax.swing.JMenuItem();
+		userManagement = new javax.swing.JMenu();
+		activateUser = new javax.swing.JMenuItem();
+		deactivateUser = new javax.swing.JMenuItem();
+		userDelete = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(450, 150, 0, 0));
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setBounds(new java.awt.Rectangle(450, 150, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel1.setText("Welcome Admin");
+		jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+		jLabel1.setText("Welcome Admin");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
-        );
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout
+						.createSequentialGroup().addGap(92, 92, 92).addComponent(jLabel1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(113, Short.MAX_VALUE)));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout
+						.createSequentialGroup().addGap(102, 102, 102).addComponent(jLabel1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(128, Short.MAX_VALUE)));
 
-        user.setText("USER");
+		user.setText("USER");
 
-        addUser.setText("Add User");
-        addUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Clicked(evt);
-            }
-        });
-        user.add(addUser);
+		addUser.setText("Add User");
+		addUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				Clicked(evt);
+			}
+		});
+		user.add(addUser);
 
-        getUser.setText("Get User");
-        getUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                getUserMousePressed(evt);
-            }
-        });
-        user.add(getUser);
+		getUser.setText("Get User");
+		getUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				getUserMousePressed(evt);
+			}
+		});
+		user.add(getUser);
 
-        updateUser.setText("Update User");
-        updateUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                updateUserMousePressed(evt);
-            }
-        });
-        user.add(updateUser);
+		updateUser.setText("Update User");
+		updateUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				updateUserMousePressed(evt);
+			}
+		});
+		user.add(updateUser);
 
-        deleteUser.setText("Delete User");
-        deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                deleteUserMousePressed(evt);
-            }
-        });
-        user.add(deleteUser);
+		deleteUser.setText("Delete User");
+		deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				deleteUserMousePressed(evt);
+			}
+		});
+		user.add(deleteUser);
 
-        jMenuBar1.add(user);
+		jMenuBar1.add(user);
 
-        customer.setText("CUSTOMER");
+		customer.setText("CUSTOMER");
 
-        addCustomer.setText("Add Customer");
-        addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addCustomerMousePressed(evt);
-            }
-        });
-        customer.add(addCustomer);
+		addCustomer.setText("Add Customer");
+		addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				addCustomerMousePressed(evt);
+			}
+		});
+		customer.add(addCustomer);
 
-        getCustomer.setText("Get Customer");
-        getCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                getCustomerMousePressed(evt);
-            }
-        });
-        getCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getCustomerActionPerformed(evt);
-            }
-        });
-        customer.add(getCustomer);
+		getCustomer.setText("Get Customer");
+		getCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				getCustomerMousePressed(evt);
+			}
+		});
+		getCustomer.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				getCustomerActionPerformed(evt);
+			}
+		});
+		customer.add(getCustomer);
 
-        updateCustomer.setText("Update Customer");
-        customer.add(updateCustomer);
+		updateCustomer.setText("Update Customer");
+		customer.add(updateCustomer);
 
-        deleteCustomer.setText("Delete Customer");
-        customer.add(deleteCustomer);
+		deleteCustomer.setText("Delete Customer");
+		customer.add(deleteCustomer);
 
-        addCustomerJob.setText("Add Customer Job");
-        addCustomerJob.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addCustomerJobMousePressed(evt);
-            }
-        });
-        customer.add(addCustomerJob);
+		addCustomerJob.setText("Add Customer Job");
+		addCustomerJob.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				addCustomerJobMousePressed(evt);
+			}
+		});
+		customer.add(addCustomerJob);
 
-        jMenuBar1.add(customer);
+		searchJob.setText("Search Job");
+		searchJob.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				searchJobMousePressed(evt);
+			}
+		});
+		customer.add(searchJob);
 
-        report.setText("REPORT");
+		jMenuBar1.add(customer);
 
-        jMenuItem1.setText("Monthly Report");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
-            }
-        });
-        report.add(jMenuItem1);
+		report.setText("REPORT");
 
-        jMenuBar1.add(report);
+		jMenuItem1.setText("Monthly Report");
+		jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				jMenuItem1MousePressed(evt);
+			}
+		});
+		report.add(jMenuItem1);
 
-        userManagement.setText("USER MANAGEMENT");
+		jMenuBar1.add(report);
 
-        activateUser.setText("Activate User");
-        activateUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                activateUserMousePressed(evt);
-            }
-        });
-        userManagement.add(activateUser);
+		userManagement.setText("USER MANAGEMENT");
 
-        deactivateUser.setText("Deactivate User");
-        deactivateUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                deactivateUserMousePressed(evt);
-            }
-        });
-        userManagement.add(deactivateUser);
+		activateUser.setText("Activate User");
+		activateUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				activateUserMousePressed(evt);
+			}
+		});
+		userManagement.add(activateUser);
 
-        userDelete.setText("Delete User");
-        userDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                userDeleteMousePressed(evt);
-            }
-        });
-        userManagement.add(userDelete);
+		deactivateUser.setText("Deactivate User");
+		deactivateUser.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				deactivateUserMousePressed(evt);
+			}
+		});
+		userManagement.add(deactivateUser);
 
-        jMenuBar1.add(userManagement);
+		userDelete.setText("Delete User");
+		userDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				userDeleteMousePressed(evt);
+			}
+		});
+		userManagement.add(userDelete);
 
-        setJMenuBar(jMenuBar1);
+		jMenuBar1.add(userManagement);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+		setJMenuBar(jMenuBar1);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addGap(23, 23, 23)
+						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(18, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addContainerGap()));
 
-    private void addCustomerJobMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerJobMousePressed
-        // TODO add your handling code here:
-    	dispose();
-    	customerJob.setVisible(true);
-    	customerJob.setTitle("Add Customer Job");
-    }//GEN-LAST:event_addCustomerJobMousePressed
+		pack();
+	}// </editor-fold>//GEN-END:initComponents
+
+	private void addCustomerJobMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_addCustomerJobMousePressed
+		// TODO add your handling code here:
+		dispose();
+		customerJob.setVisible(true);
+		customerJob.setTitle("Add Customer Job");
+	}// GEN-LAST:event_addCustomerJobMousePressed
+
+	private void searchJobMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_searchJobMousePressed
+		// TODO add your handling code here:
+		dispose();
+		searchCustomerJob.setVisible(true);
+		searchCustomerJob.setTitle("Search Customer Job");
+	}// GEN-LAST:event_searchJobMousePressed
 
 	private void activateUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_activateUserMousePressed
 
@@ -334,26 +345,27 @@ public class WelcomeForm extends javax.swing.JFrame {
 	 *            the command line arguments
 	 */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem activateUser;
-    private javax.swing.JMenuItem addCustomer;
-    private javax.swing.JMenuItem addCustomerJob;
-    private javax.swing.JMenuItem addUser;
-    private javax.swing.JMenu customer;
-    private javax.swing.JMenuItem deactivateUser;
-    private javax.swing.JMenuItem deleteCustomer;
-    private javax.swing.JMenuItem deleteUser;
-    private javax.swing.JMenuItem getCustomer;
-    private javax.swing.JMenuItem getUser;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenu report;
-    private javax.swing.JMenuItem updateCustomer;
-    private javax.swing.JMenuItem updateUser;
-    private javax.swing.JMenu user;
-    private javax.swing.JMenuItem userDelete;
-    private javax.swing.JMenu userManagement;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JMenuItem activateUser;
+	private javax.swing.JMenuItem addCustomer;
+	private javax.swing.JMenuItem addCustomerJob;
+	private javax.swing.JMenuItem addUser;
+	private javax.swing.JMenu customer;
+	private javax.swing.JMenuItem deactivateUser;
+	private javax.swing.JMenuItem deleteCustomer;
+	private javax.swing.JMenuItem deleteUser;
+	private javax.swing.JMenuItem getCustomer;
+	private javax.swing.JMenuItem getUser;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JMenuBar jMenuBar1;
+	private javax.swing.JMenuItem jMenuItem1;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JMenu report;
+	private javax.swing.JMenuItem searchJob;
+	private javax.swing.JMenuItem updateCustomer;
+	private javax.swing.JMenuItem updateUser;
+	private javax.swing.JMenu user;
+	private javax.swing.JMenuItem userDelete;
+	private javax.swing.JMenu userManagement;
+	// End of variables declaration//GEN-END:variables
 }
