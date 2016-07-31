@@ -18,6 +18,8 @@ public class Customer {
 	private String mobile;
 	private String registeredOn;
 	private String status;
+	private String lastUpdated;
+	private CMTOrderManagement cmtOrderManagement;
 
 	/**
 	 * @return the name
@@ -115,6 +117,22 @@ public class Customer {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(String lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public CMTOrderManagement getCmtOrderManagement() {
+		return cmtOrderManagement;
+	}
+
+	public void setCmtOrderManagement(CMTOrderManagement cmtOrderManagement) {
+		this.cmtOrderManagement = cmtOrderManagement;
 	}
 
 }

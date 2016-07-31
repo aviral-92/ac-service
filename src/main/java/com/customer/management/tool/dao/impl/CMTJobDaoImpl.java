@@ -1,6 +1,10 @@
 package com.customer.management.tool.dao.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -134,5 +138,12 @@ public class CMTJobDaoImpl implements CMTJobDao {
 				args.toArray());
 
 		return jobDetails;
+	}
+
+	private Date stringToDate(String date) throws ParseException {
+
+		DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+		Date stringTodate = formatter.parse(date);
+		return stringTodate;
 	}
 }

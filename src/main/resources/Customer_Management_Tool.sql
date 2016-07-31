@@ -86,6 +86,8 @@ CREATE  TABLE IF NOT EXISTS `customer_mgmt_tool`.`customer` (
 ALTER TABLE `customer_mgmt_tool`.`customer` ADD COLUMN `customerStatus` VARCHAR(4) NOT NULL DEFAULT 'A' AFTER `RegisteredDate` ;
 ALTER TABLE `customer_mgmt_tool`.`customer` AUTO_INCREMENT = 1000;
 
+ALTER TABLE `customer_mgmt_tool`.`customer` 
+ADD COLUMN `last_updated` VARCHAR(45) NULL DEFAULT NULL AFTER `customerStatus`;
 
 CREATE TABLE IF NOT EXISTS `customer_mgmt_tool`.`unique_detail` (
   `unique_id` INT NOT NULL,

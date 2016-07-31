@@ -29,7 +29,7 @@ public class CustomerJobDetail extends Customer {
 	private String finalAmount;
 	private String updatedDateRetun;
 	private CMTCategory cmtCategory;
-	private CMTOrderManagement cmtOrderManagement;
+	// private CMTOrderManagement cmtOrderManagement;
 
 	/**
 	 * @return the description
@@ -245,13 +245,5 @@ public class CustomerJobDetail extends Customer {
 
 	public void setCmtCategory(CMTCategory cmtCategory) {
 		this.cmtCategory = cmtCategory;
-	}
-
-	public CMTOrderManagement getCmtOrderManagement() {
-		return cmtOrderManagement;
-	}
-
-	public void setCmtOrderManagement(CMTOrderManagement cmtOrderManagement) {
-		this.cmtOrderManagement = cmtOrderManagement;
 	}
 }
