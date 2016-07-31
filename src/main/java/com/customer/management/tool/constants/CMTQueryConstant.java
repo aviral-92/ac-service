@@ -36,8 +36,8 @@ public class CMTQueryConstant {
 
 	public static String AC_SERVICE = "SELECT * FROM ac_type";
 
-	public static String ADDCUSTOMER = "INSERT INTO customer (customerId,name,email,address,mobile,RegisteredDate) "
-			+ "VALUES (0,?,?,?,?,NOW())";
+	public static String ADDCUSTOMER = "INSERT INTO customer (customerId,name,email,address,mobile,RegisteredDate,last_updated) "
+			+ "VALUES (0,?,?,?,?,NOW(),?)";
 
 	public static String IS_CUSTOMER_EXIST = "SELECT * FROM customer WHERE email = ? OR mobile = ?";
 

@@ -6,6 +6,7 @@
 package com.customer.management.tool.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,12 @@ public class CMTDaoImpl implements CMTDao {
 
 		String response = null;
 		if (!isExist(customer)) {
-			List<String> args = new ArrayList<>();
+			List<Object> args = new ArrayList<>();
 			args.add(customer.getName());
 			args.add(customer.getEmail());
 			args.add(customer.getAddress());
 			args.add(customer.getMobile());
+			args.add(new Date());
 			int result = jdbcTemplate.update(CMTQueryConstant.ADDCUSTOMER,
 					args.toArray());
 			if (result > 0) {
