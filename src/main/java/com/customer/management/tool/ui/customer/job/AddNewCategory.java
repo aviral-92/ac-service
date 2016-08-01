@@ -43,88 +43,139 @@ public class AddNewCategory extends CMTServiceImpl {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed"
+	// desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        categoryText = new javax.swing.JTextField();
-        Add = new javax.swing.JButton();
-        close = new javax.swing.JButton();
+		jPanel1 = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		categoryText = new javax.swing.JTextField();
+		Add = new javax.swing.JButton();
+		close = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add New Category", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null,
+				"Add New Category",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        jLabel1.setText("Category Name");
+		jLabel1.setText("Category Name");
 
-        Add.setText("ADD");
-        Add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
-            }
-        });
+		Add.setText("ADD");
+		Add.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				AddActionPerformed(evt);
+			}
+		});
 
-        close.setText("CLOSE");
-        close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeActionPerformed(evt);
-            }
-        });
+		close.setText("CLOSE");
+		close.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				closeActionPerformed(evt);
+			}
+		});
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29)
-                        .addComponent(categoryText, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(close)
-                        .addGap(18, 18, 18)
-                        .addComponent(Add)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(categoryText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Add)
-                    .addComponent(close))
-                .addGap(19, 19, 19))
-        );
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
+				jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout
+				.setHorizontalGroup(jPanel1Layout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanel1Layout
+										.createSequentialGroup()
+										.addGroup(
+												jPanel1Layout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.LEADING)
+														.addGroup(
+																jPanel1Layout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				jLabel1)
+																		.addGap(29,
+																				29,
+																				29)
+																		.addComponent(
+																				categoryText,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				119,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																jPanel1Layout
+																		.createSequentialGroup()
+																		.addGap(59,
+																				59,
+																				59)
+																		.addComponent(
+																				close)
+																		.addGap(18,
+																				18,
+																				18)
+																		.addComponent(
+																				Add)))
+										.addContainerGap(29, Short.MAX_VALUE)));
+		jPanel1Layout
+				.setVerticalGroup(jPanel1Layout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanel1Layout
+										.createSequentialGroup()
+										.addGap(19, 19, 19)
+										.addGroup(
+												jPanel1Layout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(jLabel1)
+														.addComponent(
+																categoryText,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+												28, Short.MAX_VALUE)
+										.addGroup(
+												jPanel1Layout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(Add)
+														.addComponent(close))
+										.addGap(19, 19, 19)));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+				getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanel1,
+								javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanel1,
+								javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)));
 
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+		pack();
+		setLocationRelativeTo(null);
+	}// </editor-fold>//GEN-END:initComponents
 
 	private void AddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddActionPerformed
 		// TODO add your handling code here:
@@ -133,11 +184,17 @@ public class AddNewCategory extends CMTServiceImpl {
 			category.setCategory_name(categoryText.getText());
 			String response = cmtImpl.addNewCategory(category);
 			if (response.contains("Successful")) {
+				JOptionPane.showMessageDialog(new JFrame(), response,
+						"Success", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(), response, "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(new JFrame(), "Error",
-					"Please provide some input", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(),
+					"Please provide some input", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}// GEN-LAST:event_AddActionPerformed
 
@@ -151,11 +208,11 @@ public class AddNewCategory extends CMTServiceImpl {
 	 *            the command line arguments
 	 */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
-    private javax.swing.JTextField categoryText;
-    private javax.swing.JButton close;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton Add;
+	private javax.swing.JTextField categoryText;
+	private javax.swing.JButton close;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JPanel jPanel1;
+	// End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.customer.management.tool.cache.CacheManager;
 import com.customer.management.tool.constants.CMTOrderStatusCode;
 import com.customer.management.tool.dao.CMTJobDao;
 import com.customer.management.tool.extractor.CMTCategoryExtractor;
@@ -31,22 +32,39 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	public String addCategory(CMTCategory category) {
 
 		String response = null;
-		String query = "INSERT INTO CATEGORY (category_name) values (?)";
-		if (!StringUtils.isEmpty(category) && !StringUtils.isEmpty(category.getCategory_name())) {
-			Object[] args = { category.getCategory_name() };
-			int executed = jdbcTemplate.update(query, args);
-			if (executed > 0) {
-				response = "Category Successfully inserted";
+		if (!isCategoryExist(category)) {
+			String query = "INSERT INTO CATEGORY (category_name) values (?)";
+			if (!StringUtils.isEmpty(category)
+					&& !StringUtils.isEmpty(category.getCategory_name())) {
+				Object[] args = { category.getCategory_name().toLowerCase() };
+				int executed = jdbcTemplate.update(query, args);
+				if (executed > 0) {
+					response = "Category Successfully Added";
+				}
 			}
+		} else {
+			response = category.getCategory_name() + " already exist ";
 		}
 		return response;
+	}
+
+	private boolean isCategoryExist(CMTCategory category) {
+
+		boolean exist = false;
+		if (!StringUtils.isEmpty(category.getCategory_name())
+				&& CacheManager.categoryMap.containsValue(category
+						.getCategory_name().toLowerCase())) {
+			exist = true;
+		}
+		return exist;
 	}
 
 	@Override
 	public List<CMTCategory> getCategories() {
 
 		String query = "SELECT * FROM CATEGORY ";
-		List<CMTCategory> categories = jdbcTemplate.query(query, new CMTCategoryExtractor());
+		List<CMTCategory> categories = jdbcTemplate.query(query,
+				new CMTCategoryExtractor());
 		return categories;
 	}
 
@@ -89,9 +107,11 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			} else {
 				args.add(customerJobDetail.getReason());
 			}
-			int executed = jdbcTemplate.update(queryForCustomerJobDetail, args.toArray());
+			int executed = jdbcTemplate.update(queryForCustomerJobDetail,
+					args.toArray());
 			if (executed > 0) {
-				response = "Customer Job details Successfully Added, orderID is " + orderid;
+				response = "Customer Job details Successfully Added, orderID is "
+						+ orderid;
 			}
 		}
 		return response;
@@ -106,7 +126,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	}
 
 	@Override
-	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
+	public List<CustomerJobDetail> searchJobOfCustomer(
+			CustomerJobDetail customerJobDetail) {
 
 		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId "
 				+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
@@ -117,7 +138,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		if (customerJobDetail.getJobId() > 0) {
 			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		} else if (!StringUtils.isEmpty(customerJobDetail.getCmtOrderManagement())
+		} else if (!StringUtils.isEmpty(customerJobDetail
+				.getCmtOrderManagement())
 				&& customerJobDetail.getCmtOrderManagement().getOrderId() > 0) {
 			query.append(" AND CJD.order_id = ?");
 			args.add(customerJobDetail.getCmtOrderManagement().getOrderId());
@@ -134,7 +156,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			query.append(" AND CUST.mobile = ?");
 			args.add(customerJobDetail.getMobile());
 		}
-		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(query.toString(), new CustomerJobDetailExtractor(),
+		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(
+				query.toString(), new CustomerJobDetailExtractor(),
 				args.toArray());
 
 		return jobDetails;

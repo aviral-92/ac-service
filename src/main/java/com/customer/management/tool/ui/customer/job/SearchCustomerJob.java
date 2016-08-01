@@ -282,13 +282,13 @@ public class SearchCustomerJob extends CMTServiceImpl {
 	public void display(List<CustomerJobDetail> customerJobDetails) {
 
 		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(new Object[] { "Customer ID", "Name", "Job ID", "Order ID", "Order Status",
+		model.setColumnIdentifiers(new Object[] { "Customer ID", "Name", /*"Job ID",*/ "Order ID", "Order Status",
 				"Category", "Amount Paid", "Due Date", "Reason", "Warrenty" });
 
 		for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 			
 			model.addRow(new Object[] { customerJobDetail.getCustomerId(), customerJobDetail.getName(),
-					customerJobDetail.getJobId(), customerJobDetail.getCmtOrderManagement().getOrderId(),
+					/*customerJobDetail.getJobId(),*/ customerJobDetail.getCmtOrderManagement().getOrderId(),
 					customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),
 					customerJobDetail.getCmtCategory().getCategory_name(), customerJobDetail.getPaidAmount(),
 					customerJobDetail.getDueDate(), customerJobDetail.getReason(), customerJobDetail.getWarranty() });
