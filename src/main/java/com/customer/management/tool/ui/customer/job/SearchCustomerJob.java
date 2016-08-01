@@ -6,21 +6,18 @@
 
 package com.customer.management.tool.ui.customer.job;
 
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTOrderManagement;
 import com.customer.management.tool.pojo.CustomerJobDetail;
-import com.customer.management.tool.pojo.UserDetailHistory;
-
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -282,16 +279,16 @@ public class SearchCustomerJob extends CMTServiceImpl {
 	public void display(List<CustomerJobDetail> customerJobDetails) {
 
 		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(new Object[] { "Customer ID", "Name", /*"Job ID",*/ "Order ID", "Order Status",
-				"Category", "Amount Paid", "Due Date", "Reason", "Warrenty" });
+		model.setColumnIdentifiers(new Object[] { "Job ID","Customer ID", "Name", /*"Order ID", "Order Status",*/
+				/*"Category", */"Amount Paid",/* "Due Date",*/ "Reason", "Description" /*"Warrenty"*/ });
 
 		for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 			
-			model.addRow(new Object[] { customerJobDetail.getCustomerId(), customerJobDetail.getName(),
-					/*customerJobDetail.getJobId(),*/ customerJobDetail.getCmtOrderManagement().getOrderId(),
-					customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),
-					customerJobDetail.getCmtCategory().getCategory_name(), customerJobDetail.getPaidAmount(),
-					customerJobDetail.getDueDate(), customerJobDetail.getReason(), customerJobDetail.getWarranty() });
+			model.addRow(new Object[] { customerJobDetail.getJobId(), customerJobDetail.getCustomerId(), customerJobDetail.getName(),
+					 /*customerJobDetail.getCmtOrderManagement().getOrderId(),*/
+					/*customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),*/
+					/*customerJobDetail.getCmtCategory().getCategory_name(),*/ customerJobDetail.getPaidAmount(),
+					/*customerJobDetail.getDueDate(),*/ customerJobDetail.getReason(), customerJobDetail.getDescription() /*customerJobDetail.getWarranty()*/ });
 		}
 		jTable1.setModel(model);
 		jTable1.setEnabled(false);
