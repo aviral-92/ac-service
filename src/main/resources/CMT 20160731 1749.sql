@@ -305,7 +305,12 @@ INSERT INTO `userdetail` (`userId`,`name`,`email`,`mobile`,`username`,`registere
  (9,'Avi','hhh@mail.com','8523697410','lll','2016-07-28 07:37:48','A');
 /*!40000 ALTER TABLE `userdetail` ENABLE KEYS */;
 
-
+ALTER TABLE `customer_mgmt_tool`.`customer_job_detail` 
+CHANGE COLUMN `unique_id` `unique_id` VARCHAR(45) NULL DEFAULT 'Not Specified'  
+, CHANGE COLUMN `description` `description` VARCHAR(95) NULL DEFAULT 'Not Specified'  
+, CHANGE COLUMN `due_date` `due_date` DATE NOT NULL  
+, CHANGE COLUMN `warranty` `warranty` VARCHAR(45) NULL DEFAULT 'Not Specified'  
+, CHANGE COLUMN `reason` `reason` VARCHAR(95) NULL DEFAULT 'Not Specified'  ;
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

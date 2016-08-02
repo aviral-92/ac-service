@@ -74,22 +74,30 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		String response = null;
 		String queryForOrderMgmt = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
 				+ "order_date) VALUES (?,?,?,?,now()) ";
+		String queryForOrderMgmtNow = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
+				+ "order_date) VALUES (?,?,?,NOW(),now()) ";
 		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
-				+ "paid_amount,description,due_date,warranty,reason) VALUES (?,?,?,?,?,?,?,?,?,?) ";
+				+ "paid_amount,description,due_date,warranty,reason) VALUES (?,?,?,?,?,?,?,STR_TO_DATE(?,'%d,%m,%Y %h,%m,%s'),?,?) ";
+		String queryForCustomerJobDetailNow = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
+				+ "paid_amount,description,warranty,reason,due_date) VALUES (?,?,?,?,?,?,?,?,?,NOW()) ";
 
 		List<Object> args = new ArrayList<Object>();
 		args.add(customerJobDetail.getCustomerId());
 		args.add(customerJobDetail.getDescription());
 		if (StringUtils.isEmpty(customerJobDetail.getDueDate())) {
-			customerJobDetail.setDueDate(new Date().toString());
+			// customerJobDetail.setDueDate(new Date().toString());
 			args.add(CMTOrderStatusCode.COMPLETED.getPrperty());
-			args.add(customerJobDetail.getDueDate());
+			// args.add(customerJobDetail.getDueDate());
 		} else {
 			args.add(CMTOrderStatusCode.PENDING.getPrperty());
 			args.add(customerJobDetail.getDueDate());
 		}
-
-		int execute = jdbcTemplate.update(queryForOrderMgmt, args.toArray());
+		int execute = 0;
+		if (customerJobDetail.getDueDate() != null) {
+			execute = jdbcTemplate.update(queryForOrderMgmt, args.toArray());
+		} else {
+			execute = jdbcTemplate.update(queryForOrderMgmtNow, args.toArray());
+		}
 		if (execute > 0) {
 			int orderid = getLastInsertedOrderID();
 			args = new ArrayList<Object>();
@@ -99,7 +107,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			args.add(customerJobDetail.getUnique_Id());
 			args.add(customerJobDetail.getActualAmount());
 			args.add(customerJobDetail.getPaidAmount());
-			args.add(customerJobDetail.getDescription());
+
 			args.add(customerJobDetail.getDueDate());
 			args.add(customerJobDetail.getWarranty());
 			if (StringUtils.isEmpty(customerJobDetail.getReason())) {
@@ -107,8 +115,16 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			} else {
 				args.add(customerJobDetail.getReason());
 			}
-			int executed = jdbcTemplate.update(queryForCustomerJobDetail,
-					args.toArray());
+			int executed = 0;
+			if (customerJobDetail.getDueDate() != null) {
+				args.add(customerJobDetail.getDescription());
+				executed = jdbcTemplate.update(queryForCustomerJobDetail,
+						args.toArray());
+			} else {
+				executed = jdbcTemplate.update(queryForCustomerJobDetailNow,
+						args.toArray());
+			}
+
 			if (executed > 0) {
 				response = "Customer Job details Successfully Added, orderID is "
 						+ orderid;
@@ -161,6 +177,26 @@ public class CMTJobDaoImpl implements CMTJobDao {
 				args.toArray());
 
 		return jobDetails;
+	}
+
+	public List<CustomerJobDetail> jobByDate(Date startDate, Date endDate, boolean pending) {
+
+		List<CustomerJobDetail> customerJobDetails = new ArrayList<>();
+		String query = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.order_mgmt AS "
+				+ " OM ON CJD.order_id = OM.orderId INNER JOIN customer_mgmt_tool.customer_order_status AS "
+				+ " OS ON OM.order_status = OS.order_status where CJD.due_date >= ? AND CJD.due_date <= ?  ";
+		StringBuilder stringBuilder = new StringBuilder(query);
+		if (!StringUtils.isEmpty(startDate) && !StringUtils.isEmpty(endDate)) {
+			if(pending){
+				stringBuilder.append(" AND OS.order_status = 'P'");
+			}else{
+				stringBuilder.append(" AND OS.order_status = 'UC'");
+			}
+			Object[] args = { startDate, endDate };
+			customerJobDetails = jdbcTemplate.query(stringBuilder.toString(),
+					new CustomerJobDetailExtractor(), args);
+		}
+		return customerJobDetails;
 	}
 
 	private Date stringToDate(String date) throws ParseException {
