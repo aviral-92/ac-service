@@ -274,6 +274,7 @@ public class SearchCustomerJob extends CMTServiceImpl {
 
 	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		// TODO add your handling code here:
+                
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
 	public void display(List<CustomerJobDetail> customerJobDetails) {

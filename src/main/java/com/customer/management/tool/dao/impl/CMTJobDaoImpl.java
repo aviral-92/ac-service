@@ -190,7 +190,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			if(pending){
 				stringBuilder.append(" AND OS.order_status = 'P'");
 			}else{
-				stringBuilder.append(" AND OS.order_status = 'UC'");
+				stringBuilder.append(" AND OS.order_status = 'UP'");
 			}
 			Object[] args = { startDate, endDate };
 			customerJobDetails = jdbcTemplate.query(stringBuilder.toString(),

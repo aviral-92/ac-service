@@ -155,6 +155,7 @@ INSERT INTO `customer_order_status` (`order_status`,`order_value`) VALUES
  ('C','Completed'),
  ('P','Pending'),
  ('R','Reopen');
+ ('UP','Under Process');
 /*!40000 ALTER TABLE `customer_order_status` ENABLE KEYS */;
 
 

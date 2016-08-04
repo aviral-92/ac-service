@@ -86,8 +86,6 @@ public class WelcomeForm extends javax.swing.JFrame {
         getCustomer = new javax.swing.JMenuItem();
         updateCustomer = new javax.swing.JMenuItem();
         deleteCustomer = new javax.swing.JMenuItem();
-        addCustomerJob = new javax.swing.JMenuItem();
-        searchJob = new javax.swing.JMenuItem();
         report = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         userManagement = new javax.swing.JMenu();
@@ -96,6 +94,8 @@ public class WelcomeForm extends javax.swing.JFrame {
         userDelete = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         byDate = new javax.swing.JMenuItem();
+        addCustomerJob = new javax.swing.JMenuItem();
+        searchJob = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -109,6 +109,8 @@ public class WelcomeForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(450, 150, 0, 0));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "WELCOME ADMIN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel1.setText("Welcome Admin");
@@ -195,22 +197,6 @@ public class WelcomeForm extends javax.swing.JFrame {
         deleteCustomer.setText("Delete Customer");
         customer.add(deleteCustomer);
 
-        addCustomerJob.setText("Add Customer Job");
-        addCustomerJob.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addCustomerJobMousePressed(evt);
-            }
-        });
-        customer.add(addCustomerJob);
-
-        searchJob.setText("Search Job");
-        searchJob.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                searchJobMousePressed(evt);
-            }
-        });
-        customer.add(searchJob);
-
         jMenuBar1.add(customer);
 
         report.setText("REPORT");
@@ -263,6 +249,22 @@ public class WelcomeForm extends javax.swing.JFrame {
         });
         jMenu3.add(byDate);
 
+        addCustomerJob.setText("Add Customer Job");
+        addCustomerJob.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addCustomerJobMousePressed(evt);
+            }
+        });
+        jMenu3.add(addCustomerJob);
+
+        searchJob.setText("Search Job");
+        searchJob.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                searchJobMousePressed(evt);
+            }
+        });
+        jMenu3.add(searchJob);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -274,7 +276,7 @@ public class WelcomeForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
