@@ -5,6 +5,8 @@
  */
 package com.customer.management.tool.ui.customer.job;
 
+import java.text.SimpleDateFormat;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -506,17 +508,19 @@ public class CustomerJob extends CMTServiceImpl {
 		cmtOrderManagement.setCustomerId(Integer.parseInt(customerIdtxt
 				.getText()));
 		cmtOrderManagement.setCustomer_name(customerNameTxt.getText());
-		cmtOrderManagement.setCategory_id(categoryList.getSelectedIndex());
+		cmtOrderManagement.setCategory_id(categoryList.getSelectedIndex()+1);
 		cmtOrderManagement.setActualAmount(actualAmountTxt.getText());
 		cmtOrderManagement.setPaidAmount(paidAmountTxt.getText());
 		cmtOrderManagement.setUnique_Id(uniqueIdtxt.getText());
 		cmtOrderManagement.setReason(reasonArea.getText());
 		cmtOrderManagement.setDescription(descriptionArea.getText());
 		if (!StringUtils.isEmpty(warrenty_Date.getDate())) {
-			cmtOrderManagement.setWarranty(warrenty_Date.getDate().toString());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd");
+			cmtOrderManagement.setWarranty(sdf.format(warrenty_Date.getDate()));
 		}
 		if(!StringUtils.isEmpty(DueDateCalendar.getDate())){
-			cmtOrderManagement.setDueDate(DueDateCalendar.getDate().toString());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd");
+			cmtOrderManagement.setDueDate(sdf.format(DueDateCalendar.getDate()));
 		}
 		
 		String response = cmtImpl.addCustomerJobDetails(cmtOrderManagement);

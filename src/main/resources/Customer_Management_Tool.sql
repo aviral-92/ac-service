@@ -232,3 +232,6 @@ ADD CONSTRAINT `OrderStatusKey`
   REFERENCES `customer_mgmt_tool`.`customer_order_status` (`order_status`)
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
+  
+  ALTER TABLE `customer_mgmt_tool`.`order_mgmt` 
+CHANGE COLUMN `order_completion` `order_completion` DATE NOT NULL ;

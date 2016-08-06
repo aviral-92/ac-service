@@ -73,11 +73,11 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		String response = null;
 		String queryForOrderMgmt = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
-				+ "order_date) VALUES (?,?,?,?,now()) ";
+				+ "order_date) VALUES (?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),now()) ";
 		String queryForOrderMgmtNow = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
 				+ "order_date) VALUES (?,?,?,NOW(),now()) ";
 		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
-				+ "paid_amount,description,due_date,warranty,reason) VALUES (?,?,?,?,?,?,?,STR_TO_DATE(?,'%d,%m,%Y %h,%m,%s'),?,?) ";
+				+ "paid_amount,description,due_date,warranty,reason) VALUES (?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),?,?) ";
 		String queryForCustomerJobDetailNow = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
 				+ "paid_amount,description,warranty,reason,due_date) VALUES (?,?,?,?,?,?,?,?,?,NOW()) ";
 
@@ -107,7 +107,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			args.add(customerJobDetail.getUnique_Id());
 			args.add(customerJobDetail.getActualAmount());
 			args.add(customerJobDetail.getPaidAmount());
-
+			args.add(customerJobDetail.getDescription());
 			args.add(customerJobDetail.getDueDate());
 			args.add(customerJobDetail.getWarranty());
 			if (StringUtils.isEmpty(customerJobDetail.getReason())) {
@@ -117,7 +117,6 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			}
 			int executed = 0;
 			if (customerJobDetail.getDueDate() != null) {
-				args.add(customerJobDetail.getDescription());
 				executed = jdbcTemplate.update(queryForCustomerJobDetail,
 						args.toArray());
 			} else {

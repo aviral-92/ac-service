@@ -7,6 +7,9 @@ package com.customer.management.tool.ui.customer.job;
 
 import java.util.List;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -272,7 +275,7 @@ public class JobListByDate extends CMTServiceImpl {
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(new Object[] { "JobID", "Job Status",
-				"Reason", "Due Date", "Start Work" });
+				"Reason", "Due Date", "Start Work", "List" });
 
 		// model.addRow(new Object[]{"1",null,true});
 		for (CustomerJobDetail customerJobDetail : customerJobDetails) {
@@ -284,11 +287,25 @@ public class JobListByDate extends CMTServiceImpl {
 					customerJobDetail.getReason(),
 					customerJobDetail.getDueDate(), false });
 		}
+		JComboBox<String> jc = new JComboBox<>();
+		DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+		comboModel.addElement("Snowboarding");
+		comboModel.addElement("Rowing");
+		comboModel.addElement("Knitting");
+		comboModel.addElement("Speed reading");
+		comboModel.addElement("Pool");
+		comboModel.addElement("None of the above");
+		jc.setModel(comboModel);
+
+//		model.addRow(new Object[]{1,"a","","ssss",true,"data"});
 		jTable1.setModel(model);
 		TableColumn tc = jTable1.getColumnModel().getColumn(4);
 		tc.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
 		tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
-
+		TableColumn tc1 = jTable1.getColumnModel().getColumn(5);
+		tc1.setCellEditor(new DefaultCellEditor(jc));
+//		tc1.setCellEditor(jTable1.getDefaultEditor(JComboBox.class));
+//		tc1.setCellRenderer(jTable1.getDefaultRenderer(JComboBox.class));
 		jTable1.setEnabled(true);
 		jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -300,6 +317,11 @@ public class JobListByDate extends CMTServiceImpl {
 	 *            the command line arguments
 	 */
 
+	public static void main(String[] args) {
+		JobListByDate jj = new JobListByDate();
+		jj.setVisible(true);
+		jj.display(null);
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Search;
     private javax.swing.ButtonGroup buttonGroup1;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.pojo.CMTCategory;
 import com.customer.management.tool.pojo.CMTOrderManagement;
@@ -30,8 +29,9 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			customerJobDetail.setActualAmount(rs.getString("actual_amount"));
 			customerJobDetail.setPaidAmount(rs.getString("paid_amount"));
 			customerJobDetail.setDescription(rs.getString("description"));
-			customerJobDetail.setUpdateDate(rs.getString("due_date"));
-			customerJobDetail.setWarranty(rs.getString("warranty"));
+			customerJobDetail.setUpdateDate(rs.getDate("due_date").toString());
+			customerJobDetail.setDueDate(rs.getDate("due_date").toString());
+			customerJobDetail.setWarranty(rs.getDate("warranty").toString());
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetail.setReason(rs.getString("reason"));
 			CMTCategory cmtCategory = new CMTCategory();
