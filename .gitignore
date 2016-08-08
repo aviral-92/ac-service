@@ -4,5 +4,8 @@ build/
 .factorypath
 .settings
 .springBeans
+.bin
+.jar/
+.lock
 /bin/
 /.project
