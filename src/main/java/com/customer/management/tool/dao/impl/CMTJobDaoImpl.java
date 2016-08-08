@@ -34,11 +34,15 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		String response = null;
 		if (!isCategoryExist(category)) {
 			String query = "INSERT INTO CATEGORY (category_name) values (?)";
-			if (!StringUtils.isEmpty(category)
-					&& !StringUtils.isEmpty(category.getCategory_name())) {
+			String maxRow = "SELECT max(categoryId) AS categoryId FROM customer_mgmt_tool.category";
+			if (!StringUtils.isEmpty(category) && !StringUtils.isEmpty(category.getCategory_name())) {
 				Object[] args = { category.getCategory_name().toLowerCase() };
 				int executed = jdbcTemplate.update(query, args);
 				if (executed > 0) {
+					Integer lastInsertedId = jdbcTemplate.query(maxRow, new GetLastInsertedIDExtractor());
+					if (lastInsertedId > 0) {
+						CacheManager.categoryMap.put(lastInsertedId, category.getCategory_name());
+					}
 					response = "Category Successfully Added";
 				}
 			}
@@ -52,8 +56,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		boolean exist = false;
 		if (!StringUtils.isEmpty(category.getCategory_name())
-				&& CacheManager.categoryMap.containsValue(category
-						.getCategory_name().toLowerCase())) {
+				&& CacheManager.categoryMap.containsValue(category.getCategory_name().toLowerCase())) {
 			exist = true;
 		}
 		return exist;
@@ -63,8 +66,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	public List<CMTCategory> getCategories() {
 
 		String query = "SELECT * FROM CATEGORY ";
-		List<CMTCategory> categories = jdbcTemplate.query(query,
-				new CMTCategoryExtractor());
+		List<CMTCategory> categories = jdbcTemplate.query(query, new CMTCategoryExtractor());
 		return categories;
 	}
 
@@ -110,23 +112,18 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			args.add(customerJobDetail.getDescription());
 			args.add(customerJobDetail.getDueDate());
 			args.add(customerJobDetail.getWarranty());
-			if (StringUtils.isEmpty(customerJobDetail.getReason())) {
-				args.add(null);
-			} else {
+			if (!StringUtils.isEmpty(customerJobDetail.getReason())) {
 				args.add(customerJobDetail.getReason());
 			}
 			int executed = 0;
 			if (customerJobDetail.getDueDate() != null) {
-				executed = jdbcTemplate.update(queryForCustomerJobDetail,
-						args.toArray());
+				executed = jdbcTemplate.update(queryForCustomerJobDetail, args.toArray());
 			} else {
-				executed = jdbcTemplate.update(queryForCustomerJobDetailNow,
-						args.toArray());
+				executed = jdbcTemplate.update(queryForCustomerJobDetailNow, args.toArray());
 			}
 
 			if (executed > 0) {
-				response = "Customer Job details Successfully Added, orderID is "
-						+ orderid;
+				response = "Customer Job details Successfully Added, orderID is " + orderid;
 			}
 		}
 		return response;
@@ -141,20 +138,19 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	}
 
 	@Override
-	public List<CustomerJobDetail> searchJobOfCustomer(
-			CustomerJobDetail customerJobDetail) {
+	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
 
 		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId "
 				+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
 				+ "ON OMGMT.orderId = CJD.order_id INNER JOIN customer_mgmt_tool.customer_order_status AS OS ON OS.order_status =  OMGMT.order_status"
+				+ " INNER JOIN customer_mgmt_tool.customer_order_status AS COS ON OMGMT.order_status = COS.order_status"
 				+ " WHERE CUST.customerStatus = 'A' AND CAT.category_status = 'A' ";
 		StringBuilder query = new StringBuilder(sql);
 		List<Object> args = new ArrayList<>();
 		if (customerJobDetail.getJobId() > 0) {
 			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		} else if (!StringUtils.isEmpty(customerJobDetail
-				.getCmtOrderManagement())
+		} else if (!StringUtils.isEmpty(customerJobDetail.getCmtOrderManagement())
 				&& customerJobDetail.getCmtOrderManagement().getOrderId() > 0) {
 			query.append(" AND CJD.order_id = ?");
 			args.add(customerJobDetail.getCmtOrderManagement().getOrderId());
@@ -171,14 +167,13 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			query.append(" AND CUST.mobile = ?");
 			args.add(customerJobDetail.getMobile());
 		}
-		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(
-				query.toString(), new CustomerJobDetailExtractor(),
+		List<CustomerJobDetail> jobDetails = jdbcTemplate.query(query.toString(), new CustomerJobDetailExtractor(),
 				args.toArray());
 
 		return jobDetails;
 	}
 
-	public List<CustomerJobDetail> jobByDate(Date startDate, Date endDate, boolean pending) {
+	public List<CustomerJobDetail> jobByDate(Date startDate, Date endDate, String pending) {
 
 		List<CustomerJobDetail> customerJobDetails = new ArrayList<>();
 		String query = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.order_mgmt AS "
@@ -186,16 +181,23 @@ public class CMTJobDaoImpl implements CMTJobDao {
 				+ " OS ON OM.order_status = OS.order_status where CJD.due_date >= ? AND CJD.due_date <= ?  ";
 		StringBuilder stringBuilder = new StringBuilder(query);
 		if (!StringUtils.isEmpty(startDate) && !StringUtils.isEmpty(endDate)) {
-			if(pending){
+			if (!StringUtils.isEmpty(pending) && pending.equalsIgnoreCase("pending")) {
 				stringBuilder.append(" AND OS.order_status = 'P'");
-			}else{
+			} else if (!StringUtils.isEmpty(pending) && pending.equalsIgnoreCase("underprocess")) {
 				stringBuilder.append(" AND OS.order_status = 'UP'");
+			} else {
+				stringBuilder.append(" AND OS.order_status = 'C'");
 			}
 			Object[] args = { startDate, endDate };
-			customerJobDetails = jdbcTemplate.query(stringBuilder.toString(),
-					new CustomerJobDetailExtractor(), args);
+			customerJobDetails = jdbcTemplate.query(stringBuilder.toString(), new CustomerJobDetailExtractor(), args);
 		}
 		return customerJobDetails;
+	}
+	
+	public String orderStatusChange(CustomerJobDetail customerJobDetail){
+		// Job Id -- customer_job_detail -- cust_id -- 
+		
+		return "";
 	}
 
 	private Date stringToDate(String date) throws ParseException {

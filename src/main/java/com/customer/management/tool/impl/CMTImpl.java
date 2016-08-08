@@ -111,9 +111,14 @@ public class CMTImpl {
 
 		return cmtJobDaoImpl.searchJobOfCustomer(customerJobDetail);
 	}
-	
-	public List<CustomerJobDetail> searchByDate(Date startDate, Date endDate, boolean pending){
-		
+
+	public List<CustomerJobDetail> searchByDate(Date startDate, Date endDate, String pending) {
+
 		return cmtJobDaoImpl.jobByDate(startDate, endDate, pending);
+	}
+
+	public String changeOrderStatus(CustomerJobDetail customerJobDetail) {
+
+		return cmtJobDaoImpl.orderStatusChange(customerJobDetail);
 	}
 }

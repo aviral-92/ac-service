@@ -28,6 +28,7 @@ public class CustomerJobDetail extends Customer {
 	private String isWarrantyExpired;
 	private String finalAmount;
 	private String updatedDateRetun;
+	private boolean startWork;
 	private CMTCategory cmtCategory;
 	// private CMTOrderManagement cmtOrderManagement;
 
@@ -245,5 +246,13 @@ public class CustomerJobDetail extends Customer {
 
 	public void setCmtCategory(CMTCategory cmtCategory) {
 		this.cmtCategory = cmtCategory;
+	}
+
+	public boolean isStartWork() {
+		return startWork;
+	}
+
+	public void setStartWork(boolean startWork) {
+		this.startWork = startWork;
 	}
 }

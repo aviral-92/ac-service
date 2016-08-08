@@ -31,7 +31,9 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			customerJobDetail.setDescription(rs.getString("description"));
 			customerJobDetail.setUpdateDate(rs.getDate("due_date").toString());
 			customerJobDetail.setDueDate(rs.getDate("due_date").toString());
-			customerJobDetail.setWarranty(rs.getDate("warranty").toString());
+			if (rs.getDate("warranty") != null) {
+				customerJobDetail.setWarranty(rs.getDate("warranty").toString());
+			}
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetail.setReason(rs.getString("reason"));
 			CMTCategory cmtCategory = new CMTCategory();
