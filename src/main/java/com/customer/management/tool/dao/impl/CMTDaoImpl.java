@@ -8,6 +8,8 @@ package com.customer.management.tool.dao.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -71,8 +73,9 @@ public class CMTDaoImpl implements CMTDao {
 		List<String> args = new ArrayList<>();
 		args.add(customer.getEmail());
 		args.add(customer.getMobile());
-		List<Customer> response = jdbcTemplate.query(CMTQueryConstant.IS_CUSTOMER_EXIST,
-				new CMTCustomerExtractor(), args.toArray());
+		List<Customer> response = jdbcTemplate.query(
+				CMTQueryConstant.IS_CUSTOMER_EXIST, new CMTCustomerExtractor(),
+				args.toArray());
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			isExist = true;
 		}
@@ -143,7 +146,7 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(customerReparingDetail.getDescription());
 			args.add(customerReparingDetail.getActualAmount());
 			args.add(customerReparingDetail.getPaidAmount());
-//			args.add(customerReparingDetail.getModel_Vehicle());
+			// args.add(customerReparingDetail.getModel_Vehicle());
 			args.add(customerReparingDetail.getUpdateDate());
 			args.add(customerReparingDetail.getWarranty());
 
@@ -182,14 +185,54 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			System.out.println(System.currentTimeMillis());
-			List<CustomerJobDetail> customerJobDetails = jdbcTemplate
-					.query(query, new CustomerJobDetailExtractor(),
-							args.toArray());
-//			System.out.println(System.currentTimeMillis());
-			if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
+			List<CustomerJobDetail> customerJobDetails = jdbcTemplate.query(
+					query, new CustomerJobDetailExtractor(), args.toArray());
+			// System.out.println(System.currentTimeMillis());
+			if (!StringUtils.isEmpty(customerJobDetails)
+					&& !customerJobDetails.isEmpty()) {
 				return customerJobDetails;
 			}
 		}
 		return null;
+	}
+
+	public void validation(String valid) {
+
+		if (valid != null) {
+			if ((valid.length() >= 6 && valid.length() <= 40)
+					|| (valid.equals("_") || valid.equals("-") || valid
+							.equals("."))) {
+				if (org.apache.commons.lang3.StringUtils.isAlpha(String
+						.valueOf(valid.charAt(0)))
+						&& org.apache.commons.lang3.StringUtils.isAlpha(String
+								.valueOf(valid.charAt(valid.length() - 1)))) {
+					for (int i = 0; i < valid.length(); i++) {
+						if (valid.charAt(i) == '-' || valid.charAt(i) == '_'
+								|| valid.charAt(i) == '.') {
+							if (valid.charAt(i) != valid.charAt(i + 1)) {
+								System.out.println("Hello");
+							}
+						} else if (i == valid.length() - 1) {
+							System.out
+									.println("No Special Character found still it will work");
+						}
+					}
+				} else {
+					System.out
+							.println("Either first Character is not Alphabet or Last one");
+				}
+			} else {
+				System.out
+						.println("String is either less than 6 or greater than 40 or invalid special Characters");
+			}
+		} else {
+			System.out.println("Empty String");
+		}
+	}
+
+	public static void main(String[] args) {
+		CMTDaoImpl cmtDaoImpl = new CMTDaoImpl();
+
+		cmtDaoImpl.validation("a222f0f2l");
 	}
 }

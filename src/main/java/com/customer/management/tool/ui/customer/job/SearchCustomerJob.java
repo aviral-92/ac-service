@@ -296,6 +296,7 @@ public class SearchCustomerJob extends CMTServiceImpl {
 					/*customerJobDetail.getCmtCategory().getCategory_name(),*/ customerJobDetail.getPaidAmount(),
 					/*customerJobDetail.getDueDate(),*/ customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(), customerJobDetail.getDescription() /*customerJobDetail.getWarranty()*/ });
 		}
+		model.fireTableDataChanged();
 		jTable1.setModel(model);
 		jTable1.setEnabled(false);
 		// jTable1.setRowSelectionAllowed(true);
@@ -303,7 +304,7 @@ public class SearchCustomerJob extends CMTServiceImpl {
 		// jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// selectionTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		model.fireTableDataChanged();
+		
 		// dataChanged(model);
 	}
 
