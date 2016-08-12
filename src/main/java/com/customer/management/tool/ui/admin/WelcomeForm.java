@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.customer.management.tool.ui.customer.AddCustomer;
 import com.customer.management.tool.ui.customer.CustomerAllDetails;
 import com.customer.management.tool.ui.customer.job.AddNewCategory;
-import com.customer.management.tool.ui.customer.job.CustomerJob;
+import com.customer.management.tool.ui.customer.job.AddCustomerJob;
 import com.customer.management.tool.ui.customer.job.SearchCustomerJob;
 import com.customer.management.tool.ui.customer.GetCustomer;
 import com.customer.management.tool.ui.customer.job.JobListByDate;
@@ -41,7 +41,7 @@ public class WelcomeForm extends javax.swing.JFrame {
 	@Autowired
 	private UserManagement userMgmt;
 	@Autowired
-	private CustomerJob customerJob;
+	private AddCustomerJob customerJob;
 	@Autowired
 	private AddNewCategory addNewCategory;
 	@Autowired
