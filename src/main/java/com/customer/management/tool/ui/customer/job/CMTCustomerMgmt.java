@@ -112,7 +112,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 				new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
 		addCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/add.png"))); // NOI18N
+				"add.png")); // NOI18N
 		addCustomer.setText("ADD");
 		addCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +121,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		editCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/edit.png"))); // NOI18N
+				"edit.png")); // NOI18N
 		editCustomer.setText("EDIT");
 		editCustomer.setToolTipText("Search Customer and select Row which you want to update.");
 		editCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +131,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		deleteCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/delete.png"))); // NOI18N
+				"delete.png")); // NOI18N
 		deleteCustomer.setText("DELETE");
 		deleteCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +140,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		clearCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/clear.png"))); // NOI18N
+				"clear.png")); // NOI18N
 		clearCustomer.setText("CLEAR");
 		clearCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +149,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		refreshCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/refresh.png"))); // NOI18N
+				"refresh.png")); // NOI18N
 		refreshCustomer.setText("REFRESH");
 		refreshCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +158,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		getCustomer.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/get.png"))); // NOI18N
+				"get.png")); // NOI18N
 		getCustomer.setText("GET");
 		getCustomer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 				new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
 		addJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/add.png"))); // NOI18N
+				"add.png")); // NOI18N
 		addJob.setText("ADD");
 		addJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,7 +356,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		editJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/edit.png"))); // NOI18N
+				"edit.png")); // NOI18N
 		editJob.setText("EDIT");
 		editJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +365,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		deleteJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/delete.png"))); // NOI18N
+				"delete.png")); // NOI18N
 		deleteJob.setText("DELETE");
 		deleteJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,7 +374,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		clearJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/clear.png"))); // NOI18N
+				"clear.png")); // NOI18N
 		clearJob.setText("CLEAR");
 		clearJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,7 +383,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		refreshJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/refresh.png"))); // NOI18N
+				"refresh.png")); // NOI18N
 		refreshJob.setText("REFRESH");
 		refreshJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,7 +392,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		});
 
 		getJob.setIcon(new javax.swing.ImageIcon(
-				getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/get.png"))); // NOI18N
+				"get.png")); // NOI18N
 		getJob.setText("GET");
 		getJob.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
