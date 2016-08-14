@@ -377,12 +377,6 @@ public class JobListByDate extends CMTServiceImpl {
 	 *            the command line arguments
 	 */
 
-	public static void main(String[] args) {
-		JobListByDate jj = new JobListByDate();
-		jj.setVisible(true);
-		jj.display(null);
-	}
-
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton Search;
 	private javax.swing.ButtonGroup buttonGroup1;

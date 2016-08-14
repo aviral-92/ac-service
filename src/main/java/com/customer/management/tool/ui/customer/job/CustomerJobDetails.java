@@ -12,6 +12,10 @@ package com.customer.management.tool.ui.customer.job;
 public class CustomerJobDetails extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form CustomerJobDetails
      */
     public CustomerJobDetails() {

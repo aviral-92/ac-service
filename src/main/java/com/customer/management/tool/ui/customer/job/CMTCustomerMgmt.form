@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -116,12 +116,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="get" alignment="1" max="32767" attributes="0"/>
-                          <Component id="refresh" alignment="0" max="32767" attributes="0"/>
-                          <Component id="add" alignment="0" max="32767" attributes="0"/>
-                          <Component id="edit" alignment="0" max="32767" attributes="0"/>
-                          <Component id="delete" alignment="0" max="32767" attributes="0"/>
-                          <Component id="clear" alignment="0" max="32767" attributes="0"/>
+                          <Component id="getCustomer" alignment="1" max="32767" attributes="0"/>
+                          <Component id="refreshCustomer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="addCustomer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="editCustomer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="deleteCustomer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="clearCustomer" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -131,23 +131,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="add" max="32767" attributes="0"/>
+                      <Component id="addCustomer" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="get" max="32767" attributes="0"/>
+                      <Component id="getCustomer" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="edit" max="32767" attributes="0"/>
+                      <Component id="editCustomer" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="delete" max="32767" attributes="0"/>
+                      <Component id="deleteCustomer" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="clear" max="32767" attributes="0"/>
+                      <Component id="clearCustomer" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="refresh" max="32767" attributes="0"/>
+                      <Component id="refreshCustomer" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="add">
+            <Component class="javax.swing.JButton" name="addCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/add.png"/>
@@ -155,21 +155,22 @@
                 <Property name="text" type="java.lang.String" value="ADD"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="edit">
+            <Component class="javax.swing.JButton" name="editCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/edit.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="EDIT"/>
+                <Property name="toolTipText" type="java.lang.String" value="Search Customer and select Row which you want to update."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="delete">
+            <Component class="javax.swing.JButton" name="deleteCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/delete.png"/>
@@ -177,10 +178,10 @@
                 <Property name="text" type="java.lang.String" value="DELETE"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="clear">
+            <Component class="javax.swing.JButton" name="clearCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/clear.png"/>
@@ -188,10 +189,10 @@
                 <Property name="text" type="java.lang.String" value="CLEAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="refresh">
+            <Component class="javax.swing.JButton" name="refreshCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/refresh.png"/>
@@ -199,10 +200,10 @@
                 <Property name="text" type="java.lang.String" value="REFRESH"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="get">
+            <Component class="javax.swing.JButton" name="getCustomer">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/get.png"/>
@@ -210,7 +211,7 @@
                 <Property name="text" type="java.lang.String" value="GET"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getCustomerActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -222,7 +223,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="table">
+            <Component class="javax.swing.JTable" name="customerTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
@@ -233,10 +234,43 @@
                     <Column editable="true" title="Address" type="java.lang.String"/>
                   </Table>
                 </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="1">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerTableMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -435,12 +469,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="get1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="refresh1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="add1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="edit1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="delete1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="clear1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="getJob" alignment="1" max="32767" attributes="0"/>
+                          <Component id="refreshJob" alignment="0" max="32767" attributes="0"/>
+                          <Component id="addJob" alignment="0" max="32767" attributes="0"/>
+                          <Component id="editJob" alignment="0" max="32767" attributes="0"/>
+                          <Component id="deleteJob" alignment="0" max="32767" attributes="0"/>
+                          <Component id="clearJob" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -450,24 +484,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="add1" max="32767" attributes="0"/>
+                      <Component id="addJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="get1" max="32767" attributes="0"/>
+                      <Component id="getJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="edit1" max="32767" attributes="0"/>
+                      <Component id="editJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="delete1" max="32767" attributes="0"/>
+                      <Component id="deleteJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="clear1" max="32767" attributes="0"/>
+                      <Component id="clearJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="refresh1" max="32767" attributes="0"/>
+                      <Component id="refreshJob" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="add1">
+            <Component class="javax.swing.JButton" name="addJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/add.png"/>
@@ -475,10 +509,10 @@
                 <Property name="text" type="java.lang.String" value="ADD"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addJobActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="edit1">
+            <Component class="javax.swing.JButton" name="editJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/edit.png"/>
@@ -486,10 +520,10 @@
                 <Property name="text" type="java.lang.String" value="EDIT"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editJobActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="delete1">
+            <Component class="javax.swing.JButton" name="deleteJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/delete.png"/>
@@ -497,10 +531,10 @@
                 <Property name="text" type="java.lang.String" value="DELETE"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delete1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteJobActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="clear1">
+            <Component class="javax.swing.JButton" name="clearJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/clear.png"/>
@@ -508,10 +542,10 @@
                 <Property name="text" type="java.lang.String" value="CLEAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clear1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearJobActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="refresh1">
+            <Component class="javax.swing.JButton" name="refreshJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/refresh.png"/>
@@ -519,10 +553,10 @@
                 <Property name="text" type="java.lang.String" value="REFRESH"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refresh1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshJobActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="get1">
+            <Component class="javax.swing.JButton" name="getJob">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/get.png"/>
@@ -530,7 +564,7 @@
                 <Property name="text" type="java.lang.String" value="GET"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="get1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getJobActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -542,15 +576,54 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="customerJobTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="false" title="Job Id" type="java.lang.Integer"/>
+                    <Column editable="false" title="Customer ID" type="java.lang.Integer"/>
+                    <Column editable="false" title="Name" type="java.lang.String"/>
+                    <Column editable="false" title="Amont Paid" type="java.lang.String"/>
+                    <Column editable="true" title="Order Status" type="java.lang.String"/>
+                    <Column editable="true" title="Description" type="java.lang.String"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
             </Component>
@@ -584,11 +657,11 @@
                       </Group>
                       <EmptySpace pref="11" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="mobile1" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="address1" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="email1" alignment="0" pref="119" max="32767" attributes="0"/>
-                          <Component id="name1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="custId1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jobMobile" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jobEmail" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jobUnique" alignment="0" pref="119" max="32767" attributes="0"/>
+                          <Component id="jobCustId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jobId" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -599,28 +672,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="custId1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jobId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="name1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jobCustId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="email1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jobUnique" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="address1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jobEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="mobile1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jobMobile" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
@@ -633,25 +706,25 @@
                 <Property name="text" type="java.lang.String" value="Customer ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="custId1">
+            <Component class="javax.swing.JTextField" name="jobId">
             </Component>
-            <Component class="javax.swing.JTextField" name="name1">
+            <Component class="javax.swing.JTextField" name="jobCustId">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Customer Email"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="email1">
+            <Component class="javax.swing.JTextField" name="jobUnique">
             </Component>
-            <Component class="javax.swing.JTextField" name="address1">
+            <Component class="javax.swing.JTextField" name="jobEmail">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Customer Mobile"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="mobile1">
+            <Component class="javax.swing.JTextField" name="jobMobile">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
