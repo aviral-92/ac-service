@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.configuration.Cipher;
 import com.customer.management.tool.constants.CMTMessageCode;
 import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.constants.UserManagementCode;
@@ -27,8 +26,8 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	@Autowired
-	private Cipher Cipher;
+/*	@Autowired
+	private Cipher Cipher;*/
 
 	private ResourceBundleMessageSource messageSource;
 
@@ -64,7 +63,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 			List<String> args = null;
 			args = new ArrayList<>();
 			args.add(login.getUsername());
-			args.add(Cipher.encode(login.getPassword()));
+			args.add(login.getPassword());
 			args.add(login.getRole());
 			int success = jdbcTemplate.update(CMTQueryConstant.INSERT_IN_LOGIN,
 					args.toArray());

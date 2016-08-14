@@ -1,4 +1,4 @@
-package com.customer.management.tool.configuration;
+/*package com.customer.management.tool.configuration;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -28,3 +28,4 @@ public class Cipher {
 		return new String(decoder, StandardCharsets.UTF_8);
 	}
 }
+*/
