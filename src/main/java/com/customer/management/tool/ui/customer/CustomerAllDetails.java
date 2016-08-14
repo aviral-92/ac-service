@@ -85,7 +85,7 @@ public class CustomerAllDetails extends CMTServiceImpl {
             }
         });
 
-        edit.setIcon(new javax.swing.ImageIcon("edit.png")); // NOI18N
+        edit.setIcon(new javax.swing.ImageIcon("\\edit.png")); // NOI18N
         edit.setText("EDIT");
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class CustomerAllDetails extends CMTServiceImpl {
             }
         });
 
-        delete.setIcon(new javax.swing.ImageIcon("delete.png")); // NOI18N
+        delete.setIcon(new javax.swing.ImageIcon("/customer-management-tool/src/main/resources/delete.png")); // NOI18N
         delete.setText("DELETE");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
