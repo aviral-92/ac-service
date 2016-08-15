@@ -39,8 +39,7 @@ public class CMTDaoImpl implements CMTDao {
 
 	@Override
 	public List<CMTUniqueDetail> getAcTypes() {
-		return jdbcTemplate.query(CMTQueryConstant.AC_SERVICE,
-				new CMTTypesExtractor());
+		return jdbcTemplate.query(CMTQueryConstant.AC_SERVICE, new CMTTypesExtractor());
 	}
 
 	@Override
@@ -54,11 +53,9 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(customer.getAddress());
 			args.add(customer.getMobile());
 			args.add(new Date());
-			int result = jdbcTemplate.update(CMTQueryConstant.ADDCUSTOMER,
-					args.toArray());
+			int result = jdbcTemplate.update(CMTQueryConstant.ADDCUSTOMER, args.toArray());
 			if (result > 0) {
-				response = "Customer " + customer.getName()
-						+ " successfully added";
+				response = "Customer " + customer.getName() + " successfully added";
 			}
 		} else {
 			throw new Exception("Email or Password already Exist");
@@ -73,8 +70,7 @@ public class CMTDaoImpl implements CMTDao {
 		List<String> args = new ArrayList<>();
 		args.add(customer.getEmail());
 		args.add(customer.getMobile());
-		List<Customer> response = jdbcTemplate.query(
-				CMTQueryConstant.IS_CUSTOMER_EXIST, new CMTCustomerExtractor(),
+		List<Customer> response = jdbcTemplate.query(CMTQueryConstant.IS_CUSTOMER_EXIST, new CMTCustomerExtractor(),
 				args.toArray());
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			isExist = true;
@@ -114,26 +110,22 @@ public class CMTDaoImpl implements CMTDao {
 			isAddress = true;
 		}
 		if (isMobile || isEmail || isAddress) {
-			if (!StringUtils.isEmpty(customer.getCustomerId())
-					&& customer.getCustomerId() != -1) {
+			if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
 				query.append(" OR customerId = ? ");
 				args.add(String.valueOf(customer.getCustomerId()));
 			}
-		} else if (!StringUtils.isEmpty(customer.getCustomerId())
-				&& customer.getCustomerId() != -1) {
+		} else if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
 			query.append(" WHERE customerId = ? ");
 			args.add(String.valueOf(customer.getCustomerId()));
 		}
 
-		List<Customer> response = jdbcTemplate.query(query.toString(),
-				new CMTCustomerExtractor(), args.toArray());
+		List<Customer> response = jdbcTemplate.query(query.toString(), new CMTCustomerExtractor(), args.toArray());
 
 		return response;
 	}
 
 	@Override
-	public String addCustomerRepairDetails(
-			CustomerJobDetail customerReparingDetail) {
+	public String addCustomerRepairDetails(CustomerJobDetail customerReparingDetail) {
 
 		String response = null;
 		if (!StringUtils.isEmpty(customerReparingDetail)) {
@@ -160,13 +152,11 @@ public class CMTDaoImpl implements CMTDao {
 
 	public Customer getCustomerId(Customer customer) {
 
-		if (!StringUtils.isEmpty(customer)
-				&& !StringUtils.isEmpty(customer.getEmail())) {
+		if (!StringUtils.isEmpty(customer) && !StringUtils.isEmpty(customer.getEmail())) {
 			String query = "SELECT * FROM customer WHERE email = ? ";
 			List<String> args = new ArrayList<>();
 			args.add(customer.getEmail());
-			List<Customer> customerList = jdbcTemplate.query(query,
-					new CMTCustomerExtractor(), args.toArray());
+			List<Customer> customerList = jdbcTemplate.query(query, new CMTCustomerExtractor(), args.toArray());
 			if (!StringUtils.isEmpty(customerList) && customerList.size() > 0) {
 				customer.setCustomerId(customerList.get(0).getCustomerId());
 			}
@@ -175,64 +165,55 @@ public class CMTDaoImpl implements CMTDao {
 	}
 
 	@Override
-	public List<CustomerJobDetail> findRepairDetailsByCustomerId(
-			CustomerJobDetail reparingDetail) {
+	public List<CustomerJobDetail> findRepairDetailsByCustomerId(CustomerJobDetail reparingDetail) {
 
 		String query = "select * from ( ( select * from ac_service.CUSTOMER_REPAIRING_DETAIL where customer_Id=? ) a , (select * from ac_service.CUSTOMER  where CUSTOMERID =?) b ) where a.customer_Id = b.CUSTOMERID";
 		List<String> args = new ArrayList<>();
-		if (!StringUtils.isEmpty(reparingDetail)
-				&& !StringUtils.isEmpty(reparingDetail.getCustomerId())) {
+		if (!StringUtils.isEmpty(reparingDetail) && !StringUtils.isEmpty(reparingDetail.getCustomerId())) {
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			args.add(String.valueOf(reparingDetail.getCustomerId()));
 			System.out.println(System.currentTimeMillis());
-			List<CustomerJobDetail> customerJobDetails = jdbcTemplate.query(
-					query, new CustomerJobDetailExtractor(), args.toArray());
+			List<CustomerJobDetail> customerJobDetails = jdbcTemplate.query(query, new CustomerJobDetailExtractor(),
+					args.toArray());
 			// System.out.println(System.currentTimeMillis());
-			if (!StringUtils.isEmpty(customerJobDetails)
-					&& !customerJobDetails.isEmpty()) {
+			if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
 				return customerJobDetails;
 			}
 		}
 		return null;
 	}
 
-	public void validation(String valid) {
+	public String updateCustomer(Customer customer) {
 
-		if (valid != null) {
-			if ((valid.length() >= 6 && valid.length() <= 40)
-					|| (valid.equals("_") || valid.equals("-") || valid
-							.equals("."))) {
-				if (org.apache.commons.lang3.StringUtils.isAlpha(String
-						.valueOf(valid.charAt(0)))
-						&& org.apache.commons.lang3.StringUtils.isAlpha(String
-								.valueOf(valid.charAt(valid.length() - 1)))) {
-					for (int i = 0; i < valid.length(); i++) {
-						if (valid.charAt(i) == '-' || valid.charAt(i) == '_'
-								|| valid.charAt(i) == '.') {
-							if (valid.charAt(i) != valid.charAt(i + 1)) {
-								System.out.println("Hello");
-							}
-						} else if (i == valid.length() - 1) {
-							System.out
-									.println("No Special Character found still it will work");
-						}
-					}
-				} else {
-					System.out
-							.println("Either first Character is not Alphabet or Last one");
-				}
+		String response = null;
+		String query = "UPDATE CUSTOMER SET name = ? , email = ? , mobile = ? , address = ? , "
+				+ "customerStatus = ? , last_updated = NOW() WHERE  customerId = ?";
+		if (!StringUtils.isEmpty(customer)) {
+			Object[] args = { customer.getName(), customer.getEmail(), customer.getMobile(), customer.getAddress(),
+					customer.getStatus(), customer.getCustomerId() };
+			int update = jdbcTemplate.update(query, args);
+			if (update > 0) {
+				response = "Successfully Updated";
 			} else {
-				System.out
-						.println("String is either less than 6 or greater than 40 or invalid special Characters");
+				response = "Unable to update it";
 			}
-		} else {
-			System.out.println("Empty String");
 		}
+		return response;
 	}
 
-	public static void main(String[] args) {
-		CMTDaoImpl cmtDaoImpl = new CMTDaoImpl();
+	public String deleteCustomer(String customerId) {
 
-		cmtDaoImpl.validation("a222f0f2l");
+		String response = null;
+		String query = "UPDATE CUSTOMER SET customerStatus = 'D' WHERE customerId = ? ";
+		if (!StringUtils.isEmpty(customerId)) {
+			Object[] args = { customerId };
+			int deleted = jdbcTemplate.update(query, args);
+			if (deleted > 0) {
+				response = customerId + " Successfully Deleted";
+			} else {
+				response = "Unable to delete it";
+			}
+		}
+		return response;
 	}
 }

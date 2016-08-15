@@ -135,7 +135,7 @@
             <Component class="javax.swing.JButton" name="add">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/customer/management/tool/ui/cusomer/pic/add.png"/>
+                  <Image iconType="2" name="G:\Git Projects\customer-management-tool\src\main\resources\add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ADD"/>
               </Properties>

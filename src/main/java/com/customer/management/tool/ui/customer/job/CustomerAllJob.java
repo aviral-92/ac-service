@@ -69,7 +69,7 @@ public class CustomerAllJob extends CMTServiceImpl {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Commands", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/customer/management/tool/ui/cusomer/pic/add.png"))); // NOI18N
+        add.setIcon(new javax.swing.ImageIcon("G:\\Git Projects\\customer-management-tool\\src\\main\\resources\\add.png")); // NOI18N
         add.setText("ADD");
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
