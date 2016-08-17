@@ -28,19 +28,23 @@ public class CMTDataBaseConfiguration {
 	private String dbUsername;
 	@Value("${db.mysql.password}")
 	private String dbPassword;
+	@Value("${db.pawel.jdbcurl}")
+	private String pawelDbURL;
+	@Value("${db.pawel.password}")
+	private String pawelDbPassword;
 
 	@Bean
 	public DataSource getDataSource() {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(dbDriver);
-		if (!System.getProperty("user.name").equalsIgnoreCase("amittal")) {
-			dataSource.setUrl("jdbc:mysql://127.0.0.1/customer_mgmt_tool");
-		} else {
-			dataSource.setUrl(dbURL);
-		}
-		dataSource.setUsername(dbUsername);
-		dataSource.setPassword(dbPassword);
+//		if (!System.getProperty("user.name").equalsIgnoreCase("amittal")) {
+//			dataSource.setUrl("jdbc:mysql://127.0.0.1/customer_mgmt_tool");
+//		} else {
+			dataSource.setUrl(pawelDbURL);
+//		}
+//		dataSource.setUsername(dbUsername);
+		dataSource.setPassword(pawelDbPassword);
 		return dataSource;
 	}
 
