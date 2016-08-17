@@ -73,57 +73,32 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	public String addCustomerJob(CustomerJobDetail customerJobDetail) {
 
 		String response = null;
-		String queryForOrderMgmt = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
-				+ "order_date) VALUES (?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),now()) ";
-		String queryForOrderMgmtNow = "INSERT INTO customer_mgmt_tool.order_mgmt (customer_id, order_description, order_status, order_completion,"
-				+ "order_date) VALUES (?,?,?,NOW(),now()) ";
-		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
-				+ "paid_amount,description,due_date,warranty,reason) VALUES (?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),?,?) ";
-		String queryForCustomerJobDetailNow = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,order_id,unique_id,actual_amount,"
-				+ "paid_amount,description,warranty,reason,due_date) VALUES (?,?,?,?,?,?,?,?,?,NOW()) ";
+		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,unique_id,actual_amount,"
+				+ "paid_amount,description,warranty,reason,due_date,customer_job_status) VALUES (?,?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),?) ";
+		String queryForCustomerJobDetailNow = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,unique_id,actual_amount,"
+				+ "paid_amount,description,warranty,reason,due_date, customer_job_status) VALUES (?,?,?,?,?,?,?,?,NOW(),?) ";
 
+		int executed = 0;
 		List<Object> args = new ArrayList<Object>();
 		args.add(customerJobDetail.getCustomerId());
+		args.add(customerJobDetail.getCategory_id());
+		args.add(customerJobDetail.getUnique_Id());
+		args.add(customerJobDetail.getActualAmount());
+		args.add(customerJobDetail.getPaidAmount());
 		args.add(customerJobDetail.getDescription());
+		args.add(customerJobDetail.getWarranty());
+		args.add(customerJobDetail.getReason());
 		if (StringUtils.isEmpty(customerJobDetail.getDueDate())) {
-			// customerJobDetail.setDueDate(new Date().toString());
 			args.add(CMTOrderStatusCode.COMPLETED.getPrperty());
-			// args.add(customerJobDetail.getDueDate());
+			executed = jdbcTemplate.update(queryForCustomerJobDetailNow, args.toArray());
 		} else {
+			args.add(customerJobDetail.getDueDate());
 			args.add(CMTOrderStatusCode.PENDING.getPrperty());
-			args.add(customerJobDetail.getDueDate());
+			executed = jdbcTemplate.update(queryForCustomerJobDetail, args.toArray());
 		}
-		int execute = 0;
-		if (customerJobDetail.getDueDate() != null) {
-			execute = jdbcTemplate.update(queryForOrderMgmt, args.toArray());
-		} else {
-			execute = jdbcTemplate.update(queryForOrderMgmtNow, args.toArray());
-		}
-		if (execute > 0) {
-			int orderid = getLastInsertedOrderID();
-			args = new ArrayList<Object>();
-			args.add(customerJobDetail.getCustomerId());
-			args.add(customerJobDetail.getCategory_id());
-			args.add(orderid);
-			args.add(customerJobDetail.getUnique_Id());
-			args.add(customerJobDetail.getActualAmount());
-			args.add(customerJobDetail.getPaidAmount());
-			args.add(customerJobDetail.getDescription());
-			args.add(customerJobDetail.getDueDate());
-			args.add(customerJobDetail.getWarranty());
-			if (!StringUtils.isEmpty(customerJobDetail.getReason())) {
-				args.add(customerJobDetail.getReason());
-			}
-			int executed = 0;
-			if (customerJobDetail.getDueDate() != null) {
-				executed = jdbcTemplate.update(queryForCustomerJobDetail, args.toArray());
-			} else {
-				executed = jdbcTemplate.update(queryForCustomerJobDetailNow, args.toArray());
-			}
-
-			if (executed > 0) {
-				response = "Customer Job details Successfully Added, orderID is " + orderid;
-			}
+		if (executed > 0) {
+			int custID = getLastInsertedOrderID();
+			response = "Customer Job details Successfully Added, Job ID is " + custID;
 		}
 		return response;
 	}
@@ -131,11 +106,12 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	@Override
 	public int getLastInsertedOrderID() {
 
-		String query = "SELECT max(orderId) as orderId FROM customer_mgmt_tool.order_mgmt";
+		String query = "SELECT max(job_id) as jobId FROM customer_mgmt_tool.customer_job_detail";
 		int id = jdbcTemplate.query(query, new GetLastInsertedIDExtractor());
 		return id;
 	}
 
+	// TODO Remove Order Details
 	@Override
 	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
 
@@ -192,10 +168,10 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		}
 		return customerJobDetails;
 	}
-	
-	public String orderStatusChange(CustomerJobDetail customerJobDetail){
-		// Job Id -- customer_job_detail -- cust_id -- 
-		
+
+	public String orderStatusChange(CustomerJobDetail customerJobDetail) {
+		// Job Id -- customer_job_detail -- cust_id --
+
 		return "";
 	}
 

@@ -17,8 +17,8 @@ public class GetLastInsertedIDExtractor implements ResultSetExtractor<Integer> {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
 			for (int x = 1; x <= columns; x++) {
-				if ("orderId".equals(rsmd.getColumnName(x))) {
-					lastId = rs.getInt("orderId");
+				if ("jobId".equals(rsmd.getColumnName(x))) {
+					lastId = rs.getInt("jobId");
 				} else if ("categoryId".equals(rsmd.getColumnName(x))) {
 					lastId = rs.getInt("categoryId");
 				}
