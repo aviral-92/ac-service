@@ -133,8 +133,8 @@ public class CMTImpl {
 		return customerDaoImpl.updateCustomer(customerData);
 	}
 
-	public String deleteCustomerWithId(String text) {
+	public String deleteCustomerWithId(String custID) {
 
-		return customerDaoImpl.deleteCustomer(text);
+		return customerDaoImpl.deleteCustomer(custID);
 	}
 }
