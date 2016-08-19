@@ -64,7 +64,7 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	@Override
 	public List<CMTCategory> getCategories() {
 
-		String query = "SELECT * FROM CATEGORY ";
+		String query = "SELECT * FROM customer_mgmt_tool.category ";
 		List<CMTCategory> categories = jdbcTemplate.query(query, new CMTCategoryExtractor());
 		return categories;
 	}

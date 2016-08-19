@@ -38,12 +38,7 @@ public class CMTDataBaseConfiguration {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(dbDriver);
-//		if (!System.getProperty("user.name").equalsIgnoreCase("amittal")) {
-//			dataSource.setUrl("jdbc:mysql://127.0.0.1/customer_mgmt_tool");
-//		} else {
-			dataSource.setUrl(pawelDbURL);
-//		}
-//		dataSource.setUsername(dbUsername);
+		dataSource.setUrl(pawelDbURL);
 		dataSource.setPassword(pawelDbPassword);
 		return dataSource;
 	}
