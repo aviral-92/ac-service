@@ -15,11 +15,11 @@ public class CMTOrderStatusTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTOrderStatus orderStatus = new CMTOrderStatus();
-		orderStatus.setOrder_status("A");
-		orderStatus.setOrder_value("B");
-		assertEquals("A", orderStatus.getOrder_status());
-		assertEquals("B", orderStatus.getOrder_value());
+		OrderStatus orderStatus = new OrderStatus();
+		orderStatus.setOrderStatus("A");
+		orderStatus.setOrderValue("B");
+		assertEquals("A", orderStatus.getOrderStatus());
+		assertEquals("B", orderStatus.getOrderValue());
 	}
 
 }

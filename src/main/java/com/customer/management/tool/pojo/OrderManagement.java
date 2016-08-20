@@ -1,13 +1,13 @@
 package com.customer.management.tool.pojo;
 
-public class CMTOrderManagement {
+public class OrderManagement {
 
 	private int orderId;
-	private int customer_id;
-	private CMTOrderStatus cmtOrderStatus;
+	private int customerId;
+	private OrderStatus orderStatus;
 	private String description;
-	private String order_date;
-	private String completion_date;
+	private String orderDate;
+	private String completionDate;
 	private String status;
 
 	/**
@@ -28,16 +28,16 @@ public class CMTOrderManagement {
 	/**
 	 * @return the customer_id
 	 */
-	public int getCustomer_id() {
-		return customer_id;
+	public int getCustomerId() {
+		return customerId;
 	}
 
 	/**
 	 * @param customer_id
 	 *            the customer_id to set
 	 */
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(int customer_id) {
+		this.customerId = customer_id;
 	}
 
 	/**
@@ -58,31 +58,31 @@ public class CMTOrderManagement {
 	/**
 	 * @return the order_date
 	 */
-	public String getOrder_date() {
-		return order_date;
+	public String getOrderDate() {
+		return orderDate;
 	}
 
 	/**
 	 * @param order_date
 	 *            the order_date to set
 	 */
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
+	public void setOrderDate(String order_date) {
+		this.orderDate = order_date;
 	}
 
 	/**
 	 * @return the completion_date
 	 */
-	public String getCompletion_date() {
-		return completion_date;
+	public String getCompletionDate() {
+		return completionDate;
 	}
 
 	/**
 	 * @param completion_date
 	 *            the completion_date to set
 	 */
-	public void setCompletion_date(String completion_date) {
-		this.completion_date = completion_date;
+	public void setCompletionDate(String completion_date) {
+		this.completionDate = completion_date;
 	}
 
 	/**
@@ -100,12 +100,12 @@ public class CMTOrderManagement {
 		this.status = status;
 	}
 
-	public CMTOrderStatus getCmtOrderStatus() {
-		return cmtOrderStatus;
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setCmtOrderStatus(CMTOrderStatus cmtOrderStatus) {
-		this.cmtOrderStatus = cmtOrderStatus;
+	public void setOrderStatus(OrderStatus cmtOrderStatus) {
+		this.orderStatus = cmtOrderStatus;
 	}
 
 }

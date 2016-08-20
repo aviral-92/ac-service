@@ -15,7 +15,7 @@ public class CMTLoginTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTLogin login = new CMTLogin("john", "abc", "user");
+		Login login = new Login("john", "abc", "user");
 		assertEquals("john", login.getUsername());
 		assertEquals("abc", login.getPassword());
 		assertEquals("user", login.getRole());

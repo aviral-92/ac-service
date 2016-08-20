@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.pojo.Category;
 
 /**
  *
@@ -179,9 +179,9 @@ public class AddNewCategory extends CMTServiceImpl {
 
 	private void AddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddActionPerformed
 		// TODO add your handling code here:
-		CMTCategory category = new CMTCategory();
+		Category category = new Category();
 		if (!StringUtils.isEmpty(categoryText.getText())) {
-			category.setCategory_name(categoryText.getText());
+			category.setName(categoryText.getText());
 			String response = cmtImpl.addNewCategory(category);
 			if (response.contains("Successful")) {
 				JOptionPane.showMessageDialog(new JFrame(), response,

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import com.customer.management.tool.constants.CMTMessageCode;
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -257,7 +257,7 @@ public class AddUser extends CMTServiceImpl {
 
 		try {
 			if (password.getText().equals(cnfPassword.getText())) {
-				CMTLogin login = new CMTLogin(username.getText(), password.getText(),
+				Login login = new Login(username.getText(), password.getText(),
 						choice.getSelectedItem().toString());
 				UserDetailHistory userDetail = new UserDetailHistory(0, username.getText(), name.getText(),
 						email.getText(), mobile.getText(), new Date().toString(), new Date().toString(), "add", "a");

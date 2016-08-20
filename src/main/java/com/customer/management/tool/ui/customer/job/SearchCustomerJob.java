@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTOrderManagement;
+import com.customer.management.tool.pojo.OrderManagement;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.ui.admin.WelcomeForm;
 
@@ -254,7 +254,7 @@ public class SearchCustomerJob extends CMTServiceImpl {
 	private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchButtonActionPerformed
 		// TODO add your handling code here:
 		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
-		CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
+		OrderManagement cmtOrderManagement = new OrderManagement();
 		if (!StringUtils.isEmpty(jobId.getText())) {
 			customerJobDetail.setJobId(Integer.parseInt(jobId.getText()));
 		}
@@ -264,10 +264,10 @@ public class SearchCustomerJob extends CMTServiceImpl {
 		if (!StringUtils.isEmpty(custId.getText())) {
 			customerJobDetail.setCustomerId(Integer.parseInt(custId.getText()));
 		}
-		customerJobDetail.setUnique_Id(uniqueId.getText());
+		customerJobDetail.setUniqueId(uniqueId.getText());
 		customerJobDetail.setEmail(email.getText());
 		customerJobDetail.setMobile(mobile.getText());
-		customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
+		customerJobDetail.setOrderManagement(cmtOrderManagement);
 		List<CustomerJobDetail> customerJobDetails = cmtImpl.getOrSearchJobList(customerJobDetail);
 		if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
 			display(customerJobDetails);
@@ -294,7 +294,7 @@ public class SearchCustomerJob extends CMTServiceImpl {
 					 /*customerJobDetail.getCmtOrderManagement().getOrderId(),*/
 					/*customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),*/
 					/*customerJobDetail.getCmtCategory().getCategory_name(),*/ customerJobDetail.getPaidAmount(),
-					/*customerJobDetail.getDueDate(),*/ customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(), customerJobDetail.getDescription() /*customerJobDetail.getWarranty()*/ });
+					/*customerJobDetail.getDueDate(),*/ customerJobDetail.getOrderManagement().getOrderStatus().getOrderValue(), customerJobDetail.getDescription() /*customerJobDetail.getWarranty()*/ });
 		}
 		model.fireTableDataChanged();
 		jTable1.setModel(model);

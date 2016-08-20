@@ -14,9 +14,9 @@ public class CustomerJobDetail extends Customer {
 
 	private int jobId;
 	// private int order_id;
-	private String unique_Id;
-	private int category_id;
-	private String customer_name;
+	private String uniqueId;
+	private int categoryId;
+	private String customerName;
 	private String description;
 	private String actualAmount;
 	private String paidAmount;
@@ -29,7 +29,7 @@ public class CustomerJobDetail extends Customer {
 	private String finalAmount;
 	private String updatedDateRetun;
 	private boolean startWork;
-	private CMTCategory cmtCategory;
+	private Category category;
 	// private CMTOrderManagement cmtOrderManagement;
 
 	/**
@@ -50,16 +50,16 @@ public class CustomerJobDetail extends Customer {
 	/**
 	 * @return the unique_Id
 	 */
-	public String getUnique_Id() {
-		return unique_Id;
+	public String getUniqueId() {
+		return uniqueId;
 	}
 
 	/**
 	 * @param unique_Id
 	 *            the unique_Id to set
 	 */
-	public void setUnique_Id(String unique_Id) {
-		this.unique_Id = unique_Id;
+	public void setUniqueId(String unique_Id) {
+		this.uniqueId = unique_Id;
 	}
 
 	/**
@@ -183,31 +183,31 @@ public class CustomerJobDetail extends Customer {
 	/**
 	 * @return the customer_name
 	 */
-	public String getCustomer_name() {
-		return customer_name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
 	/**
 	 * @param customer_name
 	 *            the customer_name to set
 	 */
-	public void setCustomer_name(String customer_name) {
-		this.customer_name = customer_name;
+	public void setCustomerName(String customer_name) {
+		this.customerName = customer_name;
 	}
 
 	/**
 	 * @return the category_id
 	 */
-	public int getCategory_id() {
-		return category_id;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
 	/**
 	 * @param category_id
 	 *            the category_id to set
 	 */
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(int category_id) {
+		this.categoryId = category_id;
 	}
 
 	/**
@@ -240,12 +240,12 @@ public class CustomerJobDetail extends Customer {
 		this.reason = reason;
 	}
 
-	public CMTCategory getCmtCategory() {
-		return cmtCategory;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCmtCategory(CMTCategory cmtCategory) {
-		this.cmtCategory = cmtCategory;
+	public void setCategory(Category cmtCategory) {
+		this.category = cmtCategory;
 	}
 
 	public boolean isStartWork() {

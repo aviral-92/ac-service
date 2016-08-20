@@ -15,8 +15,8 @@ import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.dao.impl.CMTDaoImpl;
 import com.customer.management.tool.dao.impl.CMTJobDaoImpl;
-import com.customer.management.tool.pojo.CMTCategory;
-import com.customer.management.tool.pojo.CMTUniqueDetail;
+import com.customer.management.tool.pojo.Category;
+import com.customer.management.tool.pojo.UniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.validator.ValidateCustomer;
@@ -36,7 +36,7 @@ public class CMTImpl {
 	@Autowired
 	private CMTJobDaoImpl cmtJobDaoImpl;
 
-	public List<CMTUniqueDetail> getAcType() {
+	public List<UniqueDetail> getAcType() {
 
 		return customerDaoImpl.getAcTypes();
 	}
@@ -92,14 +92,14 @@ public class CMTImpl {
 		return customerReparingDetails;
 	}
 
-	public String addNewCategory(CMTCategory category) {
+	public String addNewCategory(Category category) {
 
 		String response = null;
 		response = cmtJobDaoImpl.addCategory(category);
 		return response;
 	}
 
-	public List<CMTCategory> getAllCategories() {
+	public List<Category> getAllCategories() {
 
 		return cmtJobDaoImpl.getCategories();
 	}

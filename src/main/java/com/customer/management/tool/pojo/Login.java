@@ -9,14 +9,14 @@ package com.customer.management.tool.pojo;
  *
  * @author amittal
  */
-public class CMTLogin {
+public class Login {
 
     private String username;
     private String password;
     private String role;
 
      
-    public CMTLogin(String username, String password, String role) {
+    public Login(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;

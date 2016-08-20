@@ -11,19 +11,19 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 
 /**
  *
  * @author amittal
  */
-public class CMTLoginExtractor implements ResultSetExtractor<CMTLogin> {
+public class CMTLoginExtractor implements ResultSetExtractor<Login> {
 
     @Override
-    public CMTLogin extractData(ResultSet rs) throws SQLException, DataAccessException {
-        CMTLogin login =null ;
+    public Login extractData(ResultSet rs) throws SQLException, DataAccessException {
+        Login login =null ;
         if (rs.next()) {
-            login = new CMTLogin(rs.getString("username"),rs.getString("password"),rs.getString("role"));
+            login = new Login(rs.getString("username"),rs.getString("password"),rs.getString("role"));
         }
         return login;
     }

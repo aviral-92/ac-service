@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
 import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.constants.CMTMessageCode;
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.ui.admin.WelcomeForm;
 
 /**
@@ -275,7 +275,7 @@ public class LoginForm extends CMTServiceImpl {
 
 		try {
 
-			String response = acServiceUserImpl.login(new CMTLogin(username
+			String response = acServiceUserImpl.login(new Login(username
 					.getText(), passwrd.getText(), role.getSelectedItem()
 					.toString()));
 			if (!CMTDevelopmentTool.isDevelopmentMode) {

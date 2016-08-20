@@ -18,7 +18,7 @@ import com.customer.management.tool.dao.CMTJobDao;
 import com.customer.management.tool.extractor.CMTCategoryExtractor;
 import com.customer.management.tool.extractor.CustomerJobDetailExtractor;
 import com.customer.management.tool.extractor.GetLastInsertedIDExtractor;
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.pojo.Category;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
 @Component
@@ -28,44 +28,44 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public String addCategory(CMTCategory category) {
+	public String addCategory(Category category) {
 
 		String response = null;
 		if (!isCategoryExist(category)) {
 			String query = "INSERT INTO CATEGORY (category_name) values (?)";
 			String maxRow = "SELECT max(categoryId) AS categoryId FROM customer_mgmt_tool.category";
-			if (!StringUtils.isEmpty(category) && !StringUtils.isEmpty(category.getCategory_name())) {
-				Object[] args = { category.getCategory_name().toLowerCase() };
+			if (!StringUtils.isEmpty(category) && !StringUtils.isEmpty(category.getName())) {
+				Object[] args = { category.getName().toLowerCase() };
 				int executed = jdbcTemplate.update(query, args);
 				if (executed > 0) {
 					Integer lastInsertedId = jdbcTemplate.query(maxRow, new GetLastInsertedIDExtractor());
 					if (lastInsertedId > 0) {
-						CacheManager.categoryMap.put(lastInsertedId, category.getCategory_name());
+						CacheManager.categoryMap.put(lastInsertedId, category.getName());
 					}
 					response = "Category Successfully Added";
 				}
 			}
 		} else {
-			response = category.getCategory_name() + " already exist ";
+			response = category.getName() + " already exist ";
 		}
 		return response;
 	}
 
-	private boolean isCategoryExist(CMTCategory category) {
+	private boolean isCategoryExist(Category category) {
 
 		boolean exist = false;
-		if (!StringUtils.isEmpty(category.getCategory_name())
-				&& CacheManager.categoryMap.containsValue(category.getCategory_name().toLowerCase())) {
+		if (!StringUtils.isEmpty(category.getName())
+				&& CacheManager.categoryMap.containsValue(category.getName().toLowerCase())) {
 			exist = true;
 		}
 		return exist;
 	}
 
 	@Override
-	public List<CMTCategory> getCategories() {
+	public List<Category> getCategories() {
 
 		String query = "SELECT * FROM customer_mgmt_tool.category ";
-		List<CMTCategory> categories = jdbcTemplate.query(query, new CMTCategoryExtractor());
+		List<Category> categories = jdbcTemplate.query(query, new CMTCategoryExtractor());
 		return categories;
 	}
 
@@ -81,8 +81,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		int executed = 0;
 		List<Object> args = new ArrayList<Object>();
 		args.add(customerJobDetail.getCustomerId());
-		args.add(customerJobDetail.getCategory_id());
-		args.add(customerJobDetail.getUnique_Id());
+		args.add(customerJobDetail.getCategoryId());
+		args.add(customerJobDetail.getUniqueId());
 		args.add(customerJobDetail.getActualAmount());
 		args.add(customerJobDetail.getPaidAmount());
 		args.add(customerJobDetail.getDescription());
@@ -125,13 +125,13 @@ public class CMTJobDaoImpl implements CMTJobDao {
 		if (customerJobDetail.getJobId() > 0) {
 			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		} else if (!StringUtils.isEmpty(customerJobDetail.getCmtOrderManagement())
-				&& customerJobDetail.getCmtOrderManagement().getOrderId() > 0) {
+		} else if (!StringUtils.isEmpty(customerJobDetail.getOrderManagement())
+				&& customerJobDetail.getOrderManagement().getOrderId() > 0) {
 			query.append(" AND CJD.order_id = ?");
-			args.add(customerJobDetail.getCmtOrderManagement().getOrderId());
-		} else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
+			args.add(customerJobDetail.getOrderManagement().getOrderId());
+		} else if (!StringUtils.isEmpty(customerJobDetail.getUniqueId())) {
 			query.append(" AND CJD.unique_id LIKE ?");
-			args.add("%" + customerJobDetail.getUnique_Id() + "%");
+			args.add("%" + customerJobDetail.getUniqueId() + "%");
 		} else if (customerJobDetail.getCustomerId() > 0) {
 			query.append(" AND CJD.customer_id = ?");
 			args.add(customerJobDetail.getCustomerId());

@@ -15,18 +15,18 @@ public class CMTProductTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTProduct product = new CMTProduct(1, "box", "big", "available");
-		assertEquals(1, product.getProductId());
-		assertEquals("box", product.getProductName());
-		assertEquals("big", product.getProductDescription());
+		Product product = new Product(1, "box", "big", "available");
+		assertEquals(1, product.getId());
+		assertEquals("box", product.getName());
+		assertEquals("big", product.getDescription());
 		assertEquals("available", product.getStatus());
-		product.setProductId(2);
-		product.setProductName("box2");
-		product.setProductDescription("small");
+		product.setId(2);
+		product.setName("box2");
+		product.setDescription("small");
 		product.setStatus("unavailable");
-		assertEquals(2, product.getProductId());
-		assertEquals("box2", product.getProductName());
-		assertEquals("small", product.getProductDescription());
+		assertEquals(2, product.getId());
+		assertEquals("box2", product.getName());
+		assertEquals("small", product.getDescription());
 		assertEquals("unavailable", product.getStatus());
 	}
 

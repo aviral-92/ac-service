@@ -7,34 +7,34 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTOrderManagement;
-import com.customer.management.tool.pojo.CMTOrderStatus;
+import com.customer.management.tool.pojo.OrderManagement;
+import com.customer.management.tool.pojo.OrderStatus;
 
-public class CMTOrderManagementExtractor implements ResultSetExtractor<CMTOrderManagement> {
+public class CMTOrderManagementExtractor implements ResultSetExtractor<OrderManagement> {
 
 	@Override
-	public CMTOrderManagement extractData(ResultSet rs) throws SQLException, DataAccessException {
-		CMTOrderManagement cmtOrderManagement = null;
+	public OrderManagement extractData(ResultSet rs) throws SQLException, DataAccessException {
+		OrderManagement cmtOrderManagement = null;
 		if (rs.next()) {
-			cmtOrderManagement = new CMTOrderManagement();
-			cmtOrderManagement.setCustomer_id(rs.getInt("customer_id"));
+			cmtOrderManagement = new OrderManagement();
+			cmtOrderManagement.setCustomerId(rs.getInt("customer_id"));
 			cmtOrderManagement.setOrderId(rs.getInt("orderId"));
 			// cmtOrderManagement.setOrder_status(rs.getString("order_status"));
 			cmtOrderManagement.setDescription(rs.getString("order_description"));
-			cmtOrderManagement.setOrder_date(rs.getTimestamp("order_date").toString());
-			cmtOrderManagement.setCompletion_date(rs.getTimestamp("order_completion").toString());
+			cmtOrderManagement.setOrderDate(rs.getTimestamp("order_date").toString());
+			cmtOrderManagement.setCompletionDate(rs.getTimestamp("order_completion").toString());
 			cmtOrderManagement.setStatus(rs.getString("status"));
-			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
+			OrderStatus cmtOrderStatus = new OrderStatus();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
 			for (int x = 1; x <= columns; x++) {
 				if ("order_status".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_status(rs.getString("order_status"));
+					cmtOrderStatus.setOrderStatus(rs.getString("order_status"));
 				} else if ("order_value".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_value(rs.getString("order_value"));
+					cmtOrderStatus.setOrderValue(rs.getString("order_value"));
 				}
 			}
-			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
+			cmtOrderManagement.setOrderStatus(cmtOrderStatus);
 		}
 		return cmtOrderManagement;
 	}

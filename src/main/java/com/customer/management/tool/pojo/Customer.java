@@ -19,7 +19,7 @@ public class Customer {
 	private String registeredOn;
 	private String status;
 	private String lastUpdated;
-	private CMTOrderManagement cmtOrderManagement;
+	private OrderManagement orderManagement;
 
 	/**
 	 * @return the name
@@ -127,12 +127,12 @@ public class Customer {
 		this.lastUpdated = lastUpdated;
 	}
 
-	public CMTOrderManagement getCmtOrderManagement() {
-		return cmtOrderManagement;
+	public OrderManagement getOrderManagement() {
+		return orderManagement;
 	}
 
-	public void setCmtOrderManagement(CMTOrderManagement cmtOrderManagement) {
-		this.cmtOrderManagement = cmtOrderManagement;
+	public void setOrderManagement(OrderManagement cmtOrderManagement) {
+		this.orderManagement = cmtOrderManagement;
 	}
 
 }

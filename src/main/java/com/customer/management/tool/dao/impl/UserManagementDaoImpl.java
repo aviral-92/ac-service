@@ -19,7 +19,7 @@ import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.CMTLoginExtractor;
 import com.customer.management.tool.extractor.UserManagementExtractor;
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -39,7 +39,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 	private Cipher Cipher;*/
 
 	@Override
-	public boolean authenticateUser(CMTLogin login) {
+	public boolean authenticateUser(Login login) {
 		boolean loginSuccess = false;
 		List<String> args = new ArrayList<>();
 		args.add(login.getUsername());
@@ -48,7 +48,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 
 		// TODO Add one more thing STATUS='A' in AUTHENTICATE_USER_CREDENTIALS
 		// and use Capital 'A'
-		CMTLogin loginDetail = jdbcTemplate.query(
+		Login loginDetail = jdbcTemplate.query(
 				CMTQueryConstant.AUTHENTICATE_USER_CREDENTIALS,
 				new CMTLoginExtractor(), args.toArray());
 
@@ -59,17 +59,17 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return loginSuccess;
 	}
 
-	public CMTLogin getUserLoginDetailByUserName(String username) {
+	public Login getUserLoginDetailByUserName(String username) {
 
 		Object[] args = { username };
-		CMTLogin cmtLogin = jdbcTemplate.query(
+		Login cmtLogin = jdbcTemplate.query(
 				CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(),
 				args);
 		return cmtLogin;
 	}
 
 	@Override
-	public String addUser(UserDetailHistory userDetail, CMTLogin login) {
+	public String addUser(UserDetailHistory userDetail, Login login) {
 
 		String response = null;
 		if (!isUserExist(userDetail)) {
@@ -103,10 +103,10 @@ public class UserManagementDaoImpl implements UserManagementDao {
 		return response;
 	}
 
-	public CMTLogin getUsernamePassword(String username) {
+	public Login getUsernamePassword(String username) {
 
 		Object[] args = { username };
-		CMTLogin cmtLogin = jdbcTemplate.query(
+		Login cmtLogin = jdbcTemplate.query(
 				CMTQueryConstant.GET_LOGIN_DETAIL, new CMTLoginExtractor(),
 				args);
 		return cmtLogin;
@@ -285,7 +285,7 @@ public class UserManagementDaoImpl implements UserManagementDao {
 			}
 		}
 		int response = jdbcTemplate.update(query.toString(), args.toArray());
-		CMTLogin cmtLogin = null;
+		Login cmtLogin = null;
 		if (response > 0) {
 			if (detailHistory.getStatus().equalsIgnoreCase("d")) {
 				activeDeactive = "Successfully Deleted";

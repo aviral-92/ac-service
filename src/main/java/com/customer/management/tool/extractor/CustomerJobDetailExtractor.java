@@ -9,9 +9,9 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTCategory;
-import com.customer.management.tool.pojo.CMTOrderManagement;
-import com.customer.management.tool.pojo.CMTOrderStatus;
+import com.customer.management.tool.pojo.Category;
+import com.customer.management.tool.pojo.OrderManagement;
+import com.customer.management.tool.pojo.OrderStatus;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
 public class CustomerJobDetailExtractor implements ResultSetExtractor<List<CustomerJobDetail>> {
@@ -24,8 +24,8 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			customerJobDetail = new CustomerJobDetail();
 			customerJobDetail.setJobId(rs.getInt("job_id"));
 			customerJobDetail.setCustomerId(rs.getInt("customer_id"));
-			customerJobDetail.setCategory_id(rs.getInt("category_id"));
-			customerJobDetail.setUnique_Id(rs.getString("unique_id"));
+			customerJobDetail.setCategoryId(rs.getInt("category_id"));
+			customerJobDetail.setUniqueId(rs.getString("unique_id"));
 			customerJobDetail.setActualAmount(rs.getString("actual_amount"));
 			customerJobDetail.setPaidAmount(rs.getString("paid_amount"));
 			customerJobDetail.setDescription(rs.getString("description"));
@@ -36,14 +36,14 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			}
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetail.setReason(rs.getString("reason"));
-			CMTCategory cmtCategory = new CMTCategory();
-			CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
-			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
+			Category cmtCategory = new Category();
+			OrderManagement cmtOrderManagement = new OrderManagement();
+			OrderStatus cmtOrderStatus = new OrderStatus();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
 			for (int x = 1; x <= columns; x++) {
 				if ("customerId".equals(rsmd.getColumnName(x))) {
-					customerJobDetail.setCategory_id(rs.getInt("customerId"));
+					customerJobDetail.setCategoryId(rs.getInt("customerId"));
 				} else if ("name".equals(rsmd.getColumnName(x))) {
 					customerJobDetail.setName(rs.getString("name"));
 				} else if ("email".equals(rsmd.getColumnName(x))) {
@@ -57,22 +57,22 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 				} else if ("address".equals(rsmd.getColumnName(x))) {
 					customerJobDetail.setAddress(rs.getString("address"));
 				} else if ("categoryId".equals(rsmd.getColumnName(x))) {
-					cmtCategory.setCategory_id(rs.getInt("categoryId"));
+					cmtCategory.setId(rs.getInt("categoryId"));
 				} else if ("category_name".equals(rsmd.getColumnName(x))) {
-					cmtCategory.setCategory_name(rs.getString("category_name"));
+					cmtCategory.setName(rs.getString("category_name"));
 				} else if ("category_status".equals(rsmd.getColumnName(x))) {
 					cmtCategory.setStatus(rs.getString("category_status"));
 				} else if ("orderId".equals(rsmd.getColumnName(x))) {
 					cmtOrderManagement.setOrderId(rs.getInt("orderId"));
 				} else if ("order_status".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_status(rs.getString("order_status"));
+					cmtOrderStatus.setOrderStatus(rs.getString("order_status"));
 				} else if ("order_value".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_value(rs.getString("order_value"));
+					cmtOrderStatus.setOrderValue(rs.getString("order_value"));
 				}
 			}
-			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
-			customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
-			customerJobDetail.setCmtCategory(cmtCategory);
+			cmtOrderManagement.setOrderStatus(cmtOrderStatus);
+			customerJobDetail.setOrderManagement(cmtOrderManagement);
+			customerJobDetail.setCategory(cmtCategory);
 			customerJobDetails.add(customerJobDetail);
 		}
 		return customerJobDetails;

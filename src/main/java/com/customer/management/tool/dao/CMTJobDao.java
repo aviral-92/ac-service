@@ -2,14 +2,14 @@ package com.customer.management.tool.dao;
 
 import java.util.List;
 
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.pojo.Category;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
 public interface CMTJobDao {
 
-	public String addCategory(CMTCategory category);
+	public String addCategory(Category category);
 	
-	public List<CMTCategory> getCategories();
+	public List<Category> getCategories();
 	
 	public String addCustomerJob(CustomerJobDetail customerJobDetail);
 	

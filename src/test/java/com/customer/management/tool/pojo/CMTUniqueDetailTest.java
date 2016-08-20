@@ -15,13 +15,13 @@ public class CMTUniqueDetailTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTUniqueDetail uniqueDetail = new CMTUniqueDetail();
-		uniqueDetail.setUnique_Id(1);
-		uniqueDetail.setUnique_description("sample description");
-		uniqueDetail.setUnique_Status("sample status");
-		assertEquals(1, uniqueDetail.getUnique_Id());
-		assertEquals("sample description", uniqueDetail.getUnique_description());
-		assertEquals("sample status", uniqueDetail.getUnique_Status());
+		UniqueDetail uniqueDetail = new UniqueDetail();
+		uniqueDetail.setUniqueId(1);
+		uniqueDetail.setUniqueDescription("sample description");
+		uniqueDetail.setUniqueStatus("sample status");
+		assertEquals(1, uniqueDetail.getUniqueId());
+		assertEquals("sample description", uniqueDetail.getUniqueDescription());
+		assertEquals("sample status", uniqueDetail.getUniqueStatus());
 	}
 
 }

@@ -16,7 +16,7 @@ import com.customer.management.tool.constants.CMTQueryConstant;
 import com.customer.management.tool.constants.UserManagementCode;
 import com.customer.management.tool.dao.UserManagementDao;
 import com.customer.management.tool.extractor.UserManagementExtractor;
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 @Component
@@ -49,13 +49,13 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 	}
 
 	@Override
-	public boolean authenticateUser(CMTLogin login) {
+	public boolean authenticateUser(Login login) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public String addUser(UserDetailHistory userDetail, CMTLogin login)
+	public String addUser(UserDetailHistory userDetail, Login login)
 			throws Exception {
 
 		String response = null;

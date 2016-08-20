@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTOrderManagement;
-import com.customer.management.tool.pojo.CMTOrderStatus;
+import com.customer.management.tool.pojo.OrderManagement;
+import com.customer.management.tool.pojo.OrderStatus;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.ui.admin.WelcomeForm;
 
@@ -288,12 +288,12 @@ public class JobListByDate extends CMTServiceImpl {
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				customerJobDetail.setJobId(Integer.parseInt(jTable1.getModel().getValueAt(selectedRow, 0).toString()));
-				CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
-				CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
-				cmtOrderStatus.setOrder_value(jTable1.getModel().getValueAt(selectedRow, 1).toString());
-				cmtOrderStatus.setOrder_status(jTable1.getModel().getValueAt(selectedRow, 5).toString());
-				cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
-				customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
+				OrderManagement cmtOrderManagement = new OrderManagement();
+				OrderStatus cmtOrderStatus = new OrderStatus();
+				cmtOrderStatus.setOrderValue(jTable1.getModel().getValueAt(selectedRow, 1).toString());
+				cmtOrderStatus.setOrderStatus(jTable1.getModel().getValueAt(selectedRow, 5).toString());
+				cmtOrderManagement.setOrderStatus(cmtOrderStatus);
+				customerJobDetail.setOrderManagement(cmtOrderManagement);
 				customerJobDetail.setReason(jTable1.getModel().getValueAt(selectedRow, 2).toString());
 				customerJobDetail.setDueDate(jTable1.getModel().getValueAt(selectedRow, 3).toString());
 				customerJobDetail
@@ -346,7 +346,7 @@ public class JobListByDate extends CMTServiceImpl {
 		for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 
 			model.addRow(new Object[] { customerJobDetail.getJobId(),
-					customerJobDetail.getCmtOrderManagement().getCmtOrderStatus().getOrder_value(),
+					customerJobDetail.getOrderManagement().getOrderStatus().getOrderValue(),
 					customerJobDetail.getReason(), customerJobDetail.getDueDate(), false });
 		}
 		JComboBox<String> jc = new JComboBox<>();

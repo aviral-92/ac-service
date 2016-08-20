@@ -7,7 +7,7 @@ package com.customer.management.tool.dao;
 
 import java.util.List;
 
-import com.customer.management.tool.pojo.CMTUniqueDetail;
+import com.customer.management.tool.pojo.UniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
@@ -17,7 +17,7 @@ import com.customer.management.tool.pojo.CustomerJobDetail;
  */
 public interface CMTDao {
 
-	public List<CMTUniqueDetail> getAcTypes();
+	public List<UniqueDetail> getAcTypes();
 
 	public String addCustomer(Customer customer) throws Exception;
 

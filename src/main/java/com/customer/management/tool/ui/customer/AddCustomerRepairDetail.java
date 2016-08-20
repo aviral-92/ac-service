@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
-import com.customer.management.tool.pojo.CMTUniqueDetail;
+import com.customer.management.tool.pojo.UniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
@@ -326,7 +326,7 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
 		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
-		customerJobDetail.setUnique_Id(String.valueOf(type.getSelectedIndex() + 1)); //TODO check
+		customerJobDetail.setUniqueId(String.valueOf(type.getSelectedIndex() + 1)); //TODO check
 		customerJobDetail.setActualAmount(actualAmount.getText());
 		if (!StringUtils.isEmpty(customerId.getText())) {
 			customerJobDetail.setCustomerId(Integer.parseInt(customerId.getText()));
@@ -380,9 +380,9 @@ public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 	public void getAcType() {
 
-		List<CMTUniqueDetail> cmtUniqueDetails = cmtImpl.getAcType();
-		for (CMTUniqueDetail cmtUniqueDetail : cmtUniqueDetails) {
-			type.addItem(cmtUniqueDetail.getUnique_description());
+		List<UniqueDetail> cmtUniqueDetails = cmtImpl.getAcType();
+		for (UniqueDetail cmtUniqueDetail : cmtUniqueDetails) {
+			type.addItem(cmtUniqueDetail.getUniqueDescription());
 		}
 	}
 

@@ -8,21 +8,21 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTProduct;
+import com.customer.management.tool.pojo.Product;
 
 public class CMTProductExtractor implements
-		ResultSetExtractor<List<CMTProduct>> {
+		ResultSetExtractor<List<Product>> {
 
 	@Override
-	public List<CMTProduct> extractData(ResultSet rs) throws SQLException,
+	public List<Product> extractData(ResultSet rs) throws SQLException,
 			DataAccessException {
-		List<CMTProduct> cmtProducts = new ArrayList<CMTProduct>();
-		CMTProduct cmtProduct = null;
+		List<Product> cmtProducts = new ArrayList<Product>();
+		Product cmtProduct = null;
 		while (rs.next()) {
-			cmtProduct = new CMTProduct();
-			cmtProduct.setProductId(rs.getInt("productId"));
-			cmtProduct.setProductName(rs.getString("product_name"));
-			cmtProduct.setProductDescription(rs.getString("product_description"));
+			cmtProduct = new Product();
+			cmtProduct.setId(rs.getInt("productId"));
+			cmtProduct.setName(rs.getString("product_name"));
+			cmtProduct.setDescription(rs.getString("product_description"));
 			cmtProduct.setStatus(rs.getString("status"));
 			cmtProducts.add(cmtProduct);
 		}

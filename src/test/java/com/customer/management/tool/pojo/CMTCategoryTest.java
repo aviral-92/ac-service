@@ -15,12 +15,12 @@ public class CMTCategoryTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTCategory category = new CMTCategory();
-		category.setCategory_id(1);
-		category.setCategory_name("A");
+		Category category = new Category();
+		category.setId(1);
+		category.setName("A");
 		category.setStatus("valid");
-		assertEquals(1, category.getCategory_id());
-		assertEquals("A", category.getCategory_name());
+		assertEquals(1, category.getId());
+		assertEquals("A", category.getName());
 		assertEquals("valid", category.getStatus());
 	}
 

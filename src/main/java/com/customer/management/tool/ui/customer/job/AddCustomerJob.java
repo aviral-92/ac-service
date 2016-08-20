@@ -528,11 +528,11 @@ public class AddCustomerJob extends CMTServiceImpl {
 		// TODO add your handling code here:
 		CustomerJobDetail cmtOrderManagement = new CustomerJobDetail();
 		cmtOrderManagement.setCustomerId(Integer.parseInt(customerIdtxt.getText()));
-		cmtOrderManagement.setCustomer_name(customerNameTxt.getText());
-		cmtOrderManagement.setCategory_id(categoryList.getSelectedIndex() + 1);
+		cmtOrderManagement.setCustomerName(customerNameTxt.getText());
+		cmtOrderManagement.setCategoryId(categoryList.getSelectedIndex() + 1);
 		cmtOrderManagement.setActualAmount(actualAmountTxt.getText());
 		cmtOrderManagement.setPaidAmount(paidAmountTxt.getText());
-		cmtOrderManagement.setUnique_Id(uniqueIdtxt.getText());
+		cmtOrderManagement.setUniqueId(uniqueIdtxt.getText());
 		cmtOrderManagement.setReason(reasonArea.getText());
 		cmtOrderManagement.setDescription(descriptionArea.getText());
 		if (!StringUtils.isEmpty(warrenty_Date.getDate())) {

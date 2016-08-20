@@ -20,7 +20,7 @@ import com.customer.management.tool.dao.CMTDao;
 import com.customer.management.tool.extractor.CMTCustomerExtractor;
 import com.customer.management.tool.extractor.CMTTypesExtractor;
 import com.customer.management.tool.extractor.CustomerJobDetailExtractor;
-import com.customer.management.tool.pojo.CMTUniqueDetail;
+import com.customer.management.tool.pojo.UniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
@@ -36,7 +36,7 @@ public class CMTDaoImpl implements CMTDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<CMTUniqueDetail> getAcTypes() {
+	public List<UniqueDetail> getAcTypes() {
 		return jdbcTemplate.query(CMTQueryConstant.AC_SERVICE, new CMTTypesExtractor());
 	}
 

@@ -7,7 +7,7 @@ package com.customer.management.tool.dao;
 
 import java.util.List;
 
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 /**
@@ -16,9 +16,9 @@ import com.customer.management.tool.pojo.UserDetailHistory;
  */
 public interface UserManagementDao {
 
-	public boolean authenticateUser(CMTLogin login);
+	public boolean authenticateUser(Login login);
 
-	public String addUser(UserDetailHistory userDetail, CMTLogin login) throws Exception;
+	public String addUser(UserDetailHistory userDetail, Login login) throws Exception;
 
 	public boolean isUserExist(UserDetailHistory detail);
 

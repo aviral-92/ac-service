@@ -8,21 +8,21 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.pojo.Category;
 
 public class CMTCategoryExtractor implements
-		ResultSetExtractor<List<CMTCategory>> {
+		ResultSetExtractor<List<Category>> {
 
 	@Override
-	public List<CMTCategory> extractData(ResultSet rs) throws SQLException,
+	public List<Category> extractData(ResultSet rs) throws SQLException,
 			DataAccessException {
 
-		List<CMTCategory> categories = new ArrayList<CMTCategory>();
-		CMTCategory category = new CMTCategory();
+		List<Category> categories = new ArrayList<Category>();
+		Category category = new Category();
 		while (rs.next()) {
-			category = new CMTCategory();
-			category.setCategory_id(rs.getInt("categoryId"));
-			category.setCategory_name(rs.getString("category_name"));
+			category = new Category();
+			category.setId(rs.getInt("categoryId"));
+			category.setName(rs.getString("category_name"));
 			category.setStatus(rs.getString("category_status"));
 			categories.add(category);
 		}

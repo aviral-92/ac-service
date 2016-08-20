@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
 import com.customer.management.tool.CMTDevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
 import com.customer.management.tool.dao.impl.UserMgmtDaoImpl;
-import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.Login;
 import com.customer.management.tool.pojo.UserDetailHistory;
 import com.customer.management.tool.validator.ValidateUser;
 
@@ -41,7 +41,7 @@ public class CMTUserManagementImpl {
 	@Value("${userManagementDaoImplEnable}")
 	String userManagementDaoImplEnable;
 
-	public String login(CMTLogin login) throws Exception {
+	public String login(Login login) throws Exception {
 
 		String response = null;
 		if (!CMTDevelopmentTool.isDevelopmentMode) {
@@ -74,7 +74,7 @@ public class CMTUserManagementImpl {
 		return data;
 	}
 
-	public String addUser(CMTLogin login, UserDetailHistory userDetail) throws Exception {
+	public String addUser(Login login, UserDetailHistory userDetail) throws Exception {
 		String response = null;
 		validation.validateLogin(login);
 		validation.validateUser(userDetail);

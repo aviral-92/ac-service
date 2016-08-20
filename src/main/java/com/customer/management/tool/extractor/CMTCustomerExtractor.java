@@ -14,8 +14,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTOrderManagement;
-import com.customer.management.tool.pojo.CMTOrderStatus;
+import com.customer.management.tool.pojo.OrderManagement;
+import com.customer.management.tool.pojo.OrderStatus;
 import com.customer.management.tool.pojo.Customer;
 
 /**
@@ -39,21 +39,21 @@ public class CMTCustomerExtractor implements ResultSetExtractor<List<Customer>> 
 			customer.setRegisteredOn(rs.getTimestamp("RegisteredDate").toString());
 			customer.setStatus(rs.getString("customerStatus"));
 			customer.setLastUpdated(rs.getString("last_updated"));
-			CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
-			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
+			OrderManagement cmtOrderManagement = new OrderManagement();
+			OrderStatus cmtOrderStatus = new OrderStatus();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
 			for (int x = 1; x <= columns; x++) {
 				if ("orderId".equals(rsmd.getColumnName(x))) {
 					cmtOrderManagement.setOrderId(rs.getInt("orderId"));
 				} else if ("order_status".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_status(rs.getString("order_status"));
+					cmtOrderStatus.setOrderStatus(rs.getString("order_status"));
 				} else if ("order_value".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_value(rs.getString("order_value"));
+					cmtOrderStatus.setOrderValue(rs.getString("order_value"));
 				}
 			}
-			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
-			customer.setCmtOrderManagement(cmtOrderManagement);
+			cmtOrderManagement.setOrderStatus(cmtOrderStatus);
+			customer.setOrderManagement(cmtOrderManagement);
 			customerList.add(customer);
 		}
 		return customerList;

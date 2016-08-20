@@ -13,24 +13,24 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.customer.management.tool.pojo.CMTUniqueDetail;
+import com.customer.management.tool.pojo.UniqueDetail;
 
 /**
  *
  * @author amittal
  */
-public class CMTTypesExtractor implements ResultSetExtractor<List<CMTUniqueDetail>> {
+public class CMTTypesExtractor implements ResultSetExtractor<List<UniqueDetail>> {
 
     @Override
-    public List<CMTUniqueDetail> extractData(ResultSet rs) throws SQLException, DataAccessException {
+    public List<UniqueDetail> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
-        List<CMTUniqueDetail> cmtUniqueDetails = new ArrayList<>();
-        CMTUniqueDetail cmtUniqueDetail;
+        List<UniqueDetail> cmtUniqueDetails = new ArrayList<>();
+        UniqueDetail cmtUniqueDetail;
         while (rs.next()) {
-            cmtUniqueDetail = new CMTUniqueDetail();
-            cmtUniqueDetail.setUnique_Id(rs.getInt("unique_Id"));
-            cmtUniqueDetail.setUnique_description(rs.getString("unique_description"));
-            cmtUniqueDetail.setUnique_Status(rs.getString("status"));
+            cmtUniqueDetail = new UniqueDetail();
+            cmtUniqueDetail.setUniqueId(rs.getInt("unique_Id"));
+            cmtUniqueDetail.setUniqueDescription(rs.getString("unique_description"));
+            cmtUniqueDetail.setUniqueStatus(rs.getString("status"));
             cmtUniqueDetails.add(cmtUniqueDetail);
         }
         return cmtUniqueDetails;
