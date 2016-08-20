@@ -4,14 +4,14 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class CMTCategoryTest extends TestCase{
+public class CategoryTest extends TestCase{
 
-	public CMTCategoryTest(String testName){
+	public CategoryTest(String testName){
 		super(testName);
 	}
 
 	public static Test Suite(){
-		return new TestSuite(CMTCategoryTest.class);
+		return new TestSuite(CategoryTest.class);
 	}
 
 	public void testAccessors(){

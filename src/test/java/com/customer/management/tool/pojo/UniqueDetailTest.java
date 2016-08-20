@@ -4,14 +4,14 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class CMTUniqueDetailTest extends TestCase{
+public class UniqueDetailTest extends TestCase{
 
-	public CMTUniqueDetailTest(String testName){
+	public UniqueDetailTest(String testName){
 		super(testName);
 	}
 
 	public static Test Suite(){
-		return new TestSuite(CMTUniqueDetailTest.class);
+		return new TestSuite(UniqueDetailTest.class);
 	}
 
 	public void testAccessors(){

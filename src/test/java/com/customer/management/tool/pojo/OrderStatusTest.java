@@ -4,14 +4,14 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class CMTOrderStatusTest extends TestCase{
+public class OrderStatusTest extends TestCase{
 
-	public CMTOrderStatusTest(String testName){
+	public OrderStatusTest(String testName){
 		super(testName);
 	}
 
 	public static Test Suite(){
-		return new TestSuite(CMTOrderStatusTest.class);
+		return new TestSuite(OrderStatusTest.class);
 	}
 
 	public void testAccessors(){

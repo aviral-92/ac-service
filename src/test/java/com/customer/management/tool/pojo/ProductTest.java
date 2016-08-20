@@ -4,14 +4,14 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class CMTProductTest extends TestCase{
+public class ProductTest extends TestCase{
 
-	public CMTProductTest(String testName){
+	public ProductTest(String testName){
 		super(testName);
 	}
 
 	public static Test Suite(){
-		return new TestSuite(CMTProductTest.class);
+		return new TestSuite(ProductTest.class);
 	}
 
 	public void testAccessors(){

@@ -4,14 +4,14 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-public class CMTLoginTest extends TestCase{
+public class LoginTest extends TestCase{
 
-	public CMTLoginTest(String testName){
+	public LoginTest(String testName){
 		super(testName);
 	}
 
 	public static Test Suite(){
-		return new TestSuite(CMTLoginTest.class);
+		return new TestSuite(LoginTest.class);
 	}
 
 	public void testAccessors(){
