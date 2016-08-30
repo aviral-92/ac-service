@@ -88,7 +88,6 @@ public class WelcomeForm extends javax.swing.JFrame {
         addUser = new javax.swing.JMenuItem();
         getUser = new javax.swing.JMenuItem();
         updateUser = new javax.swing.JMenuItem();
-        deleteUser = new javax.swing.JMenuItem();
         customer = new javax.swing.JMenu();
         addCustomer = new javax.swing.JMenuItem();
         getCustomer = new javax.swing.JMenuItem();
@@ -166,14 +165,6 @@ public class WelcomeForm extends javax.swing.JFrame {
             }
         });
         user.add(updateUser);
-
-        deleteUser.setText("Delete User");
-        deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                deleteUserMousePressed(evt);
-            }
-        });
-        user.add(deleteUser);
 
         jMenuBar1.add(user);
 
@@ -429,7 +420,6 @@ public class WelcomeForm extends javax.swing.JFrame {
     private javax.swing.JMenu customer;
     private javax.swing.JMenuItem deactivateUser;
     private javax.swing.JMenuItem deleteCustomer;
-    private javax.swing.JMenuItem deleteUser;
     private javax.swing.JMenuItem getCustomer;
     private javax.swing.JMenuItem getUser;
     private javax.swing.JLabel jLabel1;

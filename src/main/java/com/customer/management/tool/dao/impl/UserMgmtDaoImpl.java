@@ -214,7 +214,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 							.equalsIgnoreCase(
 									UserManagementCode.ACTIVATE.getPrperty())) {
 						StringBuilder query = new StringBuilder(
-								"SELECT * FROM USERDETAIL WHERE USERNAME != ? ");
+								"select * from  userdetail where username != ? ");
 						List<String> args = new ArrayList<>();
 						args.add(user.get(0).getUsername());
 						if (!StringUtils.isEmpty(detail.getEmail())
@@ -398,7 +398,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 				&& org.apache.commons.lang3.StringUtils.isNotEmpty(status)) {
 			Object[] args = { status, username };
 			int executed = jdbcTemplate.update(
-					"UPDATE LOGIN SET STATUS = ? WHERE USERNAME = ? ", args);
+					"UPDATE login SET STATUS = ? WHERE USERNAME = ? ", args);
 			if (executed > 0) {
 				response = "Successfully updated";
 			} else {
