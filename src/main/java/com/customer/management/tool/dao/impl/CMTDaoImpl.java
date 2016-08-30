@@ -5,6 +5,7 @@
  */
 package com.customer.management.tool.dao.impl;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,10 +52,27 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(customer.getAddress());
 			args.add(customer.getMobile());
 			args.add(new Date());
+			
+			
 			int result = jdbcTemplate.update(CMTQueryConstant.ADDCUSTOMER, args.toArray());
 			if (result > 0) {
 				response = "Customer " + customer.getName() + " successfully added";
 			}
+			
+			
+			/*
+			 * Testing for writing whole query with arguments 
+			 * PreparedStatement ps = jdbcTemplate.getDataSource().getConnection().prepareStatement(CMTQueryConstant.ADDCUSTOMER);
+			
+			for (int i = 0; i < args.size(); i++) {
+				ps.setObject(i+1,args.get(i));
+				}
+			
+			System.out.println("================================");
+			System.out.println("Query ===>>> "+ps.toString());
+			System.out.println("================================");*/
+			
+			
 		} else {
 			throw new Exception("Email or Password already Exist");
 		}
