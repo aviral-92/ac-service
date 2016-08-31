@@ -174,7 +174,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 									UserManagementCode.DEACTIVATE.getPrperty()))) {
 				args.add(detail.getStatus());
 			} else {
-				args.add(UserManagementCode.ACTIVATE.getPrperty());
+				args.add(UserManagementCode.DELETE.getPrperty());
 			}
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail
 					.getUsername())) {
@@ -190,7 +190,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 				args.add(detail.getMobile());
 			}
 			userDetail = jdbcTemplate.query(query.toString(),
-					new UserManagementExtractor(), args.toArray());
+					new UserManagementExtractor(), args.toArray()); 
 		}
 		return userDetail;
 	}
