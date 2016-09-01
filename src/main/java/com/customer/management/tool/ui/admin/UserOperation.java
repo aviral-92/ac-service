@@ -185,6 +185,11 @@ public class UserOperation extends CMTServiceImpl {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add, Update, Delete, Get", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -348,6 +353,21 @@ public class UserOperation extends CMTServiceImpl {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+    	int selectedRowIndex = jTable1.getSelectedRow();
+		if (selectedRowIndex >= 0) {
+//			UserDetailHistory detailHistory = new UserDetailHistory();
+			username.setText(jTable1.getModel().getValueAt(selectedRowIndex, 0).toString());
+			name.setText(jTable1.getModel().getValueAt(selectedRowIndex, 1).toString());
+			email.setText(jTable1.getModel().getValueAt(selectedRowIndex, 2).toString());
+			mobile.setText(jTable1.getModel().getValueAt(selectedRowIndex, 3).toString());
+//			changeStatus.setse
+			password.disable();
+			cnfPassword.disable();
+		}
+    }//GEN-LAST:event_jTable1MousePressed
+
 	public void display(List<UserDetailHistory> userDetailHistory) {
 
 		DefaultTableModel model = new DefaultTableModel();
@@ -429,6 +449,7 @@ public class UserOperation extends CMTServiceImpl {
 
 	private void editActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editActionPerformed
 		// TODO add your handling code here:
+		
 	}// GEN-LAST:event_editActionPerformed
 
 	private void clearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clearActionPerformed
