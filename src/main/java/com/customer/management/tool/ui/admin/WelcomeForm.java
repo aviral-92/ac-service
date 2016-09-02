@@ -374,9 +374,7 @@ public class WelcomeForm extends javax.swing.JFrame {
 		 * getUserDetail.setTitle("Update User Details");
 		 * getUserDetail.setVisible(true);
 		 */
-		// userMgmt.updateContent();
-		userOperation.setVisible(true);
-		userOperation.setTitle("Available Options for User");
+		userMgmt.updateContent();
 	}// GEN-LAST:event_updateUserMousePressed
 
 	/*

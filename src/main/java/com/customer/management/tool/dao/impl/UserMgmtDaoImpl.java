@@ -241,7 +241,7 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 						if (users.isEmpty()) {
 							Object[] arg = { detail.getName(),
 									detail.getEmail(), detail.getMobile(),
-									String.valueOf(detail.getUsername()) };
+									String.valueOf(detail.getUserId()) };
 							if (jdbcTemplate.update(
 									CMTQueryConstant.UPDATE_USER, arg) > 0) {
 								response = messageSource.getMessage(

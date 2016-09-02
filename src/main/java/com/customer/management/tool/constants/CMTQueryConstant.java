@@ -23,7 +23,7 @@ public class CMTQueryConstant {
 
 	public static String IS_USERNAME_EXIST = "SELECT * from userdetail where username = ? ";
 
-	public static String UPDATE_USER = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where username = ?";
+	public static String UPDATE_USER = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
 	
 	public static String IS_USER_ACTIVE = " SELECT * FROM userdetail WHERE username = ? ";
 
