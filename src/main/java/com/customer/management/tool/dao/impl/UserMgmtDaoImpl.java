@@ -188,6 +188,10 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 					.getMobile())) {
 				query.append(" AND MOBILE = ? ");
 				args.add(detail.getMobile());
+			}else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail
+					.getName())) {
+				query.append(" AND NAME LIKE ? ");
+				args.add("%"+detail.getName()+"%");
 			}
 			userDetail = jdbcTemplate.query(query.toString(),
 					new UserManagementExtractor(), args.toArray()); 

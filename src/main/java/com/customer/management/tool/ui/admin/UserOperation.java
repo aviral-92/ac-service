@@ -430,6 +430,7 @@ public class UserOperation extends CMTServiceImpl {
 		detailHistory.setUsername(username.getText());
 		detailHistory.setEmail(email.getText());
 		detailHistory.setMobile(mobile.getText());
+		detailHistory.setName(name.getText());
 		if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.ACTIVATE.toString())) {
 			detailHistory.setStatus(UserManagementCode.ACTIVATE.getPrperty());
 		} else if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.DEACTIVATE.toString())) {
