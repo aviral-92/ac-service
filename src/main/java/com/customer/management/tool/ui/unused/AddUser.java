@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.customer.management.tool.ui.admin;
+package com.customer.management.tool.ui.unused;
 
 import java.util.Date;
 import java.util.Locale;
@@ -250,7 +250,7 @@ public class AddUser extends CMTServiceImpl {
 						.addContainerGap(15, Short.MAX_VALUE)));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}// </editor-fold>                        
 
 	@SuppressWarnings("deprecation")
 	private void submitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_submitActionPerformed

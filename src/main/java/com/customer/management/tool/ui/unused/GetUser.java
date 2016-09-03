@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.customer.management.tool.ui.admin;
+package com.customer.management.tool.ui.unused;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -193,7 +193,7 @@ public class GetUser extends CMTServiceImpl implements Serializable {
 						.addContainerGap(27, Short.MAX_VALUE)));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}// </editor-fold>                        
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
 		dispose();
