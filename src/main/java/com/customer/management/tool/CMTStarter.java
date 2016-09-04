@@ -12,7 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.customer.management.tool.cache.CacheManager;
-import com.customer.management.tool.ui.LoginForm;
+import com.customer.management.tool.ui.OnlineOffline;
 
 /**
  *
@@ -38,8 +38,8 @@ public class CMTStarter {
             }
         }
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(CMTStarter.class).headless(false).run(args);
-		context.getBean(LoginForm.class).setVisible(true);
-		context.getBean(LoginForm.class).setResizable(false);
+		context.getBean(OnlineOffline.class).setVisible(true);
+		context.getBean(OnlineOffline.class).setResizable(false);
 		context.getBean(CacheManager.class).insertInCategoryMap();
 		
 	}
