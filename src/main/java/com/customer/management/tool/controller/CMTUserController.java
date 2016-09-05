@@ -1,26 +1,36 @@
 package com.customer.management.tool.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
-@Controller
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.customer.management.tool.impl.CMTUserManagementImpl;
+import com.customer.management.tool.pojo.CMTLogin;
+import com.customer.management.tool.pojo.UserDetailHistory;
+
+@RestController
 public class CMTUserController {
 
-	@RequestMapping("/index")
-	public ModelAndView firstPage() {
-
-		return new ModelAndView("index");
-	}
+	@Autowired
+	private CMTUserManagementImpl CMTUserManagementImpl;
 
 	@RequestMapping("/addUser")
-	public void addUser() {
+	public String addUser(CMTLogin login, UserDetailHistory userDetail) {
 
-		System.out.println("Hello Successfully called Controller");
+		try {
+			return CMTUserManagementImpl.addUser(login, userDetail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@RequestMapping("/getUser")
-	public void getUser() {
+	public List<UserDetailHistory> getUser(UserDetailHistory detailHistory) {
 
+		return CMTUserManagementImpl.getUser(detailHistory);
 	}
+
 }
