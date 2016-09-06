@@ -3,7 +3,10 @@ package com.customer.management.tool.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.management.tool.impl.CMTUserManagementImpl;
@@ -15,8 +18,14 @@ public class CMTUserController {
 
 	@Autowired
 	private CMTUserManagementImpl CMTUserManagementImpl;
+	
+	@RequestMapping("/")
+	public String test(){
+		
+		return "Successfully calling rest Service";
+	}
 
-	@RequestMapping("/addUser")
+	@RequestMapping(value = "/addUser", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addUser(CMTLogin login, UserDetailHistory userDetail) {
 
 		try {
@@ -27,10 +36,20 @@ public class CMTUserController {
 		return null;
 	}
 
-	@RequestMapping("/getUser")
-	public List<UserDetailHistory> getUser(UserDetailHistory detailHistory) {
+	@RequestMapping(value = "/getUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UserDetailHistory> getUser(@RequestParam String name) { //@PathVariable(value = "name") String name
 
-		return CMTUserManagementImpl.getUser(detailHistory);
+		UserDetailHistory detailHistory = new UserDetailHistory();
+		detailHistory.setName(name);
+		detailHistory.setStatus("A");
+		List<UserDetailHistory> response = CMTUserManagementImpl.getUser(detailHistory);
+		return response;
 	}
 
+	@ExceptionHandler
+	@RequestMapping(value = "/error")
+	public String error(){
+		
+		return "Exception generated, will work it later";
+	}
 }
