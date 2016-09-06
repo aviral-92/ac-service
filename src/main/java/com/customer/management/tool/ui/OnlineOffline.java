@@ -110,6 +110,7 @@ public class OnlineOffline extends javax.swing.JFrame {
         }else if(offline.isSelected()){
         	loginForm.setVisible(true);
         	loginForm.setTitle("Login");
+        	dispose();
         }
     }//GEN-LAST:event_submitActionPerformed
 

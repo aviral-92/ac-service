@@ -14,7 +14,7 @@ public class CMTQueryConstant {
 	public static String AUTHENTICATE_USER_CREDENTIALS = "SELECT * FROM LOGIN WHERE username = ? AND password = ? AND role = ?";
 
 	public static String INSERT_IN_LOGIN = " INSERT INTO login (username,password,role) VALUES (?,?,?)";
-	
+
 	public static String GET_LOGIN_DETAIL = "SELECT * FROM login WHERE username = ? ";
 
 	public static String INSERT_USERDETAIL = "INSERT INTO userdetail (userId,name,email,mobile,username,registeredDate) values (0,?,?,?,?,NOW())";
@@ -23,12 +23,12 @@ public class CMTQueryConstant {
 
 	public static String IS_USERNAME_EXIST = "SELECT * from userdetail where username = ? ";
 
-	public static String UPDATE_USER = " UPDATE userdetail SET name = ?, email = ?, mobile = ? where userid = ?";
-	
+	public static String UPDATE_USER = " UPDATE customer_mgmt_tool.userdetail SET name = ?, email = ?, mobile = ? where username = ?";
+
 	public static String IS_USER_ACTIVE = " SELECT * FROM userdetail WHERE username = ? ";
 
 	public static String DELETE_USER = "UPDATE userdetail SET status = ? ";
-	
+
 	public static String ACTIVATE_USER = "UPDATE userdetail SET status = ? ";
 
 	public static String INSERT_USERDETAILHISTORY = "INSERT INTO user_detail_history (Id,userId,name,username,email,mobile,registeredDate,"
