@@ -133,7 +133,7 @@ public class CMTDaoImpl implements CMTDao {
 			query.append(" WHERE customerId = ? ");
 			args.add(String.valueOf(customer.getCustomerId()));
 		} else if (!StringUtils.isEmpty(customer.getName())) {
-			query.append(" WHERE name = ? ");
+			query.append(" WHERE name LIKE ? ");
 			args.add("%" + customer.getName() + "%");
 		}
 		List<Customer> response = jdbcTemplate.query(query.toString(), new CMTCustomerExtractor(), args.toArray());
@@ -203,11 +203,11 @@ public class CMTDaoImpl implements CMTDao {
 	public String updateCustomer(Customer customer) {
 
 		String response = null;
-		String query = "UPDATE CUSTOMER SET name = ? , email = ? , mobile = ? , address = ? , "
-				+ "customerStatus = ? , last_updated = NOW() WHERE  customerId = ?";
+		String query = "UPDATE customer_mgmt_tool.customer SET name = ? , email = ? , mobile = ? , address = ? , "
+				+ " last_updated = NOW() WHERE  customerId = ?";
 		if (!StringUtils.isEmpty(customer)) {
 			Object[] args = { customer.getName(), customer.getEmail(), customer.getMobile(), customer.getAddress(),
-					customer.getStatus(), customer.getCustomerId() };
+					customer.getCustomerId() };
 			int update = jdbcTemplate.update(query, args);
 			if (update > 0) {
 				response = "Successfully Updated";

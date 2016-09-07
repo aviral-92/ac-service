@@ -45,26 +45,10 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="addUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add User"/>
+                <Property name="text" type="java.lang.String" value="User Operations"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Clicked"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="getUser">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Get User"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="getUserMousePressed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="updateUser">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Update User"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateUserMousePressed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -74,32 +58,13 @@
             <Property name="text" type="java.lang.String" value="CUSTOMER"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="addCustomer">
+            <MenuItem class="javax.swing.JMenuItem" name="customerOperation">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add Customer"/>
+                <Property name="text" type="java.lang.String" value="Customer Operations"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addCustomerMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerOperationMousePressed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="getCustomer">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Get Customer"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="getCustomerMousePressed"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getCustomerActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="updateCustomer">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Update Customer"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteCustomer">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Delete Customer"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

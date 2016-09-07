@@ -73,6 +73,7 @@ public class WelcomeForm extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed"
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -87,13 +88,8 @@ public class WelcomeForm extends javax.swing.JFrame {
 		jMenuBar1 = new javax.swing.JMenuBar();
 		user = new javax.swing.JMenu();
 		addUser = new javax.swing.JMenuItem();
-		getUser = new javax.swing.JMenuItem();
-		updateUser = new javax.swing.JMenuItem();
 		customer = new javax.swing.JMenu();
-		addCustomer = new javax.swing.JMenuItem();
-		getCustomer = new javax.swing.JMenuItem();
-		updateCustomer = new javax.swing.JMenuItem();
-		deleteCustomer = new javax.swing.JMenuItem();
+		customerOperation = new javax.swing.JMenuItem();
 		report = new javax.swing.JMenu();
 		jMenuItem1 = new javax.swing.JMenuItem();
 		userManagement = new javax.swing.JMenu();
@@ -141,7 +137,7 @@ public class WelcomeForm extends javax.swing.JFrame {
 
 		user.setText("USER");
 
-		addUser.setText("Add User");
+		addUser.setText("User Operations");
 		addUser.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				Clicked(evt);
@@ -149,52 +145,17 @@ public class WelcomeForm extends javax.swing.JFrame {
 		});
 		user.add(addUser);
 
-		getUser.setText("Get User");
-		getUser.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
-				getUserMousePressed(evt);
-			}
-		});
-		user.add(getUser);
-
-		updateUser.setText("Update User");
-		updateUser.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
-				updateUserMousePressed(evt);
-			}
-		});
-		user.add(updateUser);
-
 		jMenuBar1.add(user);
 
 		customer.setText("CUSTOMER");
 
-		addCustomer.setText("Add Customer");
-		addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+		customerOperation.setText("Customer Operations");
+		customerOperation.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
-				addCustomerMousePressed(evt);
+				customerOperationMousePressed(evt);
 			}
 		});
-		customer.add(addCustomer);
-
-		getCustomer.setText("Get Customer");
-		getCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
-				getCustomerMousePressed(evt);
-			}
-		});
-		getCustomer.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				getCustomerActionPerformed(evt);
-			}
-		});
-		customer.add(getCustomer);
-
-		updateCustomer.setText("Update Customer");
-		customer.add(updateCustomer);
-
-		deleteCustomer.setText("Delete Customer");
-		customer.add(deleteCustomer);
+		customer.add(customerOperation);
 
 		jMenuBar1.add(customer);
 
@@ -340,10 +301,6 @@ public class WelcomeForm extends javax.swing.JFrame {
 		userMgmt.setTitle("User Management");
 	}// GEN-LAST:event_userDeleteMousePressed
 
-	private void getCustomerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_getCustomerActionPerformed
-
-	}// GEN-LAST:event_getCustomerActionPerformed
-
 	private void Clicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_Clicked
 
 		dispose();
@@ -353,51 +310,11 @@ public class WelcomeForm extends javax.swing.JFrame {
 		userOperation.setVisible(true);
 	}// GEN-LAST:event_Clicked
 
-	private void getUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_getUserMousePressed
-
-		dispose();
-		/*
-		 * getUserDetail.setTitle("Get User Details");
-		 * getUserDetail.setVisible(true);
-		 */
-		// userMgmt.getContent();
-		userOperation.setTitle("Add User");
-		userOperation.setVisible(true);
-	}// GEN-LAST:event_getUserMousePressed
-
-	private void updateUserMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_updateUserMousePressed
-
-		dispose();
-		/*
-		 * getUserDetail.setTitle("Update User Details");
-		 * getUserDetail.setVisible(true);
-		 */
-		// userMgmt.updateContent();
-		userOperation.setVisible(true);
-		userOperation.setTitle("Available Options for User");
-	}// GEN-LAST:event_updateUserMousePressed
-
-	/*
-	 * private void deleteUserMousePressed(java.awt.event.MouseEvent evt) {//
-	 * GEN-FIRST:event_deleteUserMousePressed
-	 * 
-	 * dispose(); getUserDetail.setTitle("Delete User Details");
-	 * getUserDetail.setVisible(true); }// GEN-LAST:event_deleteUserMousePressed
-	 */
-	private void addCustomerMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_customerAddMousePressed
+	private void customerOperationMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_customerAddMousePressed
 
 		dispose();
 		customerAllDetails.setVisible(true);
-		// addCustomerDetail.setTitle("CUSTOMER ADD");
-		// addCustomerDetail.setVisible(true);
 	}// GEN-LAST:event_customerAddMousePressed
-
-	private void getCustomerMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_getCustomerMousePressed
-
-		dispose();
-		getCustomerDetail.setTitle("Get Customer Info");
-		getCustomerDetail.setVisible(true);
-	}// GEN-LAST:event_getCustomerMousePressed
 
 	private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem1MousePressed
 
@@ -412,16 +329,13 @@ public class WelcomeForm extends javax.swing.JFrame {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JMenuItem activateUser;
-	private javax.swing.JMenuItem addCustomer;
 	private javax.swing.JMenuItem addCustomerJob;
 	private javax.swing.JMenuItem addUser;
 	private javax.swing.JMenuItem byDate;
 	private javax.swing.JMenuItem cmtCustomerMgmt;
 	private javax.swing.JMenu customer;
+	private javax.swing.JMenuItem customerOperation;
 	private javax.swing.JMenuItem deactivateUser;
-	private javax.swing.JMenuItem deleteCustomer;
-	private javax.swing.JMenuItem getCustomer;
-	private javax.swing.JMenuItem getUser;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JMenu jMenu1;
 	private javax.swing.JMenu jMenu2;
@@ -435,8 +349,6 @@ public class WelcomeForm extends javax.swing.JFrame {
 	private javax.swing.JPopupMenu jPopupMenu1;
 	private javax.swing.JMenu report;
 	private javax.swing.JMenuItem searchJob;
-	private javax.swing.JMenuItem updateCustomer;
-	private javax.swing.JMenuItem updateUser;
 	private javax.swing.JMenu user;
 	private javax.swing.JMenuItem userDelete;
 	private javax.swing.JMenu userManagement;
