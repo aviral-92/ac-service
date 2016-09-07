@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.customer.management.tool.ui.admin;
+package com.customer.management.tool.ui.user;
 
 import java.util.Date;
 import java.util.List;
@@ -24,6 +24,7 @@ import com.customer.management.tool.constants.UserManagementCode;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 
 /**
  *

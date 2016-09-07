@@ -8,14 +8,14 @@ package com.customer.management.tool.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.customer.management.tool.ui.unused.AddCustomer;
+import com.customer.management.tool.ui.unused.AddCustomerRepairDetail;
 import com.customer.management.tool.ui.unused.AddUser;
+import com.customer.management.tool.ui.unused.GetCustomer;
 import com.customer.management.tool.ui.unused.GetUser;
 import com.customer.management.tool.ui.unused.GetUsers;
 import com.customer.management.tool.ui.unused.ModifyUser;
 import com.customer.management.tool.ui.admin.WelcomeForm;
-import com.customer.management.tool.ui.customer.AddCustomer;
-import com.customer.management.tool.ui.customer.AddCustomerRepairDetail;
-import com.customer.management.tool.ui.customer.GetCustomer;
 import com.customer.management.tool.ui.customer.CustomerHistory;
 import com.customer.management.tool.ui.customer.CustomerDetail;
 

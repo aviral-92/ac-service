@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.customer.management.tool.impl.CMTGoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CustomerJobDetail;
+import com.customer.management.tool.ui.unused.AddCustomerRepairDetail;
 
 /**
  *

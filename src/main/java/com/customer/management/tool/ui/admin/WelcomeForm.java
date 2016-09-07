@@ -11,12 +11,13 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
 import com.customer.management.tool.ui.customer.CustomerAllDetails;
-import com.customer.management.tool.ui.customer.GetCustomer;
 import com.customer.management.tool.ui.customer.job.AddCustomerJob;
 import com.customer.management.tool.ui.customer.job.CMTCustomerMgmt;
 import com.customer.management.tool.ui.customer.job.JobListByDate;
 import com.customer.management.tool.ui.customer.job.SearchCustomerJob;
 import com.customer.management.tool.ui.report.CMTReport;
+import com.customer.management.tool.ui.unused.GetCustomer;
+import com.customer.management.tool.ui.user.UserOperation;
 
 /**
  *
