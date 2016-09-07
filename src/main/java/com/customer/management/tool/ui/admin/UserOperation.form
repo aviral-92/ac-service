@@ -270,8 +270,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="cnfPassword" linkSize="3" max="32767" attributes="0"/>
-                                          <Component id="password" linkSize="3" pref="112" max="32767" attributes="0"/>
+                                          <Component id="password" max="32767" attributes="0"/>
+                                          <Component id="cnfPassword" pref="113" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -309,17 +309,17 @@
                           <Component id="mobile" linkSize="4" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" linkSize="8" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="password" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="password" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cnfPassword" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" linkSize="8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel6" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cnfPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="choice" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" linkSize="8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -358,8 +358,6 @@
                 <Property name="text" type="java.lang.String" value="User Mobile"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="password">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Password"/>
@@ -381,12 +379,14 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cnfPassword">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Role"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="password">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="cnfPassword">
             </Component>
           </SubComponents>
         </Container>
