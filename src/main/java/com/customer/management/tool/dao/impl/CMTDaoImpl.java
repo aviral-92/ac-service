@@ -52,27 +52,26 @@ public class CMTDaoImpl implements CMTDao {
 			args.add(customer.getAddress());
 			args.add(customer.getMobile());
 			args.add(new Date());
-			
-			
+
 			int result = jdbcTemplate.update(CMTQueryConstant.ADDCUSTOMER, args.toArray());
 			if (result > 0) {
 				response = "Customer " + customer.getName() + " successfully added";
 			}
-			
-			
+
 			/*
-			 * Testing for writing whole query with arguments 
-			 * PreparedStatement ps = jdbcTemplate.getDataSource().getConnection().prepareStatement(CMTQueryConstant.ADDCUSTOMER);
-			
-			for (int i = 0; i < args.size(); i++) {
-				ps.setObject(i+1,args.get(i));
-				}
-			
-			System.out.println("================================");
-			System.out.println("Query ===>>> "+ps.toString());
-			System.out.println("================================");*/
-			
-			
+			 * Testing for writing whole query with arguments PreparedStatement
+			 * ps =
+			 * jdbcTemplate.getDataSource().getConnection().prepareStatement(
+			 * CMTQueryConstant.ADDCUSTOMER);
+			 * 
+			 * for (int i = 0; i < args.size(); i++) {
+			 * ps.setObject(i+1,args.get(i)); }
+			 * 
+			 * System.out.println("================================");
+			 * System.out.println("Query ===>>> "+ps.toString());
+			 * System.out.println("================================");
+			 */
+
 		} else {
 			throw new Exception("Email or Password already Exist");
 		}
@@ -126,15 +125,17 @@ public class CMTDaoImpl implements CMTDao {
 			isAddress = true;
 		}
 		if (isMobile || isEmail || isAddress) {
-			if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
+			if (customer.getCustomerId() > 0) {
 				query.append(" OR customerId = ? ");
 				args.add(String.valueOf(customer.getCustomerId()));
 			}
-		} else if (!StringUtils.isEmpty(customer.getCustomerId()) && customer.getCustomerId() != -1) {
+		} else if (customer.getCustomerId() > 0) {
 			query.append(" WHERE customerId = ? ");
 			args.add(String.valueOf(customer.getCustomerId()));
+		} else if (!StringUtils.isEmpty(customer.getName())) {
+			query.append(" WHERE name = ? ");
+			args.add("%" + customer.getName() + "%");
 		}
-
 		List<Customer> response = jdbcTemplate.query(query.toString(), new CMTCustomerExtractor(), args.toArray());
 
 		return response;

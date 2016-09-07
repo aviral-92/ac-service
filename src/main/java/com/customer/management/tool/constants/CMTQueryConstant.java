@@ -41,5 +41,5 @@ public class CMTQueryConstant {
 
 	public static String IS_CUSTOMER_EXIST = "SELECT * FROM customer WHERE email = ? OR mobile = ?";
 
-	public static String GETCUSTOMER = "SELECT * FROM customer ";
+	public static String GETCUSTOMER = "SELECT * FROM customer_mgmt_tool.customer ";
 }
