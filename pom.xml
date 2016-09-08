@@ -11,7 +11,7 @@
 	<groupId>com.management.customer.tool</groupId>
 	<artifactId>customer-management-tool</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>${packaging.type}</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -97,6 +97,12 @@
 
 	</dependencies>
 
+	<profiles>
+	<profile>
+	<id>desktop</id>
+	<properties>
+		<packaging.type>jar</packaging.type>
+	</properties>
 	<build>
 		<plugins>
 			<plugin>
@@ -132,5 +138,18 @@
 			</plugin>
 		</plugins>
 	</build>
+	</profile>
+
+	<profile>
+		<id>web</id>
+		<properties>
+			<packaging.type>war</packaging.type>
+		</properties>
+		<build>
+			<finalName>customer-management-tool</finalName>
+		</build>
+	</profile>
+
+	</profiles>
 
 </project>
