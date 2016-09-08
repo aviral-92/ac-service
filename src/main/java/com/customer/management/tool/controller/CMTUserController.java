@@ -13,6 +13,7 @@ import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
 @RestController
+@RequestMapping("/user")
 public class CMTUserController {
 
 	@Autowired
@@ -42,6 +43,17 @@ public class CMTUserController {
 		detailHistory.setName(name);
 		detailHistory.setStatus("A");
 		List<UserDetailHistory> response = CMTUserManagementImpl.getUser(detailHistory);
+		return response;
+	}
+
+	public String updateUser(UserDetailHistory detailHistory) {
+
+		String response = null;
+		try {
+			response = CMTUserManagementImpl.updateUserData(detailHistory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return response;
 	}
 }
