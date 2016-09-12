@@ -116,20 +116,17 @@ public class CMTJobDaoImpl implements CMTJobDao {
 	public List<CustomerJobDetail> searchJobOfCustomer(CustomerJobDetail customerJobDetail) {
 
 		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId "
-				+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
+				+ "INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id "
+				/*+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
 				+ "ON OMGMT.orderId = CJD.order_id INNER JOIN customer_mgmt_tool.customer_order_status AS OS ON OS.order_status =  OMGMT.order_status"
-				+ " INNER JOIN customer_mgmt_tool.customer_order_status AS COS ON OMGMT.order_status = COS.order_status"
+				+ " INNER JOIN customer_mgmt_tool.customer_order_status AS COS ON OMGMT.order_status = COS.order_status"*/
 				+ " WHERE CUST.customerStatus = 'A' AND CAT.category_status = 'A' ";
 		StringBuilder query = new StringBuilder(sql);
 		List<Object> args = new ArrayList<>();
 		if (customerJobDetail.getJobId() > 0) {
 			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		} else if (!StringUtils.isEmpty(customerJobDetail.getCmtOrderManagement())
-				&& customerJobDetail.getCmtOrderManagement().getOrderId() > 0) {
-			query.append(" AND CJD.order_id = ?");
-			args.add(customerJobDetail.getCmtOrderManagement().getOrderId());
-		} else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
+		}  else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
 			query.append(" AND CJD.unique_id LIKE ?");
 			args.add("%" + customerJobDetail.getUnique_Id() + "%");
 		} else if (customerJobDetail.getCustomerId() > 0) {

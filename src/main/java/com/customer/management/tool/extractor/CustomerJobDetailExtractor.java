@@ -37,8 +37,8 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			customerJobDetail.setStatus(rs.getString("status"));
 			customerJobDetail.setReason(rs.getString("reason"));
 			CMTCategory cmtCategory = new CMTCategory();
-			CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
-			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
+//			CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
+//			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columns = rsmd.getColumnCount();
 			for (int x = 1; x <= columns; x++) {
@@ -62,16 +62,16 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 					cmtCategory.setCategory_name(rs.getString("category_name"));
 				} else if ("category_status".equals(rsmd.getColumnName(x))) {
 					cmtCategory.setStatus(rs.getString("category_status"));
-				} else if ("orderId".equals(rsmd.getColumnName(x))) {
+				} /*else if ("orderId".equals(rsmd.getColumnName(x))) {
 					cmtOrderManagement.setOrderId(rs.getInt("orderId"));
 				} else if ("order_status".equals(rsmd.getColumnName(x))) {
 					cmtOrderStatus.setOrder_status(rs.getString("order_status"));
 				} else if ("order_value".equals(rsmd.getColumnName(x))) {
 					cmtOrderStatus.setOrder_value(rs.getString("order_value"));
-				}
+				}*/
 			}
-			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
-			customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
+//			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
+//			customerJobDetail.setCmtOrderManagement(cmtOrderManagement);
 			customerJobDetail.setCmtCategory(cmtCategory);
 			customerJobDetails.add(customerJobDetail);
 		}

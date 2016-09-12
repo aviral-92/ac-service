@@ -17,6 +17,8 @@ import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
+import com.customer.management.tool.pojo.CustomerJobDetail;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -54,6 +56,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed"
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -308,7 +311,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
         backJob.setText("BACK");
         backJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
+            	backActionPerformed(evt);
             }
         });
 
@@ -377,6 +380,11 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        customerJobTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                customerJobTableMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(customerJobTable);
@@ -522,6 +530,11 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void customerJobTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerJobTableMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_customerJobTableMousePressed
+
 	private void customerTableMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_customerTableMousePressed
 		// TODO add your handling code here:
 		int selectedRow = customerTable.getSelectedRow();
@@ -609,6 +622,22 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 
 	private void getJobActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_getJobActionPerformed
 		// TODO add your handling code here:
+		CustomerJobDetail customerJobDetail = setCustomerJobData();
+		List<CustomerJobDetail> response = cmtImpl.getOrSearchJobList(customerJobDetail);
+		if (!StringUtils.isEmpty(response) && response.size() > 0) {
+			DefaultTableModel model = new DefaultTableModel();
+			model.setColumnIdentifiers(new Object[] { "Job ID", "Customer ID", "Name",
+					"Amount", "Unique ID", "Last Updated", "Warrenty", "Reason" });
+			for(CustomerJobDetail jobDetail : response){
+				model.addRow(new Object[] { jobDetail.getJobId(), jobDetail.getCustomerId(),
+						jobDetail.getName(), jobDetail.getFinalAmount(), jobDetail.getUnique_Id(), jobDetail.getUpdateDate(),jobDetail.getWarranty(), jobDetail.getReason() });
+			}
+			model.fireTableDataChanged();
+			customerJobTable.setModel(model);
+		}else{
+			JOptionPane.showMessageDialog(new JFrame(), "No data found",
+					"Information Message", JOptionPane.ERROR_MESSAGE);
+		}
 	}// GEN-LAST:event_getJobActionPerformed
 
 	private Customer setCustomerData() {
@@ -624,6 +653,23 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		customer.setStatus(custStatus.getText());
 		return customer;
 	}
+
+	private CustomerJobDetail setCustomerJobData() {
+
+		CustomerJobDetail customerJobDetail = new CustomerJobDetail();
+		if (!StringUtils.isEmpty(jobId.getText())) {
+			customerJobDetail.setJobId(Integer.parseInt(jobId.getText()));
+		}
+		if (!jobCustId.getText().equals("0")) {
+			customerJobDetail.setCustomerId(Integer.parseInt(jobCustId.getText()));
+		}
+		customerJobDetail.setUnique_Id(jobUnique.getText());
+		customerJobDetail.setUnique_Id(jobEmail.getText());
+		customerJobDetail.setUnique_Id(jobMobile.getText());
+		return customerJobDetail;
+	}
+
+
 
 	/**
 	 * @param args
