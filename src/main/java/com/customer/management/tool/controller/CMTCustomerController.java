@@ -1,5 +1,7 @@
 package com.customer.management.tool.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,8 @@ import com.customer.management.tool.impl.CMTImpl;
 import com.customer.management.tool.pojo.Customer;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/CMT")
+@Api(description = "Customer management API")
 public class CMTCustomerController {
 
 	@Autowired
