@@ -53,7 +53,7 @@ public class PropertiesConfiguration {
 	}
 	
 	@Bean
-	public UserManagementDaoImpl userMgmtDaoImpl(){
+	public UserManagementDaoImpl userManagementDaoImpl(){
 		return new UserManagementDaoImpl(messageSource());
 	}
 }
