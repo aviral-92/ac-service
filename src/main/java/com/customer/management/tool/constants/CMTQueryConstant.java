@@ -19,7 +19,7 @@ public class CMTQueryConstant {
 
 	public static String INSERT_USERDETAIL = "INSERT INTO userdetail (userId,name,email,mobile,username,registeredDate) values (0,?,?,?,?,NOW())";
 
-	public static String GET_USERDETAIL = " SELECT * FROM customer_mgmt_tool.userdetail WHERE status = ? ";
+	public static String GET_USERDETAIL = " SELECT * FROM customer_mgmt_tool.userdetail ";
 
 	public static String IS_USERNAME_EXIST = "SELECT * from userdetail where username = ? ";
 

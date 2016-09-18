@@ -154,24 +154,24 @@ public class UserMgmtDaoImpl implements UserManagementDao {
 		if (!StringUtils.isEmpty(detail)) {
 			StringBuilder query = new StringBuilder(CMTQueryConstant.GET_USERDETAIL);
 			List<String> args = new ArrayList<>();
-			if (detail.getStatus() != null
+			/*if (detail.getStatus() != null
 					&& (detail.getStatus().equalsIgnoreCase(UserManagementCode.ACTIVATE.getPrperty())
 							|| detail.getStatus().equalsIgnoreCase(UserManagementCode.DEACTIVATE.getPrperty()))) {
 				args.add(detail.getStatus());
 			} else {
 				args.add(UserManagementCode.DELETE.getPrperty());
-			}
+			}*/
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getUsername())) {
-				query.append(" AND USERNAME = ? ");
+				query.append(" WHERE USERNAME = ? ");
 				args.add(detail.getUsername());
 			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getEmail())) {
-				query.append(" AND EMAIL = ? ");
+				query.append(" WHERE EMAIL = ? ");
 				args.add(detail.getEmail());
 			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getMobile())) {
-				query.append(" AND MOBILE = ? ");
+				query.append(" WHERE MOBILE = ? ");
 				args.add(detail.getMobile());
 			} else if (org.apache.commons.lang3.StringUtils.isNotEmpty(detail.getName())) {
-				query.append(" AND NAME LIKE ? ");
+				query.append(" WHERE NAME LIKE ? ");
 				args.add("%" + detail.getName() + "%");
 			}
 			userDetail = jdbcTemplate.query(query.toString(), new UserManagementExtractor(), args.toArray());
