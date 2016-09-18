@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.constants.UserManagementCode;
+import com.customer.management.tool.constants.UserStatusType;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
@@ -55,8 +55,8 @@ public class UserOperation extends CMTServiceImpl {
 	 * Creates new form UserOperation
 	 */
 	public UserOperation() {
-		String[] items = { UserManagementCode.ACTIVATE.name(), UserManagementCode.DEACTIVATE.name(),
-				UserManagementCode.DELETE.name() };
+		String[] items = { UserStatusType.ACTIVATE.name(), UserStatusType.DEACTIVATE.name(),
+				UserStatusType.DELETE.name() };
 		ComboBoxModel<String> aModel = new DefaultComboBoxModel<String>(items);
 		initComponents();
 		changeStatus.setModel(aModel);
@@ -449,12 +449,12 @@ public class UserOperation extends CMTServiceImpl {
 		detailHistory.setEmail(email.getText());
 		detailHistory.setMobile(mobile.getText());
 		detailHistory.setName(name.getText());
-		/*if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.ACTIVATE.toString())) {
-			detailHistory.setStatus(UserManagementCode.ACTIVATE.getPrperty());
-		} else if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.DEACTIVATE.toString())) {
-			detailHistory.setStatus(UserManagementCode.DEACTIVATE.getPrperty());
+		/*if (changeStatus.getSelectedItem().toString().equals(UserStatusType.ACTIVATE.toString())) {
+			detailHistory.setStatus(UserStatusType.ACTIVATE.getPrperty());
+		} else if (changeStatus.getSelectedItem().toString().equals(UserStatusType.DEACTIVATE.toString())) {
+			detailHistory.setStatus(UserStatusType.DEACTIVATE.getPrperty());
 		} else {
-			detailHistory.setStatus(UserManagementCode.DELETE.getPrperty());
+			detailHistory.setStatus(UserStatusType.DELETE.getPrperty());
 		}*/
 
 		List<UserDetailHistory> userDetailHistory = acServiceUserImpl.getUser(detailHistory);
@@ -474,11 +474,11 @@ public class UserOperation extends CMTServiceImpl {
 		detailHistory.setEmail(email.getText());
 		detailHistory.setMobile(mobile.getText());
 		if (changeStatus.getSelectedItem().toString().equalsIgnoreCase("ACTIVATE")) {
-			detailHistory.setStatus(UserManagementCode.ACTIVATE.getPrperty());
+			detailHistory.setStatus(UserStatusType.ACTIVATE.getPrperty());
 		} else if (changeStatus.getSelectedItem().toString().equalsIgnoreCase("DEACTIVATE")) {
-			detailHistory.setStatus(UserManagementCode.DEACTIVATE.getPrperty());
+			detailHistory.setStatus(UserStatusType.DEACTIVATE.getPrperty());
 		} else {
-			detailHistory.setStatus(UserManagementCode.DELETE.getPrperty());
+			detailHistory.setStatus(UserStatusType.DELETE.getPrperty());
 		}
 
 		String response;

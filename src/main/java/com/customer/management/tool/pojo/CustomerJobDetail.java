@@ -29,7 +29,7 @@ public class CustomerJobDetail extends Customer {
 	private String finalAmount;
 	private String updatedDateRetun;
 	private boolean startWork;
-	private CMTCategory cmtCategory;
+	private Category cmtCategory;
 	// private CMTOrderManagement cmtOrderManagement;
 
 	/**
@@ -240,11 +240,11 @@ public class CustomerJobDetail extends Customer {
 		this.reason = reason;
 	}
 
-	public CMTCategory getCmtCategory() {
+	public Category getCmtCategory() {
 		return cmtCategory;
 	}
 
-	public void setCmtCategory(CMTCategory cmtCategory) {
+	public void setCmtCategory(Category cmtCategory) {
 		this.cmtCategory = cmtCategory;
 	}
 

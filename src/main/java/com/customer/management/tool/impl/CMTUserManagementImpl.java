@@ -16,9 +16,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.CMTDevelopmentTool;
+import com.customer.management.tool.DevelopmentTool;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
-import com.customer.management.tool.dao.impl.UserMgmtDaoImpl;
+import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
 import com.customer.management.tool.validator.ValidateUser;
@@ -36,7 +36,7 @@ public class CMTUserManagementImpl {
 	@Autowired
 	private ValidateUser validation;
 	@Autowired
-	UserMgmtDaoImpl userMgmtDaoImpl;
+	UserManagementDaoImpl userMgmtDaoImpl;
 
 	@Value("${userManagementDaoImplEnable}")
 	String userManagementDaoImplEnable;
@@ -44,7 +44,7 @@ public class CMTUserManagementImpl {
 	public String login(CMTLogin login) throws Exception {
 
 		String response = null;
-		if (!CMTDevelopmentTool.isDevelopmentMode) {
+		if (!DevelopmentTool.isDevelopmentMode) {
 			validation.validateLogin(login);
 			if (StringUtils.isEmpty(response)) {
 				if (userDaoImpl.authenticateUser(login)) {

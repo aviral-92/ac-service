@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.constants.CMTMessageCode;
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.constants.MessageCode;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
@@ -42,7 +42,7 @@ public class GetUsers extends CMTServiceImpl implements Serializable {
 	}
 
 	@Autowired
-	private CMTGoBackImpl acServiceBackImpl;
+	private GoBackImpl acServiceBackImpl;
 
 	public GetUsers(ResourceBundleMessageSource resourceBundleMessageSource) {
 		setMessageSource(resourceBundleMessageSource);
@@ -54,12 +54,12 @@ public class GetUsers extends CMTServiceImpl implements Serializable {
 		DefaultTableModel model = new DefaultTableModel();
 		// Setting Column names
 		model.setColumnIdentifiers(new Object[] {
-				getMessageSource().getMessage(CMTMessageCode.USER_ID.getValue(), null, Locale.getDefault()),
-				getMessageSource().getMessage(CMTMessageCode.NAME.getValue(), null, Locale.getDefault()),
-				getMessageSource().getMessage(CMTMessageCode.USERNAME.getValue(), null, Locale.getDefault()),
-				getMessageSource().getMessage(CMTMessageCode.EMAIL.getValue(), null, Locale.getDefault()),
-				getMessageSource().getMessage(CMTMessageCode.MOBILE.getValue(), null, Locale.getDefault()),
-				getMessageSource().getMessage(CMTMessageCode.REGISTER_DATE.getValue(), null, Locale.getDefault()) });
+				getMessageSource().getMessage(MessageCode.USER_ID.getValue(), null, Locale.getDefault()),
+				getMessageSource().getMessage(MessageCode.NAME.getValue(), null, Locale.getDefault()),
+				getMessageSource().getMessage(MessageCode.USERNAME.getValue(), null, Locale.getDefault()),
+				getMessageSource().getMessage(MessageCode.EMAIL.getValue(), null, Locale.getDefault()),
+				getMessageSource().getMessage(MessageCode.MOBILE.getValue(), null, Locale.getDefault()),
+				getMessageSource().getMessage(MessageCode.REGISTER_DATE.getValue(), null, Locale.getDefault()) });
 		for (UserDetail details : userDetails) {
 			model.addRow(new Object[] { details.getUserId(), details.getName(), details.getUsername(),
 					details.getEmail(), details.getMobile(), details.getRegisteredDate() });
@@ -92,7 +92,7 @@ public class GetUsers extends CMTServiceImpl implements Serializable {
 		jScrollPane1.setViewportView(jTable1);
 
 		jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jButton1.setText(messageSource.getMessage(CMTMessageCode.BACK.getValue(), null, Locale.getDefault()));
+		jButton1.setText(messageSource.getMessage(MessageCode.BACK.getValue(), null, Locale.getDefault()));
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);

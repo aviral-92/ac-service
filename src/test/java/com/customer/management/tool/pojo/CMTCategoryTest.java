@@ -15,7 +15,7 @@ public class CMTCategoryTest extends TestCase{
 	}
 
 	public void testAccessors(){
-		CMTCategory category = new CMTCategory();
+		Category category = new Category();
 		category.setCategory_id(1);
 		category.setCategory_name("A");
 		category.setStatus("valid");

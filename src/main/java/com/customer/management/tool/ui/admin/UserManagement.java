@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.constants.UserManagementCode;
+import com.customer.management.tool.constants.UserStatusType;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
@@ -55,8 +55,8 @@ public class UserManagement extends CMTServiceImpl {
 	 * Creates new form UserManagement
 	 */
 	public UserManagement() {
-		String[] items = { UserManagementCode.ACTIVATE.name(), UserManagementCode.DEACTIVATE.name(),
-				UserManagementCode.DELETE.name() };
+		String[] items = { UserStatusType.ACTIVATE.name(), UserStatusType.DEACTIVATE.name(),
+				UserStatusType.DELETE.name() };
 		ComboBoxModel<String> aModel = new DefaultComboBoxModel<String>(items);
 		initComponents();
 		changeStatus.setModel(aModel);
@@ -274,12 +274,12 @@ public class UserManagement extends CMTServiceImpl {
 				detailHistory.setUsername(jTable1.getModel().getValueAt(selectedRowIndex, 0).toString());
 				detailHistory.setEmail(jTable1.getModel().getValueAt(selectedRowIndex, 3).toString());
 				detailHistory.setMobile(jTable1.getModel().getValueAt(selectedRowIndex, 4).toString());
-				if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.ACTIVATE.toString())) {
-					detailHistory.setStatus(UserManagementCode.ACTIVATE.getPrperty());
-				} else if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.DEACTIVATE.toString())) {
-					detailHistory.setStatus(UserManagementCode.DEACTIVATE.getPrperty());
+				if (changeStatus.getSelectedItem().toString().equals(UserStatusType.ACTIVATE.toString())) {
+					detailHistory.setStatus(UserStatusType.ACTIVATE.getPrperty());
+				} else if (changeStatus.getSelectedItem().toString().equals(UserStatusType.DEACTIVATE.toString())) {
+					detailHistory.setStatus(UserStatusType.DEACTIVATE.getPrperty());
 				} else {
-					detailHistory.setStatus(UserManagementCode.DELETE.getPrperty());
+					detailHistory.setStatus(UserStatusType.DELETE.getPrperty());
 				}
 
 				String response = acServiceUserImpl.activateDeactivateUser(detailHistory);
@@ -311,12 +311,12 @@ public class UserManagement extends CMTServiceImpl {
 		detailHistory.setUsername(username.getText());
 		detailHistory.setEmail(email.getText());
 		detailHistory.setMobile(mobile.getText());
-		if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.ACTIVATE.toString())) {
-			detailHistory.setStatus(UserManagementCode.ACTIVATE.getPrperty());
-		} else if (changeStatus.getSelectedItem().toString().equals(UserManagementCode.DEACTIVATE.toString())) {
-			detailHistory.setStatus(UserManagementCode.DEACTIVATE.getPrperty());
+		if (changeStatus.getSelectedItem().toString().equals(UserStatusType.ACTIVATE.toString())) {
+			detailHistory.setStatus(UserStatusType.ACTIVATE.getPrperty());
+		} else if (changeStatus.getSelectedItem().toString().equals(UserStatusType.DEACTIVATE.toString())) {
+			detailHistory.setStatus(UserStatusType.DEACTIVATE.getPrperty());
 		} else {
-			detailHistory.setStatus(UserManagementCode.DELETE.getPrperty());
+			detailHistory.setStatus(UserStatusType.DELETE.getPrperty());
 		}
 
 		List<UserDetailHistory> userDetailHistory = acServiceUserImpl.getUser(detailHistory);

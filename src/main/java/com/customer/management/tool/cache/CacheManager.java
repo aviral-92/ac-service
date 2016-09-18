@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTImpl;
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.pojo.Category;
 
 @Component
 public class CacheManager {
@@ -21,9 +21,9 @@ public class CacheManager {
 	
 	public void insertInCategoryMap(){
 		
-		List<CMTCategory> response = cmtImpl.getAllCategories();
+		List<Category> response = cmtImpl.getAllCategories();
 		if(!StringUtils.isEmpty(response) && !response.isEmpty()){
-			for(CMTCategory cmtCategory : response){
+			for(Category cmtCategory : response){
 				categoryMap.put(cmtCategory.getCategory_id(), cmtCategory.getCategory_name());
 			}
 		}

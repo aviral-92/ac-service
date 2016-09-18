@@ -18,9 +18,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.constants.CMTMessageCode;
+import com.customer.management.tool.constants.MessageCode;
 import com.customer.management.tool.dao.impl.UserManagementDaoImpl;
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetailHistory;
 
@@ -43,7 +43,7 @@ public class GetUser extends CMTServiceImpl implements Serializable {
 	@Autowired
 	private ModifyUser modifyUser;
 	@Autowired
-	private CMTGoBackImpl CMTgoBackImpl;
+	private GoBackImpl CMTgoBackImpl;
 
 	public GetUser(ResourceBundleMessageSource resourceBundleMessageSource) {
 		initComponents(resourceBundleMessageSource);
@@ -76,19 +76,19 @@ public class GetUser extends CMTServiceImpl implements Serializable {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setBounds(new java.awt.Rectangle(450, 150, 0, 0));
 		jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-		jLabel1.setText(messageSource.getMessage(CMTMessageCode.USER_DETAIL.getValue(), null, Locale.getDefault()));
+		jLabel1.setText(messageSource.getMessage(MessageCode.USER_DETAIL.getValue(), null, Locale.getDefault()));
 
 		jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel2.setText(messageSource.getMessage(CMTMessageCode.USERNAME.getValue(), null, Locale.getDefault()));
+		jLabel2.setText(messageSource.getMessage(MessageCode.USERNAME.getValue(), null, Locale.getDefault()));
 
 		jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel3.setText(messageSource.getMessage(CMTMessageCode.EMAIL.getValue(), null, Locale.getDefault()));
+		jLabel3.setText(messageSource.getMessage(MessageCode.EMAIL.getValue(), null, Locale.getDefault()));
 
 		jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel4.setText(messageSource.getMessage(CMTMessageCode.MOBILE.getValue(), null, Locale.getDefault()));
+		jLabel4.setText(messageSource.getMessage(MessageCode.MOBILE.getValue(), null, Locale.getDefault()));
 
 		submit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		submit.setText(messageSource.getMessage(CMTMessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
+		submit.setText(messageSource.getMessage(MessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
 
 		submit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,18 +98,18 @@ public class GetUser extends CMTServiceImpl implements Serializable {
 
 		buttonGroup1.add(getRB);
 		getRB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-		getRB.setText(messageSource.getMessage(CMTMessageCode.GET.getValue(), null, Locale.getDefault()));
+		getRB.setText(messageSource.getMessage(MessageCode.GET.getValue(), null, Locale.getDefault()));
 
 		buttonGroup1.add(updateRB);
 		updateRB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-		updateRB.setText(messageSource.getMessage(CMTMessageCode.UPDATE.getValue(), null, Locale.getDefault()));
+		updateRB.setText(messageSource.getMessage(MessageCode.UPDATE.getValue(), null, Locale.getDefault()));
 
 		buttonGroup1.add(deleteRB);
 		deleteRB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-		deleteRB.setText(messageSource.getMessage(CMTMessageCode.DELETE.getValue(), null, Locale.getDefault()));
+		deleteRB.setText(messageSource.getMessage(MessageCode.DELETE.getValue(), null, Locale.getDefault()));
 
 		jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jButton2.setText(messageSource.getMessage(CMTMessageCode.BACK.getValue(), null, Locale.getDefault()));
+		jButton2.setText(messageSource.getMessage(MessageCode.BACK.getValue(), null, Locale.getDefault()));
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);

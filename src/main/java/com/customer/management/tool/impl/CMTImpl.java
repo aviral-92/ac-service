@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.dao.impl.CMTDaoImpl;
-import com.customer.management.tool.dao.impl.CMTJobDaoImpl;
-import com.customer.management.tool.pojo.CMTCategory;
+import com.customer.management.tool.dao.impl.CustomerManagementDaoImpl;
+import com.customer.management.tool.dao.impl.JobManagementDaoImpl;
+import com.customer.management.tool.pojo.Category;
 import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
@@ -30,11 +30,11 @@ import com.customer.management.tool.validator.ValidateCustomer;
 public class CMTImpl {
 
 	@Autowired
-	private CMTDaoImpl customerDaoImpl;
+	private CustomerManagementDaoImpl customerDaoImpl;
 	@Autowired
 	private ValidateCustomer validateCustomer;
 	@Autowired
-	private CMTJobDaoImpl cmtJobDaoImpl;
+	private JobManagementDaoImpl cmtJobDaoImpl;
 
 	public List<CMTUniqueDetail> getAcType() {
 
@@ -88,14 +88,14 @@ public class CMTImpl {
 		return customerReparingDetails;
 	}
 
-	public String addNewCategory(CMTCategory category) {
+	public String addNewCategory(Category category) {
 
 		String response = null;
 		response = cmtJobDaoImpl.addCategory(category);
 		return response;
 	}
 
-	public List<CMTCategory> getAllCategories() {
+	public List<Category> getAllCategories() {
 
 		return cmtJobDaoImpl.getCategories();
 	}

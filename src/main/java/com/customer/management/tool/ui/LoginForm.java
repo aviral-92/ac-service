@@ -17,8 +17,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.CMTDevelopmentTool;
-import com.customer.management.tool.constants.CMTMessageCode;
+import com.customer.management.tool.DevelopmentTool;
+import com.customer.management.tool.constants.MessageCode;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.ui.admin.WelcomeForm;
@@ -62,7 +62,7 @@ public class LoginForm extends CMTServiceImpl {
 		LOG.info("============="
 				+ messageSource.getMessage("loginForm", null,
 						Locale.getDefault()));
-		setTitle(messageSource.getMessage(CMTMessageCode.TITLE.getValue(),
+		setTitle(messageSource.getMessage(MessageCode.TITLE.getValue(),
 				null, Locale.getDefault()));
 	}
 
@@ -92,15 +92,15 @@ public class LoginForm extends CMTServiceImpl {
 
 		jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
 		jLabel1.setText(messageSource.getMessage(
-				CMTMessageCode.TITLE.getValue(), null, Locale.getDefault()));
+				MessageCode.TITLE.getValue(), null, Locale.getDefault()));
 
 		jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel2.setText(messageSource.getMessage(
-				CMTMessageCode.USERNAME.getValue(), null, Locale.getDefault()));
+				MessageCode.USERNAME.getValue(), null, Locale.getDefault()));
 
 		jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel3.setText(messageSource.getMessage(
-				CMTMessageCode.PASSWORD.getValue(), null, Locale.getDefault()));
+				MessageCode.PASSWORD.getValue(), null, Locale.getDefault()));
 
 		username.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -110,7 +110,7 @@ public class LoginForm extends CMTServiceImpl {
 
 		jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jButton1.setText(messageSource.getMessage(
-				CMTMessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
+				MessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
@@ -119,7 +119,7 @@ public class LoginForm extends CMTServiceImpl {
 
 		jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel4.setText(messageSource.getMessage(
-				CMTMessageCode.ROLE.getValue(), null, Locale.getDefault()));
+				MessageCode.ROLE.getValue(), null, Locale.getDefault()));
 
 		role.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
 				"select", "admin", "user" }));
@@ -278,7 +278,7 @@ public class LoginForm extends CMTServiceImpl {
 			String response = acServiceUserImpl.login(new CMTLogin(username
 					.getText(), passwrd.getText(), role.getSelectedItem()
 					.toString()));
-			if (!CMTDevelopmentTool.isDevelopmentMode) {
+			if (!DevelopmentTool.isDevelopmentMode) {
 				if (StringUtils.isEmpty(response)) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Username Or Password is incorrect", "ERROR",
@@ -304,7 +304,7 @@ public class LoginForm extends CMTServiceImpl {
 
 	private void usernameFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_usernameFocusLost
 
-		if (!CMTDevelopmentTool.isDevelopmentMode) {
+		if (!DevelopmentTool.isDevelopmentMode) {
 			String response = acServiceUserImpl.validateField(username
 					.getText());
 			if (response != null) {

@@ -27,7 +27,7 @@ repositories {
 }
 
 springBoot {
-    mainClassName = "com.customer.management.tool.CMTStarter"
+    mainClassName = "com.customer.management.tool.CustomerManagementToolStarter"
 }
 
 group = 'com.management.customer.tool'

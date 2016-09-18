@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.constants.CMTMessageCode;
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.constants.MessageCode;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.UserDetail;
 import com.customer.management.tool.pojo.UserDetailHistory;
@@ -32,7 +32,7 @@ import com.customer.management.tool.pojo.UserDetailHistory;
 public class ModifyUser extends CMTServiceImpl implements Serializable {
 
 	@Autowired
-	private CMTGoBackImpl acServiceBackImpl;
+	private GoBackImpl acServiceBackImpl;
 	private static final long serialVersionUID = 1L;
 
 	public ModifyUser(ResourceBundleMessageSource resourceBundleMessageSource) {
@@ -74,25 +74,25 @@ public class ModifyUser extends CMTServiceImpl implements Serializable {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-		jLabel1.setText(messageSource.getMessage(CMTMessageCode.UPDATE_USER.getValue(), null, Locale.getDefault()));
+		jLabel1.setText(messageSource.getMessage(MessageCode.UPDATE_USER.getValue(), null, Locale.getDefault()));
 
 		jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel2.setText(messageSource.getMessage(CMTMessageCode.USER_ID.getValue(), null, Locale.getDefault()));
+		jLabel2.setText(messageSource.getMessage(MessageCode.USER_ID.getValue(), null, Locale.getDefault()));
 
 		jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel3.setText(messageSource.getMessage(CMTMessageCode.NAME.getValue(), null, Locale.getDefault()));
+		jLabel3.setText(messageSource.getMessage(MessageCode.NAME.getValue(), null, Locale.getDefault()));
 
 		jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel4.setText(messageSource.getMessage(CMTMessageCode.USERNAME.getValue(), null, Locale.getDefault()));
+		jLabel4.setText(messageSource.getMessage(MessageCode.USERNAME.getValue(), null, Locale.getDefault()));
 
 		jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel5.setText(messageSource.getMessage(CMTMessageCode.EMAIL.getValue(), null, Locale.getDefault()));
+		jLabel5.setText(messageSource.getMessage(MessageCode.EMAIL.getValue(), null, Locale.getDefault()));
 
 		jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-		jLabel6.setText(messageSource.getMessage(CMTMessageCode.MOBILE.getValue(), null, Locale.getDefault()));
+		jLabel6.setText(messageSource.getMessage(MessageCode.MOBILE.getValue(), null, Locale.getDefault()));
 
 		update.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-		update.setText(messageSource.getMessage(CMTMessageCode.UPDATE.getValue(), null, Locale.getDefault()));
+		update.setText(messageSource.getMessage(MessageCode.UPDATE.getValue(), null, Locale.getDefault()));
 		update.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				updateActionPerformed(evt);
@@ -100,7 +100,7 @@ public class ModifyUser extends CMTServiceImpl implements Serializable {
 		});
 
 		back.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-		back.setText(messageSource.getMessage(CMTMessageCode.BACK.getValue(), null, Locale.getDefault()));
+		back.setText(messageSource.getMessage(MessageCode.BACK.getValue(), null, Locale.getDefault()));
 		back.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				backActionPerformed(evt);

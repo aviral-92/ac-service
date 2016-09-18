@@ -17,7 +17,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
 
@@ -34,7 +34,7 @@ public class AddCustomer extends CMTServiceImpl implements Serializable {
 	@Autowired
 	private AddCustomerRepairDetail addCustomerRepairDetail;
 	@Autowired
-	private CMTGoBackImpl CMTgoBackImpl;
+	private GoBackImpl CMTgoBackImpl;
 
 	/**
 	 * Creates new form AddCustomer

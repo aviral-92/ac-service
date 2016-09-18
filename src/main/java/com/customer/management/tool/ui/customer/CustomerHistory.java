@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.ui.unused.AddCustomerRepairDetail;
@@ -37,7 +37,7 @@ public class CustomerHistory extends CMTServiceImpl {
 	@Autowired
 	private AddCustomerRepairDetail addRepairDetails;
 	@Autowired
-	private CMTGoBackImpl acServiceGoBackImpl;
+	private GoBackImpl acServiceGoBackImpl;
 
 	/**
 	 * Creates new form CustomerHistory

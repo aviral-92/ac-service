@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
-import com.customer.management.tool.constants.CMTMessageCode;
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.constants.MessageCode;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTLogin;
 import com.customer.management.tool.pojo.UserDetailHistory;
@@ -37,7 +37,7 @@ public class AddUser extends CMTServiceImpl {
 	 */
 
 	@Autowired
-	private CMTGoBackImpl CMTgoBackImpl;
+	private GoBackImpl CMTgoBackImpl;
 
 	public AddUser(ResourceBundleMessageSource resourceBundleMessageSource) {
 
@@ -76,35 +76,35 @@ public class AddUser extends CMTServiceImpl {
 		setBounds(new java.awt.Rectangle(450, 150, 0, 0));
 		jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
 		jLabel1.setText(messageSource.getMessage(
-				CMTMessageCode.ADD_USER.getValue(), null, Locale.getDefault()));
+				MessageCode.ADD_USER.getValue(), null, Locale.getDefault()));
 
 		jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel6.setText(messageSource.getMessage(
-				CMTMessageCode.NAME.getValue(), null, Locale.getDefault()));
+				MessageCode.NAME.getValue(), null, Locale.getDefault()));
 
 		jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel7.setText(messageSource.getMessage(
-				CMTMessageCode.USERNAME.getValue(), null, Locale.getDefault()));
+				MessageCode.USERNAME.getValue(), null, Locale.getDefault()));
 
 		jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel8.setText(messageSource.getMessage(
-				CMTMessageCode.EMAIL.getValue(), null, Locale.getDefault()));
+				MessageCode.EMAIL.getValue(), null, Locale.getDefault()));
 
 		jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel9.setText(messageSource.getMessage(
-				CMTMessageCode.MOBILE.getValue(), null, Locale.getDefault()));
+				MessageCode.MOBILE.getValue(), null, Locale.getDefault()));
 
 		jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel2.setText(messageSource.getMessage(
-				CMTMessageCode.PASSWORD.getValue(), null, Locale.getDefault()));
+				MessageCode.PASSWORD.getValue(), null, Locale.getDefault()));
 
 		jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel3.setText(messageSource.getMessage(
-				CMTMessageCode.CONFIRM_PASSWRD.getValue(), null, Locale.getDefault()));
+				MessageCode.CONFIRM_PASSWRD.getValue(), null, Locale.getDefault()));
 
 		submit.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
 		submit.setText(messageSource.getMessage(
-				CMTMessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
+				MessageCode.SUBMIT.getValue(), null, Locale.getDefault()));
 		submit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				submitActionPerformed(evt);
@@ -113,13 +113,13 @@ public class AddUser extends CMTServiceImpl {
 
 		jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel4.setText(messageSource.getMessage(
-				CMTMessageCode.ROLE.getValue(), null, Locale.getDefault()));
+				MessageCode.ROLE.getValue(), null, Locale.getDefault()));
 
 		choice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "user", "admin" }));
 
 		jButton2.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
 		jButton2.setText(messageSource.getMessage(
-				CMTMessageCode.BACK.getValue(), null, Locale.getDefault()));
+				MessageCode.BACK.getValue(), null, Locale.getDefault()));
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);

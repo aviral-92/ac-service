@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.ui.customer.CustomerDetail;
@@ -35,7 +35,7 @@ public class GetCustomer extends CMTServiceImpl {
 	@Autowired
 	private CustomerDetail customerDetail;
 	@Autowired
-	private CMTGoBackImpl getUsers;
+	private GoBackImpl getUsers;
 
 	/*
 	 * @Autowired private MenuBar menuBar;

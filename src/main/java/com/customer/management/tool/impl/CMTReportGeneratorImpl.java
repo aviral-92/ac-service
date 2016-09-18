@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.dao.impl.CMTReportDaoImpl;
+import com.customer.management.tool.dao.impl.RevenueReportManagementDaoImpl;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 import com.customer.management.tool.pojo.ReportGenerator;
 import com.itextpdf.text.BaseColor;
@@ -39,7 +39,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class CMTReportGeneratorImpl {
 
 	@Autowired
-	private CMTReportDaoImpl reportDaoImpl;
+	private RevenueReportManagementDaoImpl reportDaoImpl;
 
 	public List<CustomerJobDetail> startToEndDateRecords(
 			ReportGenerator reportGenerator) {

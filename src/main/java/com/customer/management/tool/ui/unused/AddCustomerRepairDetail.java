@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.customer.management.tool.impl.CMTGoBackImpl;
+import com.customer.management.tool.impl.GoBackImpl;
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.CMTUniqueDetail;
 import com.customer.management.tool.pojo.Customer;
@@ -36,7 +36,7 @@ import com.customer.management.tool.pojo.CustomerJobDetail;
 public class AddCustomerRepairDetail extends CMTServiceImpl {
 
 	@Autowired
-	private CMTGoBackImpl acServiceBackImpl;
+	private GoBackImpl acServiceBackImpl;
 	/**
 	 *
 	 */
