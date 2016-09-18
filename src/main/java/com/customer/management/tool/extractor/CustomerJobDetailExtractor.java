@@ -10,8 +10,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.customer.management.tool.pojo.CMTCategory;
-import com.customer.management.tool.pojo.CMTOrderManagement;
-import com.customer.management.tool.pojo.CMTOrderStatus;
 import com.customer.management.tool.pojo.CustomerJobDetail;
 
 public class CustomerJobDetailExtractor implements ResultSetExtractor<List<CustomerJobDetail>> {
@@ -29,7 +27,7 @@ public class CustomerJobDetailExtractor implements ResultSetExtractor<List<Custo
 			customerJobDetail.setActualAmount(rs.getString("actual_amount"));
 			customerJobDetail.setPaidAmount(rs.getString("paid_amount"));
 			customerJobDetail.setDescription(rs.getString("description"));
-			customerJobDetail.setUpdateDate(rs.getDate("due_date").toString());
+			customerJobDetail.setUpdateDate(rs.getDate("updated_date").toString());
 			customerJobDetail.setDueDate(rs.getDate("due_date").toString());
 			if (rs.getDate("warranty") != null) {
 				customerJobDetail.setWarranty(rs.getDate("warranty").toString());

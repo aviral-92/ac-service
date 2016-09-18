@@ -39,21 +39,21 @@ public class CMTCustomerExtractor implements ResultSetExtractor<List<Customer>> 
 			customer.setRegisteredOn(rs.getTimestamp("RegisteredDate").toString());
 			customer.setStatus(rs.getString("customerStatus"));
 			customer.setLastUpdated(rs.getString("last_updated"));
-			CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
-			CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columns = rsmd.getColumnCount();
-			for (int x = 1; x <= columns; x++) {
-				if ("orderId".equals(rsmd.getColumnName(x))) {
-					cmtOrderManagement.setOrderId(rs.getInt("orderId"));
-				} else if ("order_status".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_status(rs.getString("order_status"));
-				} else if ("order_value".equals(rsmd.getColumnName(x))) {
-					cmtOrderStatus.setOrder_value(rs.getString("order_value"));
-				}
-			}
-			cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
-			customer.setCmtOrderManagement(cmtOrderManagement);
+			// CMTOrderManagement cmtOrderManagement = new CMTOrderManagement();
+			// CMTOrderStatus cmtOrderStatus = new CMTOrderStatus();
+			// ResultSetMetaData rsmd = rs.getMetaData();
+			// int columns = rsmd.getColumnCount();
+			// for (int x = 1; x <= columns; x++) {
+			// if ("orderId".equals(rsmd.getColumnName(x))) {
+			// cmtOrderManagement.setOrderId(rs.getInt("orderId"));
+			// } else if ("order_status".equals(rsmd.getColumnName(x))) {
+			// cmtOrderStatus.setOrder_status(rs.getString("order_status"));
+			// } else if ("order_value".equals(rsmd.getColumnName(x))) {
+			// cmtOrderStatus.setOrder_value(rs.getString("order_value"));
+			// }
+			// }
+			// cmtOrderManagement.setCmtOrderStatus(cmtOrderStatus);
+			// customer.setCmtOrderManagement(cmtOrderManagement);
 			customerList.add(customer);
 		}
 		return customerList;

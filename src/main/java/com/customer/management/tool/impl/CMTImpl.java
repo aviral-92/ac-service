@@ -51,8 +51,7 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomer(customer);
 	}
 
-	public String addRepairDetail(CustomerJobDetail customerReparingDetail)
-			throws Exception {
+	public String addRepairDetail(CustomerJobDetail customerReparingDetail) throws Exception {
 
 		validateCustomer.isRepairDetails(customerReparingDetail);
 		return customerDaoImpl.addCustomerRepairDetails(customerReparingDetail);
@@ -63,16 +62,13 @@ public class CMTImpl {
 		return customerDaoImpl.getCustomerId(customer);
 	}
 
-	public List<CustomerJobDetail> getRepairDetailByCustomerId(
-			CustomerJobDetail jobDetail) {
+	public List<CustomerJobDetail> getRepairDetailByCustomerId(CustomerJobDetail jobDetail) {
 
 		List<CustomerJobDetail> customerReparingDetails = new ArrayList<>();
 
-		List<CustomerJobDetail> customerJobDetails = customerDaoImpl
-				.findRepairDetailsByCustomerId(jobDetail);
+		List<CustomerJobDetail> customerJobDetails = customerDaoImpl.findRepairDetailsByCustomerId(jobDetail);
 
-		if (!StringUtils.isEmpty(customerJobDetails)
-				&& !customerJobDetails.isEmpty()) {
+		if (!StringUtils.isEmpty(customerJobDetails) && !customerJobDetails.isEmpty()) {
 			Date date = new Date();
 			for (CustomerJobDetail customerJobDetail : customerJobDetails) {
 				jobDetail = customerJobDetail;
@@ -111,14 +107,12 @@ public class CMTImpl {
 		return response;
 	}
 
-	public List<CustomerJobDetail> getOrSearchJobList(
-			CustomerJobDetail customerJobDetail) {
+	public List<CustomerJobDetail> getOrSearchJobList(CustomerJobDetail customerJobDetail) {
 
 		return cmtJobDaoImpl.searchJobOfCustomer(customerJobDetail);
 	}
 
-	public List<CustomerJobDetail> searchByDate(Date startDate, Date endDate,
-			String pending) {
+	public List<CustomerJobDetail> searchByDate(Date startDate, Date endDate, String pending) {
 
 		return cmtJobDaoImpl.jobByDate(startDate, endDate, pending);
 	}
@@ -136,5 +130,10 @@ public class CMTImpl {
 	public String deleteCustomerWithId(String custID) {
 
 		return customerDaoImpl.deleteCustomer(custID);
+	}
+
+	public String updateCustomerJob(CustomerJobDetail customerJobDetail) {
+
+		return cmtJobDaoImpl.updateCustomerJobDetail(customerJobDetail);
 	}
 }

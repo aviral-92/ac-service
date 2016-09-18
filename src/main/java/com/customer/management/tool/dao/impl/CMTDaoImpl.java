@@ -142,7 +142,7 @@ public class CMTDaoImpl implements CMTDao {
 	}
 
 	@Override
-	public String addCustomerRepairDetails(CustomerJobDetail customerReparingDetail) {
+	synchronized public String addCustomerRepairDetails(CustomerJobDetail customerReparingDetail) {
 
 		String response = null;
 		if (!StringUtils.isEmpty(customerReparingDetail)) {
@@ -200,7 +200,7 @@ public class CMTDaoImpl implements CMTDao {
 		return null;
 	}
 
-	public String updateCustomer(Customer customer) {
+	synchronized public String updateCustomer(Customer customer) {
 
 		String response = null;
 		String query = "UPDATE customer_mgmt_tool.customer SET name = ? , email = ? , mobile = ? , address = ? , "
@@ -218,7 +218,7 @@ public class CMTDaoImpl implements CMTDao {
 		return response;
 	}
 
-	public String deleteCustomer(String customerId) {
+	synchronized public String deleteCustomer(String customerId) {
 
 		String response = null;
 		String query = "UPDATE CUSTOMER SET customerStatus = 'D' WHERE customerId = ? ";

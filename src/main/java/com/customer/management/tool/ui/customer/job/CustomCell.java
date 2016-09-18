@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class CustomCell extends DefaultTableModel implements TableCellRenderer, TableCellEditor{
+public class CustomCell extends DefaultTableModel implements TableCellRenderer, TableCellEditor {
 
 	/**
 	 * 
@@ -19,13 +19,13 @@ public class CustomCell extends DefaultTableModel implements TableCellRenderer, 
 	@Override
 	public void addCellEditorListener(CellEditorListener l) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void cancelCellEditing() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -36,14 +36,13 @@ public class CustomCell extends DefaultTableModel implements TableCellRenderer, 
 
 	@Override
 	public boolean isCellEditable(EventObject anEvent) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void removeCellEditorListener(CellEditorListener l) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

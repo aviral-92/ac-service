@@ -74,9 +74,9 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		String response = null;
 		String queryForCustomerJobDetail = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,unique_id,actual_amount,"
-				+ "paid_amount,description,warranty,reason,due_date,customer_job_status) VALUES (?,?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),?) ";
+				+ "paid_amount,description,warranty,reason,due_date,customer_job_status,updated_date) VALUES (?,?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y,%m,%d'),?,NOW()) ";
 		String queryForCustomerJobDetailNow = "INSERT INTO customer_mgmt_tool.customer_job_detail(customer_id,category_id,unique_id,actual_amount,"
-				+ "paid_amount,description,warranty,reason,due_date, customer_job_status) VALUES (?,?,?,?,?,?,?,?,NOW(),?) ";
+				+ "paid_amount,description,warranty,reason,due_date, customer_job_status,updated_date) VALUES (?,?,?,?,?,?,?,?,NOW(),?,NOW()) ";
 
 		int executed = 0;
 		List<Object> args = new ArrayList<Object>();
@@ -117,16 +117,21 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		String sql = "select * from customer_mgmt_tool.customer_job_detail AS CJD INNER JOIN customer_mgmt_tool.customer AS CUST ON CJD.customer_id=CUST.customerId "
 				+ "INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id "
-				/*+ " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
-				+ "ON OMGMT.orderId = CJD.order_id INNER JOIN customer_mgmt_tool.customer_order_status AS OS ON OS.order_status =  OMGMT.order_status"
-				+ " INNER JOIN customer_mgmt_tool.customer_order_status AS COS ON OMGMT.order_status = COS.order_status"*/
+				/*
+				 * +
+				 * " INNER JOIN customer_mgmt_tool.category AS CAT ON CAT.categoryId = CJD.category_id INNER JOIN customer_mgmt_tool.order_mgmt AS OMGMT "
+				 * +
+				 * "ON OMGMT.orderId = CJD.order_id INNER JOIN customer_mgmt_tool.customer_order_status AS OS ON OS.order_status =  OMGMT.order_status"
+				 * +
+				 * " INNER JOIN customer_mgmt_tool.customer_order_status AS COS ON OMGMT.order_status = COS.order_status"
+				 */
 				+ " WHERE CUST.customerStatus = 'A' AND CAT.category_status = 'A' ";
 		StringBuilder query = new StringBuilder(sql);
 		List<Object> args = new ArrayList<>();
 		if (customerJobDetail.getJobId() > 0) {
 			query.append(" AND CJD.job_id = ?");
 			args.add(customerJobDetail.getJobId());
-		}  else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
+		} else if (!StringUtils.isEmpty(customerJobDetail.getUnique_Id())) {
 			query.append(" AND CJD.unique_id LIKE ?");
 			args.add("%" + customerJobDetail.getUnique_Id() + "%");
 		} else if (customerJobDetail.getCustomerId() > 0) {
@@ -164,6 +169,23 @@ public class CMTJobDaoImpl implements CMTJobDao {
 			customerJobDetails = jdbcTemplate.query(stringBuilder.toString(), new CustomerJobDetailExtractor(), args);
 		}
 		return customerJobDetails;
+	}
+
+	synchronized public String updateCustomerJobDetail(CustomerJobDetail customerJobDetail) {
+
+		String response = null;
+		if (!StringUtils.isEmpty(customerJobDetail) && customerJobDetail.getJobId() > 0) {
+			String query = "UPDATE customer_mgmt_tool.customer_job_detail SET paid_amount = ?, unique_id = ?, due_date = ?, updated_date = NOW(), reason = ?"
+					+ " WHERE job_id = ? ";
+			Object args[] = { customerJobDetail.getPaidAmount(), customerJobDetail.getUnique_Id(),
+					customerJobDetail.getDueDate(), customerJobDetail.getReason(),
+					customerJobDetail.getJobId() };
+			int execute = jdbcTemplate.update(query, args);
+			if (execute > 0) {
+				response = "Successfully Updated";
+			}
+		}
+		return response;
 	}
 
 	public String orderStatusChange(CustomerJobDetail customerJobDetail) {

@@ -6,21 +6,22 @@
 
 package com.customer.management.tool.ui.customer.job;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.customer.management.tool.impl.CMTServiceImpl;
 import com.customer.management.tool.pojo.Customer;
 import com.customer.management.tool.pojo.CustomerJobDetail;
-
-import org.springframework.stereotype.Component;
+import com.customer.management.tool.ui.admin.WelcomeForm;
 
 /**
  *
@@ -34,9 +35,12 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	static Logger LOG = Logger.getLogger(CMTCustomerMgmt.class.getName());
 
 	@Autowired
 	private AddCustomerJob addCustomerJob;
+	@Autowired
+	private WelcomeForm welcomeForm;
 
 	/**
 	 * Creates new form Test
@@ -575,6 +579,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		// TODO add your handling code here:
 		customerJobTable.getColumnModel().getColumn(0).setCellEditor(new CustomCell());
 		customerJobTable.getColumnModel().getColumn(1).setCellEditor(new CustomCell());
+		customerJobTable.getColumnModel().getColumn(7).setCellEditor(new CustomCell());
 	}// GEN-LAST:event_customerJobTableMousePressed
 
 	private void customerTableMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_customerTableMousePressed
@@ -639,7 +644,7 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 			}
 			model.fireTableDataChanged();
 			customerTable.setModel(model);
-			System.out.println("Executed");
+			LOG.info("Successfully Executed...!!!");
 		}
 	}// GEN-LAST:event_getCustomerActionPerformed
 
@@ -655,12 +660,33 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		int selectedRowIndex = customerJobTable.getSelectedRow();
 		if (selectedRowIndex >= 0) {
 			CustomerJobDetail customerJobDetail = new CustomerJobDetail();
-			//TODO need to set value in object from table
+			customerJobDetail.setJobId((int) customerJobTable.getModel().getValueAt(selectedRowIndex, 0));
+			customerJobDetail.setCustomerId((int) customerJobTable.getModel().getValueAt(selectedRowIndex, 1));
+			customerJobDetail.setName(customerJobTable.getModel().getValueAt(selectedRowIndex, 2).toString());
+			customerJobDetail.setPaidAmount(customerJobTable.getModel().getValueAt(selectedRowIndex, 3).toString());
+			customerJobDetail.setUnique_Id(customerJobTable.getModel().getValueAt(selectedRowIndex, 4).toString());
+			customerJobDetail.setDueDate(customerJobTable.getModel().getValueAt(selectedRowIndex, 5).toString());
+			customerJobDetail.setUpdateDate(new Date().toString());
+			customerJobDetail.setWarranty(customerJobTable.getModel().getValueAt(selectedRowIndex, 7).toString());
+			customerJobDetail.setReason(customerJobTable.getModel().getValueAt(selectedRowIndex, 8).toString());
+			String response = cmtImpl.updateCustomerJob(customerJobDetail);
+			if (!StringUtils.isEmpty(response)) {
+				LOG.info(response);
+				JOptionPane.showMessageDialog(new JFrame(), response, "Information Message",
+						JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(), "Unable to update it", "Information Message",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			// TODO need to set value in object from table
 		}
 	}// GEN-LAST:event_editJobActionPerformed
 
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deleteJobActionPerformed
 		// TODO add your handling code here:
+		dispose();
+		welcomeForm.setTitle("Welcome");
+		welcomeForm.setVisible(true);
 	}// GEN-LAST:event_deleteJobActionPerformed
 
 	private void clearJobActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clearJobActionPerformed
@@ -674,11 +700,11 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 		if (!StringUtils.isEmpty(response) && response.size() > 0) {
 			DefaultTableModel model = new DefaultTableModel();
 			model.setColumnIdentifiers(new Object[] { "Job ID", "Customer ID", "Name", "Amount", "Unique ID",
-					"Last Updated", "Warrenty", "Reason" });
+					"Due Date", "Last Updated", "Warrenty", "Reason" });
 			for (CustomerJobDetail jobDetail : response) {
 				model.addRow(new Object[] { jobDetail.getJobId(), jobDetail.getCustomerId(), jobDetail.getName(),
-						jobDetail.getPaidAmount(), jobDetail.getUnique_Id(), jobDetail.getUpdateDate(),
-						jobDetail.getWarranty(), jobDetail.getReason() });
+						jobDetail.getPaidAmount(), jobDetail.getUnique_Id(), jobDetail.getDueDate(),
+						jobDetail.getUpdateDate(), jobDetail.getWarranty(), jobDetail.getReason() });
 			}
 			model.fireTableDataChanged();
 			customerJobTable.setModel(model);
