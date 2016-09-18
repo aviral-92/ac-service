@@ -691,6 +691,15 @@ public class CMTCustomerMgmt extends CMTServiceImpl {
 
 	private void clearJobActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clearJobActionPerformed
 		// TODO add your handling code here:
+		
+		jobCustId.setText("");
+		jobEmail.setText("");
+		jobId.setText("");
+		jobMobile.setText("");
+		jobUnique.setText("");
+		DefaultTableModel model = new DefaultTableModel();
+		model.setRowCount(0);
+		customerJobTable.setModel(model);
 	}// GEN-LAST:event_clearJobActionPerformed
 
 	private void getJobActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_getJobActionPerformed
