@@ -32,8 +32,8 @@ public class CMTJobDaoImpl implements CMTJobDao {
 
 		String response = null;
 		if (!isCategoryExist(category)) {
-			String query = "INSERT INTO CATEGORY (category_name) values (?)";
-			String maxRow = "SELECT max(categoryId) AS categoryId FROM customer_mgmt_tool.category";
+			String query = "INSERT INTO category (category_name) values (?)";
+			String maxRow = "SELECT max(categoryId) AS categoryId FROM category";
 			if (!StringUtils.isEmpty(category) && !StringUtils.isEmpty(category.getCategory_name())) {
 				Object[] args = { category.getCategory_name().toLowerCase() };
 				int executed = jdbcTemplate.update(query, args);
