@@ -13,6 +13,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,9 +66,12 @@ public class UserOperation extends CMTServiceImpl {
 		password.enable();
 		cnfPassword.enable();
 		
-		PromptSupport.setPrompt("Name Field", name);
-		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.HIDE_PROMPT, name);
-		PromptSupport.setFontStyle(Font.BOLD, name);
+		setup(name, "Name Field");
+		setup(email, "Email Field");
+		setup(username, "username Field");
+		setup(mobile, "mobile Field");
+		setup(password, "Password Field");
+		setup(cnfPassword, "Confirm Password Field");
 		
 		//TODO for more
 	}
@@ -368,6 +372,13 @@ public class UserOperation extends CMTServiceImpl {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+	private void setup(JTextField field, String text){
+		
+		PromptSupport.setPrompt(text, field);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.HIDE_PROMPT, field);
+		PromptSupport.setFontStyle(Font.BOLD, field);
+	}
+	
 	private void backActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backActionPerformed
 		// TODO add your handling code here:
 		name.setText("");
