@@ -22,29 +22,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
-	@Value("${swaggerenableurl}")
+	@Value("${swaggerenableurl:CMT}")
 	String swaggerEnableUrl ;
-	
-	
-	@Value("$(swaggerTitle)")
+
+	@Value("${swaggerTitle:CMT}")
 	String swaggerTitle ;
 	
-	@Value("${swaggerDescription}")
+	@Value("${swaggerDescription:CMT}")
 	String swaggerDescription;
 	
-	@Value("${swaggerVersion}")
+	@Value("${swaggerVersion:1.0.0}")
 	String swaggerVersion;
 	
-	@Value("${swaggerTermsOfServiceUrl}")
+	@Value("${swaggerTermsOfServiceUrl:test}")
 	String swaggerTermsOfServiceUrl;
 	
-	@Value("${swaggerLicense}")
+	@Value("${swaggerLicense:1}")
 	String swaggerLicense;
 	 
-	@Value("${swaggerLicenseUrl}")
+	@Value("${swaggerLicenseUrl:1}")
 	 String swaggerLicenseUrl ;
 	
-	@Value("${swaggerGroupName}")
+	@Value("${swaggerGroupName:CMT}")
 	 String swaggerGroupName ;
 	
     @Override

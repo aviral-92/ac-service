@@ -9,11 +9,12 @@ package com.customer.management.tool;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.customer.management.tool.cache.CacheManager;
 import com.customer.management.tool.ui.LoginForm;
-import com.customer.management.tool.ui.OnlineOffline;
 
 /**
  *
@@ -21,6 +22,7 @@ import com.customer.management.tool.ui.OnlineOffline;
  */
 
 @SpringBootApplication
+@PropertySource("classpath:/application.properties")
 public class CustomerManagementToolStarter extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {

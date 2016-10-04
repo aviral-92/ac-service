@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -20,13 +21,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataBaseConfiguration {
 
-	@Value("${db.mysql.driver}")
+	
+	@Value("${isLocal:yes}")
+	private String isLocal ;
+	
+	@Value("${db.mysql.driver:com.mysql.jdbc.Driver}")
 	private String dbDriver;
-	@Value("${db.mysql.url}")
+	@Value("${db.mysql.url:jdbc:mysql://10.2.0.207:3306/customer_mgmt_tool}")
 	private String dbURL;
-	@Value("${db.mysql.username}")
+	@Value("${db.mysql.username:root}")
 	private String dbUsername;
-	@Value("${db.mysql.password}")
+	@Value("${db.mysql.password:root}")
 	private String dbPassword;
 	@Value("${db.pawel.jdbcurl}")
 	private String pawelDbURL;
@@ -38,8 +43,14 @@ public class DataBaseConfiguration {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(dbDriver);
+		if(!StringUtils.isEmpty(isLocal) && "yes".equalsIgnoreCase(isLocal)){
+			dataSource.setUrl(dbURL);
+			dataSource.setUsername(dbUsername);
+			dataSource.setPassword(dbPassword);
+		} else {
 		dataSource.setUrl(pawelDbURL);
 		dataSource.setPassword(pawelDbPassword);
+		}
 		return dataSource;
 	}
 
